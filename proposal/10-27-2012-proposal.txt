@@ -1,0 +1,66 @@
+Team: All American Bad Girls (tentative)
+Project Proposal: Brock Maps
+Date: October 25, 2012
+
+
+------------------------------------------------
+
+        General Idea
+
+------------------------------------------------
+
+-   Navigation system using university access point (AP) in conjunction with device-enabled GPS
+
+-   Virtual tour through university
+
+
+------------------------------------------------
+
+		Features to Implement
+
+------------------------------------------------
+
+-   Voice recognized source/destination for directions from/to
+
+-   Ability to get directions to room based on course code/name spoken or manually entered
+
+-   Directions based on classroom or course
+
+-   Virtual tour (similar to Google Street View)
+
+-   Provides virtual environment using images of premises
+
+
+------------------------------------------------
+
+		Requirements
+
+------------------------------------------------
+
+-   Database for storing course locations, times
+
+-   Position tracking
+
+-   Maps of university grounds
+
+-   AP locations/IP addresses
+
+
+------------------------------------------------
+
+			Roles
+
+------------------------------------------------
+
+Everyone will be taking on a programming position, but those who become designated
+programmers will take on more of the tasks. This is where modularization of the
+overall design is important.
+
+Members: (roles TBA)
+
+Grisdale,       James
+Menonkariyil,   Mathew
+Mychaskiw,      Taras
+Nelson,         Thomas
+Pascuzzi,       Vincent
+Plant,          Lachlan
