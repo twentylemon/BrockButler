@@ -14,3 +14,6 @@ January 11, 2013
 - Thomas added acceptamce criteria to the scope document
 - A new meeting notes document was added
 
+
+I'm not wearing any pants
+
