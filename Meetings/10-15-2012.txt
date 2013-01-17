@@ -1,0 +1,94 @@
+Team: [Extreme, Ramrod, Geezers, ...] 
+Project Proposal: Brock Maps
+Date: October 25, 2012
+
+
+Revision 1:
+
+Revision 2:
+
+Revision 3:
+
+...
+
+
+------------------------------------------------
+
+		General Idea
+
+------------------------------------------------
+
+- GPS using university access point (AP)
+- APs serve as means to determine location of client and for naviating through the university
+- Present UI with floor plans as maps showing locating within vicinity
+
+
+------------------------------------------------
+
+		Current Features
+
+------------------------------------------------
+
+- Voice recognition
+	- destination
+	- current location (if AP cannot provide accurate position)
+
+- Auto-silent
+	- activates when in classroom/lecture setting
+
+
+------------------------------------------------
+
+		Requirements
+
+------------------------------------------------
+
+- Database
+- Tracking position using APs
+- Maps/layout of university
+
+
+------------------------------------------------
+
+		Possible Additions
+
+------------------------------------------------
+
+- Video/frames of university grounds (similar to Google Street View)
+
+- Booklist
+	- pulled from Bookstore site
+
+- All-in-one planner app (Brock Converge)
+	- Student calendar, Todos
+	- Auto-fetch and creation of student schedule (after course codes are entered)
+	- single sign-on for access to my.brocku and Sakai
+		- Student schedule, marks
+	- auto email configuration (access to Brock email)
+    
+-   Location sharing
+
+
+------------------------------------------------
+
+			Roles
+
+------------------------------------------------
+
+Everyone will be taking on a programming position, but those who become designated
+programmers will take on more of the tasks. This is where modularization of the
+overall design is important.
+
+Lead: TBA
+
+Deputy: TBA
+
+Test Leader/Programmer: Lachlan Plant
+
+Technical Writer/Librarian: Mathew Menonkariyil
+
+Programmer: TBA
+
+Programmer: TBA
+
+UI Design: Taras' Girlfriend
