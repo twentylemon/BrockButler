@@ -1,0 +1,37 @@
+Date: December 19, 2012
+
+Members present:
+  Taras
+  Matthew
+  Vince
+  Grisdale
+  Lachlan
+
+Members not present:
+  Thomas
+
+- discussed overview and general UML for project
+- each team member will gain experience with Android SDK over holiday
+- vague UML image to be uploaded this evening for members to expand upon
+
+--------
+Todo
+--------
+  Grisdale:
+    Webcrawler
+
+  Thomas:
+    Location/tracking
+
+  Matthew:
+    Assisting Thomas and Grisdale
+    UML diagram
+  
+  Vince:
+    Classes activity
+
+  Taras:
+    Leading
+
+  Lachlan:
+    Various
