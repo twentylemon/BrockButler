@@ -1,0 +1,21 @@
+  Date: Jan 24, 2012
+
+Members present:
+  Taras
+  Matthew
+  Thomas
+  Grisdale
+  Lachlan
+  Vince
+
+- Finished system architecture diagram
+- Finished phase plan 
+- Added estimated completion dates to phase plan
+- worked on testing plan
+
+--------
+Todo
+--------
+- complete testing plan
+- complete standards document
+- finalize definition phase
