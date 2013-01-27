@@ -1,0 +1,19 @@
+Date: Jan 22, 2012
+
+Members present:
+  Taras
+  Matthew
+  Vince
+  Grisdale
+  Lachlan
+
+Members not present:
+  Thomas
+
+- Designed the flowchart in part
+
+
+--------
+Todo
+--------
+--Complete flowchart design

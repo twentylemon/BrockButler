@@ -1,0 +1,18 @@
+Date: January 10, 2013
+Time: 3:30pm - 5:00pm
+
+Members Present:
+	Taras
+	Matther
+	Vince
+	Grisdale
+	Thomas
+	Lachlan
+	
+	
+- Discussed and completed definition phase of project phase plan
+- Every member of group created a github account
+- Discussed Github protocol and use for the project
+- Discussed the use of android ADT for app creation and talked about learning android over the next two weeks
+- Went over general flow of the application with the use case diagram
+- discussed creating our own use case diagrams for individual modules for next tuesdays meeting

@@ -1,0 +1,20 @@
+  Date: Jan 24, 2012
+
+Members present:
+  Taras
+  Matthew
+  Thomas
+  Grisdale
+  Lachlan
+
+Members not present:
+  Vince
+
+- updated standards doc
+- talked about timeline, to increase testing time
+
+
+--------
+Todo
+--------
+--Complete flowchart design
