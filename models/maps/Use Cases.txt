@@ -1,4 +1,5 @@
-"UC-T01" Request Location
-"UC-T02" Request Route
-"UC-T03" Wi-Fi Location
-"UC-T05" Calculate Route
+"UC-MAP01" Draw Location
+"UC-MAP02" Calculate Location
+"UC-MAP03" Draw Route
+"UC-MAP04" Calculate Route
+"UC-MAP05" Draw Destination
