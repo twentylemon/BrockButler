@@ -1,5 +1,9 @@
-"UC-MAP01" Draw Location
-"UC-MAP02" Calculate Location
-"UC-MAP03" Draw Route
-"UC-MAP04" Calculate Route
-"UC-MAP05" Draw Destination
+"UC-MAP01" Display Map
+"UC-MAP02" Update User Location
+"UC-MAP03" Draw User Location
+"UC-MAP04" Calculate User Location
+"UC-MAP05" User Leaves Mapped Area
+"UC-MAP06" Draw Navigation Route (pass search)
+"UC-MAP07" Calculate Navigation Route 
+"UC-MAP08" Change Zoom Level
+"UC-MAP09" Map Scrolling
