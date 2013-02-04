@@ -20,4 +20,6 @@ January 26, 2013
 - System architecture diagram complete
 - phase plan/timetable complete
 
+February 1, 2013
+- Definition phase complete
 
