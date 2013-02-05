@@ -5,5 +5,3 @@
 "UC-MAP05" User Leaves Mapped Area
 "UC-MAP06" Draw Navigation Route (pass search)
 "UC-MAP07" Calculate Navigation Route 
-"UC-MAP08" Change Zoom Level
-"UC-MAP09" Map Scrolling
