@@ -1,6 +1,4 @@
-"UC-MAP01" Display Map
-"UC-MAP02" Update User Location
-"UC-MAP03" Draw User Location
-"UC-MAP04" Calculate User Location
-"UC-MAP05" Draw Navigation Route (pass search)
-"UC-MAP06" Calculate Navigation Route 
+"UC-MAP01" Send User Location
+"UC-MAP02" Calculate User Location
+"UC-MAP03" Send Navigation Route
+"UC-MAP04" Calculate Navigation Route
