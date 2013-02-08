@@ -1,0 +1,20 @@
+Date: Feb 5, 2013
+Time: 3:30pm - 5:00pm
+
+Members present:
+  Taras
+  Matthew
+  Thomas
+  Grisdale
+  Lachlan
+  Vince
+
+- discussed use case interaction
+- work on use case diagrams
+- worked on use case documents
+
+--------
+Todo
+--------
+- complete use case documents
+- complete use case diagrams
