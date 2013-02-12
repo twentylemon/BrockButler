@@ -1,0 +1,8 @@
+"UC-S01" Schedule View
+
+"UC-S02" Add Task
+      (BASE)
+"UC-S03" Update Tasks  (BASE)
+
+"UC-S04" Delete Tasks  (BASE)
+"UC-S05" Modify Tasks

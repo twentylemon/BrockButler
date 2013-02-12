@@ -1,0 +1,8 @@
+"UC-C01" Display Course Overview
+
+"UC-C02" Add Course
+     (BASE)
+"UC-C03" Update Course  (BASE)
+"UC-C04" Delete Course  (BASE)
+"UC-C05" Course Details
+"UC-Co6" Modify Marks	(BASE)
