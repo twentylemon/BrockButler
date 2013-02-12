@@ -1,0 +1,3 @@
+"CD-MAP01" POSITION class
+"CD-MAP02" ROUTE class
+"CD-MAP03" LOCATE Class
