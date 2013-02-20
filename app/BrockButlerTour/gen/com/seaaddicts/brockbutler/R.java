@@ -316,8 +316,13 @@ public final class R {
         public static final int ic_launcher=0x7f02012e;
     }
     public static final class id {
-        public static final int menu_settings=0x7f070001;
+        public static final int center=0x7f070003;
+        public static final int lowerleft=0x7f070001;
+        public static final int lowerright=0x7f070005;
+        public static final int menu_settings=0x7f070006;
         public static final int screen=0x7f070000;
+        public static final int upperleft=0x7f070002;
+        public static final int upperright=0x7f070004;
     }
     public static final class layout {
         public static final int activity_tour_handler=0x7f030000;
@@ -357,5 +362,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f050001;
+        public static final int styleName=0x7f050002;
     }
 }

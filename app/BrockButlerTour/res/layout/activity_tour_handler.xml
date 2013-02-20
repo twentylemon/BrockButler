@@ -3,6 +3,46 @@
     android:id="@+id/screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".TourHandler" >
+
+    <ImageButton
+        android:id="@+id/lowerleft"
+        android:layout_width="75dp"
+        android:layout_height="400dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/upperleft"
+        android:layout_centerVertical="true" />
+
+    <ImageButton
+        android:id="@+id/upperleft"
+        android:layout_width="75dp"
+        android:layout_height="400dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/center"
+        android:layout_centerVertical="true" />
+
+    <ImageButton
+        android:id="@+id/center"
+        android:layout_width="75dp"
+        android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <ImageButton
+        android:id="@+id/upperright"
+        android:layout_width="75dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/center"
+        android:layout_centerVertical="true" />
+
+    <ImageButton
+        android:id="@+id/lowerright"
+        android:layout_width="75dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/upperright"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>
