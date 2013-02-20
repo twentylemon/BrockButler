@@ -7,15 +7,11 @@
  */
 package com.seaaddicts.brockbutler;
 
-import android.content.Context;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-
 public abstract class TourNode {
 	protected int image;	//resource for the image on this node
 	protected TourNode turnAroundNode;
 
-	public boolean canTurnAround(){ return(turnAroundNode == null); }
+	public boolean canTurnAround(){ return(turnAroundNode != null); }
 	public TourNode getTurnAroundNode(){ return(turnAroundNode); }
 
 	protected void setTurnAroundNode(TourNode node){ turnAroundNode = node; }
@@ -26,5 +22,5 @@ public abstract class TourNode {
 	 * ie where the buttons will take you.
 	 * @param rl - the layout to paint onto
 	 */
-	protected abstract void paint(RelativeLayout rl, ImageButton[] buttons, Context c);
+	protected abstract void paint(TourInfo info);
 }

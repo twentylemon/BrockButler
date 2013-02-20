@@ -1,13 +1,10 @@
 package com.seaaddicts.brockbutler;
 
-import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class TourHallway extends TourNode {
+public class TourHall extends TourNode {
 	private TourNode[] nodes;
 	
 	/**
@@ -20,7 +17,7 @@ public class TourHallway extends TourNode {
 	 * @param ur - upper right node
 	 * @param lr - lower right node
 	 */
-	public TourHallway(int img, TourNode ul, TourNode ll, TourNode c, TourNode ur, TourNode lr){
+	public TourHall(int img, TourNode ul, TourNode ll, TourNode c, TourNode ur, TourNode lr){
 		image = img;
 		nodes = new TourNode[5];
 		nodes[0] = ul;
@@ -36,7 +33,7 @@ public class TourHallway extends TourNode {
 	 * @param img - image resource value
 	 * @param c - the center node
 	 */
-	public TourHallway(int img, TourNode c){
+	public TourHall(int img, TourNode c){
 		this(img,null,null,c,null,null);
 	}
 
@@ -45,7 +42,7 @@ public class TourHallway extends TourNode {
 	 * around node. Links `turnAroundNode` back to this node via turning around.
 	 * @param ta - turn around node
 	 */
-	public TourHallway(int img, TourNode ul, TourNode ll, TourNode c, TourNode ur, TourNode lr, TourNode ta){
+	public TourHall(int img, TourNode ul, TourNode ll, TourNode c, TourNode ur, TourNode lr, TourNode ta){
 		this(img,ul,ll,c,ur,lr);
 		turnAroundNode = ta;
 		turnAroundNode.setTurnAroundNode(this);
@@ -57,21 +54,29 @@ public class TourHallway extends TourNode {
 	 * @param c - the center node
 	 * @param ta - turn around node
 	 */
-	public TourHallway(int img, TourNode c, TourNode ta){
+	public TourHall(int img, TourNode c, TourNode ta){
 		this(img,null,null,c,null,null,ta);
 	}
 
+	/**
+	 * paint(TourInfo)
+	 * Changes the image displayed on the screen and redefines where the buttons lead us to.
+	 * Also pushes this node onto the TourInfo's history.
+	 */
 	@Override
-	protected void paint(final RelativeLayout rl, final ImageButton[] buttons, final Context c) {
-		rl.setBackgroundResource(image);
+	protected void paint(final TourInfo info) {
+		info.rl.setBackgroundResource(image);
+		info.current = this;
 		for (int i = 0; i < nodes.length; i++){
 			final int idx = i;
-			buttons[i].setOnClickListener(new OnClickListener(){
+			info.buttons[i].setOnClickListener(new OnClickListener(){
 				public void onClick(View v){
-					if (nodes[idx] != null)
-						nodes[idx].paint(rl, buttons, c);
+					if (nodes[idx] != null){
+						info.history.push(TourHall.this);
+						nodes[idx].paint(info);
+					}
 					else
-						Toast.makeText(c, "No data available", Toast.LENGTH_SHORT).show();
+						Toast.makeText(info.context, "No data available", Toast.LENGTH_SHORT).show();
 				}
 			});
 		}
