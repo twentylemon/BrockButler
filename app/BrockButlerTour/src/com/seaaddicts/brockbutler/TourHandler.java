@@ -3,6 +3,8 @@ package com.seaaddicts.brockbutler;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 public class TourHandler extends Activity {
 
