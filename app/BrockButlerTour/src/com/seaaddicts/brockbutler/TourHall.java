@@ -1,3 +1,11 @@
+/**
+ * TourHall.java
+ * Brock Butler
+ * A hallway node in the tour. Hallways have multiple branching points,
+ * and can turn around. Each hallway knows about all of it's branching points.
+ * Created by Taras Mychaskiw 2013-02-20
+ * Copyright (c) 2013 Sea Addicts. All rights reserved.
+ */
 package com.seaaddicts.brockbutler;
 
 import android.view.View;
@@ -5,23 +13,23 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 public class TourHall extends TourNode {
-	private TourNode[] nodes;
+	private TourNode[] nodes;	//each of the nodes this hallway branches off to
 	
 	/**
 	 * Forward pass constructor. Defines each button, and inits the turn around
 	 * location to null.
 	 * @param img - the image resource value
+	 * @param ll - outer left node
 	 * @param ul - upper left node
-	 * @param ll - lower left node
 	 * @param c - center node
 	 * @param ur - upper right node
-	 * @param lr - lower right node
+	 * @param lr - outer right node
 	 */
-	public TourHall(int img, TourNode ul, TourNode ll, TourNode c, TourNode ur, TourNode lr){
+	public TourHall(int img, TourNode ll, TourNode ul, TourNode c, TourNode ur, TourNode lr){
 		image = img;
 		nodes = new TourNode[5];
-		nodes[0] = ul;
-		nodes[1] = ll;
+		nodes[0] = ll;
+		nodes[1] = ul;
 		nodes[2] = c;
 		nodes[3] = ur;
 		nodes[4] = lr;
@@ -42,20 +50,10 @@ public class TourHall extends TourNode {
 	 * around node. Links `turnAroundNode` back to this node via turning around.
 	 * @param ta - turn around node
 	 */
-	public TourHall(int img, TourNode ul, TourNode ll, TourNode c, TourNode ur, TourNode lr, TourNode ta){
-		this(img,ul,ll,c,ur,lr);
+	public TourHall(int img, TourNode ll, TourNode ul, TourNode c, TourNode ur, TourNode lr, TourNode ta){
+		this(img,ll,ul,c,ur,lr);
 		turnAroundNode = ta;
 		turnAroundNode.setTurnAroundNode(this);
-	}
-	
-	/**
-	 * Simplified second pass constructor. Inits ul,ll,ur,lr to null.
-	 * @param img - image resource value
-	 * @param c - the center node
-	 * @param ta - turn around node
-	 */
-	public TourHall(int img, TourNode c, TourNode ta){
-		this(img,null,null,c,null,null,ta);
 	}
 
 	/**
@@ -69,7 +67,7 @@ public class TourHall extends TourNode {
 		info.current = this;
 		for (int i = 0; i < nodes.length; i++){
 			final int idx = i;
-			info.buttons[i].setOnClickListener(new OnClickListener(){
+			info.buttons[idx].setOnClickListener(new OnClickListener(){
 				public void onClick(View v){
 					if (nodes[idx] != null){
 						info.history.push(TourHall.this);

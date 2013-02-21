@@ -1,8 +1,8 @@
 /**
  * TourNode.java
  * Brock Butler
- * Simple abstract wrapper for TourRoom and TourHallway.
- * Create by Taras Mychaskiw 2013-02-20
+ * Simple abstract wrapper for TourRoom and TourHall.
+ * Created by Taras Mychaskiw 2013-02-20
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
 package com.seaaddicts.brockbutler;

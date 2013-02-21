@@ -7,7 +7,7 @@
     tools:context=".TourHandler" >
 
     <ImageButton
-        android:id="@+id/lowerleft"
+        android:id="@+id/outerleft"
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_marginRight="20dp"
@@ -38,7 +38,7 @@
         android:layout_centerVertical="true" />
 
     <ImageButton
-        android:id="@+id/lowerright"
+        android:id="@+id/outerright"
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_marginLeft="20dp"
