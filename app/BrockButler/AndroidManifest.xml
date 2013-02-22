@@ -16,12 +16,17 @@
         <activity
             android:name="edu.brocku.seaaddicts.brockbutler.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:noHistory="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="edu.brocku.seaaddicts.brockbutler.MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

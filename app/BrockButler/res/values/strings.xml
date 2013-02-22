@@ -13,5 +13,6 @@
     <string name="login">Login</string>
     <string name="temp">Logo Here</string>
     <string name="msg_skip">By logging in BrockButler attempts to automatically update your timetable, grades, and other information from my.brocku.\n\nDo you still want to skip the login process?</string>
+    <string name="title_activity_main">Main</string>
 
 </resources>
