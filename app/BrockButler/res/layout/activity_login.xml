@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff0000"
+    tools:context=".LoginActivity" >
+
+    <TextView
+        android:id="@+id/app_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/app_logo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:layout_below="@id/app_logo"
+        android:text="@string/temp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:id="@+id/login_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_email"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/login_email"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dip"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_password"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <Button
+                android:id="@+id/btn_login_login"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textSize="20sp" >
+            </Button>
+
+            <Button
+                android:id="@+id/btn_login_skip"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:text="@string/login_skip"
+                android:textSize="20sp" >
+            </Button>
+        </LinearLayout>
+    </TableLayout>
+    
+
+    <TextView
+        android:id="@+id/login_remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_table"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dip"
+        android:layout_toRightOf="@+id/app_logo"
+        android:text="@string/login_remember" />
+
+    <CheckBox
+        android:id="@+id/chk_login_remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/login_remember"
+        android:layout_alignBottom="@+id/login_remember"
+        android:layout_toRightOf="@+id/login_remember" />
+
+    <TextView
+        android:id="@+id/login_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_remember"
+        android:layout_marginTop="30dip"
+        android:layout_toRightOf="@+id/app_logo"
+        
+        android:text="@string/login_skip_msg" />
+
+    <CheckBox
+        android:id="@+id/chk_login_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/login_skip"
+        android:layout_alignBottom="@+id/login_skip"
+        android:layout_toRightOf="@+id/login_remember" />
+
+</RelativeLayout>
