@@ -145,6 +145,7 @@ public class TourHandler extends Activity {
 	 * Giant method to link all of the images together. The fun stuff. Right here.
 	 */
 	private void initNodes(){
+		R.drawable D = new R.drawable();
 		nodes = new TourNode[numImages];
 		/** J BLOCK FORWARD PASS **/
 		create(R.drawable._j315f,-1);
