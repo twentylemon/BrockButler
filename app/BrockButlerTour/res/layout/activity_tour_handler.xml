@@ -11,11 +11,11 @@
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/upperleft"
+        android:layout_toLeftOf="@+id/innerleft"
         android:layout_centerVertical="true" />
 
     <ImageButton
-        android:id="@+id/upperleft"
+        android:id="@+id/innerleft"
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_marginRight="20dp"
@@ -30,7 +30,7 @@
         android:layout_centerVertical="true" />
 
     <ImageButton
-        android:id="@+id/upperright"
+        android:id="@+id/innerright"
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_marginLeft="20dp"
@@ -42,7 +42,7 @@
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/upperright"
+        android:layout_toRightOf="@+id/innerright"
         android:layout_centerVertical="true" />
 
     <!-- android:background="@android:color/transparent" -->

@@ -57,7 +57,6 @@ public class TourHall extends TourNode {
 	}
 
 	/**
-	 * paint(TourInfo)
 	 * Changes the image displayed on the screen and redefines where the buttons lead us to.
 	 * Also pushes this node onto the TourInfo's history.
 	 */
@@ -79,5 +78,4 @@ public class TourHall extends TourNode {
 			});
 		}
 	}
-
 }

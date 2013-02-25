@@ -23,7 +23,8 @@ public class TourHandler extends Activity {
 	private final int groupID = 1;
 	private final int backID = Menu.FIRST;
 	private final int turnID = Menu.FIRST + 1;
-	private final int exitID = Menu.FIRST + 2;
+	private final int teleID = Menu.FIRST + 2;
+	private final int exitID = Menu.FIRST + 3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,13 @@ public class TourHandler extends Activity {
 		progress.setTitle("Loading Tour");
 		progress.setMessage("Please wait while the tour loads...");
 		progress.show();
-		
+
 		RelativeLayout rl = (RelativeLayout)findViewById(R.id.screen);
 		ImageButton[] buttons = new ImageButton[5];
 		buttons[0] = (ImageButton)findViewById(R.id.outerleft);
-		buttons[1] = (ImageButton)findViewById(R.id.upperleft);
+		buttons[1] = (ImageButton)findViewById(R.id.innerleft);
 		buttons[2] = (ImageButton)findViewById(R.id.center);
-		buttons[3] = (ImageButton)findViewById(R.id.upperright);
+		buttons[3] = (ImageButton)findViewById(R.id.innerright);
 		buttons[4] = (ImageButton)findViewById(R.id.outerright);
 		info = new TourInfo(rl,buttons,getApplicationContext());
 		initNodes();
@@ -56,6 +57,7 @@ public class TourHandler extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(groupID,backID,backID,"Go Back");
 		menu.add(groupID,turnID,turnID,"Turn Around");
+		//menu.add(groupID,teleID,teleID,"Teleport!");
 		menu.add(groupID,exitID,exitID,"End Tour");
 		// Inflate the menu; this adds items to the action bar if it is present.
 		//getMenuInflater().inflate(R.menu.activity_tour_handler, menu);
@@ -71,6 +73,8 @@ public class TourHandler extends Activity {
 		case turnID:
 			turnAround();
 			return(true);
+		case teleID:
+			return(true);
 		case exitID:
 			super.onBackPressed();
 			return(true);
@@ -80,7 +84,6 @@ public class TourHandler extends Activity {
 	}
 	
 	/**
-	 * void onBackPressed()
 	 * Overrides the back button to pop previous TourNode from the stack
 	 * and goes to that node.
 	 */
@@ -91,31 +94,30 @@ public class TourHandler extends Activity {
 	}
 
 	/**
-	 * void turnAround()
-	 * Goes to the node in the tour which is logically turning around. Fun.
+	 * Goes to the node in the tour which is logically turning around.
 	 */
 	private void turnAround(){
-		if (info.current != null && info.current.canTurnAround())
+		if (info.current.canTurnAround()){
+			info.history.push(info.current);
 			info.current.turnAroundNode.paint(info);
+		}
 	}
 	
 	/**
-	 * int idx()
 	 * @param r - image resource value
-	 * @return index in `nodes` of TourNode which shows that image
+	 * @return index in `nodes` of TourNode which shows the image `r`
 	 */
 	private int idx(int r){
 		return(r - R.drawable._a301b);
 	}
 	
 	/**
-	 * void create()
 	 * Adds a new TourHall to nodes.
 	 * @param r  - the image resource value
 	 * @param ol - image resource value of outer left button
-	 * @param ul - resource of upper left
+	 * @param ul - resource of inner left
 	 * @param c  - resource of center
-	 * @param ur - resource of upper right
+	 * @param ur - resource of inner right
 	 * @param or - resource of outer right
 	 * @param ta - resource of turn around node
 	 */
@@ -141,195 +143,269 @@ public class TourHandler extends Activity {
 	private void create (int r, int ll, int ul, int c, int ur, int lr){ create(r,ll,ul,c,ur,lr,-1); }
 	
 	/**
-	 * void initNodes()
 	 * Giant method to link all of the images together. The fun stuff. Right here.
 	 */
+	@SuppressWarnings("static-access")
 	private void initNodes(){
 		R.drawable D = new R.drawable();
 		nodes = new TourNode[numImages];
 		/** J BLOCK FORWARD PASS **/
-		create(R.drawable._j315f,-1);
-		create(R.drawable._j314f,R.drawable._j315f);
-		create(R.drawable._j313f,R.drawable._j314f);
-		create(R.drawable._j312f,-1,-1,-1,R.drawable._j313f,-1);
-		create(R.drawable._j311f,R.drawable._j312f);
-		create(R.drawable._j310f,-1,-1,R.drawable._j311f,R.drawable._j311f,-1);
-		create(R.drawable._j309f,R.drawable._j310f);
-		create(R.drawable._j308f,R.drawable._j309f);
-		create(R.drawable._j307f,-1);
-		create(R.drawable._j306f,R.drawable._j307f,R.drawable._j307f,-1,R.drawable._j308f,R.drawable._j308f);
-		create(R.drawable._j305f,R.drawable._j306f);
-		create(R.drawable._j304f,R.drawable._j305f);
-		create(R.drawable._j303f,R.drawable._j304f);
-		create(R.drawable._j302f,-1);
-		create(R.drawable._j301f,R.drawable._j303f,R.drawable._j303f,R.drawable._j303f,R.drawable._j302f,R.drawable._j302f);
+		create(D._j315f,-1);
+		create(D._j314f,D._j315f);
+		create(D._j313f,D._j314f);
+		create(D._j312f,-1,-1,-1,D._j313f,-1);
+		create(D._j311f,D._j312f);
+		create(D._j310f,-1,-1,D._j311f,D._j311f,-1);
+		create(D._j309f,D._j310f);
+		create(D._j308f,D._j309f);
+		create(D._j307f,-1);
+		create(D._j306f,D._j307f,D._j307f,-1,D._j308f,D._j308f);
+		create(D._j305f,D._j306f);
+		create(D._j304f,D._j305f);
+		create(D._j303f,D._j304f);
+		create(D._j302f,-1);
+		create(D._j301f,D._j303f,D._j303f,D._j303f,D._j302f,D._j302f);
 
 		/** D BLOCK FORWARD PASS **/
-		create(R.drawable._d343f,-1,-1,-1,/*R.drawable._j312b*/-1,/*R.drawable._j312b*/-1);
-		create(R.drawable._d342f,R.drawable._d343f);
-		create(R.drawable._d341f,-1,-1,R.drawable._j301f,R.drawable._j301f,R.drawable._d342f);
-		create(R.drawable._d340f,R.drawable._d341f);
-		create(R.drawable._d339f,R.drawable._d340f);
-		create(R.drawable._d338f,R.drawable._d339f);
-		create(R.drawable._d337f,R.drawable._d338f);
-		create(R.drawable._d336f,R.drawable._d337f);
-		create(R.drawable._d335f,/*R.drawable._d306b*/-1,/*R.drawable._d306b*/-1,-1,R.drawable._d341f,R.drawable._d341f);
-		create(R.drawable._d334f,R.drawable._d335f);
-		create(R.drawable._d333f,R.drawable._d334f);
-		create(R.drawable._d332f,R.drawable._d333f);
-		create(R.drawable._d331f,R.drawable._d332f);
-		create(R.drawable._d330f,R.drawable._d331f);
-		create(R.drawable._d329f,R.drawable._d330f);
-		create(R.drawable._d328f,R.drawable._d329f,R.drawable._d329f,-1,-1,-1);
-		create(R.drawable._d327f,R.drawable._d328f);
-		create(R.drawable._d326f,R.drawable._d327f);
-		create(R.drawable._d325f,R.drawable._d326f);
-		create(R.drawable._d324f,R.drawable._d325f);
-		create(R.drawable._d323f,-1,R.drawable._d324f,R.drawable._d324f,-1,-1);
-		create(R.drawable._d322f,R.drawable._d323f);
-		create(R.drawable._d321f,R.drawable._d322f);
-		create(R.drawable._d320f,R.drawable._d321f);
-		create(R.drawable._d319f,R.drawable._d320f);
-		create(R.drawable._d318f,R.drawable._d319f);
-		create(R.drawable._d317f,R.drawable._d336f,R.drawable._d336f,-1,-1,R.drawable._d318f);
-		create(R.drawable._d316f,R.drawable._d317f);
-		create(R.drawable._d315f,R.drawable._d316f);
-		create(R.drawable._d314f,R.drawable._d315f);
-		create(R.drawable._d313f,R.drawable._d314f);
-		create(R.drawable._d312f,/*R.drawable._d319b*/-1,/*R.drawable._d319b*/-1,-1,R.drawable._d319f,R.drawable._d319f);
-		create(R.drawable._d311f,R.drawable._d312f);
-		create(R.drawable._d310f,R.drawable._d311f,R.drawable._d311f,-1,-1,-1);
-		create(R.drawable._d309f,R.drawable._d310f);
-		create(R.drawable._d308f,R.drawable._d309f);
-		create(R.drawable._d307f,R.drawable._d308f);
-		create(R.drawable._d306f,R.drawable._d307f);
-		create(R.drawable._d305f,R.drawable._d306f);
-		create(R.drawable._d304f,-1);
-		create(R.drawable._d303f,-1,R.drawable._d305f,-1,R.drawable._d304f,-1);
-		create(R.drawable._d302f,-1,-1,R.drawable._d313f,-1,R.drawable._d303f);
-		create(R.drawable._d301f,R.drawable._d302f);
+		create(D._d343f,-1,-1,-1,/*D._j312b*/-1,/*D._j312b*/-1);
+		create(D._d342f,D._d343f);
+		create(D._d341f,-1,-1,D._j301f,D._j301f,D._d342f);
+		create(D._d340f,D._d341f);
+		create(D._d339f,D._d340f);
+		create(D._d338f,D._d339f);
+		create(D._d337f,D._d338f);
+		create(D._d336f,D._d337f);
+		create(D._d335f,/*D._d306b*/-1,/*D._d306b*/-1,-1,D._d341f,D._d341f);
+		create(D._d334f,D._d335f);
+		create(D._d333f,D._d334f);
+		create(D._d332f,D._d333f);
+		create(D._d331f,D._d332f);
+		create(D._d330f,D._d331f);
+		create(D._d329f,D._d330f);
+		create(D._d328f,D._d329f,D._d329f,-1,-1,-1);
+		create(D._d327f,D._d328f);
+		create(D._d326f,D._d327f);
+		create(D._d325f,D._d326f);
+		create(D._d324f,D._d325f);
+		create(D._d323f,-1,D._d324f,D._d324f,-1,-1);
+		create(D._d322f,D._d323f);
+		create(D._d321f,D._d322f);
+		create(D._d320f,D._d321f);
+		create(D._d319f,D._d320f);
+		create(D._d318f,D._d319f);
+		create(D._d317f,D._d336f,D._d336f,-1,-1,D._d318f);
+		create(D._d316f,D._d317f);
+		create(D._d315f,D._d316f);
+		create(D._d314f,D._d315f);
+		create(D._d313f,D._d314f);
+		create(D._d312f,/*D._d319b*/-1,/*D._d319b*/-1,-1,D._d319f,D._d319f);
+		create(D._d311f,D._d312f);
+		create(D._d310f,D._d311f,D._d311f,-1,-1,-1);
+		create(D._d309f,D._d310f);
+		create(D._d308f,D._d309f);
+		create(D._d307f,D._d308f);
+		create(D._d306f,D._d307f);
+		create(D._d305f,D._d306f);
+		create(D._d304f,-1);
+		create(D._d303f,-1,D._d305f,-1,D._d304f,-1);
+		create(D._d302f,-1,-1,D._d313f,-1,D._d303f);
+		create(D._d301f,D._d302f);
 
 		/** C BLOCK FORWARD PASS **/
-		create(R.drawable._c312f,-1,-1,-1,R.drawable._d301f,R.drawable._d301f);
-		create(R.drawable._c311f,R.drawable._c312f);
-		create(R.drawable._c310f,-1,R.drawable._c311f,R.drawable._c311f,-1,-1);
-		create(R.drawable._c309f,R.drawable._c310f);
-		create(R.drawable._c308f,R.drawable._c309f);
-		create(R.drawable._c307f,-1,R.drawable._c308f,-1,-1,-1);
-		create(R.drawable._c306f,-1,-1,/*R.drawable._c306b*/-1,R.drawable._c307f,R.drawable._c307f);
-		create(R.drawable._c305f,R.drawable._c306f);
-		create(R.drawable._c304f,R.drawable._c305f);
-		create(R.drawable._c303f,R.drawable._c304f);
-		create(R.drawable._c302f,R.drawable._c303f);
-		create(R.drawable._c301f,-1,-1,-1,R.drawable._c302f,R.drawable._c302f);
-		create(R.drawable._c316f,-1,R.drawable._c306f,/*R.drawable._c310b*/-1,/*R.drawable._c310b*/-1,-1);
-		create(R.drawable._c315f,R.drawable._c316f);
-		create(R.drawable._c314f,R.drawable._c315f);
-		create(R.drawable._c313f,-1,-1,-1,R.drawable._c314f,R.drawable._c314f);
+		create(D._c312f,-1,-1,-1,D._d301f,D._d301f);
+		create(D._c311f,D._c312f);
+		create(D._c310f,-1,D._c311f,D._c311f,-1,-1);
+		create(D._c309f,D._c310f);
+		create(D._c308f,D._c309f);
+		create(D._c307f,-1,D._c308f,-1,-1,-1);
+		create(D._c306f,-1,-1,/*D._c306b*/-1,D._c307f,D._c307f);
+		create(D._c305f,D._c306f);
+		create(D._c304f,D._c305f);
+		create(D._c303f,D._c304f);
+		create(D._c302f,D._c303f);
+		create(D._c301f,-1,-1,-1,D._c302f,D._c302f);
+		create(D._c316f,-1,D._c306f,/*D._c310b*/-1,/*D._c310b*/-1,-1);
+		create(D._c315f,D._c316f);
+		create(D._c314f,D._c315f);
+		create(D._c313f,-1,-1,-1,D._c314f,D._c314f);
 		
 		/** F BLOCK FORWARD PASS **/
-		create(R.drawable._f308f,-1,R.drawable._c313f,R.drawable._c313f,-1,-1);
-		create(R.drawable._f307f,R.drawable._f308f);
-		create(R.drawable._f306f,R.drawable._f307f);
-		create(R.drawable._f305f,R.drawable._f306f);
-		create(R.drawable._f304f,R.drawable._f305f);
-		create(R.drawable._f303f,R.drawable._f304f);
-		create(R.drawable._f302f,R.drawable._f303f);
-		create(R.drawable._f301f,R.drawable._f302f,R.drawable._f302f,-1,/*R.drawable._h302b*/-1,/*R.drawable._h302b*/-1);
+		create(D._f308f,-1,D._c313f,D._c313f,-1,-1);
+		create(D._f307f,D._f308f);
+		create(D._f306f,D._f307f);
+		create(D._f305f,D._f306f);
+		create(D._f304f,D._f305f);
+		create(D._f303f,D._f304f);
+		create(D._f302f,D._f303f);
+		create(D._f301f,D._f302f,D._f302f,-1,/*D._h302b*/-1,/*D._h302b*/-1);
 		
 		/** G BLOCK FORWARD PASS **/
-		create(R.drawable._g313f,-1);
-		create(R.drawable._g312f,R.drawable._g313f);
-		create(R.drawable._g311f,R.drawable._g312f);
-		create(R.drawable._g310f,R.drawable._g311f);
-		create(R.drawable._g309f,R.drawable._g310f);
-		create(R.drawable._g308f,R.drawable._g309f);
-		create(R.drawable._g307f,R.drawable._g308f);
-		create(R.drawable._g306f,R.drawable._g307f);
-		create(R.drawable._g305f,R.drawable._g306f);
-		create(R.drawable._g304f,R.drawable._g305f);
-		create(R.drawable._g303f,R.drawable._g304f);
-		create(R.drawable._g302f,-1,-1,R.drawable._g303f,R.drawable._g303f,-1);
-		create(R.drawable._g301f,-1,R.drawable._g302f,-1,-1,-1);
+		create(D._g313f,-1);
+		create(D._g312f,D._g313f);
+		create(D._g311f,D._g312f);
+		create(D._g310f,D._g311f);
+		create(D._g309f,D._g310f);
+		create(D._g308f,D._g309f);
+		create(D._g307f,D._g308f);
+		create(D._g306f,D._g307f);
+		create(D._g305f,D._g306f);
+		create(D._g304f,D._g305f);
+		create(D._g303f,D._g304f);
+		create(D._g302f,-1,-1,D._g303f,D._g303f,-1);
+		create(D._g301f,-1,D._g302f,-1,-1,-1);
 
 		/** H BLOCK FORWARD PASS **/
-		create(R.drawable._h338f,-1,R.drawable._g301f,-1,R.drawable._f302f,-1);
-		create(R.drawable._h337f,-1,-1,R.drawable._h338f,R.drawable._h338f,-1);
-		create(R.drawable._h336f,-1,-1,R.drawable._h337f,R.drawable._h337f,-1);
-		create(R.drawable._h335f,-1,-1,R.drawable._h336f,R.drawable._h336f,-1);
-		create(R.drawable._h334f,R.drawable._h335f);
-		create(R.drawable._h333f,/*R.drawable._h303b*/-1,/*R.drawable._h303b*/-1,-1,R.drawable._h334f,-1);
-		create(R.drawable._h332f,R.drawable._h333f);
-		create(R.drawable._h331f,R.drawable._h332f);
-		create(R.drawable._h330f,R.drawable._h331f);
-		create(R.drawable._h329f,-1,R.drawable._h334f,/*R.drawable._h303b*/-1,/*R.drawable._h322b*/-1,/*R.drawable._h322b*/-1);
-		create(R.drawable._h328f,R.drawable._h329f);
-		create(R.drawable._h327f,R.drawable._h328f);
-		create(R.drawable._h326f,R.drawable._h327f);
-		create(R.drawable._h325f,R.drawable._h326f);
-		create(R.drawable._h324f,R.drawable._h325f);
-		create(R.drawable._h323f,R.drawable._h324f);
-		create(R.drawable._h322f,R.drawable._h323f);
-		create(R.drawable._h321f,R.drawable._h322f);
-		create(R.drawable._h320f,R.drawable._h321f);
-		create(R.drawable._h319f,-1,-1,-1,-1,R.drawable._h320f);
-		create(R.drawable._h318f,R.drawable._h319f);
-		create(R.drawable._h317f,R.drawable._h318f);
-		create(R.drawable._h316f,R.drawable._h317f);
-		create(R.drawable._h315f,R.drawable._h316f);
-		create(R.drawable._h314f,-1);
-		create(R.drawable._h313f,R.drawable._h314f);
-		create(R.drawable._h312f,-1,-1,R.drawable._h313f,R.drawable._h315f,R.drawable._h315f);
-		create(R.drawable._h311f,-1,-1,-1,R.drawable._h312f,R.drawable._h312f);
-		create(R.drawable._h310f,R.drawable._h311f);
-		create(R.drawable._h309f,R.drawable._h310f);
-		create(R.drawable._h308f,R.drawable._h309f);
-		create(R.drawable._h307f,R.drawable._h308f);
-		create(R.drawable._h306f,R.drawable._h307f);
-		create(R.drawable._h305f,R.drawable._h306f);
-		create(R.drawable._h304f,R.drawable._h305f);
-		create(R.drawable._h303f,R.drawable._h304f,R.drawable._h304f,-1,R.drawable._h330f,R.drawable._h330f);
-		create(R.drawable._h302f,R.drawable._h303f);
-		create(R.drawable._h301f,R.drawable._h302f);
+		create(D._h338f,-1,D._g301f,-1,D._f302f,-1);
+		create(D._h337f,-1,-1,D._h338f,D._h338f,-1);
+		create(D._h336f,-1,-1,D._h337f,D._h337f,-1);
+		create(D._h335f,-1,-1,D._h336f,D._h336f,-1);
+		create(D._h334f,D._h335f);
+		create(D._h333f,/*D._h303b*/-1,/*D._h303b*/-1,D._h334f,-1,-1);
+		create(D._h332f,D._h333f);
+		create(D._h331f,D._h332f);
+		create(D._h330f,D._h331f);
+		create(D._h329f,-1,D._h334f,/*D._h303b*/-1,/*D._h322b*/-1,/*D._h322b*/-1);
+		create(D._h328f,D._h329f);
+		create(D._h327f,D._h328f);
+		create(D._h326f,D._h327f);
+		create(D._h325f,D._h326f);
+		create(D._h324f,D._h325f);
+		create(D._h323f,D._h324f);
+		create(D._h322f,D._h323f);
+		create(D._h321f,D._h322f);
+		create(D._h320f,D._h321f);
+		create(D._h319f,-1,-1,-1,-1,D._h320f);
+		create(D._h318f,D._h319f);
+		create(D._h317f,D._h318f);
+		create(D._h316f,D._h317f);
+		create(D._h315f,D._h316f);
+		create(D._h314f,-1);
+		create(D._h313f,D._h314f);
+		create(D._h312f,-1,-1,D._h313f,D._h315f,D._h315f);
+		create(D._h311f,-1,-1,-1,D._h312f,D._h312f);
+		create(D._h310f,D._h311f);
+		create(D._h309f,D._h310f);
+		create(D._h308f,D._h309f);
+		create(D._h307f,D._h308f);
+		create(D._h306f,D._h307f);
+		create(D._h305f,D._h306f);
+		create(D._h304f,D._h305f);
+		create(D._h303f,D._h304f,D._h304f,-1,D._h330f,D._h330f);
+		create(D._h302f,D._h303f);
+		create(D._h301f,D._h302f);
 		
 		/** E BLOCK FORWARD PASS **/
-		create(R.drawable._e311f,-1);
-		create(R.drawable._e310f,R.drawable._h301f,R.drawable._h301f,R.drawable._e311f,-1,-1);
-		create(R.drawable._e309f,R.drawable._e310f);
-		create(R.drawable._e308f,R.drawable._e309f);
-		create(R.drawable._e307f,-1,R.drawable._e308f,R.drawable._e308f,-1,-1);
-		create(R.drawable._e306f,R.drawable._e307f);
-		create(R.drawable._e305f,R.drawable._e306f);
-		create(R.drawable._e304f,R.drawable._e305f);
-		create(R.drawable._e303f,R.drawable._e304f);
-		create(R.drawable._e302f,R.drawable._e303f);
-		create(R.drawable._e301f,-1,-1,-1,R.drawable._e302f,R.drawable._e302f);
+		create(D._e311f,-1);
+		create(D._e310f,D._h301f,D._h301f,-1,D._e311f,-1);
+		create(D._e309f,D._e310f);
+		create(D._e308f,D._e309f);
+		create(D._e307f,-1,D._e308f,D._e308f,-1,-1);
+		create(D._e306f,D._e307f);
+		create(D._e305f,D._e306f);
+		create(D._e304f,D._e305f);
+		create(D._e303f,D._e304f);
+		create(D._e302f,D._e303f);
+		create(D._e301f,-1,-1,-1,D._e302f,D._e302f);
 
 		/** B BLOCK FORWARD PASS **/
-		create(R.drawable._b314f,-1,R.drawable._c301f,R.drawable._c301f,-1,-1);
-		create(R.drawable._b313f,R.drawable._b314f);
-		create(R.drawable._b312f,R.drawable._b314f);
-		create(R.drawable._b311f,-1,-1,R.drawable._b312f,R.drawable._b312f,R.drawable._b312f);
-		create(R.drawable._b310f,R.drawable._b311f,-1,R.drawable._b313f,-1,-1);
-		create(R.drawable._b309f,R.drawable._b310f);
-		create(R.drawable._b308f,R.drawable._b309f,R.drawable._b309f,-1,-1,-1);
-		create(R.drawable._b307f,R.drawable._e301f);
-		create(R.drawable._b306f,R.drawable._b307f);
-		create(R.drawable._b305f,R.drawable._b306f);
-		create(R.drawable._b304f,R.drawable._b305f);
-		create(R.drawable._b303f,R.drawable._b304f);
-		create(R.drawable._b302f,R.drawable._b303f,R.drawable._b303f,-1,R.drawable._b308f,R.drawable._b308f);
-		create(R.drawable._b301f,-1,-1,-1,R.drawable._b302f,R.drawable._b302f);
+		create(D._b314f,-1,D._c301f,D._c301f,-1,-1);
+		create(D._b313f,D._b314f);
+		create(D._b312f,D._b314f);
+		create(D._b311f,-1,-1,D._b312f,D._b312f,D._b312f);
+		create(D._b310f,D._b311f,-1,D._b313f,-1,-1);
+		create(D._b309f,D._b310f);
+		create(D._b308f,D._b309f,D._b309f,-1,-1,-1);
+		create(D._b307f,D._e301f);
+		create(D._b306f,D._b307f);
+		create(D._b305f,D._b306f);
+		create(D._b304f,D._b305f);
+		create(D._b303f,D._b304f);
+		create(D._b302f,D._b303f,D._b303f,-1,D._b308f,D._b308f);
+		create(D._b301f,-1,-1,-1,D._b302f,D._b302f);
 
 		/** A BLOCK FORWARD PASS **/
-		create(R.drawable._a309f,R.drawable._b301f,-1,-1,-1,-1);
-		create(R.drawable._a308f,R.drawable._a309f);
-		create(R.drawable._a307f,R.drawable._a308f);
-		create(R.drawable._a306f,R.drawable._a307f);
-		create(R.drawable._a305f,R.drawable._a306f);
-		create(R.drawable._a304f,R.drawable._a305f);
-		create(R.drawable._a303f,R.drawable._a304f);
-		create(R.drawable._a302f,R.drawable._a303f);
-		create(R.drawable._a301f,R.drawable._a302f);
+		create(D._a309f,D._b301f,-1,-1,-1,-1);
+		create(D._a308f,D._a309f);
+		create(D._a307f,D._a308f);
+		create(D._a306f,D._a307f);
+		create(D._a305f,D._a306f);
+		create(D._a304f,D._a305f);
+		create(D._a303f,D._a304f);
+		create(D._a302f,D._a303f);
+		create(D._a301f,D._a302f);
+
+		/** A BLOCK BACK PASS **/
+		create(D._a307b,-1,D._a302f);
+		create(D._a306b,D._a307b,D._a303f);
+		create(D._a305b,D._a306b,D._a304f);
+		create(D._a304b,D._a305b,D._a307f);
+		create(D._a303b,D._a304b,D._a308f);
+		create(D._a302b,-1,-1,-1,D._a303b,D._a303b,D._a309f);
+		create(D._a301b,D._a302b,D._b301f);
+
+		/** B BLOCK BACK PASS **/
+		create(D._b317b,D._a301b,D._b301f);
+		create(D._b316b,D._b317b,D._b302f);
+		create(D._b313b,-1,-1,-1,D._b316b,D._b316b,D._b309f);
+		create(D._b312b,D._b313b,D._b313f);
+		create(D._b311b,D._b311b,D._b313f);
+		create(D._b310b,-1,D._b311b,D._b311b,-1,-1,D._b312f);
+		create(D._b309b,-1,D._b312b,D._b312b,-1,D._b310b,D._b314f);
+		create(D._b308b,-1,D._b309b,-1,-1,-1,D._b314f);
+		create(D._b306b,-1,-1,-1,D._b308b,D._b308b,D._c301f);
+		create(D._b305b,D._b308f,D._b308f,-1,D._b317b,D._b317b,D._b303f);
+		create(D._b304b,D._b305b,D._b304f);
+		create(D._b303b,D._b304b,D._b305f);
+		create(D._b302b,D._b303b,D._b306f);
+		create(D._b301b,D._b302b,D._e301f);
+
+		/** E BLOCK BACK PASS **/
+		create(D._e309b,D._b301b,D._e303f);
+		create(D._e308b,D._e309b,D._e304f);
+		create(D._e307b,D._e308b,D._e305f);
+		create(D._e306b,D._e307b,D._e306f);
+		create(D._e305b,D._e306b,D._e307f);
+		create(D._e304b,D._e305b,D._e308f);
+		create(D._e303b,D._e304b,D._e309f);
+		create(D._e302b,D._e303b,D._e311f);
+		create(D._e301b,D._e311f,-1,D._e303b,D._e303b,-1,D._h301f);
+
+		/**  H BLOCK BACK PASS **/
+		create(D._h326b,D._e301b,D._h302f);
+		create(D._h325b,-1,-1,D._h326b,-1,D._h304f,D._h330f);
+		create(D._h324b,D._h325b,D._h331f);
+		create(D._h323b,D._h324b,D._h332f);
+		create(D._h322b,D._h323b,D._h333f);
+		create(D._h321b,D._h330f,D._h330f,-1,D._h326b,D._h326b,D._h304f);
+		create(D._h320b,D._h321b,D._h305f);
+		create(D._h319b,D._h320b,D._h307f);
+		create(D._h318b,D._h319b,D._h308f);
+		create(D._h317b,D._h318b,D._h309f);
+		create(D._h316b,D._h317b,D._h311f);
+		create(D._h315b,-1,D._h316b,-1,-1,D._h313f,D._h315f);
+		create(D._h314b,D._h315b,D._h316f);
+		create(D._h313b,D._h314b,D._h317f);
+		create(D._h312b,D._h313b,D._h319f);
+		create(D._h311b,D._h312b,D._h322f);
+		create(D._h310b,D._h311b,D._h323f);
+		create(D._h309b,D._h310b,D._h324f);
+		create(D._h308b,D._h309b,D._h325f);
+		create(D._h307b,D._h308b,D._h326f);
+		create(D._h306b,D._h307b,D._h327f);
+		create(D._h305b,D._h306b,D._h328f);
+		create(D._h304b,D._h305b,D._h329f);
+		create(D._h303b,D._h322b,D._h322b,-1,D._h304b,D._h304b,D._h334f);
+		create(D._h302b,D._h303b,D._h335f);
+		create(D._h301b,D._h302b,D._h337f);
+
+		/** G BLOCK BACK PASS **/
+
+		/** F BLOCK BACK PASS **/
+
+		/** C BLOCK BACK PASS **/
+
+		/** D BLOCK BACK PASS **/
+
+		/** J BLOCK BACK PASS **/
 	}
 }

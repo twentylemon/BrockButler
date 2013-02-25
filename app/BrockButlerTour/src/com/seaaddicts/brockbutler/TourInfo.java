@@ -20,6 +20,11 @@ public class TourInfo {
 	public TourNode current;
 	public Stack<TourNode> history;
 
+	/**
+	 * @param r - the layout of which the background is changed from node to node
+	 * @param b - array of ImageButtons where one would tap to change nodes
+	 * @param c - getApplicationContext(), for toasts
+	 */
 	public TourInfo(RelativeLayout r, ImageButton[] b, Context c){
 		rl = r;
 		buttons = b;

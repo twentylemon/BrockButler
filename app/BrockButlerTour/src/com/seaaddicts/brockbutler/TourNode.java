@@ -17,10 +17,9 @@ public abstract class TourNode {
 	protected void setTurnAroundNode(TourNode node){ turnAroundNode = node; }
 
 	/**
-	 * void paint(RelativeLayout)
 	 * Changes the background image and redefines what the buttons do,
 	 * ie where the buttons will take you.
-	 * @param rl - the layout to paint onto
+	 * @param info - current tour state
 	 */
 	protected abstract void paint(TourInfo info);
 }
