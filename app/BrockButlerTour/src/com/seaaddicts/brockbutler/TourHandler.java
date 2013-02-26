@@ -255,7 +255,7 @@ public class TourHandler extends Activity {
 		create(D._g301f,-1,D._g302f,-1,-1,-1);
 
 		/** H BLOCK FORWARD PASS **/
-		create(D._h338f,-1,D._g301f,-1,D._f302f,-1);
+		create(D._h338f,D._g301f,D._g301f,-1,D._f302f,D._f302f);
 		create(D._h337f,-1,-1,D._h338f,D._h338f,-1);
 		create(D._h336f,-1,-1,D._h337f,D._h337f,-1);
 		create(D._h335f,-1,-1,D._h336f,D._h336f,-1);
@@ -399,13 +399,88 @@ public class TourHandler extends Activity {
 		create(D._h301b,D._h302b,D._h337f);
 
 		/** G BLOCK BACK PASS **/
+		create(D._g309b,-1,-1,-1,D._f301f,D._f301f,D._g302f);
+		create(D._g308b,D._g309b,D._g309b,-1,-1,-1,D._g303f);
+		create(D._g307b,D._g308b,D._g304f);
+		create(D._g306b,D._g307b,D._g305f);
+		create(D._g305b,D._g306b,D._g306f);
+		create(D._g304b,D._g305b,D._g309f);
+		create(D._g303b,D._g304b,D._g310f);
+		create(D._g302b,D._g303b,D._g311f);
+		create(D._g301b,-1,-1,D._g302b,-1,D._g313f,D._g312f);
 
 		/** F BLOCK BACK PASS **/
+		create(D._f305b,D._f301f,D._f303f);
+		create(D._f304b,D._f305b,D._f304f);
+		create(D._f303b,D._f304b,D._f305f);
+		create(D._f302b,D._f303b,D._f306f);
+		create(D._f301b,D._f302b,D._f308f);
 
 		/** C BLOCK BACK PASS **/
+		create(D._c315b,D._b306b,D._c302f);
+		create(D._c314b,D._c315b,D._c303f);
+		create(D._c313b,D._c314b,D._c304f);
+		create(D._c312b,D._c313b,D._c305f);
+		create(D._c311b,D._c312b,D._c306f);
+		create(D._c310b,D._c311b,D._c306f);
+		create(D._c309b,D._f301b,D._f301b,-1,-1,-1,D._c313f);
+		create(D._c308b,D._c309b,D._c314f);
+		create(D._c307b,D._c308b,D._c315f);
+		create(D._c306b,D._c307b,D._c316f);
+		create(D._c305b,-1,-1,-1,D._c310b,D._c306b,D._c308f);
+		create(D._c304b,D._c305b,D._c309f);
+		create(D._c303b,D._c304b,D._c310f);
+		create(D._c302b,-1,-1,-1,D._c303b,D._c303b,D._c311f);
+		create(D._c301b,D._c302b,D._c302b,-1,-1,-1,D._c312f);
 
 		/** D BLOCK BACK PASS **/
+		create(D._d334b,D._c301b,D._d301f);
+		create(D._d333b,D._d334b,-1,-1,-1,D._d313f,D._d303f);
+		create(D._d332b,D._d333b,D._d303f);
+		create(D._d331b,D._d332b,D._d305f);
+		create(D._d330b,D._d331b,D._d306f);
+		create(D._d329b,D._d330b,D._d307f);
+		create(D._d328b,D._d329b,D._d308f);
+		create(D._d327b,D._d328b,D._d309f);
+		create(D._d326b,-1,-1,-1,D._d327b,D._d327b,D._d310f);
+		create(D._d325b,D._d334b,D._d314f);
+		create(D._d324b,D._d325b,D._d315f);
+		create(D._d323b,D._d324b,D._d317f);
+		create(D._d322b,-1,D._d318f,D._d323b,-1,-1,D._d337f);
+		create(D._d321b,D._d322b,D._d338f);
+		create(D._d320b,D._d321b,D._d340f);
+		create(D._d319b,D._d323b,D._d319f);
+		create(D._d318b,D._d319b,D._d320f);
+		create(D._d317b,D._d318b,D._d321f);
+		create(D._d316b,D._d317b,D._d322f);
+		create(D._d315b,D._d316b,D._d323f);
+		create(D._d314b,D._d315b,D._d323f);
+		create(D._d313b,D._d314b,D._d325f);
+		create(D._d312b,D._d313b,D._d327f);
+		create(D._d311b,D._d312b,D._d329f);
+		create(D._d310b,D._d311b,D._d330f);
+		create(D._d309b,D._d310b,D._d331f);
+		create(D._d308b,D._d309b,D._d333f);
+		create(D._d307b,D._d308b,D._d334f);
+		create(D._d306b,D._d307b,-1,D._d320b,-1,-1,D._d340f);
+		create(D._d305b,D._d307b,-1,D._d306b,-1,-1,D._d341f);
+		create(D._d304b,-1,D._d305b,-1,D._d341f,-1,D._d342f);
+		create(D._d303b,D._d343f,D._d343f,-1,-1,-1);
+		create(D._d302b,D._d306b,-1,-1,-1,-1,D._j301f);
+		create(D._d301b,D._d302b,D._j301f);
 
 		/** J BLOCK BACK PASS **/
+		create(D._j312b,-1,D._d303b,D._d301b,D._j303f,-1,D._j302f);
+		create(D._j311b,-1,D._j302f,-1,D._d301b,-1,D._j304f);
+		create(D._j310b,D._j311b,D._j305f);
+		create(D._j309b,D._j310b,D._j306f);
+		create(D._j308b,-1,-1,D._j308f,D._j309b,-1,D._j307f);
+		create(D._j307b,-1,D._j309b,D._j307f,-1,-1,D._j308f);
+		create(D._j306b,D._j307b,D._j309f);
+		create(D._j305b,-1,D._j306b,D._j306b,-1,-1,D._j312f);
+		create(D._j304b,D._j305b,D._j313f);
+		create(D._j303b,D._j304b,D._j313f);
+		create(D._j302b,D._j303b,D._j314f);
+		create(D._j301b,D._j302b,D._j315f);
 	}
 }
