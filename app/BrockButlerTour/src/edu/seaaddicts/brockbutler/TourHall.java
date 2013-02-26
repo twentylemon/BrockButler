@@ -6,7 +6,7 @@
  * Created by Taras Mychaskiw 2013-02-20
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
-package com.seaaddicts.brockbutler;
+package edu.seaaddicts.brockbutler;
 
 import android.view.View;
 import android.view.View.OnClickListener;

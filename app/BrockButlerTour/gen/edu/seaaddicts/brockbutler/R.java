@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.seaaddicts.brockbutler;
+package edu.seaaddicts.brockbutler;
 
 public final class R {
     public static final class attr {
