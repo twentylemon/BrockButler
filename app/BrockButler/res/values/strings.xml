@@ -14,5 +14,14 @@
     <string name="temp">Logo Here</string>
     <string name="msg_skip">By logging in BrockButler attempts to automatically update your timetable, grades, and other information from my.brocku.\n\nDo you still want to skip the login process?</string>
     <string name="title_activity_main">Main</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="test_image">This is a test image.</string>
+    <string name="title_scheduler">Scheduler</string>
+    <string name="title_maps">Maps</string>
+    <string name="title_contacts">Contacts</string>
+    <string name="title_tour">Tour</string>
+    <string name="title_help">Help</string>
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="title_activity_contact">ContactActivity</string>
 
 </resources>
