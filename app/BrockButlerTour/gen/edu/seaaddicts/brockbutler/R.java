@@ -310,6 +310,11 @@ public final class R {
         public static final int _j314f=0x7f020128;
         public static final int _j315f=0x7f020129;
         public static final int ic_launcher=0x7f02012a;
+        public static final int qb_center=0x7f02012b;
+        public static final int qb_innerleft=0x7f02012c;
+        public static final int qb_innerright=0x7f02012d;
+        public static final int qb_outerleft=0x7f02012e;
+        public static final int qb_outerright=0x7f02012f;
     }
     public static final class id {
         public static final int center=0x7f070003;

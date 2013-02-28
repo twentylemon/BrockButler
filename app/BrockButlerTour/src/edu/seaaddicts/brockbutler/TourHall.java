@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 public class TourHall extends TourNode {
-	private TourNode[] nodes;	//each of the nodes this hallway branches off to
 	
 	/**
 	 * Forward pass constructor. Defines each button, and inits the turn around
@@ -35,15 +34,6 @@ public class TourHall extends TourNode {
 		nodes[4] = lr;
 		turnAroundNode = null;
 	}
-	
-	/**
-	 * Simplified forward pass constructor. Inits non-center nodes to null.
-	 * @param img - image resource value
-	 * @param c - the center node
-	 */
-	public TourHall(int img, TourNode c){
-		this(img,null,null,c,null,null);
-	}
 
 	/**
 	 * Second pass constructor. Defines each button, and also defines the turn
@@ -56,12 +46,18 @@ public class TourHall extends TourNode {
 		turnAroundNode.setTurnAroundNode(this);
 	}
 
+	public void setOuterLeftNode(TourNode node){  nodes[0] = node; }
+	public void setInnerLeftNode(TourNode node){  nodes[1] = node; }
+	public void setCenterNode(TourNode node){     nodes[2] = node; }
+	public void setInnerRightNode(TourNode node){ nodes[3] = node; }
+	public void setOuterRightNode(TourNode node){ nodes[4] = node; }
+
 	/**
 	 * Changes the image displayed on the screen and redefines where the buttons lead us to.
 	 * Also pushes this node onto the TourInfo's history.
 	 */
 	@Override
-	protected void paint(final TourInfo info) {
+	protected void paint(final TourInfo info){
 		info.rl.setBackgroundResource(image);
 		info.current = this;
 		for (int i = 0; i < nodes.length; i++){

@@ -47,7 +47,7 @@ public class TourHandler extends Activity {
 		initNodes();
 		int first = -1;
 		while (nodes[++first] == null);
-		nodes[first].paint(info);
+		nodes[idx(R.drawable._d342f)].paint(info);
 		progress.dismiss();
 		//nodes[idx(R.drawable._j314f)].paint(info);
 				//TODO ask user where they want to be dropped
@@ -482,5 +482,12 @@ public class TourHandler extends Activity {
 		create(D._j303b,D._j304b,D._j313f);
 		create(D._j302b,D._j303b,D._j314f);
 		create(D._j301b,D._j302b,D._j315f);
+
+		/** BUTTON FIXES **/
+		//create(D._d343f,-1,-1,-1,/*D._j312b*/-1,/*D._j312b*/-1);
+		nodes[idx(D._d343f)].setInnerRightNode(nodes[idx(D._j312b)]);
+		nodes[idx(D._d343f)].setOuterRightNode(nodes[idx(D._j312b)]);
+		//create(D._d335f,/*D._d306b*/-1,/*D._d306b*/-1,-1,D._d341f,D._d341f);
+		nodes[idx(D._d335f)].setOuterLeftNode(nodes[idx(D._d306b)]);
 	}
 }
