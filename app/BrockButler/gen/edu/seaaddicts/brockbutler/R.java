@@ -49,7 +49,8 @@ public final class R {
         public static final int activity_main=0x7f030003;
         public static final int activity_map=0x7f030004;
         public static final int activity_scheduler=0x7f030005;
-        public static final int activity_tour=0x7f030006;
+        public static final int activity_scheduler_course=0x7f030006;
+        public static final int activity_tour=0x7f030007;
     }
     public static final class menu {
         public static final int activity_contact=0x7f060000;

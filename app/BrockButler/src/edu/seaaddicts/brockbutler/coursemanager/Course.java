@@ -7,5 +7,5 @@ public class Course {
 	public String mSubject;
 	public String mCode;
 	public String mInstructor;
-	public ArrayList<CourseClass> mCourseClasses;
+	public ArrayList<Offering> mOfferings;
 }

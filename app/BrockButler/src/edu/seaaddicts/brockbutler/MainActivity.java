@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 	private Button mMapsButton;
 	private Button mTourButton;
 	private Button mHelpButton;
+	View v[];
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +74,5 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-
+	
 }
