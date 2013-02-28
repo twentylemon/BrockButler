@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BrockButlerTour</string>
+    <string name="app_name">Brock Butler Tour</string>
+    <string name="menu_go_back">Go Back</string>
+    <string name="menu_turn_around">Turn Around</string>
+    <string name="menu_teleport">Teleport!</string>
+    <string name="menu_end_tour">End Tour</string>
+    <string name="a_block">A Block</string>
+    <string name="b_block">B Block</string>
+    <string name="c_block">C Block</string>
+    <string name="d_block">D Block</string>
+    <string name="e_block">E Block</string>
+    <string name="f_block">F Block</string>
+    <string name="g_block">G Block</string>
+    <string name="h_block">H Block</string>
+    <string name="j_block">J Block</string>
 
 </resources>

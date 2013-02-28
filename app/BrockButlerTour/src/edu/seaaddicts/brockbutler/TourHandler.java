@@ -8,11 +8,11 @@
 package edu.seaaddicts.brockbutler;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 
 public class TourHandler extends Activity {
@@ -20,21 +20,10 @@ public class TourHandler extends Activity {
 	private final int numImages = R.drawable._j315f - R.drawable._a301b + 1;
 	private TourInfo info;
 
-	private final int groupID = 1;
-	private final int backID = Menu.FIRST;
-	private final int turnID = Menu.FIRST + 1;
-	private final int teleID = Menu.FIRST + 2;
-	private final int exitID = Menu.FIRST + 3;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tour_handler);
-		
-		ProgressDialog progress = new ProgressDialog(this);
-		progress.setTitle("Loading Tour");
-		progress.setMessage("Please wait while the tour loads...");
-		progress.show();
 
 		RelativeLayout rl = (RelativeLayout)findViewById(R.id.screen);
 		ImageButton[] buttons = new ImageButton[5];
@@ -48,39 +37,56 @@ public class TourHandler extends Activity {
 		int first = -1;
 		while (nodes[++first] == null);
 		nodes[idx(R.drawable._d342f)].paint(info);
-		progress.dismiss();
 		//nodes[idx(R.drawable._j314f)].paint(info);
-				//TODO ask user where they want to be dropped
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(groupID,backID,backID,"Go Back");
-		menu.add(groupID,turnID,turnID,"Turn Around");
-		//menu.add(groupID,teleID,teleID,"Teleport!");
-		menu.add(groupID,exitID,exitID,"End Tour");
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_tour_handler, menu);
-		return true;
+	public boolean onCreateOptionsMenu(Menu menu){
+		getMenuInflater().inflate(R.menu.activity_tour_handler,menu);
+		return(true);
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		switch (item.getItemId()){
-		case backID:
-			onBackPressed();
-			return(true);
-		case turnID:
-			turnAround();
-			return(true);
-		case teleID:
-			return(true);
-		case exitID:
-			super.onBackPressed();
-			return(true);
-		default:
-			return(super.onOptionsItemSelected(item));
+	/**
+	 * Pops the previous TourNode from the stack and goes to that node.
+	 */
+	public void goBack(MenuItem item){
+		if (!info.history.empty())
+			info.history.pop().paint(info);
+	}
+
+	/**
+	 * Goes to the node in the tour which is logically turning around.
+	 */
+	public void turnAround(MenuItem item){ 
+		if (info.current.canTurnAround()){
+			info.history.push(info.current);
+			info.current.turnAroundNode.paint(info);
 		}
+	}
+
+	/**
+	 * Creates a popup menu asking where the user wants to teleport to.
+	 */
+	public void teleport(MenuItem item){
+		PopupMenu pop = new PopupMenu(getApplicationContext(),(RelativeLayout)findViewById(R.id.screen));
+		pop.getMenuInflater().inflate(R.menu.teleport_popup,pop.getMenu());
+		pop.show();
+	}
+
+	/**
+	 * After the user has selected where to teleport to, this does the actual teleporting.
+	 * @param item - the item the user selected
+	 */
+	public void teleportSubMenu(MenuItem item){
+		switch(item.getItemId()){
+		}
+	}
+
+	/**
+	 * Ends the tour and destroys the Activity
+	 */
+	public void endTour(MenuItem item){
+		super.onBackPressed();
 	}
 	
 	/**
@@ -89,20 +95,9 @@ public class TourHandler extends Activity {
 	 */
 	@Override
 	public void onBackPressed(){
-		if (!info.history.empty())
-			info.history.pop().paint(info);
+		goBack(null);
 	}
 
-	/**
-	 * Goes to the node in the tour which is logically turning around.
-	 */
-	private void turnAround(){
-		if (info.current.canTurnAround()){
-			info.history.push(info.current);
-			info.current.turnAroundNode.paint(info);
-		}
-	}
-	
 	/**
 	 * @param r - image resource value
 	 * @return index in `nodes` of TourNode which shows the image `r`
