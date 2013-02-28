@@ -1,0 +1,6 @@
+CD-COURSE01	MasterCourse
+CD-COURSE02	CourseListHandler
+CD-COURSE03	CurrentCoursesHandler
+CD-COURSE04	Course
+CD-COURSE05	CourseClass
+CD-COURSE06	CourseHandler
