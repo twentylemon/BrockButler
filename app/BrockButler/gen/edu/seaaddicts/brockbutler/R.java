@@ -13,39 +13,53 @@ public final class R {
     public static final class drawable {
         public static final int earth_orbit_elliptic=0x7f020000;
         public static final int ic_launcher=0x7f020001;
+        public static final int icon_contacts=0x7f020002;
+        public static final int icon_help=0x7f020003;
+        public static final int icon_maps=0x7f020004;
+        public static final int icon_scheduler=0x7f020005;
+        public static final int icon_tour=0x7f020006;
     }
     public static final class id {
         public static final int app_logo=0x7f070000;
         public static final int app_logo2=0x7f070001;
+        public static final int btn_contacts=0x7f07000d;
+        public static final int btn_help=0x7f070012;
         public static final int btn_login_login=0x7f070005;
         public static final int btn_login_skip=0x7f070006;
+        public static final int btn_maps=0x7f07000f;
+        public static final int btn_sched=0x7f07000c;
+        public static final int btn_tour=0x7f070010;
         public static final int chk_login_remember=0x7f070008;
         public static final int chk_login_skip=0x7f07000a;
-        public static final int imgv_contacts=0x7f07000d;
-        public static final int imgv_map=0x7f07000f;
-        public static final int imgv_sched=0x7f07000c;
+        public static final int imgv_map=0x7f070013;
         public static final int login_email=0x7f070003;
         public static final int login_password=0x7f070004;
         public static final int login_remember=0x7f070007;
         public static final int login_skip=0x7f070009;
         public static final int login_table=0x7f070002;
         public static final int main_icon_row1=0x7f07000b;
-        public static final int main_title_row1=0x7f07000e;
-        public static final int menu_settings=0x7f070010;
+        public static final int main_icon_row2=0x7f07000e;
+        public static final int main_icon_row3=0x7f070011;
+        public static final int menu_settings=0x7f070014;
     }
     public static final class layout {
-        public static final int activity_contact=0x7f030000;
+        public static final int activity_contacts=0x7f030000;
         public static final int activity_help=0x7f030001;
         public static final int activity_login=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int activity_map=0x7f030004;
+        public static final int activity_scheduler=0x7f030005;
+        public static final int activity_tour=0x7f030006;
     }
     public static final class menu {
         public static final int activity_contact=0x7f060000;
-        public static final int activity_help=0x7f060001;
-        public static final int activity_login=0x7f060002;
-        public static final int activity_main=0x7f060003;
-        public static final int activity_map=0x7f060004;
+        public static final int activity_contacts=0x7f060001;
+        public static final int activity_help=0x7f060002;
+        public static final int activity_login=0x7f060003;
+        public static final int activity_main=0x7f060004;
+        public static final int activity_map=0x7f060005;
+        public static final int activity_scheduler=0x7f060006;
+        public static final int activity_tour=0x7f060007;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
@@ -60,11 +74,13 @@ public final class R {
         public static final int msg_skip=0x7f04000b;
         public static final int temp=0x7f04000a;
         public static final int test_image=0x7f04000e;
-        public static final int title_activity_contact=0x7f040015;
+        public static final int title_activity_contacts=0x7f040016;
         public static final int title_activity_help=0x7f040014;
         public static final int title_activity_login=0x7f040003;
         public static final int title_activity_main=0x7f04000c;
         public static final int title_activity_map=0x7f04000d;
+        public static final int title_activity_scheduler=0x7f040015;
+        public static final int title_activity_tour=0x7f040017;
         public static final int title_contacts=0x7f040011;
         public static final int title_help=0x7f040013;
         public static final int title_maps=0x7f040010;

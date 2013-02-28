@@ -26,8 +26,7 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.maps.MapsActivity"
@@ -39,8 +38,16 @@
             android:label="@string/title_activity_help" >
         </activity>
         <activity
-            android:name="edu.seaaddicts.brockbutler.ContactActivity"
-            android:label="@string/title_activity_contact" >
+            android:name="edu.seaaddicts.brockbutler.scheduler.SchedulerActivity"
+            android:label="@string/title_activity_scheduler" >
+        </activity>
+        <activity
+            android:name="edu.seaaddicts.brockbutler.contacts.ContactsActivity"
+            android:label="@string/title_activity_contacts" >
+        </activity>
+        <activity
+            android:name="edu.seaaddicts.brockbutler.tour.TourActivity"
+            android:label="@string/title_activity_tour" >
         </activity>
     </application>
 

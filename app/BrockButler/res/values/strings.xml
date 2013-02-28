@@ -22,6 +22,8 @@
     <string name="title_tour">Tour</string>
     <string name="title_help">Help</string>
     <string name="title_activity_help">HelpActivity</string>
-    <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_scheduler">SchedulerActivity</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_tour">TourActivity</string>
 
 </resources>

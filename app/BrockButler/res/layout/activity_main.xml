@@ -8,48 +8,66 @@
         android:id="@+id/main_icon_row1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75sp"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/imgv_sched"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_margin="40sp"
+        <Button
+            android:id="@+id/btn_sched"
+            android:layout_width="110sp"
+            android:layout_height="135sp"
+            android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
-            android:src="@drawable/earth_orbit_elliptic" />
+            android:background="@drawable/icon_scheduler" />
 
-        <ImageView
-            android:id="@+id/imgv_contacts"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_margin="40sp"
+        <Button
+            android:id="@+id/btn_contacts"
+            android:layout_width="110sp"
+            android:layout_height="135sp"
+            android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
-            android:src="@drawable/earth_orbit_elliptic" />
+            android:background="@drawable/icon_contacts" />
     </LinearLayout>
-
+    
     <LinearLayout
-        android:id="@+id/main_title_row1"
+        android:id="@+id/main_icon_row2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_maps"
+            android:layout_width="110sp"
+            android:layout_height="135sp"
+            android:layout_margin="15sp"
+            android:contentDescription="@string/test_image"
+            android:background="@drawable/icon_maps" />
+
+        <Button
+            android:id="@+id/btn_tour"
+            android:layout_width="110sp"
+            android:layout_height="135sp"
+            android:layout_margin="15sp"
+            android:contentDescription="@string/test_image"
+            android:background="@drawable/icon_tour" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/main_icon_row3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/main_icon_row1"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55sp"
-            android:text="@string/title_scheduler"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="175sp"
-            android:text="@string/title_contacts"
-            android:textSize="20sp" />
+        <Button
+            android:id="@+id/btn_help"
+            android:layout_width="110sp"
+            android:layout_height="135sp"
+            android:layout_marginBottom="15sp"
+            android:contentDescription="@string/test_image"
+            android:background="@drawable/icon_help" />
     </LinearLayout>
 
 </RelativeLayout>
