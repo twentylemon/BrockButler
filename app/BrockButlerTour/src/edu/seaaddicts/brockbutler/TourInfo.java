@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 public class TourInfo {
 	public RelativeLayout rl;
 	public ImageButton[] buttons;
+	public int[] arrows;
 	public Context context;
 	public TourNode current;
 	public Stack<TourNode> history;
@@ -31,5 +32,11 @@ public class TourInfo {
 		context = c;
 		current = null;
 		history = new Stack<TourNode>();
+		arrows = new int[b.length];
+		arrows[0] = R.drawable.qb_outerleft;
+		arrows[1] = R.drawable.qb_innerleft;
+		arrows[2] = R.drawable.qb_center;
+		arrows[3] = R.drawable.qb_innerright;
+		arrows[4] = R.drawable.qb_outerright;
 	}
 }

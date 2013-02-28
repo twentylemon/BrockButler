@@ -8,22 +8,37 @@
 
     <ImageButton
         android:id="@+id/outerleft"
+        android:contentDescription="@string/go_left"
+        android:background="@android:color/transparent"
+        android:src="@drawable/qb_outerleft"
+        android:padding="5dp"
+        android:scaleType="fitEnd"
         android:layout_width="75dp"
         android:layout_height="400dp"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/innerleft"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
         android:layout_centerVertical="true" />
 
     <ImageButton
         android:id="@+id/innerleft"
+        android:contentDescription="@string/go_left"
+        android:background="@android:color/transparent"
+        android:src="@drawable/qb_innerleft"
+        android:padding="5dp"
+        android:scaleType="fitEnd"
         android:layout_width="75dp"
         android:layout_height="400dp"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/center"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/outerleft"
         android:layout_centerVertical="true" />
 
     <ImageButton
         android:id="@+id/center"
+        android:contentDescription="@string/go_forward"
+        android:background="@android:color/transparent"
+        android:src="@drawable/qb_center"
+        android:padding="5dp"
+        android:scaleType="fitEnd"
         android:layout_width="75dp"
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
@@ -31,20 +46,28 @@
 
     <ImageButton
         android:id="@+id/innerright"
+        android:contentDescription="@string/go_right"
+        android:background="@android:color/transparent"
+        android:src="@drawable/qb_innerright"
+        android:padding="5dp"
+        android:scaleType="fitEnd"
         android:layout_width="75dp"
         android:layout_height="400dp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/center"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/outerright"
         android:layout_centerVertical="true" />
 
     <ImageButton
         android:id="@+id/outerright"
+        android:contentDescription="@string/go_right"
+        android:background="@android:color/transparent"
+        android:src="@drawable/qb_outerright"
+        android:padding="5dp"
+        android:scaleType="fitEnd"
         android:layout_width="75dp"
         android:layout_height="400dp"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/innerright"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
         android:layout_centerVertical="true" />
-
-    <!-- android:background="@android:color/transparent" -->
 
 </RelativeLayout>

@@ -15,5 +15,8 @@
     <string name="g_block">G Block</string>
     <string name="h_block">H Block</string>
     <string name="j_block">J Block</string>
+    <string name="go_left">Go Left</string>
+    <string name="go_forward">Go Forward</string>
+    <string name="go_right">Go Right</string>
 
 </resources>

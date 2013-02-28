@@ -10,7 +10,6 @@ package edu.seaaddicts.brockbutler;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 public class TourHall extends TourNode {
 	
@@ -68,10 +67,10 @@ public class TourHall extends TourNode {
 						info.history.push(TourHall.this);
 						nodes[idx].paint(info);
 					}
-					else
-						Toast.makeText(info.context, "No data available", Toast.LENGTH_SHORT).show();
 				}
 			});
+			int resID = (nodes[idx] == null)? R.drawable.qb_empty : info.arrows[idx];
+			info.buttons[idx].setImageResource(resID);
 		}
 	}
 }

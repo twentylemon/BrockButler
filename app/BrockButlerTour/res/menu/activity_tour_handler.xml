@@ -1,7 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_go_back" android:titleCondensed="@string/menu_go_back" android:onClick="goBack" android:title="@string/menu_go_back"></item><item android:id="@+id/menu_turn_around" android:titleCondensed="@string/menu_turn_around" android:title="@string/menu_turn_around" android:onClick="turnAround"></item>
+    <item android:id="@+id/menu_teleport" android:titleCondensed="@string/menu_teleport" android:title="@string/menu_teleport">
+        <menu>
+            <item android:id="@+id/teleport_a_block" android:titleCondensed="@string/a_block" android:onClick="teleport" android:title="@string/a_block" />
+            <item android:id="@+id/teleport_b_block" android:titleCondensed="@string/b_block" android:onClick="teleport" android:title="@string/b_block" />
+            <item android:id="@+id/teleport_c_block" android:titleCondensed="@string/c_block" android:onClick="teleport" android:title="@string/c_block" />
+            <item android:id="@+id/teleport_d_block" android:titleCondensed="@string/d_block" android:onClick="teleport" android:title="@string/d_block"/>
+            <item android:id="@+id/teleport_e_block" android:titleCondensed="@string/e_block" android:onClick="teleport" android:title="@string/e_block"/>
+            <item android:id="@+id/teleport_f_block" android:titleCondensed="@string/f_block" android:onClick="teleport" android:title="@string/f_block"/>
+            <item android:id="@+id/teleport_g_block" android:titleCondensed="@string/g_block" android:onClick="teleport" android:title="@string/g_block"/>
+            <item android:id="@+id/teleport_h_block" android:titleCondensed="@string/h_block" android:onClick="teleport" android:title="@string/h_block"/>
+            <item android:id="@+id/teleport_j_block" android:titleCondensed="@string/j_block" android:onClick="teleport" android:title="@string/j_block"/>
+        </menu>
+    </item><item android:id="@+id/menu_end_tour" android:titleCondensed="@string/menu_end_tour" android:onClick="endTour" android:title="@string/menu_end_tour"></item>
     
-    <item android:id="@+id/menu_teleport" android:titleCondensed="@string/menu_teleport" android:onClick="teleport" android:title="@string/menu_teleport"></item><item android:id="@+id/menu_end_tour" android:titleCondensed="@string/menu_end_tour" android:onClick="endTour" android:title="@string/menu_end_tour"></item>
+    
     
 
 </menu>

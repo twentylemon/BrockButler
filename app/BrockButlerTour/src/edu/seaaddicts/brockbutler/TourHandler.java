@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 
 public class TourHandler extends Activity {
@@ -65,20 +64,20 @@ public class TourHandler extends Activity {
 	}
 
 	/**
-	 * Creates a popup menu asking where the user wants to teleport to.
+	 * Teleports the user to the specified block.
 	 */
 	public void teleport(MenuItem item){
-		PopupMenu pop = new PopupMenu(getApplicationContext(),(RelativeLayout)findViewById(R.id.screen));
-		pop.getMenuInflater().inflate(R.menu.teleport_popup,pop.getMenu());
-		pop.show();
-	}
-
-	/**
-	 * After the user has selected where to teleport to, this does the actual teleporting.
-	 * @param item - the item the user selected
-	 */
-	public void teleportSubMenu(MenuItem item){
-		switch(item.getItemId()){
+		info.history.push(info.current);
+		switch (item.getItemId()){
+		case R.id.teleport_a_block: nodes[idx(R.drawable._a301f)].paint(info); return;
+		case R.id.teleport_b_block: nodes[idx(R.drawable._b301f)].paint(info); return;
+		case R.id.teleport_c_block: nodes[idx(R.drawable._c301f)].paint(info); return;
+		case R.id.teleport_d_block: nodes[idx(R.drawable._d301b)].paint(info); return;
+		case R.id.teleport_e_block: nodes[idx(R.drawable._e301f)].paint(info); return;
+		case R.id.teleport_f_block: nodes[idx(R.drawable._f301f)].paint(info); return;
+		case R.id.teleport_g_block: nodes[idx(R.drawable._h338f)].paint(info); return;
+		case R.id.teleport_h_block: nodes[idx(R.drawable._f301f)].paint(info); return;
+		case R.id.teleport_j_block: nodes[idx(R.drawable._j301f)].paint(info); return;
 		}
 	}
 
