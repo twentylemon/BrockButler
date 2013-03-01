@@ -6,6 +6,8 @@ public class Task {
 	public int mId;
 	public boolean mIsPastDue;
 	public int mPriority;
+	public float mMark;
+	public float mWeight;
 	public String mTitle;
 	public String mDescription;
 	public String mCourse;
