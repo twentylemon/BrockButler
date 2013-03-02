@@ -2,4 +2,4 @@
 "UC-TOUR02" Continue Tour
 "UC-TOUR03" Go Back
 "UC-TOUR04" Turn Around
-"UC-TOUr05" End Tour
+"UC-TOUR05" End Tour
