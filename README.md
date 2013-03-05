@@ -23,3 +23,6 @@ January 26, 2013
 February 1, 2013
 - Definition phase complete
 
+March 5, 2013
+- Design phase complete
+
