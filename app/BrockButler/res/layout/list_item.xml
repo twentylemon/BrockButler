@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D8D8D8"
+    android:orientation="vertical"
+    tools:context=".HelpActivity" >
+
+    <RelativeLayout
+        android:id="@+id/row_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50sp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:background="#A4A4A4"
+            android:text="@string/title_sample_course1"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/row_instructor"
+        android:layout_width="fill_parent"
+        android:layout_height="40sp"
+        android:layout_marginTop="2sp"
+        android:padding="5sp"
+        android:background="#A4A4A4"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/instructor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/title_sample_instruct1"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/instructor"
+            android:layout_marginLeft="30sp"
+            android:contentDescription="@string/test_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_email" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -8,7 +8,7 @@
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_skip">Skip</string>
-    <string name="login_remember">Remember Me</string>
+    <string name="login_remember">Remember me</string>
     <string name="login_skip_msg">Always skip login</string>
     <string name="login">Login</string>
     <string name="temp">Logo Here</string>
@@ -25,5 +25,13 @@
     <string name="title_activity_scheduler">SchedulerActivity</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_tour">TourActivity</string>
+    <string name="title_sample_course1">SAMP 1P01</string>
+    <string name="title_sample_course2">SAMP 1P02</string>
+    <string name="title_sample_course3">SAMP 1P03</string>
+    <string name="title_sample_course4">SAMP 1P04</string>
+    <string name="title_sample_instruct1">Prof. S. Sampler I</string>
+    <string name="title_sample_instruct2">Prof. S. Sampler II</string>
+    <string name="title_sample_instruct3">Prof. S. Sampler III</string>
+    <string name="title_sample_instruct4">Prof. S. Sampler IV</string>
 
 </resources>

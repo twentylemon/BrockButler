@@ -4,11 +4,31 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity" >
     
-    <ImageView 
+    <ImageButton 
         android:id="@+id/imgv_map"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="300sp"
         android:src="@drawable/earth_orbit_elliptic"
         android:contentDescription="@string/test_image" />
+    
+    <Button
+        android:id="@+id/btnstart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START" />
+    <Button
+        android:id="@+id/btnstop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="100sp"
+        android:text="STOP" />
+    <TextView 
+        android:id="@+id/txtv_count" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgv_map"
+        android:contentDescription="@string/temp"
+        android:textColor="#fff" />
+    
 
 </RelativeLayout>

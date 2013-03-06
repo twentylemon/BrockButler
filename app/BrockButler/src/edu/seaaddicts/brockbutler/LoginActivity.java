@@ -61,11 +61,9 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				/** Call to Grisdale
-					
-					gris_func(login, pass);
-					
-				*/
+
+				Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
 			}
 		});
 		mBtnSkip.setOnClickListener(new OnClickListener() {

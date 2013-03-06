@@ -73,6 +73,13 @@ public class MainActivity extends Activity {
                 startActivity(i);
 			}
 		});
+		
+	}
+
+	
+	private 
+	void drawPath(String [] p) {
+		
 	}
 	
 }

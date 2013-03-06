@@ -1,5 +1,7 @@
 package edu.seaaddicts.brockbutler.scheduler;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,7 +24,7 @@ public class SchedulerActivity extends Activity {
 		return true;
 	}
 	
-	private Course [] getCourses() {
+	private ArrayList<Course> getCourses() {
 		return null;
 		
 	}
