@@ -30,13 +30,14 @@ public final class R {
         public static final int btn_maps=0x7f07000f;
         public static final int btn_sched=0x7f07000c;
         public static final int btn_tour=0x7f070010;
+        public static final int btnresume=0x7f070016;
         public static final int btnstart=0x7f070014;
         public static final int btnstop=0x7f070015;
         public static final int chk_login_remember=0x7f070008;
         public static final int chk_login_skip=0x7f07000a;
-        public static final int course_list=0x7f070017;
+        public static final int course_list=0x7f070018;
         public static final int imgv_map=0x7f070013;
-        public static final int instructor=0x7f07001b;
+        public static final int instructor=0x7f07001c;
         public static final int login_email=0x7f070003;
         public static final int login_password=0x7f070004;
         public static final int login_remember=0x7f070007;
@@ -45,11 +46,11 @@ public final class R {
         public static final int main_icon_row1=0x7f07000b;
         public static final int main_icon_row2=0x7f07000e;
         public static final int main_icon_row3=0x7f070011;
-        public static final int menu_settings=0x7f07001c;
-        public static final int row_instructor=0x7f07001a;
-        public static final int row_title=0x7f070018;
-        public static final int title=0x7f070019;
-        public static final int txtv_count=0x7f070016;
+        public static final int menu_settings=0x7f07001d;
+        public static final int row_instructor=0x7f07001b;
+        public static final int row_title=0x7f070019;
+        public static final int title=0x7f07001a;
+        public static final int txtv_count=0x7f070017;
     }
     public static final class layout {
         public static final int activity_contacts=0x7f030000;

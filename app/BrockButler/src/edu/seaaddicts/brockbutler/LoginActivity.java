@@ -55,8 +55,10 @@ public class LoginActivity extends Activity {
 
 		mBtnLogin = (Button) findViewById(R.id.btn_login_login);
 		mBtnSkip = (Button) findViewById(R.id.btn_login_skip);
+		
 		mChkRemember = (CheckBox) findViewById(R.id.chk_login_remember);
-		mBtnLogin = (CheckBox) findViewById(R.id.chk_login_skip);
+		mChkSkip = (CheckBox) findViewById(R.id.chk_login_skip);
+		
 		mBtnLogin.setOnClickListener(new OnClickListener() {
 
 			@Override

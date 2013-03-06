@@ -13,19 +13,17 @@ import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
 
 public class MapsActivity extends Activity {
-	private static final int MAP_REQUEST_UPDATE = 1;
+	private static final String tag = "MapsActivity";
 
-	final static int POSITION_UPDATE = 0;
-	final static int WIFI_DOWN = 1;
-	final static int DESTINATION_ARRIVAL = 2;
 	private TextView mTemp;
 	private Button stop;
 	private Button start;
+	private Button resume;
 
 	Handler mHandler;
 	private ImageButton img;
 	private MapsHandler mMapsHandler;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,11 +35,14 @@ public class MapsActivity extends Activity {
 			@Override
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
-				case MAP_REQUEST_UPDATE:
+				case MapsHandler.MAPS_REQUEST_UPDATE:
 					Log.d("MAIN HANDLER", "YAYAAA!!!");
 					break;
+				case MapsHandler.THREAD_UPDATE_POSITION:
+					Log.d(tag, "-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
+					break;
 				default:
-					Log.d("MAIN HANDLER", "UPDATING!!!");
+					Log.d(tag, "-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					mTemp.setText("#" + msg.what);
 					break;
 				}
@@ -56,7 +57,7 @@ public class MapsActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				mMapsHandler.sendEmptyMessage(1);
+				mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
 			}
 		});
 		start = (Button) findViewById(R.id.btnstart);
@@ -64,7 +65,7 @@ public class MapsActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				mMapsHandler.sendEmptyMessage(4);
+				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_START);
 			}
 		});
 		stop = (Button) findViewById(R.id.btnstop);
@@ -72,9 +73,28 @@ public class MapsActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				mMapsHandler.sendEmptyMessage(5);
+				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
 			}
 		});
+
+		resume = (Button) findViewById(R.id.btnresume);
+		resume.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
+			}
+		});
+		
 	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
+		mMapsHandler = null;
+	}
+	
+	
 
 }

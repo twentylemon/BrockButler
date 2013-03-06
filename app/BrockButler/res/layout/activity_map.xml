@@ -20,8 +20,14 @@
         android:id="@+id/btnstop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="100sp"
+        android:layout_margin="50sp"
         android:text="STOP" />
+    <Button
+        android:id="@+id/btnresume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="100sp"
+        android:text="RESUME" />
     <TextView 
         android:id="@+id/txtv_count" 
         android:layout_width="wrap_content"
