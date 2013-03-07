@@ -60,7 +60,7 @@ public class TourHandler extends Activity {
 			info.current.turnAroundNode.paint(info);
 		}
 		else
-			Toast.makeText(getApplicationContext(), "No data available", Toast.LENGTH_SHORT).show();
+			Toast.makeText(info.context,"No data available",Toast.LENGTH_SHORT).show();
 	}
 
 	/**

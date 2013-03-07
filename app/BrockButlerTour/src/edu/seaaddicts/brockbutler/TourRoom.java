@@ -28,8 +28,7 @@ public class TourRoom extends TourNode {
 		info.current = this;
 		for (int i = 0; i < info.buttons.length; i++){
 			info.buttons[i].setOnClickListener(new OnClickListener(){
-				public void onClick(View v){
-				}
+				public void onClick(View v){}
 			});
 		}
 	}
