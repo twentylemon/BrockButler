@@ -8,14 +8,14 @@
 package edu.seaaddicts.brockbutler;
 
 public abstract class TourNode {
-	protected int image;	//resource for the image on this node
+	protected int image;		//resource for the image on this node
 	protected TourNode turnAroundNode;
-	protected TourNode[] nodes;	//each of the nodes this node branches off to
+	protected String title;		//text for Toast to display, if any
 
 	public boolean canTurnAround(){ return(turnAroundNode != null); }
 	public TourNode getTurnAroundNode(){ return(turnAroundNode); }
 
-	protected void setTurnAroundNode(TourNode node){ turnAroundNode = node; }
+	public void setTurnAroundNode(TourNode node){ turnAroundNode = node; }
 
 	public void setOuterLeftNode(TourNode node){}
 	public void setInnerLeftNode(TourNode node){}
@@ -28,5 +28,5 @@ public abstract class TourNode {
 	 * ie where the buttons will take you.
 	 * @param info - current tour state
 	 */
-	protected abstract void paint(TourInfo info);
+	public abstract void paint(TourInfo info);
 }

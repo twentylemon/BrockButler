@@ -32,7 +32,7 @@ public class TourInfo {
 		context = c;
 		current = null;
 		history = new Stack<TourNode>();
-		arrows = new int[b.length];
+		arrows = new int[5];
 		arrows[0] = R.drawable.qb_outerleft;
 		arrows[1] = R.drawable.qb_innerleft;
 		arrows[2] = R.drawable.qb_center;

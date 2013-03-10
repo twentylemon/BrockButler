@@ -9,27 +9,31 @@ package edu.seaaddicts.brockbutler;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 public class TourRoom extends TourNode {
 
 	/**
-	 *  Initializes this room, rooms only need the image resource value
+	 * Initializes this room, rooms only need the image resource value
 	 * @param img - the resource value of the image of this room
 	 */
-	public TourRoom(int img){
+	public TourRoom(int img, String s){
 		image = img;
-		nodes = null;
+		title = s;
 		turnAroundNode = null;
 	}
 
 	@Override
-	protected void paint(TourInfo info) {
+	public void paint(TourInfo info) {
 		info.rl.setBackgroundResource(image);
 		info.current = this;
+		if (title != null)	//should never be null, but just in case
+			Toast.makeText(info.context,title,Toast.LENGTH_SHORT).show();
 		for (int i = 0; i < info.buttons.length; i++){
 			info.buttons[i].setOnClickListener(new OnClickListener(){
 				public void onClick(View v){}
 			});
+			info.buttons[i].setImageResource(R.drawable.qb_empty);
 		}
 	}
 }
