@@ -61,7 +61,6 @@ public class LoginActivity extends Activity {
 		
 		mBtnLogin.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);
@@ -70,7 +69,6 @@ public class LoginActivity extends Activity {
 		});
 		mBtnSkip.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				TextView messageText = new TextView(LoginActivity.this);
 				messageText.setText(R.string.msg_skip);

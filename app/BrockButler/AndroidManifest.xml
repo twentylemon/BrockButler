@@ -47,7 +47,7 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.tour.TourActivity"
-            android:label="@string/title_activity_tour" >
+            android:label="@string/title_activity_tour" android:screenOrientation="landscape">
         </activity>
     </application>
 

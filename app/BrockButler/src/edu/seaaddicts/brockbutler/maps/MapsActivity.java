@@ -55,7 +55,6 @@ public class MapsActivity extends Activity {
 		img = (ImageButton) findViewById(R.id.imgv_map);
 		img.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
 			}
@@ -63,7 +62,6 @@ public class MapsActivity extends Activity {
 		start = (Button) findViewById(R.id.btnstart);
 		start.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_START);
 			}
@@ -71,7 +69,6 @@ public class MapsActivity extends Activity {
 		stop = (Button) findViewById(R.id.btnstop);
 		stop.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
 			}
@@ -80,7 +77,6 @@ public class MapsActivity extends Activity {
 		resume = (Button) findViewById(R.id.btnresume);
 		resume.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
 			}

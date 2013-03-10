@@ -39,35 +39,30 @@ public class MainActivity extends Activity {
 		
 		// Set OnClickListeners
 		mSchedulerButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, SchedulerActivity.class);
                 startActivity(i);
 			}
 		});
 		mContactsButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, ContactsActivity.class);
                 startActivity(i);
 			}
 		});
 		mMapsButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(i);
 			}
 		});
 		mTourButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, TourActivity.class);
                 startActivity(i);
 			}
 		});
 		mHelpButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(i);
