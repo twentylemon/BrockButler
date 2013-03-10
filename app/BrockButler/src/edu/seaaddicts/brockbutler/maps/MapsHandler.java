@@ -41,7 +41,7 @@ public class MapsHandler extends Handler {
 	}
 
 	public MapsHandler(Handler main) {
-		Log.d("EXTERNAL HANDLER", "-----++++++ Creating Handler. ++++++------");
+		Log.d(tag, "-----++++++ Creating Handler. ++++++------");
 		mMainHandler = main;
 		mIsPaused = true;
 		init();
@@ -134,12 +134,6 @@ public class MapsHandler extends Handler {
 				}
 			}
 			break;
-
-		case THREAD_UPDATE_POSITION:
-			Log.d(tag, "-----+++++ Update position. +++++-----");
-			mMainHandler.sendEmptyMessage(THREAD_UPDATE_POSITION);
-			break;
-
 		default:
 			break;
 		}

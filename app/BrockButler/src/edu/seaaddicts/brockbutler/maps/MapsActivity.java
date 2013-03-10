@@ -90,9 +90,9 @@ public class MapsActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
 		mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
 		mMapsHandler = null;
+		super.onBackPressed();
 	}
 	
 	
