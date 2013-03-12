@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import edu.seaaddicts.brockbutler.contacts.ContactsActivity;
+import edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
 import edu.seaaddicts.brockbutler.maps.MapsActivity;
 import edu.seaaddicts.brockbutler.scheduler.SchedulerActivity;
@@ -15,7 +15,7 @@ import edu.seaaddicts.brockbutler.tour.TourActivity;
 public class MainActivity extends Activity {
 	
 	private Button mSchedulerButton;
-	private Button mContactsButton;
+	private Button mCourseManager;
 	private Button mMapsButton;
 	private Button mTourButton;
 	private Button mHelpButton;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 	{
 		// Instantiate Buttons
 		mSchedulerButton = (Button) findViewById(R.id.btn_sched);
-		mContactsButton = (Button) findViewById(R.id.btn_contacts);
+		mCourseManager = (Button) findViewById(R.id.btn_contacts);
 		mMapsButton 	= (Button) findViewById(R.id.btn_maps);
 		mTourButton 	= (Button) findViewById(R.id.btn_tour);
 		mHelpButton 	= (Button) findViewById(R.id.btn_help);
@@ -44,9 +44,9 @@ public class MainActivity extends Activity {
                 startActivity(i);
 			}
 		});
-		mContactsButton.setOnClickListener(new OnClickListener() {
+		mCourseManager.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this, ContactsActivity.class);
+				Intent i = new Intent(MainActivity.this, CourseManagerActivity.class);
                 startActivity(i);
 			}
 		});
@@ -69,12 +69,5 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-	}
-
-	
-	private 
-	void drawPath(String [] p) {
-		
-	}
-	
+	}	
 }

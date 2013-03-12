@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
+import edu.seaaddicts.brockbutler.TouchImageView;
 
 public class MapsActivity extends Activity {
 	private static final String tag = "MapsActivity";
@@ -21,9 +24,9 @@ public class MapsActivity extends Activity {
 	private Button resume;
 
 	Handler mHandler;
-	private ImageButton img;
+	private TouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,10 +42,12 @@ public class MapsActivity extends Activity {
 					Log.d("MAIN HANDLER", "YAYAAA!!!");
 					break;
 				case MapsHandler.THREAD_UPDATE_POSITION:
-					Log.d(tag, "-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
+					Log.d(tag,
+							"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					break;
 				default:
-					Log.d(tag, "-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
+					Log.d(tag,
+							"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					mTemp.setText("#" + msg.what);
 					break;
 				}
@@ -52,8 +57,8 @@ public class MapsActivity extends Activity {
 	}
 
 	private void init() {
-		img = (ImageButton) findViewById(R.id.imgv_map);
-		img.setOnClickListener(new OnClickListener() {
+		mMapImage = (TouchImageView) findViewById(R.id.imgv_map);
+		mMapImage.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
@@ -61,14 +66,14 @@ public class MapsActivity extends Activity {
 		});
 		start = (Button) findViewById(R.id.btnstart);
 		start.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_START);
 			}
 		});
 		stop = (Button) findViewById(R.id.btnstop);
 		stop.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
 			}
@@ -76,12 +81,33 @@ public class MapsActivity extends Activity {
 
 		resume = (Button) findViewById(R.id.btnresume);
 		resume.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
-				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
+				mMapsHandler
+						.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
 			}
 		});
-		
+		mMapImage.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// Choose which motion action has been performed
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					// Get X, Y coordinates from the ImageView
+					int X = (int) event.getX();
+					int Y = (int) event.getY();
+
+					Toast.makeText(MapsActivity.this, "("+X+","+Y+")", Toast.LENGTH_LONG).show();
+
+					break;
+				case MotionEvent.ACTION_MOVE:
+					break;
+				case MotionEvent.ACTION_UP:
+					break;
+				}
+				return true;
+			}
+		});
 	}
 
 	@Override
@@ -90,7 +116,4 @@ public class MapsActivity extends Activity {
 		mMapsHandler = null;
 		super.onBackPressed();
 	}
-	
-	
-
 }

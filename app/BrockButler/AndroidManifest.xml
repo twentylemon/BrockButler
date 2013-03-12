@@ -11,8 +11,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_name" >
         <activity
             android:name="edu.seaaddicts.brockbutler.LoginActivity"
             android:label="@string/app_name"
@@ -26,12 +25,13 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.maps.MapsActivity"
             android:label="@string/title_activity_map"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.help.HelpActivity"
@@ -47,7 +47,8 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.tour.TourActivity"
-            android:label="@string/title_activity_tour" android:screenOrientation="landscape">
+            android:label="@string/title_activity_tour"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

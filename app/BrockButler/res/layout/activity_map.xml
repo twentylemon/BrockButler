@@ -4,13 +4,12 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity" >
     
-    <ImageButton 
+    <edu.seaaddicts.brockbutler.TouchImageView
         android:id="@+id/imgv_map"
         android:layout_width="fill_parent"
-        android:layout_height="300sp"
-        android:src="@drawable/earth_orbit_elliptic"
+        android:layout_height="fill_parent"
+        android:src="@drawable/mch_maps"
         android:contentDescription="@string/test_image" />
-    
     <Button
         android:id="@+id/btnstart"
         android:layout_width="wrap_content"

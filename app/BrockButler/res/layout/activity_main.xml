@@ -42,7 +42,7 @@
             android:layout_height="135sp"
             android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
-            android:background="@drawable/icon_maps" />
+            android:background="@drawable/maps_icon" />
 
         <Button
             android:id="@+id/btn_tour"
@@ -50,7 +50,7 @@
             android:layout_height="135sp"
             android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
-            android:background="@drawable/icon_tour" />
+            android:background="@drawable/tour_icon" />
     </LinearLayout>
     
     <LinearLayout
@@ -67,7 +67,7 @@
             android:layout_height="135sp"
             android:layout_marginBottom="15sp"
             android:contentDescription="@string/test_image"
-            android:background="@drawable/icon_help" />
+            android:background="@drawable/help_icon" />
     </LinearLayout>
 
 </RelativeLayout>

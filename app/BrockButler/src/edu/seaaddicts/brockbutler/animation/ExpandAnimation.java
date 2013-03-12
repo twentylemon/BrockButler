@@ -5,8 +5,10 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.LinearLayout.LayoutParams;
 
-
 public class ExpandAnimation extends Animation {
+	public static final int ANIMATE_LONG = 500;
+	public static final int ANIMATE_SHORT = 250;
+	
     private View mAnimatedView;
     private LayoutParams mViewLayoutParams;
     private int mMarginStart, mMarginEnd;
