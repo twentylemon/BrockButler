@@ -1,9 +1,13 @@
 package edu.seaaddicts.brockbutler;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -21,12 +25,14 @@ public class TouchImageView extends ImageView {
     static final int DRAG = 1;
     static final int ZOOM = 2;
     int mode = NONE;
+    
+    Bitmap mBitmap;
 
     // Remember some things for zooming
     PointF last = new PointF();
     PointF start = new PointF();
     float minScale = 1f;
-    float maxScale = 3f;
+    float maxScale = 8f;
     float[] m;
 
 
@@ -44,6 +50,7 @@ public class TouchImageView extends ImageView {
     public TouchImageView(Context context) {
         super(context);
         sharedConstructing(context);
+        mBitmap = ((BitmapDrawable) this.getDrawable()).getBitmap();
     }
 
     public TouchImageView(Context context, AttributeSet attrs) {
@@ -51,12 +58,9 @@ public class TouchImageView extends ImageView {
         sharedConstructing(context);
     }
     
-    
-    
     @Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		//Do something.
 	}
 
 	private void sharedConstructing(Context context) {
@@ -67,8 +71,6 @@ public class TouchImageView extends ImageView {
         m = new float[9];
         setImageMatrix(mMatrix);
         setScaleType(ScaleType.MATRIX);
-        
-        
 
         setOnTouchListener(new OnTouchListener() {
 
@@ -82,6 +84,7 @@ public class TouchImageView extends ImageView {
                     	last.set(curr);
                         start.set(last);
                         mode = DRAG;
+                        
                         break;
                         
                     case MotionEvent.ACTION_MOVE:

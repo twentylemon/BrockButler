@@ -1,29 +1,29 @@
 package edu.seaaddicts.brockbutler.maps;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.TouchImageView;
 
 public class MapsActivity extends Activity {
 	private static final String tag = "MapsActivity";
 
+	private Bitmap mMapBitmap;
 	private TextView mTemp;
 	private Button stop;
 	private Button start;
 	private Button resume;
 
-	Handler mHandler;
+	private Handler mHandler;
 	private TouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
 
@@ -87,27 +87,10 @@ public class MapsActivity extends Activity {
 						.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
 			}
 		});
-		mMapImage.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				// Choose which motion action has been performed
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					// Get X, Y coordinates from the ImageView
-					int X = (int) event.getX();
-					int Y = (int) event.getY();
 
-					Toast.makeText(MapsActivity.this, "("+X+","+Y+")", Toast.LENGTH_LONG).show();
-
-					break;
-				case MotionEvent.ACTION_MOVE:
-					break;
-				case MotionEvent.ACTION_UP:
-					break;
-				}
-				return true;
-			}
-		});
+        mMapBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mch_maps);
+        mMapImage.setImageBitmap(mMapBitmap);
+        Log.d("----+++++ TouchImageView +++++----","(" + mMapImage.getX() + "," + mMapImage.getY() + ")");
 	}
 
 	@Override

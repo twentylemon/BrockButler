@@ -6,8 +6,8 @@
     
     <edu.seaaddicts.brockbutler.TouchImageView
         android:id="@+id/imgv_map"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/mch_maps"
         android:contentDescription="@string/test_image" />
     <Button
