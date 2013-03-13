@@ -5,7 +5,7 @@
  * Created by Taras Mychaskiw 2013-02-20
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
-package edu.seaaddicts.brockbutler;
+package com.seaaddicts.brockbutler;
 
 import android.app.Activity;
 import android.os.Bundle;

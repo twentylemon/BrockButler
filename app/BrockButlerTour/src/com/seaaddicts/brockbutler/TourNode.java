@@ -5,7 +5,8 @@
  * Created by Taras Mychaskiw 2013-02-20
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
-package edu.seaaddicts.brockbutler;
+package com.seaaddicts.brockbutler;
+
 
 public abstract class TourNode {
 	protected int image;		//resource for the image on this node
