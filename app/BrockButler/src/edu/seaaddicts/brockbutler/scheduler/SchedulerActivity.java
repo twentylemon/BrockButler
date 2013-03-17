@@ -21,6 +21,7 @@ import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 import edu.seaaddicts.brockbutler.coursemanager.Course;
 import edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity;
+import edu.seaaddicts.brockbutler.help.HelpActivity;
 
 public class SchedulerActivity extends Activity {
 
@@ -62,6 +63,14 @@ public class SchedulerActivity extends Activity {
 	public void addTask(MenuItem item) {
 		Intent i = new Intent(SchedulerActivity.this, AddTaskActivity.class);
         startActivity(i);
+	}
+	public void showHelp(MenuItem item)
+	{
+		Intent intent = new Intent(SchedulerActivity.this,HelpActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("activity", "scheduler");
+		intent.putExtras(bundle);
+		startActivity(intent);
 	}
 	
 	private ArrayList<Course> getCourses() {

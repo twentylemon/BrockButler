@@ -25,12 +25,16 @@
     <string name="menu_remove_task">Remove Task</string>
     <string name="menu_modify_task">Modify Task</string>
     <string name="menu_expand_collapse">Expand/Collapse All</string>
-
+    <string name="menu_show_scheduler_help">Show Help</string>
+    <!-- CourseManagerActivity -->
+ 	<string name="menu_show_coursemanager_help">Show Help</string>
+    
     <!-- MapsActivity -->
     <string name="menu_search">Search for Location</string>
     <string name="menu_get_directions">Get Directions</string>
     <string name="menu_update_position">Update Position</string>
     <string name="menu_exit_maps">Exit Maps</string>
+    <string name="menu_show_maps_help">Show Help</string>
 
     <!-- TourActivity -->
     <string name="menu_go_back">Go Back</string>

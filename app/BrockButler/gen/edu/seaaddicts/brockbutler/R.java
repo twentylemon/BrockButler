@@ -429,30 +429,33 @@ public final class R {
         public static final int main_icon_row1=0x7f08000f;
         public static final int main_icon_row2=0x7f080012;
         public static final int main_icon_row3=0x7f080015;
-        public static final int menu_add_task=0x7f08002b;
-        public static final int menu_collapse_all=0x7f08002d;
-        public static final int menu_end_tour=0x7f08003a;
-        public static final int menu_exit_maps=0x7f08002a;
-        public static final int menu_expand_all=0x7f08002c;
-        public static final int menu_get_directions=0x7f080028;
-        public static final int menu_go_back=0x7f08002e;
-        public static final int menu_search=0x7f080027;
+        public static final int menu_add_task=0x7f08002d;
+        public static final int menu_collapse_all=0x7f08002f;
+        public static final int menu_end_tour=0x7f08003d;
+        public static final int menu_exit_maps=0x7f08002b;
+        public static final int menu_expand_all=0x7f08002e;
+        public static final int menu_get_directions=0x7f080029;
+        public static final int menu_go_back=0x7f080031;
+        public static final int menu_search=0x7f080028;
         public static final int menu_settings=0x7f080026;
-        public static final int menu_teleport=0x7f080030;
-        public static final int menu_turn_around=0x7f08002f;
-        public static final int menu_update_position=0x7f080029;
+        public static final int menu_show_coursemanager_help=0x7f080027;
+        public static final int menu_show_maps_help=0x7f08002c;
+        public static final int menu_show_scheduler_help=0x7f080030;
+        public static final int menu_teleport=0x7f080033;
+        public static final int menu_turn_around=0x7f080032;
+        public static final int menu_update_position=0x7f08002a;
         public static final int outerleft=0x7f08001b;
         public static final int outerright=0x7f08001f;
         public static final int screen=0x7f08001a;
-        public static final int teleport_a_block=0x7f080031;
-        public static final int teleport_b_block=0x7f080032;
-        public static final int teleport_c_block=0x7f080033;
-        public static final int teleport_d_block=0x7f080034;
-        public static final int teleport_e_block=0x7f080035;
-        public static final int teleport_f_block=0x7f080036;
-        public static final int teleport_g_block=0x7f080037;
-        public static final int teleport_h_block=0x7f080038;
-        public static final int teleport_j_block=0x7f080039;
+        public static final int teleport_a_block=0x7f080034;
+        public static final int teleport_b_block=0x7f080035;
+        public static final int teleport_c_block=0x7f080036;
+        public static final int teleport_d_block=0x7f080037;
+        public static final int teleport_e_block=0x7f080038;
+        public static final int teleport_f_block=0x7f080039;
+        public static final int teleport_g_block=0x7f08003a;
+        public static final int teleport_h_block=0x7f08003b;
+        public static final int teleport_j_block=0x7f08003c;
         public static final int title=0x7f080020;
         public static final int toolbar=0x7f080021;
         public static final int txtv_count=0x7f080018;
@@ -481,7 +484,7 @@ public final class R {
         public static final int activity_tour=0x7f070008;
     }
     public static final class string {
-        public static final int a_block=0x7f04001c;
+        public static final int a_block=0x7f04001f;
         /**  AddTaskActivity 
          */
         public static final int activity_add_task=0x7f040001;
@@ -500,71 +503,76 @@ public final class R {
         public static final int activity_add_task_task_title=0x7f040002;
         public static final int activity_add_task_weight=0x7f040006;
         public static final int app_name=0x7f040000;
-        public static final int b_block=0x7f04001d;
-        public static final int c_block=0x7f04001e;
-        public static final int d_block=0x7f04001f;
-        public static final int e_block=0x7f040020;
-        public static final int f_block=0x7f040021;
-        public static final int g_block=0x7f040022;
-        public static final int go_forward=0x7f040026;
-        public static final int go_left=0x7f040025;
-        public static final int go_right=0x7f040027;
-        public static final int h_block=0x7f040023;
-        public static final int j_block=0x7f040024;
-        public static final int login=0x7f04002f;
-        public static final int login_email=0x7f04002a;
-        public static final int login_password=0x7f04002b;
-        public static final int login_remember=0x7f04002d;
-        public static final int login_skip=0x7f04002c;
-        public static final int login_skip_msg=0x7f04002e;
+        public static final int b_block=0x7f040020;
+        public static final int c_block=0x7f040021;
+        public static final int d_block=0x7f040022;
+        public static final int e_block=0x7f040023;
+        public static final int f_block=0x7f040024;
+        public static final int g_block=0x7f040025;
+        public static final int go_forward=0x7f040029;
+        public static final int go_left=0x7f040028;
+        public static final int go_right=0x7f04002a;
+        public static final int h_block=0x7f040026;
+        public static final int j_block=0x7f040027;
+        public static final int login=0x7f040032;
+        public static final int login_email=0x7f04002d;
+        public static final int login_password=0x7f04002e;
+        public static final int login_remember=0x7f040030;
+        public static final int login_skip=0x7f04002f;
+        public static final int login_skip_msg=0x7f040031;
         /**  SchedulerActivity 
          */
         public static final int menu_add_task=0x7f040010;
-        public static final int menu_end_tour=0x7f04001b;
-        public static final int menu_exit_maps=0x7f040017;
+        public static final int menu_end_tour=0x7f04001e;
+        public static final int menu_exit_maps=0x7f040019;
         public static final int menu_expand_collapse=0x7f040013;
-        public static final int menu_get_directions=0x7f040015;
+        public static final int menu_get_directions=0x7f040017;
         /**  TourActivity 
          */
-        public static final int menu_go_back=0x7f040018;
+        public static final int menu_go_back=0x7f04001b;
         public static final int menu_modify_task=0x7f040012;
         public static final int menu_remove_task=0x7f040011;
         /**  MapsActivity 
          */
-        public static final int menu_search=0x7f040014;
-        public static final int menu_settings=0x7f040028;
-        public static final int menu_teleport=0x7f04001a;
-        public static final int menu_turn_around=0x7f040019;
-        public static final int menu_update_position=0x7f040016;
-        public static final int msg_skip=0x7f040031;
-        public static final int task_priority_prompt=0x7f040047;
-        public static final int temp=0x7f040030;
-        public static final int test_image=0x7f040034;
-        public static final int title_activity_add_task=0x7f040046;
-        public static final int title_activity_contacts=0x7f04003c;
-        public static final int title_activity_help=0x7f04003a;
+        public static final int menu_search=0x7f040016;
+        public static final int menu_settings=0x7f04002b;
+        /**  CourseManagerActivity 
+         */
+        public static final int menu_show_coursemanager_help=0x7f040015;
+        public static final int menu_show_maps_help=0x7f04001a;
+        public static final int menu_show_scheduler_help=0x7f040014;
+        public static final int menu_teleport=0x7f04001d;
+        public static final int menu_turn_around=0x7f04001c;
+        public static final int menu_update_position=0x7f040018;
+        public static final int msg_skip=0x7f040034;
+        public static final int task_priority_prompt=0x7f04004a;
+        public static final int temp=0x7f040033;
+        public static final int test_image=0x7f040037;
+        public static final int title_activity_add_task=0x7f040049;
+        public static final int title_activity_contacts=0x7f04003f;
+        public static final int title_activity_help=0x7f04003d;
         /**  LoginActivity 
          */
-        public static final int title_activity_login=0x7f040029;
+        public static final int title_activity_login=0x7f04002c;
         /**  MainActivity 
          */
-        public static final int title_activity_main=0x7f040032;
-        public static final int title_activity_map=0x7f040033;
-        public static final int title_activity_scheduler=0x7f04003b;
-        public static final int title_activity_tour=0x7f04003d;
-        public static final int title_contacts=0x7f040037;
-        public static final int title_help=0x7f040039;
-        public static final int title_maps=0x7f040036;
-        public static final int title_sample_course1=0x7f04003e;
-        public static final int title_sample_course2=0x7f04003f;
-        public static final int title_sample_course3=0x7f040040;
-        public static final int title_sample_course4=0x7f040041;
-        public static final int title_sample_instruct1=0x7f040042;
-        public static final int title_sample_instruct2=0x7f040043;
-        public static final int title_sample_instruct3=0x7f040044;
-        public static final int title_sample_instruct4=0x7f040045;
-        public static final int title_scheduler=0x7f040035;
-        public static final int title_tour=0x7f040038;
+        public static final int title_activity_main=0x7f040035;
+        public static final int title_activity_map=0x7f040036;
+        public static final int title_activity_scheduler=0x7f04003e;
+        public static final int title_activity_tour=0x7f040040;
+        public static final int title_contacts=0x7f04003a;
+        public static final int title_help=0x7f04003c;
+        public static final int title_maps=0x7f040039;
+        public static final int title_sample_course1=0x7f040041;
+        public static final int title_sample_course2=0x7f040042;
+        public static final int title_sample_course3=0x7f040043;
+        public static final int title_sample_course4=0x7f040044;
+        public static final int title_sample_instruct1=0x7f040045;
+        public static final int title_sample_instruct2=0x7f040046;
+        public static final int title_sample_instruct3=0x7f040047;
+        public static final int title_sample_instruct4=0x7f040048;
+        public static final int title_scheduler=0x7f040038;
+        public static final int title_tour=0x7f04003b;
     }
     public static final class style {
         /** 

@@ -65,6 +65,9 @@ public class MainActivity extends Activity {
 		mHelpButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, HelpActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("activity", "main");
+				i.putExtras(bundle);
                 startActivity(i);
 			}
 		});
