@@ -3,6 +3,10 @@ package edu.seaaddicts.brockbutler.scheduler;
 import edu.seaaddicts.brockbutler.contacts.Contact;
 
 public class Task {
+	private static final int PRIORITY_HIGH = 1;	
+	private static final int PRIORITY_NORMAL = 2;	
+	private static final int PRIORITY_LOW = 3;	
+	
 	public int mId;
 	public boolean mIsPastDue;
 	public int mPriority;
@@ -33,5 +37,9 @@ public class Task {
 	private boolean isPastDueDate() {
 		// Have to talk about how dates are to be stored.
 		return false;
+	}
+	
+	private int getPriority() {
+		return 0;
 	}
 }

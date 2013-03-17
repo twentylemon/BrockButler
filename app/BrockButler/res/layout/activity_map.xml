@@ -6,10 +6,12 @@
     
     <edu.seaaddicts.brockbutler.TouchImageView
         android:id="@+id/imgv_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:src="@drawable/mch_maps"
         android:contentDescription="@string/test_image" />
+    <!-- 
     <Button
         android:id="@+id/btnstart"
         android:layout_width="wrap_content"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="100sp"
         android:text="RESUME" />
+         -->
     <TextView 
         android:id="@+id/txtv_count" 
         android:layout_width="wrap_content"

@@ -1,9 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/menu_settings"/>
+        android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        android:onClick="displaySearchDialog"
+        android:titleCondensed="@string/menu_search">
+    </item>
+    <item
+        android:id="@+id/menu_get_directions"
+        android:title="@string/menu_get_directions"
+        android:titleCondensed="@string/menu_get_directions">
+    </item>
+    <item
+        android:id="@+id/menu_update_position"
+        android:title="@string/menu_update_position"
+        android:titleCondensed="@string/menu_update_position">
+    </item>
+    <item
+        android:id="@+id/menu_exit_maps"
+        android:title="@string/menu_exit_maps"
+        android:onClick="exitMaps"
+        android:titleCondensed="@string/menu_exit_maps">
+    </item>
 
 </menu>

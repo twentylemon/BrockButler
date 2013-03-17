@@ -2,6 +2,37 @@
 <resources>
 
     <string name="app_name">BrockButler</string>
+
+    <!-- AddTaskActivity -->
+    <string name="activity_add_task">Add Task</string>
+    <string name="activity_add_task_task_title">Title</string>
+    <string name="activity_add_task_hint_task_title">Task title</string>
+    <string name="activity_add_task_course">Course</string>
+    <string name="activity_add_task_priority">Priority</string>
+    <string name="activity_add_task_weight">Weight</string>
+    <string name="activity_add_task_hint_weight">0 for no mark</string>
+    <string name="activity_add_task_description">Description</string>
+    <string name="activity_add_task_hint_description">Add description</string>
+    <string name="activity_add_task_due_date">Add Due Date</string>
+    <string name="activity_add_task_contact">Add Contact</string>
+    <string name="activity_add_task_date">No due date set</string>
+    <string name="activity_add_task_contacts">No contacts set</string>
+    <string name="activity_add_task_save">Save</string>
+    <string name="activity_add_task_cancel">Cancel</string>
+
+    <!-- SchedulerActivity -->
+    <string name="menu_add_task">Add Task</string>
+    <string name="menu_remove_task">Remove Task</string>
+    <string name="menu_modify_task">Modify Task</string>
+    <string name="menu_expand_collapse">Expand/Collapse All</string>
+
+    <!-- MapsActivity -->
+    <string name="menu_search">Search for Location</string>
+    <string name="menu_get_directions">Get Directions</string>
+    <string name="menu_update_position">Update Position</string>
+    <string name="menu_exit_maps">Exit Maps</string>
+
+    <!-- TourActivity -->
     <string name="menu_go_back">Go Back</string>
     <string name="menu_turn_around">Turn Around</string>
     <string name="menu_teleport">Teleport!</string>
@@ -18,8 +49,9 @@
     <string name="go_left">Go Left</string>
     <string name="go_forward">Go Forward</string>
     <string name="go_right">Go Right</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+
+    <!-- LoginActivity -->
     <string name="title_activity_login">LoginActivity</string>
     <string name="login_email">Login</string>
     <string name="login_password">Password</string>
@@ -29,6 +61,8 @@
     <string name="login">Login</string>
     <string name="temp">Logo Here</string>
     <string name="msg_skip">By logging in BrockButler attempts to automatically update your timetable, grades, and other information from my.brocku.\n\nDo you still want to skip the login process?</string>
+
+    <!-- MainActivity -->
     <string name="title_activity_main">Main</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="test_image">This is a test image.</string>
@@ -49,5 +83,13 @@
     <string name="title_sample_instruct2">Prof. S. Sampler II</string>
     <string name="title_sample_instruct3">Prof. S. Sampler III</string>
     <string name="title_sample_instruct4">Prof. S. Sampler IV</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="task_priority_prompt">Task Priority</string>
+
+    <string-array name="task_priority_array">
+        <item>High</item>
+        <item>Normal</item>
+        <item>Low</item>
+    </string-array>
 
 </resources>

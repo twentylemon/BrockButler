@@ -4,12 +4,8 @@
         android:id="@+id/menu_add_task"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/menu_settings"/>
-    <item
-        android:id="@+id/menu_help"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/menu_settings"/>
+        android:onClick="addTask"
+        android:title="@string/menu_add_task"/>
     <item
         android:id="@+id/menu_expand_all"
         android:orderInCategory="100"

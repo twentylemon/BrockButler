@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,9 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import edu.seaaddicts.brockbutler.AddTaskActivity;
+import edu.seaaddicts.brockbutler.MainActivity;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 import edu.seaaddicts.brockbutler.coursemanager.Course;
+import edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity;
 
 public class SchedulerActivity extends Activity {
 
@@ -52,6 +57,11 @@ public class SchedulerActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_scheduler, menu);
 		return true;
+	}
+	
+	public void addTask(MenuItem item) {
+		Intent i = new Intent(SchedulerActivity.this, AddTaskActivity.class);
+        startActivity(i);
 	}
 	
 	private ArrayList<Course> getCourses() {

@@ -26,29 +26,38 @@
         <activity
             android:name="edu.seaaddicts.brockbutler.MainActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.maps.MapsActivity"
             android:label="@string/title_activity_map"
+            android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.help.HelpActivity"
-            android:label="@string/title_activity_help" >
+            android:label="@string/title_activity_help"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.scheduler.SchedulerActivity"
-            android:label="@string/title_activity_scheduler" >
+            android:label="@string/title_activity_scheduler"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.contacts.ContactsActivity"
-            android:label="@string/title_activity_contacts" >
+            android:label="@string/title_activity_contacts"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.tour.TourActivity"
             android:label="@string/title_activity_tour"
             android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="edu.seaaddicts.brockbutler.AddTaskActivity"
+            android:label="@string/title_activity_add_task" >
         </activity>
     </application>
 
