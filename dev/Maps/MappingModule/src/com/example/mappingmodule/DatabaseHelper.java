@@ -1,5 +1,7 @@
+package com.example.mappingmodule;
+
 /**
- * DatabaseHarness.java
+ * DatabaseHelper.java
  * Brock Butler
  * Database helper class to ease database interaction 
  * portion of Brock Butler.
@@ -7,13 +9,11 @@
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
 
-package com.excerebros.locationtest;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHarness  extends SQLiteOpenHelper{
+public class DatabaseHelper extends SQLiteOpenHelper{
 	
 	/**
 	 * Class variable for the DATABASEHARNESS class.
@@ -32,7 +32,7 @@ public class DatabaseHarness  extends SQLiteOpenHelper{
      * Constructor method for this class uses context argument to set up
      * database connection.
      */
-    public DatabaseHarness(Context context) {
+    public DatabaseHelper(Context context) {
     	super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

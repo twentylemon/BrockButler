@@ -1,3 +1,5 @@
+package com.example.mappingmodule;
+
 /**
  * Position.java
  * Brock Butler
@@ -7,8 +9,9 @@
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
 
-package com.excerebros.locationtest;
-
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class Position implements Comparable<Object> {
@@ -28,7 +31,6 @@ public class Position implements Comparable<Object> {
     public Position from;
     public Position accesible[];
     public Position nonaccesible[];
-	
 	
 	/**
 	 * Constructor methods for the POSITION class. The constructor
@@ -126,6 +128,47 @@ public class Position implements Comparable<Object> {
 	public int compareTo (Object node) {
 		Position temp = (Position) node;
         return (int)(fScore - temp.fScore);
+	}
+	
+	/**
+	 * The following method is used only to search coordinates
+	 * from a room number
+	 */
+	public void fillFromName(Context ourContext) {
+		DatabaseHelper ourHelper = new DatabaseHelper(ourContext);
+	    SQLiteDatabase ourDatabase = ourHelper.getWritableDatabase();
+	    
+	    String[] columns = new String[]{"node_id","x","y"};
+    	Cursor cur = ourDatabase.query("node_connections", columns, "desc"+"=?", new String[]{nodeName}, null, null, null);
+    	if (cur.moveToFirst()) {
+    		nodeNumber = cur.getString(cur.getColumnIndex("node_id"));
+    		xPosition = cur.getInt(cur.getColumnIndex("x"));
+    		yPosition = cur.getInt(cur.getColumnIndex("y"));
+    	} else {
+    		Log.e("POSITION CLASS", "Can't find room data");
+    	}
+	    
+	    ourHelper.close();
+	}
+	
+	/**
+	 * gathers all metadata for a node based off of the
+	 * coordinates
+	 */
+	public void fillFromCoordinates(Context ourContext) {
+		DatabaseHelper ourHelper = new DatabaseHelper(ourContext);
+	    SQLiteDatabase ourDatabase = ourHelper.getWritableDatabase();
+	    
+	    String[] columns = new String[]{"node_id","desc"};
+    	Cursor cur = ourDatabase.query("node_connections", columns, "x=? AND y=?", new String[]{Integer.toString(xPosition),Integer.toString(yPosition)}, null, null, null);
+    	if (cur.moveToFirst()) {
+    		nodeNumber = cur.getString(cur.getColumnIndex("node_id"));
+    		nodeName = cur.getString(cur.getColumnIndex("desc"));
+    	} else {
+    		Log.e("POSITION CLASS", "Can't find position data");
+    	}
+	    
+	    ourHelper.close();
 	}
 	
 	

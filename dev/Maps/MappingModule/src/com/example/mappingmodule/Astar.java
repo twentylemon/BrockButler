@@ -1,3 +1,5 @@
+package com.example.mappingmodule;
+
 /**
  * Astar.java
  * Brock Butler
@@ -6,8 +8,6 @@
  * Created by Thomas Nelson 2013-03-05
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
-
-package com.excerebros.locationtest;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -30,7 +30,7 @@ public class Astar {
 	private static final String KEY_CONN = "con";
 	private static final String DATABASE_TABLE = "node_connections";
 	
-	private DatabaseHarness ourHelper;
+	private DatabaseHelper ourHelper;
     private final Context   ourContext;
     private SQLiteDatabase  ourDatabase;
 
@@ -42,7 +42,7 @@ public class Astar {
 	 */ 
     public Astar (Context c) {
     	ourContext = c;
-    	ourHelper = new DatabaseHarness(ourContext);
+    	ourHelper = new DatabaseHelper(ourContext);
         ourDatabase = ourHelper.getWritableDatabase();
     }
     
