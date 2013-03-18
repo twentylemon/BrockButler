@@ -51,13 +51,24 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity"
+            android:label="@string/activity_add_contact"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="edu.seaaddicts.brockbutler.tour.TourActivity"
             android:label="@string/title_activity_tour"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="edu.seaaddicts.brockbutler.AddTaskActivity"
-            android:label="@string/title_activity_add_task" >
+            android:name="edu.seaaddicts.brockbutler.scheduler.AddTaskActivity"
+            android:label="@string/title_activity_add_task"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.seaaddicts.brockbutler.contacts.AddContactActivity"
+            android:label="@string/activity_add_contact"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

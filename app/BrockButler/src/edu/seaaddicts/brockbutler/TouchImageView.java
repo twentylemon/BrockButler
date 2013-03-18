@@ -1,3 +1,12 @@
+/**
+ * Android: TouchImageView.java
+ * Created by: Mike Ortiz
+ * Updated by: Vince Pascuzzi
+ * Date: 3/14/2013
+ * 
+ * Allows pinching, zooming, translating, and drawing on an ImageView.
+ */
+
 package edu.seaaddicts.brockbutler;
 
 import android.content.Context;
@@ -15,34 +24,32 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class TouchImageView extends ImageView {
-	
+
 	private static final double MAGIC_RATIO = 1.34;
+	private static final int CLICK = 3;
 
-	Matrix mMatrixMap;
+	private Matrix mMatrixMap;
 
-	float[] values = new float[9];
+	// States of touch.
+	private static final int NONE = 0;
+	private static final int DRAG = 1;
+	private static final int ZOOM = 2;
+	private int mode = NONE;
 
-	// We can be in one of these 3 states
-	static final int NONE = 0;
-	static final int DRAG = 1;
-	static final int ZOOM = 2;
-	int mode = NONE;
+	// Zooming variables.
+	private PointF last = new PointF();
+	private PointF start = new PointF();
+	private float minScale = 1f;
+	private float maxScale = 8f;
+	private float[] m;
 
-	// Remember some things for zooming
-	PointF last = new PointF();
-	PointF start = new PointF();
-	float minScale = 1f;
-	float maxScale = 8f;
-	float[] m;
+	private int viewWidth, viewHeight;
+	private int oldMeasuredWidth, oldMeasuredHeight;
 
-	int viewWidth, viewHeight;
-	static final int CLICK = 3;
-	float saveScale = 1f;
-	protected float origWidth, origHeight;
-	int oldMeasuredWidth, oldMeasuredHeight;
-	
-	float fixTransX;
-	float fixTransY;
+	private float scaleFactor = 1f;
+	private float origWidth, origHeight;
+
+	private final Paint mPathPaint = new Paint();
 
 	ScaleGestureDetector mScaleDetector;
 
@@ -61,14 +68,15 @@ public class TouchImageView extends ImageView {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		Paint p = new Paint();
-		p.setColor(Color.CYAN);
-		p.setStrokeWidth(10);
+		mPathPaint.setColor(Color.CYAN);
+		mPathPaint.setStrokeWidth(10);
 		canvas.setMatrix(mMatrixMap);
 		float f[] = convertDimensions(1348, 876);
-		canvas.drawLine(f[0], f[1], (float)(f[0]+172*1.34), f[1], p);
+		canvas.drawLine(f[0], f[1], (float) (f[0] + 172 * 1.34), f[1],
+				mPathPaint);
 		float f2[] = convertDimensions(1520, 876);
-		canvas.drawLine(f2[0], f2[1], (float)(f2[0]+186*1.34), (float)(f2[1]-1.34*178), p);
+		canvas.drawLine(f2[0], f2[1], (float) (f2[0] + 186 * 1.34),
+				(float) (f2[1] - 1.34 * 178), mPathPaint);
 	}
 
 	private void sharedConstructing(Context context) {
@@ -95,13 +103,15 @@ public class TouchImageView extends ImageView {
 					break;
 
 				case MotionEvent.ACTION_MOVE:
+					float fixTransX;
+					float fixTransY;
 					if (mode == DRAG) {
 						float deltaX = curr.x - last.x;
 						float deltaY = curr.y - last.y;
 						fixTransX = getFixDragTrans(deltaX, viewWidth,
-								origWidth * saveScale);
+								origWidth * scaleFactor);
 						fixTransY = getFixDragTrans(deltaY, viewHeight,
-								origHeight * saveScale);
+								origHeight * scaleFactor);
 						mMatrixMap.postTranslate(fixTransX, fixTransY);
 						fixTrans();
 						last.set(curr.x, curr.y);
@@ -145,18 +155,18 @@ public class TouchImageView extends ImageView {
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
 			float mScaleFactor = detector.getScaleFactor();
-			float origScale = saveScale;
-			saveScale *= mScaleFactor;
-			if (saveScale > maxScale) {
-				saveScale = maxScale;
+			float origScale = scaleFactor;
+			scaleFactor *= mScaleFactor;
+			if (scaleFactor > maxScale) {
+				scaleFactor = maxScale;
 				mScaleFactor = maxScale / origScale;
-			} else if (saveScale < minScale) {
-				saveScale = minScale;
+			} else if (scaleFactor < minScale) {
+				scaleFactor = minScale;
 				mScaleFactor = minScale / origScale;
 			}
 
-			if (origWidth * saveScale <= viewWidth
-					|| origHeight * saveScale <= viewHeight)
+			if (origWidth * scaleFactor <= viewWidth
+					|| origHeight * scaleFactor <= viewHeight)
 				mMatrixMap.postScale(mScaleFactor, mScaleFactor, viewWidth / 2,
 						viewHeight / 2);
 			else
@@ -169,17 +179,22 @@ public class TouchImageView extends ImageView {
 
 	void fixTrans() {
 		mMatrixMap.getValues(m);
+		float fixTransX;
+		float fixTransY;
 		float transX = m[Matrix.MTRANS_X];
 		float transY = m[Matrix.MTRANS_Y];
 
-		fixTransX = getFixTrans(transX, viewWidth, origWidth * saveScale);
-		fixTransY = getFixTrans(transY, viewHeight, origHeight
-				* saveScale);
+		fixTransX = getFixTrans(transX, viewWidth, origWidth * scaleFactor);
+		fixTransY = getFixTrans(transY, viewHeight, origHeight * scaleFactor);
 
 		if (fixTransX != 0 || fixTransY != 0)
 			mMatrixMap.postTranslate(fixTransX, fixTransY);
 	}
 
+
+	/*
+	 * Fixes (when required) the translation matrix.
+	 */
 	float getFixTrans(float trans, float viewSize, float contentSize) {
 		float minTrans, maxTrans;
 
@@ -198,6 +213,10 @@ public class TouchImageView extends ImageView {
 		return 0;
 	}
 
+	/*
+	 * Adjusts the translation when dragging so that this stays in the correct
+	 * location on screen.
+	 */
 	float getFixDragTrans(float delta, float viewSize, float contentSize) {
 		if (contentSize <= viewSize) {
 			return 0;
@@ -211,14 +230,15 @@ public class TouchImageView extends ImageView {
 		viewWidth = MeasureSpec.getSize(widthMeasureSpec);
 		viewHeight = MeasureSpec.getSize(heightMeasureSpec);
 
-		// Rescales image on rotation
+		// Does image rescaling on rotation. Not necessary since our orientation
+		// is fixed in landscape.
 		if (oldMeasuredHeight == viewWidth && oldMeasuredHeight == viewHeight
 				|| viewWidth == 0 || viewHeight == 0)
 			return;
 		oldMeasuredHeight = viewHeight;
 		oldMeasuredWidth = viewWidth;
 
-		if (saveScale == 1) {
+		if (scaleFactor == 1) {
 			// Fit to screen.
 			float scale;
 
@@ -252,11 +272,11 @@ public class TouchImageView extends ImageView {
 		}
 		fixTrans();
 	}
-	
-	float [] convertDimensions(float x, float y) {
+
+	float[] convertDimensions(float x, float y) {
 		float f[] = new float[2];
-		f[0] = (float) MAGIC_RATIO*x;
-		f[1] = (float) MAGIC_RATIO*y;
+		f[0] = (float) MAGIC_RATIO * x;
+		f[1] = (float) MAGIC_RATIO * y;
 		return f;
 	}
 }

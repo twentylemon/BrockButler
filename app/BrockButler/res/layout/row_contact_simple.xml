@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:paddingTop="2sp" >
+
+    <TextView
+        android:id="@+id/tv_contact_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/activity_add_contact_fname"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <Button
+        android:id="@+id/btnRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:layout_gravity="right"
+        android:text="@string/activity_add_contact_remove"
+        android:textSize="10sp" />
+
+</LinearLayout>

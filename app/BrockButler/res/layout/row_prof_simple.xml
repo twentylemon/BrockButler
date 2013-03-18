@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10sp" >
+
+    <TextView
+        android:id="@+id/tv_prof_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/prof_name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <Button
+        android:id="@+id/prof_email_button"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:padding="20dip"
+        android:hapticFeedbackEnabled="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20sp"
+        android:background="@drawable/ic_email"
+        android:contentDescription="@string/contentdesc"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</LinearLayout>

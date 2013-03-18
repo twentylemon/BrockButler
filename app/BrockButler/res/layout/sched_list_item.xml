@@ -5,56 +5,31 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/sched_list_item_title"
         android:layout_width="fill_parent"
-        android:layout_height="100sp"
+        android:layout_height="60sp"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:padding="20dip"
+        android:padding="10dip"
         android:textSize="30sp" />
 
-    <!-- *********************** -->
-    <!-- *** TOOLBAR LAYOUT **** -->
-    <!-- *********************** -->
+    <!-- Toolbar -->
 
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:layout_marginBottom="-50dip"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip"
         android:visibility="gone" >
 
-        <Button
-            android:id="@+id/doSomething1"
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="Button1" />
+        <include android:id="@+id/row_prof" layout="@layout/row_prof_simple"/>
+        <include layout="@layout/row_task_lecture"/>
+        <include layout="@layout/row_task_tutorial"/>
+        <include layout="@layout/row_task_lab"/>
+        <include layout="@layout/row_task_assignment"/>
+        <include layout="@layout/row_task_test"/>
 
-        <Button
-            android:id="@+id/doSomething2"
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="Button2" />
-
-        <Button
-            android:id="@+id/doSomething3"
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="Button3" />
-
-        <Button
-            android:id="@+id/doSomething4"
-            android:layout_width="wrap_content"
-            android:layout_height="50dip"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="Button4" />
     </LinearLayout>
 
 </LinearLayout>

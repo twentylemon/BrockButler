@@ -3,7 +3,6 @@ package edu.seaaddicts.brockbutler.maps;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,8 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.TouchImageView;
-import edu.seaaddicts.brockbutler.help.HelpActivity;
-import edu.seaaddicts.brockbutler.scheduler.SchedulerActivity;
 
 public class MapsActivity extends Activity {
 	private static final String tag = "MapsActivity";
@@ -102,14 +99,6 @@ public class MapsActivity extends Activity {
 //						.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
 //			}
 //		});
-	}
-	public void showHelp(MenuItem item)
-	{
-		Intent intent = new Intent(MapsActivity.this,HelpActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putString("activity", "maps");
-		intent.putExtras(bundle);
-		startActivity(intent);
 	}
 
 	@Override

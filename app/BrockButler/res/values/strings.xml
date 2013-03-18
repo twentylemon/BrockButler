@@ -13,28 +13,48 @@
     <string name="activity_add_task_hint_weight">0 for no mark</string>
     <string name="activity_add_task_description">Description</string>
     <string name="activity_add_task_hint_description">Add description</string>
-    <string name="activity_add_task_due_date">Add Due Date</string>
+    <string name="activity_add_task_due_date">Edit Due Date</string>
     <string name="activity_add_task_contact">Add Contact</string>
     <string name="activity_add_task_date">No due date set</string>
     <string name="activity_add_task_contacts">No contacts set</string>
     <string name="activity_add_task_save">Save</string>
     <string name="activity_add_task_cancel">Cancel</string>
+    
+    <!-- AddContactActivity -->
+    <string name="activity_add_contact">Add Contact</string>
+    <string name="activity_add_contact_fname">First Name</string>
+    <string name="activity_add_contact_hint_fname">Enter first name</string>
+    <string name="activity_add_contact_lname">Last Name</string>
+    <string name="activity_add_contact_hint_lname">Enter last name</string>
+    <string name="activity_add_contact_email">Email</string>
+    <string name="activity_add_contact_hint_email">Enter email address</string>
+    <string name="activity_add_contact_courses">Courses</string>
+    <string name="activity_add_contact_add_courses">Add Course</string>
+    <string name="activity_add_contact_remove">Remove</string>
+    
+    <!-- Professors -->
+    <string name="prof_name">Professor Name</string>
+    <string name="prof_office">Office</string>
+    <string name="prof_email">Email</string>
 
     <!-- SchedulerActivity -->
     <string name="menu_add_task">Add Task</string>
     <string name="menu_remove_task">Remove Task</string>
     <string name="menu_modify_task">Modify Task</string>
     <string name="menu_expand_collapse">Expand/Collapse All</string>
-    <string name="menu_show_scheduler_help">Show Help</string>
-    <!-- CourseManagerActivity -->
- 	<string name="menu_show_coursemanager_help">Show Help</string>
-    
+
+    <!-- row_task_* -->
+    <string name="title_lecture">Lectures</string>
+    <string name="title_lab">Labs</string>
+    <string name="title_tutorial">Tutorials</string>
+    <string name="title_assignment">Assignments</string>
+    <string name="title_test">Tests</string>
+
     <!-- MapsActivity -->
     <string name="menu_search">Search for Location</string>
     <string name="menu_get_directions">Get Directions</string>
     <string name="menu_update_position">Update Position</string>
     <string name="menu_exit_maps">Exit Maps</string>
-    <string name="menu_show_maps_help">Show Help</string>
 
     <!-- TourActivity -->
     <string name="menu_go_back">Go Back</string>
@@ -56,7 +76,7 @@
     <string name="menu_settings">Settings</string>
 
     <!-- LoginActivity -->
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login Activity</string>
     <string name="login_email">Login</string>
     <string name="login_password">Password</string>
     <string name="login_skip">Skip</string>
@@ -68,7 +88,7 @@
 
     <!-- MainActivity -->
     <string name="title_activity_main">Main</string>
-    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_map">Maps Activity</string>
     <string name="test_image">This is a test image.</string>
     <string name="title_scheduler">Scheduler</string>
     <string name="title_maps">Maps</string>
@@ -90,10 +110,19 @@
     <string name="title_activity_add_task">AddTaskActivity</string>
     <string name="task_priority_prompt">Task Priority</string>
 
+    <!-- Miscellaneous -->
+    <string name="contentdesc">Content Description</string>
+    
     <string-array name="task_priority_array">
         <item>High</item>
         <item>Normal</item>
         <item>Low</item>
     </string-array>
+    
+    <string-array name="empty">
+        <item>None</item>
+    </string-array>
+    
+    <string name="none">None</string>
 
 </resources>
