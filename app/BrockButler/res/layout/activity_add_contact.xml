@@ -46,6 +46,24 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="85sp"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_add_contact_email" />
+
+        <EditText
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25sp"
+            android:hint="@string/activity_add_contact_hint_email"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10sp"
         android:gravity="center_horizontal"
         android:orientation="vertical" >
@@ -74,13 +92,13 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/add_task_save_button"
+            android:id="@+id/add_contact_save_button"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:text="@string/activity_add_task_save" />
 
         <Button
-            android:id="@+id/add_task_cancel_button"
+            android:id="@+id/add_contact_cancel_button"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"

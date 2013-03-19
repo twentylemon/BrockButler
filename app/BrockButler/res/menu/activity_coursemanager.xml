@@ -6,4 +6,11 @@
         android:showAsAction="never"
         android:title="@string/menu_settings"/>
 
+    <item
+        android:id="@+id/add_course"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:onClick="addCourse"
+        android:title="@string/activity_add_course_add"/>
+
 </menu>

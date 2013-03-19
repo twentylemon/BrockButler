@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10sp"
+    android:orientation="vertical"
+    tools:context=".AddTaskActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="85sp"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_add_course_subject" />
+
+        <Spinner
+            android:id="@+id/add_course_subjects_spinner"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="85sp"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_add_course_code" />
+
+        <Spinner
+            android:id="@+id/add_course_codes_spinner"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/add_course_save_button"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_add_task_save" />
+
+        <Button
+            android:id="@+id/add_course_cancel_button"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:text="@string/activity_add_task_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

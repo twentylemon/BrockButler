@@ -5,7 +5,7 @@
     tools:context=".SchedulerActivity" >
 
     <ListView
-        android:id="@+id/course_list"
+        android:id="@+id/sched_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
     </ListView>

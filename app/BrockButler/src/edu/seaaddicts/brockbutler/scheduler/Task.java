@@ -1,45 +1,37 @@
+/**
+ * Tasks.java
+ * Brock Butler
+ * A wrapper class for tasks information
+ * Created by James Grisdale on 2013-02-24
+ * Copyright (c) 2013 Sea Addicts. All rights reserved.
+**/
+
 package edu.seaaddicts.brockbutler.scheduler;
+
+import java.util.ArrayList;
 
 import edu.seaaddicts.brockbutler.contacts.Contact;
 
 public class Task {
-	private static final int PRIORITY_HIGH = 1;	
-	private static final int PRIORITY_NORMAL = 2;	
-	private static final int PRIORITY_LOW = 3;	
 	
-	public int mId;
+	public String mSubj;
+	public String mCode;
 	public boolean mIsPastDue;
-	public int mPriority;
 	public float mMark;
+	public float mBase;
 	public float mWeight;
-	public String mTitle;
-	public String mDescription;
-	public String mCourse;
+	public int mAssign;
+	public String mName;
 	public String mCreationDate;
 	public String mDueDate;
-	public Contact mContacts[];
-	
-	public Task()
-	{
-		// Do something.
+	public int mPriority;
+	public ArrayList<Contact> mContacts;
+
+	public Task(){
+		mContacts = new ArrayList<Contact>();
 	}
-	
-	public Task(int id, boolean pastDue, int priority, String title,
-			String desc, String course, String createDate, String dueDate,
-			Contact contacts[]) {
-		mId = id;
-		mPriority = priority;
-		mTitle = title;
-		mDescription = desc;
-		mCourse = course;
+	public boolean isPastDueDate(){
+		return true;
 	}
-	
-	private boolean isPastDueDate() {
-		// Have to talk about how dates are to be stored.
-		return false;
-	}
-	
-	private int getPriority() {
-		return 0;
-	}
+
 }

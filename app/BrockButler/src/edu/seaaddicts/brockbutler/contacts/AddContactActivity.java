@@ -2,9 +2,15 @@ package edu.seaaddicts.brockbutler.contacts;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import edu.seaaddicts.brockbutler.R;
 
 public class AddContactActivity extends Activity {
+
+	private Button mSaveButton;
+	private Button mCancelButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +23,22 @@ public class AddContactActivity extends Activity {
 	 * Initialize all views and sets Button OnClickListeners.
 	 */
 	private void init() {
-		
+		mSaveButton = (Button) findViewById(R.id.add_contact_save_button);
+		mSaveButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// Grisdale add contact
+				onBackPressed();
+			}
+		});
+		mCancelButton = (Button) findViewById(R.id.add_contact_cancel_button);
+		mCancelButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 	}
 }

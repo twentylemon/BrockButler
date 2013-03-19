@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/sched_list_item_title"
+        android:layout_width="fill_parent"
+        android:layout_height="60sp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:padding="10dip"
+        android:textSize="30sp" />
+
+    <!-- Toolbar -->
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dip"
+        android:visibility="gone" >
+
+        <include android:id="@+id/row_prof" layout="@layout/row_prof_simple"/>
+        <include layout="@layout/row_task_lecture"/>
+        <include layout="@layout/row_task_tutorial"/>
+        <include layout="@layout/row_task_lab"/>
+        <include layout="@layout/row_task_assignment"/>
+        <include layout="@layout/row_task_test"/>
+
+    </LinearLayout>
+
+</LinearLayout>

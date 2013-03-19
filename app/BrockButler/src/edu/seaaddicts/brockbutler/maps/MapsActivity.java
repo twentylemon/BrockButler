@@ -70,12 +70,12 @@ public class MapsActivity extends Activity {
 
 	private void init() {
 		mMapImage = (TouchImageView) findViewById(R.id.imgv_map);
-		mMapImage.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View v) {
-				mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
-			}
-		});
+//		mMapImage.setOnClickListener(new OnClickListener() {
+//
+//			public void onClick(View v) {
+//				mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
+//			}
+//		});
 //		start = (Button) findViewById(R.id.btnstart);
 //		start.setOnClickListener(new OnClickListener() {
 //

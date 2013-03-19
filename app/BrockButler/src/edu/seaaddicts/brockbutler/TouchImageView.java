@@ -71,12 +71,11 @@ public class TouchImageView extends ImageView {
 		mPathPaint.setColor(Color.CYAN);
 		mPathPaint.setStrokeWidth(10);
 		canvas.setMatrix(mMatrixMap);
-		float f[] = convertDimensions(1348, 876);
-		canvas.drawLine(f[0], f[1], (float) (f[0] + 172 * 1.34), f[1],
-				mPathPaint);
-		float f2[] = convertDimensions(1520, 876);
-		canvas.drawLine(f2[0], f2[1], (float) (f2[0] + 186 * 1.34),
-				(float) (f2[1] - 1.34 * 178), mPathPaint);
+		float f[] = convertDimensions(1054, 874);
+		float f2[] = convertDimensions(1184, 1008);
+		canvas.drawLine(f[0], f[1], f2[0], f2[1], mPathPaint);
+		float f3[] = convertDimensions(1304, 888);
+		canvas.drawLine(f2[0], f2[1], f3[0], f3[1], mPathPaint);
 	}
 
 	private void sharedConstructing(Context context) {
@@ -190,7 +189,6 @@ public class TouchImageView extends ImageView {
 		if (fixTransX != 0 || fixTransY != 0)
 			mMatrixMap.postTranslate(fixTransX, fixTransY);
 	}
-
 
 	/*
 	 * Fixes (when required) the translation matrix.

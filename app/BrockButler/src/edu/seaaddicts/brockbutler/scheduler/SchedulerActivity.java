@@ -29,7 +29,7 @@ public class SchedulerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scheduler);
 
-		ListView list = (ListView) findViewById(R.id.course_list);
+		ListView list = (ListView) findViewById(R.id.sched_list);
 
 		// Creating the list adapter and populating the list
 		ArrayAdapter<String> listAdapter = new CustomListAdapter(this,

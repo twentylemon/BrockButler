@@ -14,7 +14,7 @@
 
         <Button
             android:id="@+id/btn_sched"
-            android:layout_width="110sp"
+            android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
@@ -22,11 +22,11 @@
 
         <Button
             android:id="@+id/btn_contacts"
-            android:layout_width="110sp"
+            android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
-            android:background="@drawable/icon_contacts" />
+            android:background="@drawable/icon_course" />
     </LinearLayout>
     
     <LinearLayout
@@ -38,7 +38,7 @@
 
         <Button
             android:id="@+id/btn_maps"
-            android:layout_width="110sp"
+            android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
             android:contentDescription="@string/test_image"
@@ -63,7 +63,7 @@
 
         <Button
             android:id="@+id/btn_help"
-            android:layout_width="110sp"
+            android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_marginBottom="15sp"
             android:contentDescription="@string/test_image"

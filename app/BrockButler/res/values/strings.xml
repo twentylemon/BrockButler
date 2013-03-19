@@ -20,6 +20,9 @@
     <string name="activity_add_task_save">Save</string>
     <string name="activity_add_task_cancel">Cancel</string>
     
+    <!-- CourseManagerActivity -->
+    <string name="activity_coursemanager">Course Manager</string>
+    
     <!-- AddContactActivity -->
     <string name="activity_add_contact">Add Contact</string>
     <string name="activity_add_contact_fname">First Name</string>
@@ -31,6 +34,12 @@
     <string name="activity_add_contact_courses">Courses</string>
     <string name="activity_add_contact_add_courses">Add Course</string>
     <string name="activity_add_contact_remove">Remove</string>
+    
+    <!-- AddCourseActivity -->
+    <string name="activity_add_course">Add Course</string>
+    <string name="activity_add_course_subject">Subject</string>
+    <string name="activity_add_course_add">Add Course</string>
+    <string name="activity_add_course_code">Code</string>
     
     <!-- Professors -->
     <string name="prof_name">Professor Name</string>

@@ -54,7 +54,7 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity"
-            android:label="@string/activity_add_contact"
+            android:label="@string/activity_coursemanager"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -70,6 +70,11 @@
         <activity
             android:name="edu.seaaddicts.brockbutler.contacts.AddContactActivity"
             android:label="@string/activity_add_contact"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="edu.seaaddicts.brockbutler.coursemanager.AddCourseActivity"
+            android:label="@string/activity_add_course"
             android:screenOrientation="portrait" >
         </activity>
     </application>
