@@ -57,6 +57,7 @@ public class Astar {
         openList.add(startNode);
         
         while(openList.size() != 0)  {
+        	
         	Position tempNode = openList.remove();
             
             if(tempNode == goalNode) 
@@ -147,15 +148,15 @@ public class Astar {
     	Cursor cur = ourDatabase.query(DATABASE_TABLE, columns, KEY_CONN+"=?", new String[]{node.nodeNumber}, null, null, null);
     	if (cur.moveToFirst()) {
     		node.accesible = new Position[cur.getCount()];
-    		for(int i=0; i<cur.getCount(); i++) {
-    			cur.moveToNext();
-    			node.accesible[i].nodeNumber = cur.getString(cur.getColumnIndex(KEY_NODE));
-    			node.accesible[i].nodeName = cur.getString(cur.getColumnIndex(KEY_DESC));
-    			node.accesible[i].xPosition = cur.getInt(cur.getColumnIndex(KEY_XPOS));
-    			node.accesible[i].yPosition = cur.getInt(cur.getColumnIndex(KEY_YPOS));
-    		}
+    		//Log.i("PRINT", Integer.toString(cur.getCount()) + "," + Integer.toString(node.accesible.length));
+    		int i=0;
+    		do {
+    			Log.i("PRINT", cur.getString(cur.getColumnIndex(KEY_NODE)));
+    			node.accesible[i] = new Position(cur.getInt(cur.getColumnIndex(KEY_XPOS)), cur.getInt(cur.getColumnIndex(KEY_YPOS)), cur.getString(cur.getColumnIndex(KEY_DESC)), cur.getString(cur.getColumnIndex(KEY_NODE)));
+    			i++;
+    		} while(cur.moveToNext());
     	} else {
-    		Log.e("ASTAR CLASS", "getAdjacent: Empty return on query");
+    		Log.e("PRINT", "getAdjacent: Empty return on query");
     	}
     	return node;
     }
@@ -180,8 +181,9 @@ public class Astar {
     	String[] columns = new String[]{KEY_NODE, KEY_DESC, KEY_XPOS, KEY_YPOS, KEY_CONN};
     	Cursor cur = ourDatabase.query(DATABASE_TABLE, columns, KEY_CONN+"=?", new String[]{node.nodeNumber}, null, null, null);
     	if (cur.moveToFirst()) {
-    		while (cur.moveToNext())
+    		do {
     			Log.d("ASTAR CLASS", cur.getString(cur.getColumnIndex(KEY_NODE)) + ", " + cur.getInt(cur.getColumnIndex(KEY_XPOS)) + ", " + cur.getInt(cur.getColumnIndex(KEY_YPOS)));
+    		} while (cur.moveToNext());
     	} else {
     		Log.e("ASTAR CLASS", "printAdjacent: Empty return on query");
     	}
