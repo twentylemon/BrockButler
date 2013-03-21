@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity" >
     
-    <edu.seaaddicts.brockbutler.TouchImageView
+    <edu.seaaddicts.brockbutler.maps.MapsTouchImageView
         android:id="@+id/imgv_map"
         android:layout_alignParentTop="true"
         android:layout_width="fill_parent"

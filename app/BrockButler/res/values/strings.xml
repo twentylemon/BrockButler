@@ -17,8 +17,6 @@
     <string name="activity_add_task_contact">Add Contact</string>
     <string name="activity_add_task_date">No due date set</string>
     <string name="activity_add_task_contacts">No contacts set</string>
-    <string name="activity_add_task_save">Save</string>
-    <string name="activity_add_task_cancel">Cancel</string>
     
     <!-- CourseManagerActivity -->
     <string name="activity_coursemanager">Course Manager</string>
@@ -36,10 +34,14 @@
     <string name="activity_add_contact_remove">Remove</string>
     
     <!-- AddCourseActivity -->
-    <string name="activity_add_course">Add Course</string>
-    <string name="activity_add_course_subject">Subject</string>
-    <string name="activity_add_course_add">Add Course</string>
-    <string name="activity_add_course_code">Code</string>
+    <string name="title_add_course">Add Course</string>
+    <string name="add_course_subject">Subject</string>
+    <string name="add_course_add">Add Course</string>
+    <string name="add_course_code">Code</string>
+    <string name="add_course_add_lecs">Add Lectures</string>
+    <string name="add_course_add_labs">Add Labs</string>
+    <string name="add_course_add_sems">Add Seminars</string>
+    <string name="add_course_add_tuts">Add Tutorials</string>
     
     <!-- Professors -->
     <string name="prof_name">Professor Name</string>
@@ -121,6 +123,8 @@
 
     <!-- Miscellaneous -->
     <string name="contentdesc">Content Description</string>
+    <string name="button_save">Save</string>
+    <string name="button_cancel">Cancel</string>
     
     <string-array name="task_priority_array">
         <item>High</item>

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="85sp"
             android:layout_height="wrap_content"
-            android:text="@string/activity_add_course_subject" />
+            android:text="@string/add_course_subject" />
 
         <Spinner
             android:id="@+id/add_course_subjects_spinner"
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="85sp"
             android:layout_height="wrap_content"
-            android:text="@string/activity_add_course_code" />
+            android:text="@string/add_course_code" />
 
         <Spinner
             android:id="@+id/add_course_codes_spinner"
@@ -45,20 +45,80 @@
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
         android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/add_course_add_lecs"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_course_add_lecs" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/add_course_add_labs"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_course_add_labs" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/add_course_add_tuts"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_course_add_tuts" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/add_course_add_sems"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_course_add_sems" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/add_course_save_button"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:text="@string/activity_add_task_save" />
+            android:text="@string/button_save" />
 
         <Button
             android:id="@+id/add_course_cancel_button"
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
-            android:text="@string/activity_add_task_cancel" />
+            android:text="@string/button_cancel" />
     </LinearLayout>
 
 </LinearLayout>

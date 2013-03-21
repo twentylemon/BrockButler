@@ -17,16 +17,16 @@
             android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
-            android:contentDescription="@string/test_image"
-            android:background="@drawable/icon_scheduler" />
+            android:contentDescription="@string/contentdesc"
+            android:background="@drawable/ic_scheduler" />
 
         <Button
             android:id="@+id/btn_contacts"
             android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
-            android:contentDescription="@string/test_image"
-            android:background="@drawable/icon_course" />
+            android:contentDescription="@string/contentdesc"
+            android:background="@drawable/ic_course" />
     </LinearLayout>
     
     <LinearLayout
@@ -41,16 +41,16 @@
             android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
-            android:contentDescription="@string/test_image"
-            android:background="@drawable/maps_icon" />
+            android:contentDescription="@string/contentdesc"
+            android:background="@drawable/ic_maps" />
 
         <Button
             android:id="@+id/btn_tour"
-            android:layout_width="110sp"
+            android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_margin="15sp"
-            android:contentDescription="@string/test_image"
-            android:background="@drawable/tour_icon" />
+            android:contentDescription="@string/contentdesc"
+            android:background="@drawable/ic_tour" />
     </LinearLayout>
     
     <LinearLayout
@@ -66,8 +66,8 @@
             android:layout_width="135sp"
             android:layout_height="135sp"
             android:layout_marginBottom="15sp"
-            android:contentDescription="@string/test_image"
-            android:background="@drawable/help_icon" />
+            android:contentDescription="@string/contentdesc"
+            android:background="@drawable/ic_help" />
     </LinearLayout>
 
 </RelativeLayout>

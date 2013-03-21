@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
-import edu.seaaddicts.brockbutler.TouchImageView;
 
 public class MapsActivity extends Activity {
 	private static final String tag = "MapsActivity";
@@ -28,7 +27,7 @@ public class MapsActivity extends Activity {
 	private Button resume;
 
 	private Handler mHandler;
-	private TouchImageView mMapImage;
+	private MapsTouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
 
 	@Override
@@ -69,7 +68,7 @@ public class MapsActivity extends Activity {
 	}
 
 	private void init() {
-		mMapImage = (TouchImageView) findViewById(R.id.imgv_map);
+		mMapImage = (MapsTouchImageView) findViewById(R.id.imgv_map);
 //		mMapImage.setOnClickListener(new OnClickListener() {
 //
 //			public void onClick(View v) {

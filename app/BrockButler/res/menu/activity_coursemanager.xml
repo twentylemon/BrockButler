@@ -11,6 +11,6 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:onClick="addCourse"
-        android:title="@string/activity_add_course_add"/>
+        android:title="@string/add_course_add"/>
 
 </menu>
