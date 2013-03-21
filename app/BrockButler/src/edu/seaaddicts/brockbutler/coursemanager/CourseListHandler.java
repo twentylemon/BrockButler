@@ -7,15 +7,15 @@
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
 **/
 
-package edu.seaaddicts.brockbutler.coursemanager;
-
-import java.util.ArrayList;
+package edu.seaaddicts.brockbutler;
 
 import android.content.ContentValues;
 import android.content.Context;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 public class CourseListHandler extends SQLiteOpenHelper {
 	
 	// All Static variables
@@ -41,7 +41,6 @@ public class CourseListHandler extends SQLiteOpenHelper {
     private static final String KEY_LOCATION = "location";
     private static final String KEY_INSTRUCTOR = "instructor";
     Context context;
-    
     public CourseListHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -74,6 +73,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		try{
 		course = list.execute().get();
 		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
 		//sets database for multiple line insert
 		db.beginTransaction();
 		for (int i=0; i<course.size(); i++){
@@ -135,7 +135,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		ArrayList<String> subj = new ArrayList<String>();
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
-		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_COURSES, null);
+		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_COURSES + "ORDER BY "+KEY_SUBJ+" COLLATE NOCASE", null);
 
 		if (c != null){
 			if (c.moveToFirst()){
@@ -144,6 +144,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 				}while (c.moveToNext());
 			}
 		}
+		 
 		c.close();
 		}catch(Exception e){subj.add(e.toString());}
 		return subj;
@@ -155,7 +156,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
 		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_CODE+" FROM " + TABLE_COURSES+
-				" WHERE "+KEY_SUBJ+"='"+subj+"'", null);
+				" WHERE "+KEY_SUBJ+"='"+subj+"' ORDER BY "+KEY_SUBJ+" COLLATE NOCASE", null);
 		if (c != null){
 			if (c.moveToFirst()){
 				do{					
