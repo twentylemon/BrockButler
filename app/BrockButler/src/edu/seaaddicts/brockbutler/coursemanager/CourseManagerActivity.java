@@ -125,7 +125,7 @@ public class CourseManagerActivity extends Activity {
 						R.layout.sched_list_item, null);
 			}
 
-			((TextView) convertView.findViewById(R.id.title))
+			((TextView) convertView.findViewById(R.id.sched_list_item_title))
 					.setText(getItem(position));
 
 			// Resets the toolbar to be closed

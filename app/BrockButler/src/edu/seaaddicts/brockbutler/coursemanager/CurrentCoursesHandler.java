@@ -420,7 +420,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	 */
 	public ArrayList<Course> getRegCourses(){
 		ArrayList<Course> courses = new ArrayList<Course>();
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		try{
 			Cursor c = db.rawQuery("SELECT * FROM "+TABLE_COURSES, null);		
 			if (c != null){
@@ -432,9 +432,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			}
 			c.close();
 		}catch(Exception e){
-			Course course = new Course();
-			course.mSubject="No Courses Added";
-			courses.add(course);
+			//Uh-oh
 		}
 		
 		db.close();
