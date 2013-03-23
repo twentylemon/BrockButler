@@ -140,7 +140,6 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_OFFERINGS);
 		db.execSQL(CREATE_OFFERING_TIMES);
 		db.execSQL(CREATE_CONTACTS);
-		addCourse();
 	}
 
 	// upgrading the database will drop the table and recreate
@@ -194,6 +193,12 @@ public class CourseListHandler extends SQLiteOpenHelper {
 			course = list.execute().get();
 			SQLiteDatabase db = this.getWritableDatabase();
 			 db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
+			 String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_MCOURSES + "("
+						+ KEY_ID + " TEXT," + KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT,"
+						+ KEY_DESC + " TEXT," + KEY_TYPE + " TEXT," + KEY_SEC
+						+ " TEXT," + KEY_DUR + " TEXT," + KEY_DAYS + " TEXT,"
+						+ KEY_TIME + " TEXT," + KEY_LOCATION + " TEXT,"
+						+ KEY_INSTRUCTOR + " TEXT" + ")";
 			 db.execSQL(CREATE_COURSES_TABLE);
 			// sets database for multiple line insert
 			db.beginTransaction();
@@ -263,8 +268,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	public ArrayList<String> getSubjects() {
 		// String subjects;
 		ArrayList<String> subj = new ArrayList<String>();
-		SQLiteDatabase db = this.getReadableDatabase();
 		try {
+			SQLiteDatabase db = this.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT DISTINCT " + KEY_SUBJ + " FROM "
 					+ TABLE_MCOURSES + " ORDER BY " + KEY_SUBJ + " ASC", null);
 
@@ -287,8 +292,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	// getCodes - returns a list of codes for a subject from the database
 	public ArrayList<String> getCodes(String subj) {
 		ArrayList<String> codes = new ArrayList<String>();
-		SQLiteDatabase db = this.getReadableDatabase();
 		try {
+			SQLiteDatabase db = this.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT DISTINCT " + KEY_CODE + " FROM "
 					+ TABLE_MCOURSES + " WHERE " + KEY_SUBJ + "='" + subj
 					+ "' ORDER BY " + KEY_SUBJ + " ASC", null);
@@ -310,13 +315,16 @@ public class CourseListHandler extends SQLiteOpenHelper {
 
 	public int size() {
 		int i = 0;
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_MCOURSES, null);
-		if (c != null) {
-			c.moveToFirst();
-			i = c.getInt(0);
+		try{
+			SQLiteDatabase db = this.getReadableDatabase();
+			Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_MCOURSES, null);
+			if (c != null) {
+				c.moveToFirst();
+				i = c.getInt(0);
+			}
+			db.close();
 		}
-		db.close();
+		catch(Exception e){i=0;}		
 		return i;
 	}
 }

@@ -23,6 +23,7 @@ public class CourseHandler{
 		//this.context = context;
 		CH = new CurrentCoursesHandler(context);
 		courseList = new CourseListHandler(context);
+		
 	}
 	
 	//getAllCourses - grabs course data from the registrar's timetable and
@@ -164,6 +165,9 @@ public class CourseHandler{
 		return mark;
 	}
 	
+	public int getSize(){
+		return courseList.size();
+	}
 	//Query - returns a cursor with results for a custom query
 	public Cursor Query(String query){
 		return CH.Query(query);
