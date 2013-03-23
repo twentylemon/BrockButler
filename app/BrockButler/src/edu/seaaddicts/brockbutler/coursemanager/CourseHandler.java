@@ -32,6 +32,10 @@ public class CourseHandler{
 		courseList.addCourse();
 	}
 	
+	public void updateAll(){
+		courseList.updateCourse();
+	}
+	
 	//getCourse - gets all information for a given course subject and code
 	public Course getCourse(final String subj, final String code){	
 		return CH.getCourse(subj, code);
