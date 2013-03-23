@@ -59,6 +59,7 @@ public class MapsTouchImageView extends ImageView {
 	private ScaleGestureDetector mScaleDetector;
 
 	private Context mContext;
+	int actionBarHeight;
 
 	public MapsTouchImageView(Context context) {
 		super(context);
@@ -252,7 +253,7 @@ public class MapsTouchImageView extends ImageView {
 			int bmWidth = drawable.getIntrinsicWidth();
 			int bmHeight = drawable.getIntrinsicHeight();
 			
-			mMapRatio = (double) bmWidth/ (double) MAP_WIDTH;
+			mMapRatio = (double) (bmHeight)/ (double) MAP_HEIGHT;
 
 			Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight + "ratio" + mMapRatio);
 

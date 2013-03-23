@@ -3,8 +3,10 @@ package edu.seaaddicts.brockbutler.scheduler;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.contacts.AddContactActivity;
+import edu.seaaddicts.brockbutler.contacts.ContactsActivity;
 
 public class AddTaskActivity extends Activity {
 	private static final int DATE_DIALOG_ID = 0;
@@ -61,18 +64,17 @@ public class AddTaskActivity extends Activity {
 				showDialog(DATE_DIALOG_ID);
 			}
 		});
-		
+
 		mAddContactButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(AddTaskActivity.this, AddContactActivity.class);
-		        startActivity(i);
+				showContactSelectDialog(AddTaskActivity.this, null, "");
 			}
 		});
-		
+
 		mSaveButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// Run Grisdale's function to add a task to the database.
@@ -80,9 +82,8 @@ public class AddTaskActivity extends Activity {
 			}
 		});
 
-		
 		mCancelButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// Do nothing.
@@ -91,25 +92,55 @@ public class AddTaskActivity extends Activity {
 		});
 	}
 
+	private void showContactSelectDialog(Activity activity, String title,
+			CharSequence message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		if (title != null)
+			builder.setTitle(title);
+		// builder.setMessage(message);
+		builder.setPositiveButton("Existing",
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent i = new Intent(AddTaskActivity.this,
+								ContactsActivity.class);
+						startActivity(i);
+					}
+				});
+		builder.setNegativeButton("New", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent i = new Intent(AddTaskActivity.this,
+						AddContactActivity.class);
+				startActivity(i);
+			}
+		});
+		builder.show();
+	}
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreateDialog(int)
 	 * 
-	 * Overridden method to handle multiple dialogs that may be created from this
-	 * activity.
+	 * Overridden method to handle multiple dialogs that may be created from
+	 * this activity.
 	 */
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case DATE_DIALOG_ID:
-			return new DatePickerDialog(this, mDatePickerListener, mYear, mMonth,
-					mDay);
+			return new DatePickerDialog(this, mDatePickerListener, mYear,
+					mMonth, mDay);
 		}
 		return null;
 	}
 
 	/*
-	 * Retrieves date set from DatePickerDialog and sets TextView in this activity.
+	 * Retrieves date set from DatePickerDialog and sets TextView in this
+	 * activity.
 	 */
 	private DatePickerDialog.OnDateSetListener mDatePickerListener = new DatePickerDialog.OnDateSetListener() {
 

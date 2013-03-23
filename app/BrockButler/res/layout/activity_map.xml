@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/maps_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapActivity" >
@@ -13,10 +14,11 @@
         android:contentDescription="@string/test_image" />
     <!-- 
     <Button
-        android:id="@+id/btnstart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="START" />
+        android:id="@+id/btn_maps_menu"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:gravity="right|bottom"
+        android:text="||" />
     <Button
         android:id="@+id/btnstop"
         android:layout_width="wrap_content"

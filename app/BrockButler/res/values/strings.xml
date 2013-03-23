@@ -17,10 +17,14 @@
     <string name="activity_add_task_contact">Add Contact</string>
     <string name="activity_add_task_date">No due date set</string>
     <string name="activity_add_task_contacts">No contacts set</string>
-    
+
     <!-- CourseManagerActivity -->
     <string name="activity_coursemanager">Course Manager</string>
-    
+    <string name="add_course_remove">Remove Course</string>
+    <string name="loading_courses_registrar">Updating Course Database</string>
+    <string name="no_courses">No registered courses.\n\nMenu>Add Course</string>
+    <string name="loading_courses_registrar_msg">The course database is updating from the Brock Registrar.\n\nThis may take a few moments.</string>
+
     <!-- AddContactActivity -->
     <string name="activity_add_contact">Add Contact</string>
     <string name="activity_add_contact_fname">First Name</string>
@@ -32,7 +36,7 @@
     <string name="activity_add_contact_courses">Courses</string>
     <string name="activity_add_contact_add_courses">Add Course</string>
     <string name="activity_add_contact_remove">Remove</string>
-    
+
     <!-- AddCourseActivity -->
     <string name="title_add_course">Add Course</string>
     <string name="add_course_subject">Subject</string>
@@ -42,7 +46,7 @@
     <string name="add_course_add_labs">Add Labs</string>
     <string name="add_course_add_sems">Add Seminars</string>
     <string name="add_course_add_tuts">Add Tutorials</string>
-    
+
     <!-- Professors -->
     <string name="prof_name">Professor Name</string>
     <string name="prof_office">Office</string>
@@ -125,17 +129,16 @@
     <string name="contentdesc">Content Description</string>
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>
-    
+
     <string-array name="task_priority_array">
         <item>High</item>
         <item>Normal</item>
         <item>Low</item>
     </string-array>
-    
     <string-array name="empty">
         <item>None</item>
     </string-array>
-    
+
     <string name="none">None</string>
 
 </resources>

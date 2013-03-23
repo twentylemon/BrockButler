@@ -13,8 +13,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@android:style/Theme.Black" >
+        android:label="@string/app_name" >
         <activity
             android:name="edu.seaaddicts.brockbutler.LoginActivity"
             android:label="@string/app_name"
@@ -22,6 +21,7 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.MainActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -32,48 +32,56 @@
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.maps.MapsActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_map"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen" >
+            android:theme="@android:style/Theme.Holo.Light" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.help.HelpActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_help"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.scheduler.SchedulerActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_scheduler"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.contacts.ContactsActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_contacts"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/activity_coursemanager"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.tour.TourActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_tour"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.scheduler.AddTaskActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_add_task"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.contacts.AddContactActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/activity_add_contact"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="edu.seaaddicts.brockbutler.coursemanager.AddCourseActivity"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/title_add_course"
             android:screenOrientation="portrait" >
         </activity>

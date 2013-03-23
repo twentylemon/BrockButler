@@ -93,7 +93,6 @@ public class SchedulerActivity extends Activity {
 
 	private ArrayList<Course> getCourses() {
 		return null;
-
 	}
 
 	private void expandAll(View[] v) {

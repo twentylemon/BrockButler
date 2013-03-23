@@ -6,15 +6,13 @@
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
 **/
 
-package edu.seaaddicts.brockbutler;
+package edu.seaaddicts.brockbutler.coursemanager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.CountDownLatch;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Handler;
+import edu.seaaddicts.brockbutler.scheduler.Task;
 
 public class CourseHandler{
 	//Context context;

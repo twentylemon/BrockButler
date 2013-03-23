@@ -1,16 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/menu_settings"/>
-
-    <item
         android:id="@+id/add_course"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:onClick="addCourse"
         android:title="@string/add_course_add"/>
+
+    <item
+        android:id="@+id/remove_course"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/add_course_remove"/>
 
 </menu>

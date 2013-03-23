@@ -10,19 +10,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 
 public class MapsActivity extends Activity {
-	private static final String tag = "MapsActivity";
+	private static final String TAG = "MapsActivity";
 
 	private TextView mTemp;
-	private Button stop;
 	private Button start;
 	private Button resume;
 
@@ -33,8 +34,15 @@ public class MapsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		setContentView(R.layout.activity_map);
+
+		RelativeLayout layout = (RelativeLayout) findViewById(R.id.maps_layout);
+		layout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		getActionBar().setBackgroundDrawable(
+				getResources().getDrawable(R.drawable.actionbar_bg));
 		init();
+
 		mTemp = (TextView) findViewById(R.id.txtv_count);
 		mHandler = new Handler() {
 			@Override
@@ -44,11 +52,11 @@ public class MapsActivity extends Activity {
 					Log.d("MAIN HANDLER", "YAYAAA!!!");
 					break;
 				case MapsHandler.THREAD_UPDATE_POSITION:
-					Log.d(tag,
+					Log.d(TAG,
 							"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					break;
 				default:
-					Log.d(tag,
+					Log.d(TAG,
 							"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					mTemp.setText("#" + msg.what);
 					break;
@@ -57,8 +65,6 @@ public class MapsActivity extends Activity {
 		};
 		mMapsHandler = new MapsHandler(mHandler);
 	}
-	
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,35 +75,35 @@ public class MapsActivity extends Activity {
 
 	private void init() {
 		mMapImage = (MapsTouchImageView) findViewById(R.id.imgv_map);
-//		mMapImage.setOnClickListener(new OnClickListener() {
-//
-//			public void onClick(View v) {
-//				mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
-//			}
-//		});
-//		start = (Button) findViewById(R.id.btnstart);
-//		start.setOnClickListener(new OnClickListener() {
-//
-//			public void onClick(View v) {
-//				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_START);
-//			}
-//		});
-//		stop = (Button) findViewById(R.id.btnstop);
-//		stop.setOnClickListener(new OnClickListener() {
-//
-//			public void onClick(View v) {
-//				mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
-//			}
-//		});
-//
-//		resume = (Button) findViewById(R.id.btnresume);
-//		resume.setOnClickListener(new OnClickListener() {
-//
-//			public void onClick(View v) {
-//				mMapsHandler
-//						.sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
-//			}
-//		});
+		// mMapImage.setOnClickListener(new OnClickListener() {
+		//
+		// public void onClick(View v) {
+		// mMapsHandler.sendEmptyMessage(MapsHandler.MAPS_REQUEST_UPDATE);
+		// }
+		// });
+		// start = (Button) findViewById(R.id.btnstart);
+		// start.setOnClickListener(new OnClickListener() {
+		//
+		// public void onClick(View v) {
+		// mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_START);
+		// }
+		// });
+		// stop = (Button) findViewById(R.id.btnstop);
+		// stop.setOnClickListener(new OnClickListener() {
+		//
+		// public void onClick(View v) {
+		// mMapsHandler.sendEmptyMessage(MapsHandler.THREAD_REQUEST_PAUSE);
+		// }
+		// });
+		//
+		// resume = (Button) findViewById(R.id.btnresume);
+		// resume.setOnClickListener(new OnClickListener() {
+		//
+		// public void onClick(View v) {
+		// mMapsHandler
+		// .sendEmptyMessage(MapsHandler.THREAD_REQUEST_RESUME);
+		// }
+		// });
 	}
 
 	@Override
@@ -106,39 +112,115 @@ public class MapsActivity extends Activity {
 		mMapsHandler = null;
 		super.onBackPressed();
 	}
-	
+
+	/**
+	 * 
+	 * @param item
+	 */
 	public void exitMaps(MenuItem item) {
 		onBackPressed();
 	}
-	
+
+	/**
+	 * Prompts user to search for existence of a location.
+	 * 
+	 * @param item
+	 */
 	public void displaySearchDialog(MenuItem item) {
 		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
 
 		editalert.setTitle("MChown Location Search");
 		editalert.setMessage("Enter block or room name (i.e. B203)");
 
+		final EditText input = new EditText(this);
+		input.setSingleLine(true);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT);
+		input.setLayoutParams(lp);
+		editalert.setView(input);
+
+		final ListView locList = new ListView(this);
+
+		editalert.setPositiveButton("Search",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						Toast.makeText(getApplicationContext(),
+								"Thomas' search method goes here.",
+								Toast.LENGTH_LONG).show();
+						// Call Thomas' location search method with EditText
+						// string.
+					}
+				});
+		editalert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// do nothing
+					}
+				});
+
+		editalert.show();
+	}
+
+	/**
+	 * Displays AlertDialog for user to enter destination. First the location is
+	 * determined to exist, then if true path is drawn on map.
+	 * 
+	 * @param item
+	 */
+	public void displayGetDirectionsDialog(MenuItem item) {
+		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
+
+		editalert.setTitle("MChown Direction Getter");
+		editalert.setMessage("Enter block or room name (i.e. B203)");
 
 		final EditText input = new EditText(this);
 		input.setSingleLine(true);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-		        LinearLayout.LayoutParams.MATCH_PARENT,
-		        LinearLayout.LayoutParams.MATCH_PARENT);
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT);
 		input.setLayoutParams(lp);
 		editalert.setView(input);
-		
+
 		final ListView locList = new ListView(this);
 
-		editalert.setPositiveButton("Search", new DialogInterface.OnClickListener() {
-		    public void onClick(DialogInterface dialog, int whichButton) {
-		    	// Call Thomas' location search method with EditText string.
-		    }
-		});
-		editalert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-		    public void onClick(DialogInterface dialog, int whichButton) {
-		    	// do nothing
-		    }
-		});
+		editalert.setPositiveButton("Search",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// Call Thomas' location search method with EditText
+						// string.
+						// if (locationFound) {
+						// getDirections()
+						// draw_directions_on_map
+						// else
+						// displayNoSuchLocationDialog()
+						Toast.makeText(getApplicationContext(),
+								"Thomas' search method goes here.",
+								Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(),
+								"Thomas' direction getter method goes here.",
+								Toast.LENGTH_LONG).show();
+					}
+				});
+		editalert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// do nothing
+					}
+				});
 
 		editalert.show();
+	}
+
+	/**
+	 * Menu item onClick that calls mapping function to manual update user
+	 * location in case first reported location is not accurate.
+	 * 
+	 * @param item
+	 */
+	public void updatePosition(MenuItem item) {
+		Toast.makeText(getApplicationContext(), "Thomas' method goes here.",
+				Toast.LENGTH_LONG).show();
+		// call Thomas' method to update current position.
 	}
 }

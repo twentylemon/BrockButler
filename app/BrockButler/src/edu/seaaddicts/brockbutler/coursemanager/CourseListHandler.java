@@ -7,11 +7,12 @@
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
 **/
 
-package edu.seaaddicts.brockbutler;
+package edu.seaaddicts.brockbutler.coursemanager;
+
+import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
