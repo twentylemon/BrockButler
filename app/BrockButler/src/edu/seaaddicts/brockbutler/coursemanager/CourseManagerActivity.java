@@ -22,33 +22,29 @@ import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
 
 public class CourseManagerActivity extends Activity {
-	
-	private static final int VISIBLE	= 0;
-	private static final int GONE		= 8;
+
+	private static final int VISIBLE = 0;
+	private static final int GONE = 8;
+
+	private ArrayList<Course> mRegisteredCoursesList;
 
 	private CourseHandler mCourseHandle = null;
-	
+
 	private LinearLayout mLayout = null;
-	private ListView mCourseListView = null;
+	private ListView mRegisterCourseListView = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_coursemanager);
 		mCourseHandle = new CourseHandler(this.getApplicationContext());
-		
-		updateCourseDatabaseFromRegistrar();
+
+		//updateCourseDatabaseFromRegistrar();
+
+		mCourseHandle.getAllCourses();
+		// mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
 		//
-		// ArrayList<Course> regcourses = mCourseHandle.getRegisteredCourses();
-		// ListView list = (ListView) findViewById(R.id.courseman_list);
-		//
-		// // Creating the list adapter and populating the list
-		// ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
-		// R.layout.course_list_item);
-		// for (int i = 0; i < regcourses.size(); i++)
-		// listAdapter.add(regcourses.get(i).mSubject + " " +
-		// regcourses.get(i).mCode);
-		// list.setAdapter(listAdapter);
+
 		//
 		// // Creating an item click listener, to open/close our toolbar for
 		// each item
@@ -67,14 +63,31 @@ public class CourseManagerActivity extends Activity {
 		// }
 		// });
 	}
-	
-	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
+	}
+
+	/**
+	 * 
+	 */
 	private void populateCoursesLayout() {
-		if (mCourseListView == null) {
+		if (mRegisteredCoursesList.size() < 1) {
+			// There are no registered courses so set message.
 			TextView tvNoCourses = (TextView) findViewById(R.id.tv_no_courses);
 			tvNoCourses.setVisibility(VISIBLE);
-		} else {	// There are registered courses
-			
+		} else {
+			// We have registered courses so populate ListView.
+			mRegisterCourseListView = (ListView) findViewById(R.id.courseman_list);
+			// Creating the list adapter and populating the list
+			ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
+					R.layout.course_list_item);
+			for (int i = 0; i < mRegisteredCoursesList.size(); i++)
+				listAdapter.add(mRegisteredCoursesList.get(i).mSubject + " "
+						+ mRegisteredCoursesList.get(i).mCode);
+			mRegisterCourseListView.setAdapter(listAdapter);
 		}
 	}
 
@@ -132,16 +145,17 @@ public class CourseManagerActivity extends Activity {
 	private void updateCourseDatabaseFromRegistrar() {
 		final Handler handler = new Handler();
 		final ProgressDialog progressDialog;
-		
+
 		TextView title = new TextView(CourseManagerActivity.this);
 		title.setText(R.string.loading_courses_registrar);
 		title.setGravity(Gravity.FILL);
-		
+
 		TextView msg = new TextView(CourseManagerActivity.this);
 		msg.setText(R.string.loading_courses_registrar_msg);
 		msg.setGravity(Gravity.FILL);
-		
-		progressDialog = ProgressDialog.show(this, (CharSequence)title, (CharSequence)msg);
+
+		progressDialog = ProgressDialog.show(this, "Course Timetable Update",
+				"Updating course timetable from registrar. Please be patient.");
 
 		Thread thread = new Thread() {
 			public void run() {

@@ -34,6 +34,7 @@ public class AddCourseActivity extends Activity {
 		setContentView(R.layout.activity_add_course);
 		mCourseHandle = new CourseHandler(this.getApplicationContext());
 		init();
+		
 	}
 
 	/*

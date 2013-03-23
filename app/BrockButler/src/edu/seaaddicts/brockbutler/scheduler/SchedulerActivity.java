@@ -23,30 +23,34 @@ import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 import edu.seaaddicts.brockbutler.coursemanager.Course;
 
 public class SchedulerActivity extends Activity {
+	
+	ListView mCourseListView = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scheduler);
 
-		ListView list = (ListView) findViewById(R.id.sched_list);
+		mCourseListView = (ListView) findViewById(R.id.sched_list);
 
 		// Creating the list adapter and populating the list
 		ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
 				R.layout.sched_list_item);
 		for (int i = 0; i < 4; i++)
 			listAdapter.add("COSC " + (i + 1) + "P0" + i);
-		list.setAdapter(listAdapter);
+		mCourseListView.setAdapter(listAdapter);
 
 		// Creating an item click listener, to open/close our toolbar for each
 		// item
-		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		mCourseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
 				showHideToolbar(view);
 			}
 		});
 	}
+	
+	
 
 	private void showHideToolbar(View view) {
 		View toolbar = view.findViewById(R.id.toolbar);
