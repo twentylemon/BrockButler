@@ -75,6 +75,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		course = list.execute().get();
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
+		onCreate(db);
 		//sets database for multiple line insert
 		db.beginTransaction();
 		for (int i=0; i<course.size(); i++){
@@ -136,7 +137,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		ArrayList<String> subj = new ArrayList<String>();
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
-		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_COURSES + "ORDER BY "+KEY_SUBJ, null);
+		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_COURSES + "ORDER BY "+KEY_SUBJ+" ASC", null);
 
 		if (c != null){
 			if (c.moveToFirst()){
@@ -157,7 +158,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
 		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_CODE+" FROM " + TABLE_COURSES+
-				" WHERE "+KEY_SUBJ+"='"+subj+"' ORDER BY "+KEY_SUBJ, null);
+				" WHERE "+KEY_SUBJ+"='"+subj+"' ORDER BY "+KEY_SUBJ+" ASC", null);
 		if (c != null){
 			if (c.moveToFirst()){
 				do{					
@@ -180,4 +181,4 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		}
 		return i;
 	}
-}}
+}
