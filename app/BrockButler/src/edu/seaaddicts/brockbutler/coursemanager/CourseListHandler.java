@@ -254,7 +254,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	public int size(){
 		int i=0;
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+TABLE_MCOURSES,null);
+		Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+TABLE_M COURSES,null);
 		if (c != null){
 			c.moveToFirst();
 			i = c.getInt(0);
