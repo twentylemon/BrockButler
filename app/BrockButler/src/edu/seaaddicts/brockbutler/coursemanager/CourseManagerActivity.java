@@ -93,15 +93,16 @@ public class CourseManagerActivity extends Activity {
 			mRegisterCourseListView.setAdapter(listAdapter);
 			tvNoCourses.setVisibility(GONE);
 			mRegisterCourseListView.setVisibility(VISIBLE);
-			mRegisterCourseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, final View view,
-						int position, long id) {
-					showHideToolbar(view);
-				}
-			});
+			mRegisterCourseListView
+					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						public void onItemClick(AdapterView<?> parent,
+								final View view, int position, long id) {
+							showHideToolbar(view);
+						}
+					});
 		}
 	}
-	
+
 	private void showHideToolbar(View view) {
 		View toolbar = view.findViewById(R.id.toolbar);
 
@@ -111,14 +112,6 @@ public class CourseManagerActivity extends Activity {
 
 		// Start the animation on the toolbar
 		toolbar.startAnimation(expandAni);
-
-//		((Button) view.findViewById(R.id.prof_email_button))
-//				.setOnClickListener(new OnClickListener() {
-//					@Override
-//					public void onClick(View v) {
-//						sendEmail();
-//					}
-//				});
 	}
 
 	@Override
@@ -189,7 +182,9 @@ public class CourseManagerActivity extends Activity {
 
 		Thread thread = new Thread() {
 			public void run() {
-				//mCourseHandle.getAllCourses();
+				if (mCourseHandle.getSize() < 1) {
+					mCourseHandle.getAllCourses();
+				}
 				// this will handle the post task.
 				// it will run when the time consuming task get finished
 				handler.post(new Runnable() {
