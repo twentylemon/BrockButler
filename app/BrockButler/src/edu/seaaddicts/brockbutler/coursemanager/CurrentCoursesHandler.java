@@ -69,50 +69,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
      */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String CREATE_COURSES = "CREATE TABLE " + TABLE_COURSES + "("
-                + KEY_SUBJ + " TEXT,"
-                + KEY_CODE + " TEXT," + KEY_DESC + " TEXT,"
-                + KEY_INSTRUCTOR + " TEXT," + KEY_INSTREMAIL + " TEXT," + "PRIMARY KEY("+KEY_SUBJ+","+KEY_CODE+")"+ ")";
 		
-		String CREATE_TASKS = "CREATE TABLE " + TABLE_TASKS + "("
-                + KEY_SUBJ + " TEXT,"
-                + KEY_CODE + " TEXT," + KEY_ASSIGN + " INTEGER,"
-                + KEY_NAME + " TEXT," + KEY_MARK + " INTEGER," + KEY_BASE + " INTEGER," 
-                + KEY_WEIGHT + " REAL," + KEY_DUE + " TEXT," + KEY_CREATE_DATE + " TEXT,"
-                + KEY_PRIORITY + " INTEGER,"
-                + "PRIMARY KEY("+KEY_SUBJ+","+KEY_CODE+","+KEY_ASSIGN+"),"
-                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+") ON DELETE CASCADE,"
-                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+") ON DELETE CASCADE"
-                + ")";
-		
-		String CREATE_OFFERINGS = "CREATE TABLE " + TABLE_OFFERINGS + "("
-                + KEY_ID + " INTEGER," + KEY_SUBJ + " TEXT ,"
-                + KEY_CODE + " TEXT ," + KEY_TYPE + " TEXT,"
-                + KEY_SEC + " INTEGER,"+ "PRIMARY KEY("+KEY_ID+"),"
-                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+") ON DELETE CASCADE,"
-                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+") ON DELETE CASCADE"
-                + ")";
-		
-		String CREATE_OFFERING_TIMES = "CREATE TABLE " + TABLE_OFFERING_TIMES + "("
-                + KEY_ID + " INTEGER," + KEY_DAY + " TEXT,"
-                + KEY_TIMES + " TEXT ," + KEY_TIMEE + " TEXT,"
-                + KEY_LOCATION + " TEXT,"+ "PRIMARY KEY("+KEY_ID+","+KEY_DAY+"),"
-                + "FOREIGN KEY("+KEY_ID+") REFERENCES "+ TABLE_OFFERINGS +"("+KEY_ID+")  ON DELETE CASCADE"
-                + ")";
-		
-		String CREATE_CONTACTS = "CREATE TABLE " + TABLE_CONTACTS + "("
-                + KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT,"
-                + KEY_CID + " INTEGER," + KEY_FNAME + " TEXT,"
-                + KEY_LNAME + " TEXT," + KEY_EMAIL + " TEXT,"+ "PRIMARY KEY("+KEY_CID+"),"
-                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+") ON DELETE CASCADE,"
-                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+") ON DELETE CASCADE"
-                + ")";	
-		
-        db.execSQL(CREATE_COURSES);
-        db.execSQL(CREATE_TASKS);
-        db.execSQL(CREATE_OFFERINGS);
-        db.execSQL(CREATE_OFFERING_TIMES);
-        db.execSQL(CREATE_CONTACTS);
         
 	}
 
