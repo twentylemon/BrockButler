@@ -140,6 +140,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_OFFERINGS);
 		db.execSQL(CREATE_OFFERING_TIMES);
 		db.execSQL(CREATE_CONTACTS);
+		addCourse();
 	}
 
 	// upgrading the database will drop the table and recreate
@@ -158,8 +159,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		try {
 			course = list.execute().get();
 			SQLiteDatabase db = this.getWritableDatabase();
-			 db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
-			 onCreate(db);
+			 //db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
+			// onCreate(db);
 			// sets database for multiple line insert
 			db.beginTransaction();
 			for (int i = 0; i < course.size(); i++) {
@@ -185,6 +186,41 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		}
 		;
 	}
+	
+	public void UpdateCourse() {
+		Brocku list = new Brocku();
+		ArrayList<MasterCourse> course = new ArrayList<MasterCourse>();
+		try {
+			course = list.execute().get();
+			SQLiteDatabase db = this.getWritableDatabase();
+			 db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
+			 db.execSQL(CREATE_COURSES_TABLE);
+			// sets database for multiple line insert
+			db.beginTransaction();
+			for (int i = 0; i < course.size(); i++) {
+				ContentValues values = new ContentValues();
+				values.put(KEY_ID, course.get(i).id); // Course id
+				values.put(KEY_SUBJ, course.get(i).subj); // subject code
+				values.put(KEY_CODE, course.get(i).code);
+				values.put(KEY_DESC, course.get(i).desc);
+				values.put(KEY_TYPE, course.get(i).type);
+				values.put(KEY_SEC, course.get(i).sec);
+				values.put(KEY_DUR, course.get(i).dur);
+				values.put(KEY_DAYS, course.get(i).days);
+				values.put(KEY_TIME, course.get(i).time);
+				values.put(KEY_LOCATION, course.get(i).location);
+				values.put(KEY_INSTRUCTOR, course.get(i).instructor);
+				// Inserting Row
+				db.insert(TABLE_MCOURSES, null, values);
+			}
+			db.setTransactionSuccessful();
+			db.endTransaction();
+			db.close(); // Closing database connection
+		} catch (Exception e) {
+		}
+		;
+	}
+
 
 	// getCourses - returns a list of offerings for a particular subject and
 	// code
@@ -239,12 +275,12 @@ public class CourseListHandler extends SQLiteOpenHelper {
 					} while (c.moveToNext());
 				}
 			}
-
+			db.close();
 			c.close();
 		} catch (Exception e) {
 			subj.add(e.toString());
 		}
-		db.close();
+		
 		return subj;
 	}
 
@@ -263,11 +299,12 @@ public class CourseListHandler extends SQLiteOpenHelper {
 					} while (c.moveToNext());
 				}
 			}
+			db.close();
 			c.close();
 		} catch (Exception e) {
 			codes.add(e.toString());
 		}
-		db.close();
+		
 		return codes;
 	}
 
