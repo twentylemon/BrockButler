@@ -49,8 +49,6 @@ public class SchedulerActivity extends Activity {
 			}
 		});
 	}
-	
-	
 
 	private void showHideToolbar(View view) {
 		View toolbar = view.findViewById(R.id.toolbar);

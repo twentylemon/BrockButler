@@ -158,48 +158,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		try {
 			course = list.execute().get();
 			SQLiteDatabase db = this.getWritableDatabase();
-			 //db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
-			// onCreate(db);
-			// sets database for multiple line insert
-			db.beginTransaction();
-			for (int i = 0; i < course.size(); i++) {
-				ContentValues values = new ContentValues();
-				values.put(KEY_ID, course.get(i).id); // Course id
-				values.put(KEY_SUBJ, course.get(i).subj); // subject code
-				values.put(KEY_CODE, course.get(i).code);
-				values.put(KEY_DESC, course.get(i).desc);
-				values.put(KEY_TYPE, course.get(i).type);
-				values.put(KEY_SEC, course.get(i).sec);
-				values.put(KEY_DUR, course.get(i).dur);
-				values.put(KEY_DAYS, course.get(i).days);
-				values.put(KEY_TIME, course.get(i).time);
-				values.put(KEY_LOCATION, course.get(i).location);
-				values.put(KEY_INSTRUCTOR, course.get(i).instructor);
-				// Inserting Row
-				db.insert(TABLE_MCOURSES, null, values);
-			}
-			db.setTransactionSuccessful();
-			db.endTransaction();
-			db.close(); // Closing database connection
-		} catch (Exception e) {
-		}
-		;
-	}
-	
-	public void UpdateCourse() {
-		Brocku list = new Brocku();
-		ArrayList<MasterCourse> course = new ArrayList<MasterCourse>();
-		try {
-			course = list.execute().get();
-			SQLiteDatabase db = this.getWritableDatabase();
-			 db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
-			 String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_MCOURSES + "("
-						+ KEY_ID + " TEXT," + KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT,"
-						+ KEY_DESC + " TEXT," + KEY_TYPE + " TEXT," + KEY_SEC
-						+ " TEXT," + KEY_DUR + " TEXT," + KEY_DAYS + " TEXT,"
-						+ KEY_TIME + " TEXT," + KEY_LOCATION + " TEXT,"
-						+ KEY_INSTRUCTOR + " TEXT" + ")";
-			 db.execSQL(CREATE_COURSES_TABLE);
+			//db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
+			//onCreate(db);
 			// sets database for multiple line insert
 			db.beginTransaction();
 			for (int i = 0; i < course.size(); i++) {
@@ -226,6 +186,45 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		;
 	}
 
+	public void updateCourse() {
+		Brocku list = new Brocku();
+		ArrayList<MasterCourse> course = new ArrayList<MasterCourse>();
+		try {
+			course = list.execute().get();
+			SQLiteDatabase db = this.getWritableDatabase();
+			db.execSQL("DROP TABLE IF EXISTS " + TABLE_MCOURSES);
+			String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_MCOURSES
+					+ "(" + KEY_ID + " TEXT," + KEY_SUBJ + " TEXT," + KEY_CODE
+					+ " TEXT," + KEY_DESC + " TEXT," + KEY_TYPE + " TEXT,"
+					+ KEY_SEC + " TEXT," + KEY_DUR + " TEXT," + KEY_DAYS
+					+ " TEXT," + KEY_TIME + " TEXT," + KEY_LOCATION + " TEXT,"
+					+ KEY_INSTRUCTOR + " TEXT" + ")";
+			db.execSQL(CREATE_COURSES_TABLE);
+			// sets database for multiple line insert
+			db.beginTransaction();
+			for (int i = 0; i < course.size(); i++) {
+				ContentValues values = new ContentValues();
+				values.put(KEY_ID, course.get(i).id); // Course id
+				values.put(KEY_SUBJ, course.get(i).subj); // subject code
+				values.put(KEY_CODE, course.get(i).code);
+				values.put(KEY_DESC, course.get(i).desc);
+				values.put(KEY_TYPE, course.get(i).type);
+				values.put(KEY_SEC, course.get(i).sec);
+				values.put(KEY_DUR, course.get(i).dur);
+				values.put(KEY_DAYS, course.get(i).days);
+				values.put(KEY_TIME, course.get(i).time);
+				values.put(KEY_LOCATION, course.get(i).location);
+				values.put(KEY_INSTRUCTOR, course.get(i).instructor);
+				// Inserting Row
+				db.insert(TABLE_MCOURSES, null, values);
+			}
+			db.setTransactionSuccessful();
+			db.endTransaction();
+			db.close(); // Closing database connection
+		} catch (Exception e) {
+		}
+		;
+	}
 
 	// getCourses - returns a list of offerings for a particular subject and
 	// code
@@ -285,7 +284,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			subj.add(e.toString());
 		}
-		
+
 		return subj;
 	}
 
@@ -309,22 +308,24 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			codes.add(e.toString());
 		}
-		
+
 		return codes;
 	}
 
 	public int size() {
 		int i = 0;
-		try{
+		try {
 			SQLiteDatabase db = this.getReadableDatabase();
-			Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_MCOURSES, null);
+			Cursor c = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_MCOURSES,
+					null);
 			if (c != null) {
 				c.moveToFirst();
 				i = c.getInt(0);
 			}
 			db.close();
+		} catch (Exception e) {
+			i = 0;
 		}
-		catch(Exception e){i=0;}		
 		return i;
 	}
 }

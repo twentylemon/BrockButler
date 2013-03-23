@@ -43,7 +43,9 @@ public class CourseManagerActivity extends Activity {
 		setContentView(R.layout.activity_coursemanager);
 		mCourseHandle = new CourseHandler(this.getApplicationContext());
 
-		updateCourseDatabaseFromRegistrar();
+		if (mCourseHandle.getSize() < 1) {
+			updateCourseDatabaseFromRegistrar();
+		}
 		//
 
 		//
@@ -165,6 +167,10 @@ public class CourseManagerActivity extends Activity {
 		startActivity(i);
 	}
 
+	public void updateMaster(MenuItem item) {
+		updateCourseDatabaseFromRegistrar();
+	}
+
 	private void updateCourseDatabaseFromRegistrar() {
 		final Handler handler = new Handler();
 		final ProgressDialog progressDialog;
@@ -182,9 +188,7 @@ public class CourseManagerActivity extends Activity {
 
 		Thread thread = new Thread() {
 			public void run() {
-				if (mCourseHandle.getSize() < 1) {
 					mCourseHandle.getAllCourses();
-				}
 				// this will handle the post task.
 				// it will run when the time consuming task get finished
 				handler.post(new Runnable() {

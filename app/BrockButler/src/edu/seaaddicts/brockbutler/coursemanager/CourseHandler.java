@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import edu.seaaddicts.brockbutler.scheduler.Task;
 
 public class CourseHandler{
@@ -23,7 +24,8 @@ public class CourseHandler{
 		//this.context = context;
 		CH = new CurrentCoursesHandler(context);
 		courseList = new CourseListHandler(context);
-		
+		SQLiteDatabase db = courseList.getWritableDatabase();
+		db.close();
 	}
 	
 	//getAllCourses - grabs course data from the registrar's timetable and

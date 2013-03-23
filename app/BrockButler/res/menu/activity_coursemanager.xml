@@ -13,4 +13,11 @@
         android:showAsAction="never"
         android:title="@string/add_course_remove"/>
 
+    <item
+        android:id="@+id/update_master_list"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:onClick="updateMaster"
+        android:title="@string/add_course_update_master_list"/>
+
 </menu>
