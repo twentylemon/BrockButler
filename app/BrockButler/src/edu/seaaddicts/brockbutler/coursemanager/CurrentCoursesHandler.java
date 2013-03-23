@@ -17,6 +17,9 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import edu.seaaddicts.brockbutler.contacts.Contact;
+import edu.seaaddicts.brockbutler.scheduler.Task;
+
 
 public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;	 
@@ -251,7 +254,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* addTasks - adds all tasks associated with a given course*/
 	public void addTasks(Course course){
 		Task task;
-		Contacts contact;
+		Contact contact;
 		ContentValues values = new ContentValues();
 		SQLiteDatabase db = this.getWritableDatabase();
 		long num=0;
@@ -283,8 +286,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* addContacts - add contacts to the contacts table in the database
 	 * for the given list of contacts
 	 */
-	public void addContacts(ArrayList<Contacts> contacts){
-		Contacts contact;
+	public void addContacts(ArrayList<Contact> contacts){
+		Contact contact;
 		ContentValues values = new ContentValues();
 		SQLiteDatabase db = this.getWritableDatabase();
 		long num=0;
@@ -422,16 +425,16 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	}
 	
 	/* getContacts - get all contacts for a specified course*/
-	private ArrayList<Contacts> getContacts(Course course){
-		ArrayList<Contacts> contacts = new ArrayList<Contacts>();
+	private ArrayList<Contact> getContacts(Course course){
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
 		SQLiteDatabase db = this.getReadableDatabase();
-		Contacts contact;
+		Contact contact;
 		Cursor c = db.rawQuery("SELECT * FROM " + TABLE_CONTACTS + " WHERE "
 				+KEY_SUBJ+"='"+course.mSubject+"' AND "+KEY_CODE+"='"+course.mCode+"'", null);
 		if (c != null){
 			if (c.moveToFirst()){
 				do{
-					contact = new Contacts();
+					contact = new Contact();
 					contact.mSubj = c.getString(c.getColumnIndex(KEY_SUBJ));
 					contact.mCode = c.getString(c.getColumnIndex(KEY_CODE));
 					contact.mId = c.getInt(c.getColumnIndex(KEY_CID));
