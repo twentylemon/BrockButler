@@ -31,17 +31,17 @@ public class CourseListHandler extends SQLiteOpenHelper {
     private static final String TABLE_MCOURSES = "MasterList";
  
     // Contacts Table Columns names
-    private static final String KEY_ID = "id";
-    private static final String KEY_SUBJ = "subj";
-    private static final String KEY_CODE = "code";
-    private static final String KEY_DESC = "desc";
-    private static final String KEY_TYPE = "type";
-    private static final String KEY_SEC = "sec";
-    private static final String KEY_DUR = "dur";
+//    private static final String KEY_ID = "id";
+//    private static final String KEY_SUBJ = "subj";
+//    private static final String KEY_CODE = "code";
+//    private static final String KEY_DESC = "desc";
+//    private static final String KEY_TYPE = "type";
+//    private static final String KEY_SEC = "sec";
+//    private static final String KEY_DUR = "dur";
     private static final String KEY_DAYS = "days";
     private static final String KEY_TIME = "time";
-    private static final String KEY_LOCATION = "location";
-    private static final String KEY_INSTRUCTOR = "instructor";
+//    private static final String KEY_LOCATION = "location";
+//    private static final String KEY_INSTRUCTOR = "instructor";
     
     
     private static final String TABLE_COURSES = "courses";
@@ -217,7 +217,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		ArrayList<String> subj = new ArrayList<String>();
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
-		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_MCOURSES + "ORDER BY "+KEY_SUBJ+" ASC", null);
+		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_MCOURSES + " ORDER BY "+KEY_SUBJ+" ASC", null);
 
 		if (c != null){
 			if (c.moveToFirst()){

@@ -39,10 +39,7 @@ public class CourseManagerActivity extends Activity {
 		setContentView(R.layout.activity_coursemanager);
 		mCourseHandle = new CourseHandler(this.getApplicationContext());
 
-		//updateCourseDatabaseFromRegistrar();
-
-		mCourseHandle.getAllCourses();
-		// mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
+		updateCourseDatabaseFromRegistrar();
 		//
 
 		//
@@ -67,16 +64,18 @@ public class CourseManagerActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
+		populateCoursesLayout();
 	}
 
 	/**
 	 * 
 	 */
 	private void populateCoursesLayout() {
+		TextView tvNoCourses = (TextView) findViewById(R.id.tv_no_courses);
+		mRegisterCourseListView = (ListView) findViewById(R.id.courseman_list);
+		mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
 		if (mRegisteredCoursesList.size() < 1) {
 			// There are no registered courses so set message.
-			TextView tvNoCourses = (TextView) findViewById(R.id.tv_no_courses);
 			tvNoCourses.setVisibility(VISIBLE);
 		} else {
 			// We have registered courses so populate ListView.
@@ -88,6 +87,8 @@ public class CourseManagerActivity extends Activity {
 				listAdapter.add(mRegisteredCoursesList.get(i).mSubject + " "
 						+ mRegisteredCoursesList.get(i).mCode);
 			mRegisterCourseListView.setAdapter(listAdapter);
+			tvNoCourses.setVisibility(GONE);
+			mRegisterCourseListView.setVisibility(VISIBLE);
 		}
 	}
 
@@ -171,7 +172,7 @@ public class CourseManagerActivity extends Activity {
 						// remember to dismiss the progress dialog here.
 						// updateUI();
 						progressDialog.dismiss();
-
+						populateCoursesLayout();
 					}
 				});
 			}
