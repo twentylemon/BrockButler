@@ -189,7 +189,7 @@ public class CourseManagerActivity extends Activity {
 
 		Thread thread = new Thread() {
 			public void run() {
-				mCourseHandle.getAllCourses();
+				//mCourseHandle.getAllCourses();
 				// this will handle the post task.
 				// it will run when the time consuming task get finished
 				handler.post(new Runnable() {

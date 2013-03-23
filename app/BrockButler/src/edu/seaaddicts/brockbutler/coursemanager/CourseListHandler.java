@@ -227,8 +227,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	public ArrayList<String> getSubjects() {
 		// String subjects;
 		ArrayList<String> subj = new ArrayList<String>();
+		SQLiteDatabase db = this.getReadableDatabase();
 		try {
-			SQLiteDatabase db = this.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT DISTINCT " + KEY_SUBJ + " FROM "
 					+ TABLE_MCOURSES + " ORDER BY " + KEY_SUBJ + " ASC", null);
 
@@ -251,8 +251,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	// getCodes - returns a list of codes for a subject from the database
 	public ArrayList<String> getCodes(String subj) {
 		ArrayList<String> codes = new ArrayList<String>();
+		SQLiteDatabase db = this.getReadableDatabase();
 		try {
-			SQLiteDatabase db = this.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT DISTINCT " + KEY_CODE + " FROM "
 					+ TABLE_MCOURSES + " WHERE " + KEY_SUBJ + "='" + subj
 					+ "' ORDER BY " + KEY_SUBJ + " ASC", null);
