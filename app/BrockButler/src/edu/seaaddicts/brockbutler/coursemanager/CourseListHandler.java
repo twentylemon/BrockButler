@@ -219,6 +219,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 			}
 		}
 		c.close();
+		db.close();
 		return courseList;
 	}
 
@@ -243,6 +244,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			subj.add(e.toString());
 		}
+		db.close();
 		return subj;
 	}
 
@@ -265,6 +267,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			codes.add(e.toString());
 		}
+		db.close();
 		return codes;
 	}
 
@@ -276,6 +279,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 			c.moveToFirst();
 			i = c.getInt(0);
 		}
+		db.close();
 		return i;
 	}
 }
