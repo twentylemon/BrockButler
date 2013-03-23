@@ -136,7 +136,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		ArrayList<String> subj = new ArrayList<String>();
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
-		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_COURSES + "ORDER BY "+KEY_SUBJ+" COLLATE NOCASE", null);
+		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_SUBJ+" FROM " + TABLE_COURSES + "ORDER BY "+KEY_SUBJ, null);
 
 		if (c != null){
 			if (c.moveToFirst()){
@@ -157,7 +157,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		try{		
 		SQLiteDatabase db = this.getReadableDatabase();		
 		Cursor c = db.rawQuery("SELECT DISTINCT "+KEY_CODE+" FROM " + TABLE_COURSES+
-				" WHERE "+KEY_SUBJ+"='"+subj+"' ORDER BY "+KEY_SUBJ+" COLLATE NOCASE", null);
+				" WHERE "+KEY_SUBJ+"='"+subj+"' ORDER BY "+KEY_SUBJ, null);
 		if (c != null){
 			if (c.moveToFirst()){
 				do{					
@@ -169,4 +169,15 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		}catch(Exception e){codes.add(e.toString());}
 		return codes;
 	}
-}
+	
+	public int size(){
+		int i=0;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery("SELECT COUNT(*) FROM "+TABLE_COURSES,null);
+		if (c != null){
+			c.moveToFirst();
+			i = c.getInt(0);
+		}
+		return i;
+	}
+}}
