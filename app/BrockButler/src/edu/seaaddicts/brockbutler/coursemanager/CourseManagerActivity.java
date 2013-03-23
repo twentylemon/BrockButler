@@ -15,11 +15,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
+import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 
 public class CourseManagerActivity extends Activity {
 
@@ -89,7 +93,32 @@ public class CourseManagerActivity extends Activity {
 			mRegisterCourseListView.setAdapter(listAdapter);
 			tvNoCourses.setVisibility(GONE);
 			mRegisterCourseListView.setVisibility(VISIBLE);
+			mRegisterCourseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				public void onItemClick(AdapterView<?> parent, final View view,
+						int position, long id) {
+					showHideToolbar(view);
+				}
+			});
 		}
+	}
+	
+	private void showHideToolbar(View view) {
+		View toolbar = view.findViewById(R.id.toolbar);
+
+		// Creating the expand animation for the item
+		ExpandAnimation expandAni = new ExpandAnimation(toolbar,
+				ExpandAnimation.ANIMATE_SHORT);
+
+		// Start the animation on the toolbar
+		toolbar.startAnimation(expandAni);
+
+//		((Button) view.findViewById(R.id.prof_email_button))
+//				.setOnClickListener(new OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						sendEmail();
+//					}
+//				});
 	}
 
 	@Override
