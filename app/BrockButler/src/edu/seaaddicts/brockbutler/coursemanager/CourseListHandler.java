@@ -105,19 +105,16 @@ public class CourseListHandler extends SQLiteOpenHelper {
 				+ " INTEGER," + KEY_WEIGHT + " REAL," + KEY_DUE + " TEXT,"
 				+ KEY_CREATE_DATE + " TEXT," + KEY_PRIORITY + " INTEGER,"
 				+ "PRIMARY KEY(" + KEY_SUBJ + "," + KEY_CODE + "," + KEY_ASSIGN
-				+ ")," + "FOREIGN KEY(" + KEY_SUBJ + ") REFERENCES "
-				+ TABLE_COURSES + "(" + KEY_SUBJ + ") ON DELETE CASCADE,"
-				+ "FOREIGN KEY(" + KEY_CODE + ") REFERENCES " + TABLE_COURSES
-				+ "(" + KEY_CODE + ") ON DELETE CASCADE" + ")";
+				+ ")," + "FOREIGN KEY(" + KEY_SUBJ + "," + KEY_CODE + ") REFERENCES "
+				+ TABLE_COURSES + "(" + KEY_SUBJ + "," + KEY_CODE + ") ON DELETE CASCADE"
+				+ ")";
 
 		String CREATE_OFFERINGS = "CREATE TABLE " + TABLE_OFFERINGS + "("
 				+ KEY_ID + " INTEGER," + KEY_SUBJ + " TEXT ," + KEY_CODE
 				+ " TEXT ," + KEY_TYPE + " TEXT," + KEY_SEC + " INTEGER,"
 				+ "PRIMARY KEY(" + KEY_ID + ")," + "FOREIGN KEY(" + KEY_SUBJ
-				+ ") REFERENCES " + TABLE_COURSES + "(" + KEY_SUBJ
-				+ ") ON DELETE CASCADE," + "FOREIGN KEY(" + KEY_CODE
-				+ ") REFERENCES " + TABLE_COURSES + "(" + KEY_CODE
-				+ ") ON DELETE CASCADE" + ")";
+				+ "," + KEY_CODE + ") REFERENCES " + TABLE_COURSES + "(" + KEY_SUBJ
+				+ "," + KEY_CODE + ") ON DELETE CASCADE" + ")";
 
 		String CREATE_OFFERING_TIMES = "CREATE TABLE " + TABLE_OFFERING_TIMES
 				+ "(" + KEY_ID + " INTEGER," + KEY_DAY + " TEXT," + KEY_TIMES
@@ -130,10 +127,8 @@ public class CourseListHandler extends SQLiteOpenHelper {
 				+ KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT," + KEY_CID
 				+ " INTEGER," + KEY_FNAME + " TEXT," + KEY_LNAME + " TEXT,"
 				+ KEY_EMAIL + " TEXT," + "PRIMARY KEY(" + KEY_CID + "),"
-				+ "FOREIGN KEY(" + KEY_SUBJ + ") REFERENCES " + TABLE_COURSES
-				+ "(" + KEY_SUBJ + ") ON DELETE CASCADE," + "FOREIGN KEY("
-				+ KEY_CODE + ") REFERENCES " + TABLE_COURSES + "(" + KEY_CODE
-				+ ") ON DELETE CASCADE" + ")";
+				+ "FOREIGN KEY(" + KEY_SUBJ + "," + KEY_CODE + ") REFERENCES " + TABLE_COURSES
+				+ "(" + KEY_SUBJ + "," + KEY_CODE + ") ON DELETE CASCADE" +  ")";
 
 		db.execSQL(CREATE_COURSES);
 		db.execSQL(CREATE_TASKS);
