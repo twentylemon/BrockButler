@@ -79,31 +79,31 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
                 + KEY_WEIGHT + " REAL," + KEY_DUE + " TEXT," + KEY_CREATE_DATE + " TEXT,"
                 + KEY_PRIORITY + " INTEGER,"
                 + "PRIMARY KEY("+KEY_SUBJ+","+KEY_CODE+","+KEY_ASSIGN+"),"
-                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+"),"
-                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+")"
+                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+") ON DELETE CASCADE,"
+                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+") ON DELETE CASCADE"
                 + ")";
 		
 		String CREATE_OFFERINGS = "CREATE TABLE " + TABLE_OFFERINGS + "("
                 + KEY_ID + " INTEGER," + KEY_SUBJ + " TEXT ,"
                 + KEY_CODE + " TEXT ," + KEY_TYPE + " TEXT,"
                 + KEY_SEC + " INTEGER,"+ "PRIMARY KEY("+KEY_ID+"),"
-                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+"),"
-                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+")"
+                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+") ON DELETE CASCADE,"
+                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+") ON DELETE CASCADE"
                 + ")";
 		
 		String CREATE_OFFERING_TIMES = "CREATE TABLE " + TABLE_OFFERING_TIMES + "("
                 + KEY_ID + " INTEGER," + KEY_DAY + " TEXT,"
                 + KEY_TIMES + " TEXT ," + KEY_TIMEE + " TEXT,"
                 + KEY_LOCATION + " TEXT,"+ "PRIMARY KEY("+KEY_ID+","+KEY_DAY+"),"
-                + "FOREIGN KEY("+KEY_ID+") REFERENCES "+ TABLE_OFFERINGS +"("+KEY_ID+")"
+                + "FOREIGN KEY("+KEY_ID+") REFERENCES "+ TABLE_OFFERINGS +"("+KEY_ID+")  ON DELETE CASCADE"
                 + ")";
 		
 		String CREATE_CONTACTS = "CREATE TABLE " + TABLE_CONTACTS + "("
                 + KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT,"
                 + KEY_CID + " INTEGER," + KEY_FNAME + " TEXT,"
                 + KEY_LNAME + " TEXT," + KEY_EMAIL + " TEXT,"+ "PRIMARY KEY("+KEY_CID+"),"
-                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+"),"
-                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+")"
+                + "FOREIGN KEY("+KEY_SUBJ+") REFERENCES "+ TABLE_COURSES +"("+KEY_SUBJ+") ON DELETE CASCADE,"
+                + "FOREIGN KEY("+KEY_CODE+") REFERENCES "+ TABLE_COURSES +"("+KEY_CODE+") ON DELETE CASCADE"
                 + ")";	
 		
         db.execSQL(CREATE_COURSES);
@@ -157,9 +157,10 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	    db.close();    
 	}
 	
-	/* deleteCourse - removes all information for the given course from the databse*/
+	/* deleteCourse - removes all information for the given course from the database*/
 	public void deleteCourse(Course course){
 		SQLiteDatabase db = this.getWritableDatabase();
+		db.rawQuery("PRAGMA foreign_keys = ON", null);
 		db.delete(TABLE_COURSES, KEY_SUBJ + "='" + course.mSubject + "' AND " + KEY_CODE + "='" + course.mCode+"'", null);
 		db.close();
 	}
@@ -243,6 +244,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	 */
 	public void deleteOffering(Offering offering){
 		SQLiteDatabase db = this.getWritableDatabase();
+		db.rawQuery("PRAGMA foreign_keys = ON", null);
 		db.delete(TABLE_OFFERINGS, KEY_ID + "=" + offering.mId, null);
 		db.close();
 	}
@@ -250,7 +252,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* addTasks - adds all tasks associated with a given course*/
 	public void addTasks(Course course){
 		Task task;
-		Contact contact;
+		Contacts contact;
 		ContentValues values = new ContentValues();
 		SQLiteDatabase db = this.getWritableDatabase();
 		long num=0;
@@ -282,8 +284,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* addContacts - add contacts to the contacts table in the database
 	 * for the given list of contacts
 	 */
-	public void addContacts(ArrayList<Contact> contacts){
-		Contact contact;
+	public void addContacts(ArrayList<Contacts> contacts){
+		Contacts contact;
 		ContentValues values = new ContentValues();
 		SQLiteDatabase db = this.getWritableDatabase();
 		long num=0;
@@ -421,16 +423,16 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	}
 	
 	/* getContacts - get all contacts for a specified course*/
-	private ArrayList<Contact> getContacts(Course course){
-		ArrayList<Contact> contacts = new ArrayList<Contact>();
+	private ArrayList<Contacts> getContacts(Course course){
+		ArrayList<Contacts> contacts = new ArrayList<Contacts>();
 		SQLiteDatabase db = this.getReadableDatabase();
-		Contact contact;
+		Contacts contact;
 		Cursor c = db.rawQuery("SELECT * FROM " + TABLE_CONTACTS + " WHERE "
 				+KEY_SUBJ+"='"+course.mSubject+"' AND "+KEY_CODE+"='"+course.mCode+"'", null);
 		if (c != null){
 			if (c.moveToFirst()){
 				do{
-					contact = new Contact();
+					contact = new Contacts();
 					contact.mSubj = c.getString(c.getColumnIndex(KEY_SUBJ));
 					contact.mCode = c.getString(c.getColumnIndex(KEY_CODE));
 					contact.mId = c.getInt(c.getColumnIndex(KEY_CID));
@@ -448,6 +450,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* removeTask - deletes a given task from the tasks table of the database*/
 	public void removeTask(Task task){
 		SQLiteDatabase db = this.getWritableDatabase();
+		db.rawQuery("PRAGMA foreign_keys = ON", null);
 		db.rawQuery("DELETE * FROM "+TABLE_TASKS+" WHERE "+KEY_SUBJ+"='"+task.mSubj+
 				"' AND "+KEY_CODE+"='"+task.mCode+"' AND "+KEY_ASSIGN+"="+task.mAssign,null);
 		db.close();
@@ -459,15 +462,22 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	public ArrayList<Course> getRegCourses(){
 		ArrayList<Course> courses = new ArrayList<Course>();
 		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor c = db.rawQuery("SELECT * FROM "+TABLE_COURSES, null);		
-		if (c != null){
-			if (c.moveToFirst()){
-				do{
-					courses.add(getCourse(c.getString(c.getColumnIndex(KEY_SUBJ)),c.getString(c.getColumnIndex(KEY_CODE))));
-				}while (c.moveToNext());
+		try{
+			Cursor c = db.rawQuery("SELECT * FROM "+TABLE_COURSES, null);		
+			if (c != null){
+				if (c.moveToFirst()){
+					do{
+						courses.add(getCourse(c.getString(c.getColumnIndex(KEY_SUBJ)),c.getString(c.getColumnIndex(KEY_CODE))));
+					}while (c.moveToNext());
+				}
 			}
+			c.close();
+		}catch(Exception e){
+			Course course = new Course();
+			course.mSubject="No Courses Added";
+			courses.add(course);
 		}
-		c.close();
+		
 		db.close();
 		return courses;
 		
