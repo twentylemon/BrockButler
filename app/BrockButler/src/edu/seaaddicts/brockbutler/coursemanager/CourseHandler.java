@@ -62,7 +62,7 @@ public class CourseHandler {
 	public Course getCourseOfferings(String subj, String code) {
 		ArrayList<MasterCourse> list = courseList.getCourses(subj, code);
 		Course course = new Course();
-		ArrayList<OfferingTime> offeringtimes = new ArrayList<OfferingTime>();
+		ArrayList<OfferingTime> offeringtimes;
 		course.mSubject = list.get(0).subj;
 		course.mCode = list.get(0).code;
 		course.mInstructor = list.get(0).instructor;
@@ -77,10 +77,11 @@ public class CourseHandler {
 			offering.mCode = list.get(i).code;
 			offering.mType = list.get(i).type;
 			offering.mSection = Integer.parseInt(list.get(i).sec);
+			offeringtimes = new ArrayList<OfferingTime>();
 			for (int j = 0; j < 5; j++) {
 				if (list.get(i).days.charAt(j) != ' ') {
 					otime = new OfferingTime();
-					otime.mDay = list.get(i).days.substring(j, j);
+					otime.mDay = list.get(i).days.substring(j, j+1);
 					otime.mLocation = list.get(i).location;
 					for (int h = 0; h < list.get(i).time.length(); h++) {
 						if (list.get(i).time.charAt(h) == '-') {

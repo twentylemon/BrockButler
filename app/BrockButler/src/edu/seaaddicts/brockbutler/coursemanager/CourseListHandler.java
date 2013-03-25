@@ -73,7 +73,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	private static final String KEY_LNAME = "lname";
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_PRIORITY = "priority";
-	private static final String KEY_INSTREMAIL = "insructor_email";
+	private static final String KEY_INSTREMAIL = "instructor_email";
 
 	Context context;
 
@@ -105,30 +105,30 @@ public class CourseListHandler extends SQLiteOpenHelper {
 				+ " INTEGER," + KEY_WEIGHT + " REAL," + KEY_DUE + " TEXT,"
 				+ KEY_CREATE_DATE + " TEXT," + KEY_PRIORITY + " INTEGER,"
 				+ "PRIMARY KEY(" + KEY_SUBJ + "," + KEY_CODE + "," + KEY_ASSIGN
-				+ ")," + "FOREIGN KEY(" + KEY_SUBJ + "," + KEY_CODE
-				+ ") REFERENCES " + TABLE_COURSES + "(" + KEY_SUBJ + ","
-				+ KEY_CODE + ")" + ")";
+				+ ")"+ ")"; //+ "FOREIGN KEY(" + KEY_SUBJ + "," + KEY_CODE
+				//+ ") REFERENCES " + TABLE_COURSES + "(" + KEY_SUBJ + ","
+				//+ KEY_CODE + ")" + ")";
 
 		String CREATE_OFFERINGS = "CREATE TABLE " + TABLE_OFFERINGS + "("
 				+ KEY_ID + " INTEGER," + KEY_SUBJ + " TEXT ," + KEY_CODE
 				+ " TEXT ," + KEY_TYPE + " TEXT," + KEY_SEC + " INTEGER,"
-				+ "PRIMARY KEY(" + KEY_ID + ")," + "FOREIGN KEY(" + KEY_SUBJ
-				+ "," + KEY_CODE + ") REFERENCES " + TABLE_COURSES + "("
-				+ KEY_SUBJ + "," + KEY_CODE + ")" + ")";
+				+ "PRIMARY KEY(" + KEY_ID + ")"+ ")";// + "FOREIGN KEY(" + KEY_SUBJ
+				//+ "," + KEY_CODE + ") REFERENCES " + TABLE_COURSES + "("
+				//+ KEY_SUBJ + "," + KEY_CODE + ")" + ")";
 
 		String CREATE_OFFERING_TIMES = "CREATE TABLE " + TABLE_OFFERING_TIMES
 				+ "(" + KEY_ID + " INTEGER," + KEY_DAY + " TEXT," + KEY_TIMES
 				+ " TEXT ," + KEY_TIMEE + " TEXT," + KEY_LOCATION + " TEXT,"
-				+ "PRIMARY KEY(" + KEY_ID + "," + KEY_DAY + "),"
-				+ "FOREIGN KEY(" + KEY_ID + ") REFERENCES " + TABLE_OFFERINGS
-				+ "(" + KEY_ID + ")" + ")";
+				+ "PRIMARY KEY(" + KEY_ID + "," + KEY_DAY + ")"+ ")";
+				//+ "FOREIGN KEY(" + KEY_ID + ") REFERENCES " + TABLE_OFFERINGS
+				//+ "(" + KEY_ID + ")" + ")";
 
 		String CREATE_CONTACTS = "CREATE TABLE " + TABLE_CONTACTS + "("
 				+ KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT," + KEY_CID
 				+ " INTEGER," + KEY_FNAME + " TEXT," + KEY_LNAME + " TEXT,"
-				+ KEY_EMAIL + " TEXT," + "PRIMARY KEY(" + KEY_CID + "),"
-				+ "FOREIGN KEY(" + KEY_SUBJ + "," + KEY_CODE + ") REFERENCES "
-				+ TABLE_COURSES + "(" + KEY_SUBJ + "," + KEY_CODE + ")" + ")";
+				+ KEY_EMAIL + " TEXT," + "PRIMARY KEY(" + KEY_CID + ")"+ ")";
+				//+ "FOREIGN KEY(" + KEY_SUBJ + "," + KEY_CODE + ") REFERENCES "
+				//+ TABLE_COURSES + "(" + KEY_SUBJ + "," + KEY_CODE + ")" + ")";
 
 		db.execSQL(CREATE_COURSES);
 		db.execSQL(CREATE_TASKS);

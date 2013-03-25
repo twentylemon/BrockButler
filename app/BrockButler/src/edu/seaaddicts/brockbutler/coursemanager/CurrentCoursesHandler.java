@@ -56,7 +56,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	private static final String KEY_LNAME = "lname";
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_PRIORITY = "priority";
-	private static final String KEY_INSTREMAIL = "insructor_email";
+	private static final String KEY_INSTREMAIL = "instructor_email";
 
 	/* Constructor for the database helper */
 	public CurrentCoursesHandler(Context context) {
@@ -128,10 +128,16 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	 */
 	public void deleteCourse(Course course) {
 		SQLiteDatabase db = this.getWritableDatabase();
+		
 		// db.rawQuery("PRAGMA foreign_keys = ON", null);
 		db.delete(TABLE_COURSES, KEY_SUBJ + "='" + course.mSubject + "' AND "
 				+ KEY_CODE + "='" + course.mCode + "'", null);
 		db.close();
+		for (int i=0; i<course.mOfferings.size(); i++){
+			deleteOffering(course.mOfferings.get(i));		
+		}
+		
+		
 	}
 
 	/* getCourse - retreives all information for the given course */
@@ -199,16 +205,20 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			else
 				db.insert(TABLE_OFFERINGS, null, values);
 			values.clear();
+		}
+		SQLiteDatabase rdb = this.getReadableDatabase();
+		for (int i=0; i<course.mOfferings.size(); i++){
+			offering = course.mOfferings.get(i);
 			for (int j = 0; j < offering.mOfferingTimes.size(); j++) {
 				offeringtime = offering.mOfferingTimes.get(j);
 				num = 0;
 				update = false;
 				num = DatabaseUtils.queryNumEntries(db, TABLE_OFFERING_TIMES,
-						KEY_ID + " =" + offering.mId);
+						KEY_ID + " =" + offering.mId+ " AND "+KEY_DAY+"='"+offeringtime.mDay+"'");
 				if (num > 1)
 					update = true;
 
-				SQLiteDatabase rdb = this.getReadableDatabase();
+				
 				Cursor c = rdb.rawQuery("SELECT " + KEY_ID + " FROM "
 						+ TABLE_OFFERINGS + " WHERE " + KEY_SUBJ + "='"
 						+ offering.mSubj + "' AND " + KEY_CODE + "='"
@@ -229,9 +239,11 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 					db.insert(TABLE_OFFERING_TIMES, null, values);
 				values.clear();
 				c.close();
-				rdb.close();
+				
 			}
 		}
+		
+		rdb.close();
 		db.close();
 	}
 
@@ -240,9 +252,25 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	 * offering
 	 */
 	public void deleteOffering(Offering offering) {
+		int id;
+		//db.rawQuery("PRAGMA foreign_keys = ON", null);
+		SQLiteDatabase rdb = this.getReadableDatabase();
+		Cursor c = rdb.rawQuery("SELECT " + KEY_ID + " FROM "
+				+ TABLE_OFFERINGS + " WHERE " + KEY_SUBJ + "='"
+				+ offering.mSubj + "' AND " + KEY_CODE + "='"
+				+ offering.mCode + "' AND " + KEY_TYPE + "='"
+				+ offering.mType + "' AND " + KEY_SEC + "="
+				+ offering.mSection, null);
+		c.moveToFirst();
+		id = c.getInt(c.getColumnIndex(KEY_ID));
+		c.close();
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.rawQuery("PRAGMA foreign_keys = ON", null);
-		db.delete(TABLE_OFFERINGS, KEY_ID + "=" + offering.mId, null);
+		db.delete(TABLE_OFFERING_TIMES, KEY_ID +"="+id, null);
+		db.delete(TABLE_OFFERINGS, KEY_SUBJ
+				+ " ='" + offering.mSubj + "' AND " + KEY_CODE + "='"
+				+ offering.mCode + "' AND " + KEY_TYPE + "='"
+				+ offering.mType + "' AND " + KEY_SEC + "="
+				+ offering.mSection, null);
 		db.close();
 	}
 
@@ -335,7 +363,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* getOfferings - gets all offerings for a given subject and code */
 	public ArrayList<Offering> getOfferings(String subj, String code) {
 		ArrayList<Offering> offerings = new ArrayList<Offering>();
-		ArrayList<OfferingTime> offtimes = new ArrayList<OfferingTime>();
+		ArrayList<OfferingTime> offtimes;
 		Offering offering;
 		OfferingTime otime;
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -355,9 +383,14 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 						offering.mType = c
 								.getString(c.getColumnIndex(KEY_TYPE));
 						offering.mSection = c.getInt(c.getColumnIndex(KEY_SEC));
+						offerings.add(offering);
+					}while (c.moveToNext());
+					c.close();
+					for (int i=0; i<offerings.size(); i++){
+						offtimes = new ArrayList<OfferingTime>();
 						Cursor o = db.rawQuery("SELECT *  FROM "
 								+ TABLE_OFFERING_TIMES + " WHERE " + KEY_ID
-								+ "=" + offering.mId, null);
+								+ "=" + offerings.get(i).mId, null);
 						if (o != null) {
 							if (o.moveToFirst()) {
 								do {
@@ -376,13 +409,12 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 								} while (o.moveToNext());
 							}
 						}
-						offering.mOfferingTimes = offtimes;
-						offerings.add(offering);
+						offerings.get(i).mOfferingTimes = offtimes;
+						
 						o.close();
-					} while (c.moveToNext());
+					} 
 				}
 			}
-			c.close();
 			db.close();
 		} catch (Exception e) {
 		}
