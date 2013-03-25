@@ -9,5 +9,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
     </ListView>
+    
+    <TextView 
+        android:id="@+id/tv_no_courses"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="@string/sched_no_courses"
+        android:textColor="#ddd"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:visibility="gone" />
 
 </LinearLayout>

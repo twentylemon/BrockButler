@@ -24,6 +24,10 @@
     <string name="add_course_update_master_list">Update Master List</string>
     <string name="loading_courses_registrar">Updating Course Database</string>
     <string name="no_courses">No registered courses.\n\nMenu>Add Course</string>
+    <string-array name="course_manager_context_menu">
+        <item>Modify</item>
+        <item>Remove</item>
+    </string-array>
     <string name="loading_courses_registrar_msg">The course database is updating from the Brock Registrar.\n\nThis may take a few moments.</string>
 
     <!-- AddContactActivity -->
@@ -43,10 +47,10 @@
     <string name="add_course_subject">Subject</string>
     <string name="add_course_add">Add Course</string>
     <string name="add_course_code">Code</string>
-    <string name="add_course_add_lecs">Add Lectures</string>
-    <string name="add_course_add_labs">Add Labs</string>
-    <string name="add_course_add_sems">Add Seminars</string>
-    <string name="add_course_add_tuts">Add Tutorials</string>
+    <string name="add_course_add_lecs">Lectures</string>
+    <string name="add_course_add_labs">Labs</string>
+    <string name="add_course_add_sems">Seminars</string>
+    <string name="add_course_add_tuts">Tutorials</string>
 
     <!-- Professors -->
     <string name="prof_name">Professor Name</string>
@@ -58,6 +62,7 @@
     <string name="menu_remove_task">Remove Task</string>
     <string name="menu_modify_task">Modify Task</string>
     <string name="menu_expand_collapse">Expand/Collapse All</string>
+    <string name="sched_no_courses">No registered courses.\n\nGo to Course Manager to add courses.</string>
 
     <!-- row_task_* -->
     <string name="title_lecture">Lectures</string>

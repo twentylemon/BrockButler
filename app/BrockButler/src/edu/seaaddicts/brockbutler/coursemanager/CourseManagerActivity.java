@@ -6,22 +6,22 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 
@@ -31,11 +31,8 @@ public class CourseManagerActivity extends Activity {
 	private static final int GONE = 8;
 
 	private ArrayList<Course> mRegisteredCoursesList;
-
 	private CourseHandler mCourseHandle = null;
-
-	private LinearLayout mLayout = null;
-	private ListView mRegisterCourseListView = null;
+	private ListView mRegisteredCoursesListView = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,25 +43,6 @@ public class CourseManagerActivity extends Activity {
 		if (mCourseHandle.getSize() < 1) {
 			updateCourseDatabaseFromRegistrar();
 		}
-		//
-
-		//
-		// // Creating an item click listener, to open/close our toolbar for
-		// each item
-		// list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-		// public void onItemClick(AdapterView<?> parent, final View view, int
-		// position, long id) {
-		//
-		// View toolbar = view.findViewById(R.id.toolbar);
-		//
-		// // Creating the expand animation for the item
-		// ExpandAnimation expandAni = new ExpandAnimation(toolbar,
-		// ExpandAnimation.ANIMATE_SHORT);
-		//
-		// // Start the animation on the toolbar
-		// toolbar.startAnimation(expandAni);
-		// }
-		// });
 	}
 
 	@Override
@@ -74,39 +52,83 @@ public class CourseManagerActivity extends Activity {
 	}
 
 	/**
-	 * 
+	 * Populates the ListView with registered classes and brief details, i.e.
+	 * instructor name and class times.
 	 */
 	private void populateCoursesLayout() {
 		TextView tvNoCourses = (TextView) findViewById(R.id.tv_no_courses);
-		mRegisterCourseListView = (ListView) findViewById(R.id.courseman_list);
 		mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
-		if (mRegisteredCoursesList.size() < 1) {
+		mRegisteredCoursesListView = (ListView) findViewById(R.id.course_manager_list);
+		if (mRegisteredCoursesList.size() == 0) {
 			// There are no registered courses so set message.
+			mRegisteredCoursesListView.setVisibility(GONE);
 			tvNoCourses.setVisibility(VISIBLE);
 		} else {
 			// We have registered courses so populate ListView.
-			mRegisterCourseListView = (ListView) findViewById(R.id.courseman_list);
 			// Creating the list adapter and populating the list
 			ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
 					R.layout.course_list_item);
-			for (int i = 0; i < mRegisteredCoursesList.size(); i++)
+			for (int i = 0; i < mRegisteredCoursesList.size(); i++) {
 				listAdapter.add(mRegisteredCoursesList.get(i).mSubject + " "
 						+ mRegisteredCoursesList.get(i).mCode);
-			mRegisterCourseListView.setAdapter(listAdapter);
+				Log.d("MAIN: # Offerings", ""+mRegisteredCoursesList.get(i).mOfferings.size());
+			}
+			mRegisteredCoursesListView.setAdapter(listAdapter);
 			tvNoCourses.setVisibility(GONE);
-			mRegisterCourseListView.setVisibility(VISIBLE);
-			mRegisterCourseListView
+			mRegisteredCoursesListView.setVisibility(VISIBLE);
+			mRegisteredCoursesListView
 					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 						public void onItemClick(AdapterView<?> parent,
 								final View view, int position, long id) {
-							showHideToolbar(view);
+							showHideToolbar(view, position);
 						}
 					});
+			registerForContextMenu(mRegisteredCoursesListView);
 		}
 	}
 
-	private void showHideToolbar(View view) {
-		View toolbar = view.findViewById(R.id.toolbar);
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (v.getId() == R.id.course_manager_list) {
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			String[] menuItems = getResources().getStringArray(
+					R.array.course_manager_context_menu);
+			for (int i = 0; i < menuItems.length; i++) {
+				menu.add(Menu.NONE, i, i, menuItems[i]);
+			}
+		}
+	}
+
+	/**
+	 * Determines which MenuItem was selected and acts appropriately depending
+	 * on choice.
+	 */
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+		int menuItemIndex = item.getItemId();
+		switch (menuItemIndex) {
+		case 0:
+			Toast.makeText(this, "Modify", Toast.LENGTH_SHORT).show();
+			break;
+		case 1:
+			Course c = mRegisteredCoursesList.get(info.position);
+			mCourseHandle.removeCourse(c);
+		}
+		populateCoursesLayout();
+		return true;
+	}
+
+	/**
+	 * Shows/hides verbose description of course.
+	 * 
+	 * @param view
+	 *            The selected view to hide/show.
+	 */
+	private void showHideToolbar(View view, int position) {
+		View toolbar = view.findViewById(R.id.course_manager_toolbar);
 
 		// Creating the expand animation for the item
 		ExpandAnimation expandAni = new ExpandAnimation(toolbar,
@@ -114,6 +136,76 @@ public class CourseManagerActivity extends Activity {
 
 		// Start the animation on the toolbar
 		toolbar.startAnimation(expandAni);
+
+		((TextView) view.findViewById(R.id.tv_prof_name))
+				.setText(mRegisteredCoursesList.get(position).mInstructor);
+
+		Log.d("NUMBER OFFERINGS:", "" +mRegisteredCoursesList.get(position).mOfferings
+				.size());
+		// Add offerings registered for
+		for (int i = 0; i < mRegisteredCoursesList.get(position).mOfferings
+				.size(); i++) {
+			String what = mRegisteredCoursesList.get(position).mOfferings
+					.get(i).mType.substring(0, 3).trim();
+
+			Log.d("TYPE: ", "" + what);
+
+			if (what.equalsIgnoreCase("lec"))
+				((TextView) view.findViewById(R.id.tv_lecture))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+
+			else if (what.equalsIgnoreCase("lab"))
+				((TextView) view.findViewById(R.id.tv_lab))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+
+			else if (what.equalsIgnoreCase("tut"))
+				((TextView) view.findViewById(R.id.tv_tutorial))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+
+			else if (what.equalsIgnoreCase("sem"))
+				((TextView) view.findViewById(R.id.tv_seminar))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+		}
 	}
 
 	@Override
@@ -123,17 +215,9 @@ public class CourseManagerActivity extends Activity {
 		return true;
 	}
 
-	private ArrayList<Course> getCourses() {
-		return null;
-
-	}
-
-	private void expandAll(View[] v) {
-
-	}
-
 	/**
-	 * A simple implementation of list adapter.
+	 * A simple implementation of list adapter to populate ListView with
+	 * courses.
 	 */
 	class CustomListAdapter extends ArrayAdapter<String> {
 
@@ -146,31 +230,47 @@ public class CourseManagerActivity extends Activity {
 
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(
-						R.layout.sched_list_item, null);
+						R.layout.course_list_item, null);
 			}
 
-			((TextView) convertView.findViewById(R.id.sched_list_item_title))
+			((TextView) convertView.findViewById(R.id.course_list_item_title))
 					.setText(getItem(position));
 
 			// Resets the toolbar to be closed
-			View toolbar = convertView.findViewById(R.id.toolbar);
+			View toolbar = convertView
+					.findViewById(R.id.course_manager_toolbar);
 			((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
 			toolbar.setVisibility(View.GONE);
-
 			return convertView;
 		}
 	}
 
+	/**
+	 * Launches AddCourseActivity as intent.
+	 * 
+	 * @param menu
+	 *            MenuItem selected.
+	 */
 	public void addCourse(MenuItem menu) {
 		Intent i = new Intent(CourseManagerActivity.this,
 				AddCourseActivity.class);
 		startActivity(i);
 	}
 
+	/**
+	 * Allows user to manually fetch course calendar offerings from Registrar
+	 * 
+	 * @param item
+	 */
 	public void updateMaster(MenuItem item) {
 		updateCourseDatabaseFromRegistrar();
 	}
 
+	/**
+	 * Updates the course calendar offerings master table. Is called at first
+	 * run (if table does not exist) and manually when user wishes to check for
+	 * updates. Progress bar to prevent hanging on main thread.
+	 */
 	private void updateCourseDatabaseFromRegistrar() {
 		final Handler handler = new Handler();
 		final ProgressDialog progressDialog;
@@ -188,7 +288,7 @@ public class CourseManagerActivity extends Activity {
 
 		Thread thread = new Thread() {
 			public void run() {
-					mCourseHandle.getAllCourses();
+				mCourseHandle.updateAll();
 				// this will handle the post task.
 				// it will run when the time consuming task get finished
 				handler.post(new Runnable() {

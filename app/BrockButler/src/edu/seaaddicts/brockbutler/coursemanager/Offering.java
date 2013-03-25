@@ -18,6 +18,7 @@ public class Offering {
 	public String mType;
 	public ArrayList<OfferingTime> mOfferingTimes;
 	public int mOid;
+	
 	public Offering(){
 		mOfferingTimes = new ArrayList<OfferingTime>();
 	}

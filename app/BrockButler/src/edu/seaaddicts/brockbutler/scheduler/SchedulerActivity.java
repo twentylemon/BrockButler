@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,37 +22,60 @@ import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 import edu.seaaddicts.brockbutler.coursemanager.Course;
+import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
 
 public class SchedulerActivity extends Activity {
-	
-	ListView mCourseListView = null;
+
+	private static final int VISIBLE = 0;
+	private static final int GONE = 8;
+
+	private ArrayList<Course> mRegisteredCoursesList = null;
+	private CourseHandler mCourseHandle = null;
+	private ListView mRegisteredCoursesListView = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scheduler);
-
-		mCourseListView = (ListView) findViewById(R.id.sched_list);
-
-		// Creating the list adapter and populating the list
-		ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
-				R.layout.sched_list_item);
-		for (int i = 0; i < 4; i++)
-			listAdapter.add("COSC " + (i + 1) + "P0" + i);
-		mCourseListView.setAdapter(listAdapter);
-
-		// Creating an item click listener, to open/close our toolbar for each
-		// item
-		mCourseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, final View view,
-					int position, long id) {
-				showHideToolbar(view);
-			}
-		});
+		mCourseHandle = new CourseHandler(this);
+		populateCoursesLayout();
 	}
 
-	private void showHideToolbar(View view) {
-		View toolbar = view.findViewById(R.id.toolbar);
+	/**
+	 * 
+	 */
+	private void populateCoursesLayout() {
+		TextView tvNoCourses = (TextView) findViewById(R.id.tv_no_courses);
+		mRegisteredCoursesListView = (ListView) findViewById(R.id.sched_list);
+		mRegisteredCoursesList = mCourseHandle.getRegisteredCourses();
+		if (mRegisteredCoursesList.size() == 0) {
+			// There are no registered courses so set message.
+			mRegisteredCoursesListView.setVisibility(GONE);
+			tvNoCourses.setVisibility(VISIBLE);
+		} else {
+			// We have registered courses so populate ListView.
+			// Creating the list adapter and populating the list
+			ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
+					R.layout.course_list_item);
+			for (int i = 0; i < mRegisteredCoursesList.size(); i++)
+				listAdapter.add(mRegisteredCoursesList.get(i).mSubject + " "
+						+ mRegisteredCoursesList.get(i).mCode);
+			mRegisteredCoursesListView.setAdapter(listAdapter);
+			tvNoCourses.setVisibility(GONE);
+			mRegisteredCoursesListView.setVisibility(VISIBLE);
+			mRegisteredCoursesListView
+					.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+						public void onItemClick(AdapterView<?> parent,
+								final View view, int position, long id) {
+							showHideToolbar(view, position);
+						}
+					});
+			registerForContextMenu(mRegisteredCoursesListView);
+		}
+	}
+
+	private void showHideToolbar(View view, int position) {
+		View toolbar = view.findViewById(R.id.sched_toolbar);
 
 		// Creating the expand animation for the item
 		ExpandAnimation expandAni = new ExpandAnimation(toolbar,
@@ -60,13 +84,75 @@ public class SchedulerActivity extends Activity {
 		// Start the animation on the toolbar
 		toolbar.startAnimation(expandAni);
 
-		((Button) view.findViewById(R.id.prof_email_button))
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						sendEmail();
-					}
-				});
+		((TextView) view.findViewById(R.id.tv_prof_name))
+				.setText(mRegisteredCoursesList.get(position).mInstructor);
+
+		Log.d("NUMBER OFFERINGS:", ""
+				+ mRegisteredCoursesList.get(position).mOfferings.size());
+		// Add offerings registered for
+		for (int i = 0; i < mRegisteredCoursesList.get(position).mOfferings
+				.size(); i++) {
+			String what = mRegisteredCoursesList.get(position).mOfferings
+					.get(i).mType.substring(0, 3).trim();
+
+			Log.d("TYPE: ", "" + what);
+
+			if (what.equalsIgnoreCase("lec"))
+				((TextView) view.findViewById(R.id.tv_lecture))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+
+			else if (what.equalsIgnoreCase("lab"))
+				((TextView) view.findViewById(R.id.tv_lab))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+
+			else if (what.equalsIgnoreCase("tut"))
+				((TextView) view.findViewById(R.id.tv_tutorial))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+
+			else if (what.equalsIgnoreCase("sem"))
+				((TextView) view.findViewById(R.id.tv_seminar))
+						.setText(mRegisteredCoursesList.get(position).mOfferings
+								.get(i).mOfferingTimes.get(i).mDay
+								+ " "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mStartTime
+								+ " - "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mEndTime
+								+ " @ "
+								+ mRegisteredCoursesList.get(position).mOfferings
+										.get(i).mOfferingTimes.get(i).mLocation);
+		}
 	}
 
 	@Override
@@ -93,14 +179,6 @@ public class SchedulerActivity extends Activity {
 		startActivity(i);
 	}
 
-	private ArrayList<Course> getCourses() {
-		return null;
-	}
-
-	private void expandAll(View[] v) {
-
-	}
-
 	/**
 	 * A simple implementation of list adapter.
 	 */
@@ -122,7 +200,7 @@ public class SchedulerActivity extends Activity {
 					.setText(getItem(position));
 
 			// Resets the toolbar to be closed
-			View toolbar = convertView.findViewById(R.id.toolbar);
+			View toolbar = convertView.findViewById(R.id.sched_toolbar);
 			((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -(toolbar
 					.getHeight());
 			toolbar.setVisibility(View.GONE);

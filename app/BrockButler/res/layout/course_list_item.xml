@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/sched_list_item_title"
+        android:id="@+id/course_list_item_title"
         android:layout_width="fill_parent"
         android:layout_height="60sp"
         android:focusable="false"
@@ -16,20 +16,32 @@
     <!-- Toolbar -->
 
     <LinearLayout
-        android:id="@+id/toolbar"
+        android:id="@+id/course_manager_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dip"
         android:visibility="gone" >
 
-        <include android:id="@+id/row_prof" layout="@layout/row_prof_simple"/>
-        <include layout="@layout/row_task_lecture"/>
-        <include layout="@layout/row_task_tutorial"/>
-        <include layout="@layout/row_task_lab"/>
-        <include layout="@layout/row_task_assignment"/>
-        <include layout="@layout/row_task_test"/>
+        <include
+            android:id="@+id/row_prof"
+            layout="@layout/row_prof_simple" />
 
+        <include
+            android:id="@+id/row_lec"
+            layout="@layout/row_task_lecture" />
+
+        <include
+            android:id="@+id/row_lab"
+            layout="@layout/row_task_lab" />
+
+        <include
+            android:id="@+id/row_tut"
+            layout="@layout/row_task_tutorial" />
+
+        <include
+            android:id="@+id/row_sem"
+            layout="@layout/row_task_seminar" />
     </LinearLayout>
 
 </LinearLayout>

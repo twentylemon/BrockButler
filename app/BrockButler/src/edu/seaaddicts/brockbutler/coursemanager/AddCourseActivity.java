@@ -1,13 +1,20 @@
 package edu.seaaddicts.brockbutler.coursemanager;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,18 +22,38 @@ import edu.seaaddicts.brockbutler.R;
 
 public class AddCourseActivity extends Activity {
 	private static final int DATE_DIALOG_ID = 0;
+	private static final int VISIBLE = 0;
+	private static final int INVISIBLE = 4;
+	private static final int GONE = 8;
+
+	ArrayList<String> mLecs;
+	ArrayList<String> mLabs;
+	ArrayList<String> mTuts;
+	ArrayList<String> mSems;
+
+	ArrayList<Offering> mLecsOfferings;
+	ArrayList<Offering> mLabsOfferings;
+	ArrayList<Offering> mTutsOfferings;
+	ArrayList<Offering> mSemsOfferings;
 
 	private String mSubject;
 	private String mCode;
 
+	private Course mCourse;
+
 	private Button mSaveButton;
 	private Button mCancelButton;
-	private TextView mDueDateTextView;
 
 	private CourseHandler mCourseHandle;
+	ArrayList<Offering> mOfferings;
 
 	private Spinner mSubjectSpinner;
 	private Spinner mCodesSpinner;
+
+	private ListView mLecsListView;
+	private ListView mSemsListView;
+	private ListView mTutsListView;
+	private ListView mLabsListView;
 
 	private int mYear;
 	private int mMonth;
@@ -60,7 +87,6 @@ public class AddCourseActivity extends Activity {
 
 		mCodesSpinner = (Spinner) findViewById(R.id.add_course_codes_spinner);
 		mSubjectSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
@@ -81,13 +107,98 @@ public class AddCourseActivity extends Activity {
 				// Do nothing.
 			}
 		});
-
 		mCodesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				mCode = arg0.getItemAtPosition(arg2).toString();
+				mCourse = mCourseHandle.getCourseOfferings(mSubject, mCode);
+				mOfferings = mCourse.mOfferings;
+
+				String s;
+				mLecs = new ArrayList<String>();
+				mLabs = new ArrayList<String>();
+				mTuts = new ArrayList<String>();
+				mSems = new ArrayList<String>();
+
+				mLecsOfferings = new ArrayList<Offering>();
+				mLabsOfferings = new ArrayList<Offering>();
+				mTutsOfferings = new ArrayList<Offering>();
+				mSemsOfferings = new ArrayList<Offering>();
+
+				for (int i = 0; i < mOfferings.size(); i++) {
+					s = mOfferings.get(i).mType;
+
+					// Some offerings don't have any of what we are looking for,
+					// so check length to make sure.
+					if (s.length() > 2) {
+						if (s.substring(0, 3).trim().equalsIgnoreCase("lec")) {
+							mLecs.add(s + ", SEC " + mOfferings.get(i).mSection);
+							mLecsOfferings.add(mOfferings.get(i));
+						} else if (s.substring(0, 3).trim()
+								.equalsIgnoreCase("lab")) {
+							mLabs.add(s + ", SEC " + mOfferings.get(i).mSection);
+							mLabsOfferings.add(mOfferings.get(i));
+						} else if (s.substring(0, 3).trim()
+								.equalsIgnoreCase("tut")) {
+							mTuts.add(s + ", SEC " + mOfferings.get(i).mSection);
+							mTutsOfferings.add(mOfferings.get(i));
+						} else if (s.substring(0, 3).trim()
+								.equalsIgnoreCase("sem")) {
+							mSems.add(s + ", SEC " + mOfferings.get(i).mSection);
+							mSemsOfferings.add(mOfferings.get(i));
+						}
+					}
+				}
+
+				// Check if offerings available, and add ListView to display if
+				// so.
+				LinearLayout lec_lay = (LinearLayout) findViewById(R.id.layout_add_lecs);
+				LinearLayout lab_lay = (LinearLayout) findViewById(R.id.layout_add_labs);
+				LinearLayout tut_lay = (LinearLayout) findViewById(R.id.layout_add_tuts);
+				LinearLayout sem_lay = (LinearLayout) findViewById(R.id.layout_add_sems);
+
+				if (mLecs.size() > 0) {
+					lec_lay.setVisibility(VISIBLE);
+					mLecsListView = (ListView) findViewById(R.id.add_course_add_lecs);
+					mLecsListView.setAdapter(new ArrayAdapter<String>(
+							getApplicationContext(),
+							android.R.layout.simple_list_item_multiple_choice,
+							mLecs));
+				} else {
+					lec_lay.setVisibility(GONE);
+				}
+				if (mLabs.size() > 0) {
+					lab_lay.setVisibility(VISIBLE);
+					mLabsListView = (ListView) findViewById(R.id.add_course_add_labs);
+					mLabsListView.setAdapter(new ArrayAdapter<String>(
+							getApplicationContext(),
+							android.R.layout.simple_list_item_multiple_choice,
+							mLabs));
+				} else {
+					lab_lay.setVisibility(GONE);
+				}
+				if (mTuts.size() > 0) {
+					tut_lay.setVisibility(VISIBLE);
+					mTutsListView = (ListView) findViewById(R.id.add_course_add_tuts);
+					mTutsListView.setAdapter(new ArrayAdapter<String>(
+							getApplicationContext(),
+							android.R.layout.simple_list_item_multiple_choice,
+							mTuts));
+				} else {
+					tut_lay.setVisibility(GONE);
+				}
+				if (mSemsOfferings.size() > 0) {
+					sem_lay.setVisibility(VISIBLE);
+					mSemsListView = (ListView) findViewById(R.id.add_course_add_sems);
+					mSemsListView.setAdapter(new ArrayAdapter<String>(
+							getApplicationContext(),
+							android.R.layout.simple_list_item_multiple_choice,
+							mSems));
+				} else {
+					sem_lay.setVisibility(GONE);
+				}
 			}
 
 			@Override
@@ -98,18 +209,63 @@ public class AddCourseActivity extends Activity {
 		});
 
 		mSaveButton.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				Course c = new Course();
 				c.mSubject = mSubject;
 				c.mCode = mCode;
+				c.mInstructor = mCourseHandle.getCourseOfferings(mSubject,
+						mCode).mInstructor;
+
+				SparseBooleanArray sba1, sba2, sba3, sba4;
+				if (mLecsListView != null) {
+					sba1 = mLecsListView.getCheckedItemPositions();
+					for (int i = 0; i < mLecsListView.getCount(); i++) {
+						if (sba1.get(i) == true) {
+							c.mOfferings.add(mLecsOfferings.get(i));
+						}
+					}
+				}
+
+				if (mLabsListView != null) {
+					sba2 = mLabsListView.getCheckedItemPositions();
+
+					for (int i = 0; i < mLabsListView.getCount(); i++) {
+						if (sba2.get(i) == true) {
+							c.mOfferings.add(mLabsOfferings.get(i));
+						}
+					}
+				}
+
+				if (mTutsListView != null) {
+					sba3 = mTutsListView.getCheckedItemPositions();
+
+					for (int i = 0; i < mTutsListView.getCount(); i++) {
+						if (sba3.get(i) == true) {
+							c.mOfferings.add(mTutsOfferings.get(i));
+						}
+					}
+				}
+
+				if (mSemsListView != null) {
+					sba4 = mSemsListView.getCheckedItemPositions();
+
+					for (int i = 0; i < mSemsListView.getCount(); i++) {
+						if (sba4.get(i) == true) {
+							c.mOfferings.add(mTutsOfferings.get(i));
+						}
+					}
+				}
+
 				if (c.mSubject != null) {
 					try {
 						mCourseHandle.addCourse(c);
 						Toast.makeText(getApplicationContext(),
-								c.mSubject + " " + c.mCode + " added!",
+								c.mSubject + " " + c.mCode + " added.",
 								Toast.LENGTH_LONG).show();
+						
+							Log.d("# ADDED OFFERINGS:", ""+c.mOfferings.size());
+							
 						onBackPressed();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -120,7 +276,6 @@ public class AddCourseActivity extends Activity {
 		});
 
 		mCancelButton.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// Do nothing.
