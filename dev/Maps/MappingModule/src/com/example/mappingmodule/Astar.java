@@ -14,6 +14,7 @@ import java.util.PriorityQueue;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class Astar {
 	
@@ -71,6 +72,32 @@ public class Astar {
         		} while(cur.moveToNext());
         	}
     	}
+    	Log.d("PRINT", "Graph Built");
+    }
+    
+    /**
+	 * This method returns true or false if a given position exists
+	 * within the graph(school). This method is to be used before pathGeneration.
+	 */ 
+    public boolean nodeExist(Position node) {
+    	for(int j=0; j<graph.length; j++) {
+			if(node.compare(graph[j]))
+				return true;
+		}
+    	return false;
+    }
+    
+    /**
+	 * This method returns a position if it exists within
+	 * the graph(school). Used by the interface searching 
+	 * feature.
+	 */ 
+    public Position findPosition(String nodeName) {
+    	for(int j=0; j<graph.length; j++) {
+			if(nodeName.equals(graph[j].nodeName))
+				return graph[j];
+		}
+    	return null;
     }
     
     

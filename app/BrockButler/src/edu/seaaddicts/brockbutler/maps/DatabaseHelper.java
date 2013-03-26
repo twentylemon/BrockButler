@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	private static final String KEY_YPOS = "y";
 	private static final String KEY_CONN = "con";
 
-	private static final String DATABASE_NAME    = "node_database";
+	private static final String DATABASE_NAME    = "ButtSucker";
 	private static final String DATABASE_TABLE   = "node_connections";
 	private static final int    DATABASE_VERSION = 1;
 
