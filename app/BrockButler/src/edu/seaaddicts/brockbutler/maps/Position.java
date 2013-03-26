@@ -124,13 +124,19 @@ public class Position implements Comparable<Object> {
 		return false;
 	}
 	
+	@Override
+	public int compareTo (Object node) {
+		Position temp = (Position) node;
+        return (int)(fScore - temp.fScore);
+	}
+	
 	/**
 	 * The following method is used only to search coordinates
 	 * from a room number
 	 */
 	public void fillFromName(Context ourContext) {
 		DatabaseHelper ourHelper = new DatabaseHelper(ourContext);
-	    SQLiteDatabase ourDatabase = ourHelper.getReadableDatabase();
+	    SQLiteDatabase ourDatabase = ourHelper.getWritableDatabase();
 	    
 	    String[] columns = new String[]{"node_id","x","y"};
     	Cursor cur = ourDatabase.query("node_connections", columns, "desc"+"=?", new String[]{nodeName}, null, null, null);
@@ -151,7 +157,7 @@ public class Position implements Comparable<Object> {
 	 */
 	public void fillFromCoordinates(Context ourContext) {
 		DatabaseHelper ourHelper = new DatabaseHelper(ourContext);
-	    SQLiteDatabase ourDatabase = ourHelper.getReadableDatabase();
+	    SQLiteDatabase ourDatabase = ourHelper.getWritableDatabase();
 	    
 	    String[] columns = new String[]{"node_id","desc"};
     	Cursor cur = ourDatabase.query("node_connections", columns, "x=? AND y=?", new String[]{Integer.toString(xPosition),Integer.toString(yPosition)}, null, null, null);

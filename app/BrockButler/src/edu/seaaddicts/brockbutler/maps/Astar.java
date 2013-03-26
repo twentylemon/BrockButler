@@ -38,8 +38,7 @@ public class Astar {
     /**
 	 * Constructor method for the ASTAR class. The constructor
 	 * is given the context of the calling activity as an argument
-	 * then opens and sets up the database connection. Also creates the
-	 * graph from the database for the searchable space.
+	 * then opens and sets up the database connection.
 	 */ 
     public Astar (Context c) {
     	ourContext = c;
@@ -84,11 +83,11 @@ public class Astar {
     	for(int j=0; j<graph.length; j++) {
 			if(startNode.compare(graph[j]))
 				startNode = graph[j];
-			else if(goalNode.compare(graph[j]))
+			if(goalNode.compare(graph[j]))
 				goalNode = graph[j];
 		}
-		
-		if(startNode.accesible.length == 0 || goalNode.accesible.length == 0)
+    	
+    	if(startNode.accesible.length == 0 || goalNode.accesible.length == 0)
     		return null;
     	
         PriorityQueue<Position> openList = new PriorityQueue<Position>();
