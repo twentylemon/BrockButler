@@ -30,6 +30,12 @@ public class MapsActivity extends Activity {
 	private Handler mHandler;
 	private MapsTouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
+    
+    private Position currentLocation;
+    private Position start;
+    private Position goal;
+    private Astar school;
+    
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,10 @@ public class MapsActivity extends Activity {
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler);
+        
+        start = new Position(1693,1052,"D Block","D37");
+        goal = new Position(1818,789,"J Block","J23");
+        school = new Astar(this);
 	}
 
 	@Override
@@ -194,6 +204,19 @@ public class MapsActivity extends Activity {
 						// draw_directions_on_map
 						// else
 						// displayNoSuchLocationDialog()
+                        
+                        //if(school.nodeExist(start) && school.nodeExist(goal)) {
+                        //    Position[] route = school.pathGeneration(start, goal);
+                        //
+                        //    if(route != null)
+                        //        for(int i=0; i<route.length; i++)
+                        //            Log.i("PRINT ROUTE", route[i].nodeNumber);
+                        //    else
+                        //        Log.e("ROUTE ERROR", "No path generated");
+                        //} else {
+                        //    Log.e("ROUTE ERROR", "Invalid start or end position");
+                        //}
+                        
 						Toast.makeText(getApplicationContext(),
 								"Thomas' search method goes here.",
 								Toast.LENGTH_LONG).show();
