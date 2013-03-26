@@ -127,7 +127,9 @@ public class Position implements Comparable<Object> {
 	@Override
 	public int compareTo (Object node) {
 		Position temp = (Position) node;
-        return (int)(fScore - temp.fScore);
+        if(this.xPosition == temp.xPosition && this.yPosition == temp.yPosition && this.nodeNumber.equals(temp.nodeNumber) && this.nodeName.equals(temp.nodeName))
+			return true;
+		return false;
 	}
 	
 	/**
