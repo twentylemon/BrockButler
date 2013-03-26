@@ -14,7 +14,6 @@ import java.util.PriorityQueue;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class Astar {
 	
@@ -31,8 +30,9 @@ public class Astar {
 	private static final String DATABASE_TABLE = "node_connections";
 	
 	private DatabaseHelper ourHelper;
-    private final Context   ourContext;
-    private SQLiteDatabase  ourDatabase;
+    private final Context ourContext;
+    private SQLiteDatabase ourDatabase;
+    private Position[] graph;
 
     
     /**
@@ -44,15 +44,52 @@ public class Astar {
     	ourContext = c;
     	ourHelper = new DatabaseHelper(ourContext);
         ourDatabase = ourHelper.getWritableDatabase();
+        
+        Cursor cur = ourDatabase.rawQuery("SELECT DISTINCT node_id, desc, x, y FROM node_connections", null);
+    	graph = new Position[cur.getCount()];
+    	if (cur.moveToFirst()) {
+    		int i = 0;
+    		do {
+    			graph[i] = new Position(cur.getInt(cur.getColumnIndex(KEY_XPOS)),cur.getInt(cur.getColumnIndex(KEY_YPOS)),cur.getString(cur.getColumnIndex(KEY_DESC)),cur.getString(cur.getColumnIndex(KEY_NODE)));
+    			i++;
+    		} while (cur.moveToNext());
+    	}
+    	
+    	for(int i=0; i<graph.length; i++) {
+    		String[] columns = new String[]{KEY_NODE,KEY_DESC,KEY_XPOS,KEY_YPOS,KEY_CONN};
+        	cur = ourDatabase.query(DATABASE_TABLE, columns, KEY_CONN+"=?", new String[]{graph[i].nodeNumber}, null, null, null);
+        	if (cur.moveToFirst()) {
+        		graph[i].accesible = new Position[cur.getCount()];
+        		int k=0;
+        		do {
+        			graph[i].accesible[k] = new Position(cur.getInt(cur.getColumnIndex(KEY_XPOS)), cur.getInt(cur.getColumnIndex(KEY_YPOS)), cur.getString(cur.getColumnIndex(KEY_DESC)), cur.getString(cur.getColumnIndex(KEY_NODE)));
+        			for(int j=0; j<graph.length; j++) {
+        				if(graph[i].accesible[k].compare(graph[j]))
+        					graph[i].accesible[k] = graph[j];
+        			}
+        			k++;
+        		} while(cur.moveToNext());
+        	}
+    	}
     }
     
     
     /**
 	 * The pathGeneration method is the main part of the A* algorithm. This method
-	 * achieves an efficient and route between two positions based on a huristic 
+	 * achieves an efficient and route between two positions based on a heuristic 
 	 * score.
 	 */ 
     public Position[] pathGeneration(Position startNode, Position goalNode)  {
+    	for(int j=0; j<graph.length; j++) {
+			if(startNode.compare(graph[j]))
+				startNode = graph[j];
+			if(goalNode.compare(graph[j]))
+				goalNode = graph[j];
+		}
+    	
+    	if(startNode.accesible.length == 0 || goalNode.accesible.length == 0)
+    		return null;
+    	
         PriorityQueue<Position> openList = new PriorityQueue<Position>();
         openList.add(startNode);
         
@@ -70,7 +107,6 @@ public class Astar {
             double tempY = tempNode.yPosition - goalNode.yPosition;
             tempNode.hScore = Math.sqrt(tempX*tempX + tempY*tempY);
 
-            tempNode = getAdjacent(tempNode);
             for(int i=0; i<tempNode.accesible.length; i++) {
             	Position adjacentNode = tempNode.accesible[i];
             	
@@ -136,56 +172,5 @@ public class Astar {
 	 */ 
     public void close(){
         ourHelper.close();
-    }
-    
-    
-    /**
-	 * This method is used by the A* algorithm to return all adjacent nodes
-	 * to the current node. Searches the SQLite database for node connections.
-	 */ 
-    public Position getAdjacent(Position node) {
-    	String[] columns = new String[]{KEY_NODE,KEY_DESC,KEY_XPOS,KEY_YPOS,KEY_CONN};
-    	Cursor cur = ourDatabase.query(DATABASE_TABLE, columns, KEY_CONN+"=?", new String[]{node.nodeNumber}, null, null, null);
-    	if (cur.moveToFirst()) {
-    		node.accesible = new Position[cur.getCount()];
-    		//Log.i("PRINT", Integer.toString(cur.getCount()) + "," + Integer.toString(node.accesible.length));
-    		int i=0;
-    		do {
-    			Log.i("PRINT", cur.getString(cur.getColumnIndex(KEY_NODE)));
-    			node.accesible[i] = new Position(cur.getInt(cur.getColumnIndex(KEY_XPOS)), cur.getInt(cur.getColumnIndex(KEY_YPOS)), cur.getString(cur.getColumnIndex(KEY_DESC)), cur.getString(cur.getColumnIndex(KEY_NODE)));
-    			i++;
-    		} while(cur.moveToNext());
-    	} else {
-    		Log.e("PRINT", "getAdjacent: Empty return on query");
-    	}
-    	return node;
-    }
-    
-    
-    /**
-	 * Testing methods for the ASTAR class. These methods are provided
-	 * for testing and debugging purposes capable of printing information 
-	 * to the log.
-	 */ 
-    public void printTable () {
-    	Cursor cur = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE, null);
-    	if (cur.moveToFirst()) {
-    		while (cur.moveToNext())
-    			Log.d("ASTAR CLASS", cur.getString(cur.getColumnIndex(KEY_NODE)) + ", " + cur.getInt(cur.getColumnIndex(KEY_XPOS)) + ", " + cur.getInt(cur.getColumnIndex(KEY_YPOS)));
-    	} else {
-    		Log.e("ASTAR CLASS", "printTable: Empty return on query");
-    	}
-    }
-    
-    public void printAdjacent(Position node) {
-    	String[] columns = new String[]{KEY_NODE, KEY_DESC, KEY_XPOS, KEY_YPOS, KEY_CONN};
-    	Cursor cur = ourDatabase.query(DATABASE_TABLE, columns, KEY_CONN+"=?", new String[]{node.nodeNumber}, null, null, null);
-    	if (cur.moveToFirst()) {
-    		do {
-    			Log.d("ASTAR CLASS", cur.getString(cur.getColumnIndex(KEY_NODE)) + ", " + cur.getInt(cur.getColumnIndex(KEY_XPOS)) + ", " + cur.getInt(cur.getColumnIndex(KEY_YPOS)));
-    		} while (cur.moveToNext());
-    	} else {
-    		Log.e("ASTAR CLASS", "printAdjacent: Empty return on query");
-    	}
     }
 }

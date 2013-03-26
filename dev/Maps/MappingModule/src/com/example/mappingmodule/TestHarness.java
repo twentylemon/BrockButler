@@ -1,7 +1,6 @@
 package com.example.mappingmodule;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,20 +11,23 @@ public class TestHarness extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_harness);
-        
-        Context contextNew = this;
-		Astar a = new Astar(contextNew);
 		
-		Position start = new Position(1732,687,"J Block","J01");
-		Position goal = new Position(1858,624,"J Block","J13");
-		
-		Position[] route = a.pathGeneration(start, goal);
-		
-		for(int i=0; i<route.length; i++) {
-			Log.i("MAIN CLASS", "Node: " + route[i].nodeNumber);
-		}
-		
-		a.close();
+		Position start = new Position(1693,1052,"D Block","D37");
+		//"('D37', 'D Block', 1693, 1052, 'D38')," +
+		//"('J23', 'J Block', 1818, 789, 'J22')," +
+		Position goal = new Position(1818,789,"J Block","J23");
+	    
+	    Astar a = new Astar(this);
+	    
+	    Position[] route = a.pathGeneration(start, goal);
+	    
+	    if(route != null)
+	    	for(int i=0; i<route.length; i++)
+		    	Log.d("PRINT", route[i].nodeNumber);
+	    else
+	    	Log.e("PRINT", "Ahhh the Motherland");
+	    
+	    a.close();
     }
 
     @Override
