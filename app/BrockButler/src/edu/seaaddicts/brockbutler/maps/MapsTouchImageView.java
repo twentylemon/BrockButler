@@ -285,4 +285,8 @@ public class MapsTouchImageView extends ImageView {
 		f[1] = (float) mMapRatio * y;
 		return f;
 	}
+	
+	public void drawPosition(int x, int y) {
+		convertDimensions((float) x, (float) y);
+	}
 }

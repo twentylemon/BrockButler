@@ -24,8 +24,14 @@ public class CourseHandler {
 		// this.context = context;
 		CH = new CurrentCoursesHandler(context);
 		courseList = new CourseListHandler(context);
-		SQLiteDatabase db = courseList.getWritableDatabase();
-		db.close();
+		try{
+		courseList.createDataBase();
+		courseList.openDataBase();
+		courseList.close();
+		}
+		catch(Exception e){};
+		//SQLiteDatabase db = courseList.getWritableDatabase();
+		//db.close();
 	}
 
 	// getAllCourses - grabs course data from the registrar's timetable and
@@ -35,7 +41,7 @@ public class CourseHandler {
 	}
 
 	public void updateAll() {
-		courseList.updateCourse();
+		//courseList.updateCourse();
 	}
 
 	// getCourse - gets all information for a given course subject and code

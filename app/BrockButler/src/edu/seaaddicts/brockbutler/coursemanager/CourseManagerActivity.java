@@ -27,6 +27,8 @@ import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 
 public class CourseManagerActivity extends Activity {
 
+	private static final String TAG = "CourseManagerActivity";
+
 	private static final int VISIBLE = 0;
 	private static final int GONE = 8;
 
@@ -68,10 +70,18 @@ public class CourseManagerActivity extends Activity {
 			// Creating the list adapter and populating the list
 			ArrayAdapter<String> listAdapter = new CustomListAdapter(this,
 					R.layout.course_list_item);
+
 			for (int i = 0; i < mRegisteredCoursesList.size(); i++) {
 				listAdapter.add(mRegisteredCoursesList.get(i).mSubject + " "
 						+ mRegisteredCoursesList.get(i).mCode);
-				Log.d("MAIN: # Offerings", ""+mRegisteredCoursesList.get(i).mOfferings.size());
+
+				for (int j = 0; j < mRegisteredCoursesList.get(i).mOfferings
+						.size(); j++)
+					Log.d(TAG, "Offerings: "
+							+ mRegisteredCoursesList.get(i).mOfferings.get(j));
+
+				Log.d(TAG, "# Offerings: "
+						+ mRegisteredCoursesList.get(i).mOfferings.size());
 			}
 			mRegisteredCoursesListView.setAdapter(listAdapter);
 			tvNoCourses.setVisibility(GONE);
@@ -140,15 +150,22 @@ public class CourseManagerActivity extends Activity {
 		((TextView) view.findViewById(R.id.tv_prof_name))
 				.setText(mRegisteredCoursesList.get(position).mInstructor);
 
-		Log.d("NUMBER OFFERINGS:", "" +mRegisteredCoursesList.get(position).mOfferings
-				.size());
+		Log.d(TAG,
+				"Number of Offerings for "
+						+ mRegisteredCoursesList.get(position).mSubject
+						+ " "
+						+ mRegisteredCoursesList.get(position).mCode
+						+ ": "
+						+ mRegisteredCoursesList.get(position).mOfferings
+								.size());
+
 		// Add offerings registered for
 		for (int i = 0; i < mRegisteredCoursesList.get(position).mOfferings
 				.size(); i++) {
 			String what = mRegisteredCoursesList.get(position).mOfferings
 					.get(i).mType.substring(0, 3).trim();
 
-			Log.d("TYPE: ", "" + what);
+			Log.d(TAG, "Offering Type: " + what);
 
 			if (what.equalsIgnoreCase("lec"))
 				((TextView) view.findViewById(R.id.tv_lecture))

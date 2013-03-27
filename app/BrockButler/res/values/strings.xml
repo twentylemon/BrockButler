@@ -68,6 +68,7 @@
     <string name="title_lecture">Lectures</string>
     <string name="title_lab">Labs</string>
     <string name="title_tutorial">Tutorials</string>
+    <string name="title_seminar">Seminar</string>
     <string name="title_assignment">Assignments</string>
     <string name="title_test">Tests</string>
 

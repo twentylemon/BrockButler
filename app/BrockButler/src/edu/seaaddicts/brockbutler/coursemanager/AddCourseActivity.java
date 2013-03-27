@@ -21,6 +21,9 @@ import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 
 public class AddCourseActivity extends Activity {
+
+	private static final String TAG = "AddCourseActivity";
+
 	private static final int DATE_DIALOG_ID = 0;
 	private static final int VISIBLE = 0;
 	private static final int INVISIBLE = 4;
@@ -133,19 +136,17 @@ public class AddCourseActivity extends Activity {
 					// Some offerings don't have any of what we are looking for,
 					// so check length to make sure.
 					if (s.length() > 2) {
-						if (s.substring(0, 3).trim().equalsIgnoreCase("lec")) {
+						String ss = s.substring(0, 3).trim();
+						if (ss.equalsIgnoreCase("lec")) {
 							mLecs.add(s + ", SEC " + mOfferings.get(i).mSection);
 							mLecsOfferings.add(mOfferings.get(i));
-						} else if (s.substring(0, 3).trim()
-								.equalsIgnoreCase("lab")) {
+						} else if (ss.equalsIgnoreCase("lab")) {
 							mLabs.add(s + ", SEC " + mOfferings.get(i).mSection);
 							mLabsOfferings.add(mOfferings.get(i));
-						} else if (s.substring(0, 3).trim()
-								.equalsIgnoreCase("tut")) {
+						} else if (ss.equalsIgnoreCase("tut")) {
 							mTuts.add(s + ", SEC " + mOfferings.get(i).mSection);
 							mTutsOfferings.add(mOfferings.get(i));
-						} else if (s.substring(0, 3).trim()
-								.equalsIgnoreCase("sem")) {
+						} else if (ss.equalsIgnoreCase("sem")) {
 							mSems.add(s + ", SEC " + mOfferings.get(i).mSection);
 							mSemsOfferings.add(mOfferings.get(i));
 						}
@@ -223,6 +224,11 @@ public class AddCourseActivity extends Activity {
 					for (int i = 0; i < mLecsListView.getCount(); i++) {
 						if (sba1.get(i) == true) {
 							c.mOfferings.add(mLecsOfferings.get(i));
+							Log.d(TAG, "Added: " + mLecsOfferings.get(i).mSubj
+									+ " " + mOfferings.get(i).mCode + ", Type "
+									+ mOfferings.get(i).mType + ", Section "
+									+ mOfferings.get(i).mSection
+									+ " to Offerings");
 						}
 					}
 				}
@@ -233,6 +239,11 @@ public class AddCourseActivity extends Activity {
 					for (int i = 0; i < mLabsListView.getCount(); i++) {
 						if (sba2.get(i) == true) {
 							c.mOfferings.add(mLabsOfferings.get(i));
+							Log.d(TAG, "Added: " + mLabsOfferings.get(i).mSubj
+									+ " " + mOfferings.get(i).mCode + ", Type "
+									+ mOfferings.get(i).mType + ", Section "
+									+ mOfferings.get(i).mSection
+									+ " to Offerings");
 						}
 					}
 				}
@@ -243,6 +254,11 @@ public class AddCourseActivity extends Activity {
 					for (int i = 0; i < mTutsListView.getCount(); i++) {
 						if (sba3.get(i) == true) {
 							c.mOfferings.add(mTutsOfferings.get(i));
+							Log.d(TAG, "Added: " + mTutsOfferings.get(i).mSubj
+									+ " " + mOfferings.get(i).mCode + ", Type "
+									+ mOfferings.get(i).mType + ", Section "
+									+ mOfferings.get(i).mSection
+									+ " to Offerings");
 						}
 					}
 				}
@@ -252,7 +268,12 @@ public class AddCourseActivity extends Activity {
 
 					for (int i = 0; i < mSemsListView.getCount(); i++) {
 						if (sba4.get(i) == true) {
-							c.mOfferings.add(mTutsOfferings.get(i));
+							c.mOfferings.add(mSemsOfferings.get(i));
+							Log.d(TAG, "Added: " + mSemsOfferings.get(i).mSubj
+									+ " " + mOfferings.get(i).mCode + ", Type "
+									+ mOfferings.get(i).mType + ", Section "
+									+ mOfferings.get(i).mSection
+									+ " to Offerings");
 						}
 					}
 				}
@@ -263,9 +284,14 @@ public class AddCourseActivity extends Activity {
 						Toast.makeText(getApplicationContext(),
 								c.mSubject + " " + c.mCode + " added.",
 								Toast.LENGTH_LONG).show();
-						
-							Log.d("# ADDED OFFERINGS:", ""+c.mOfferings.size());
-							
+						Log.d("# ADDED OFFERINGS:", "" + c.mOfferings.size());
+						for (int i = 0; i < c.mOfferings.size(); i++) {
+							Log.d(TAG, "Added: " + c.mOfferings.get(i).mSubj
+									+ " " + mOfferings.get(i).mCode + ", Type "
+									+ mOfferings.get(i).mType + ", Section "
+									+ mOfferings.get(i).mSection
+									+ " to Offerings");
+						}
 						onBackPressed();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block

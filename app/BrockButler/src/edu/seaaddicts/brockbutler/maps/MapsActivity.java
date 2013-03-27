@@ -26,13 +26,16 @@ public class MapsActivity extends Activity {
 	private TextView mTemp;
 	private Button start;
 	private Button resume;
+	Position pTest;
+	
+	private EditText mSearchEditText;
 
 	private Handler mHandler;
 	private MapsTouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
     
     private Position currentLocation;
-    private Position start;
+    private Position mStartPosition;
     private Position goal;
     private Astar school;
     
@@ -70,9 +73,9 @@ public class MapsActivity extends Activity {
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler);
-        
-        start = new Position(1693,1052,"D Block","D37");
-        goal = new Position(1818,789,"J Block","J23");
+		
+        mStartPosition = new Position(1323,879,"D Block","D01");
+        goal = new Position(1371,877,"D Block","D03");
         school = new Astar(this);
 	}
 
@@ -142,13 +145,13 @@ public class MapsActivity extends Activity {
 		editalert.setTitle("MChown Location Search");
 		editalert.setMessage("Enter block or room name (i.e. B203)");
 
-		final EditText input = new EditText(this);
-		input.setSingleLine(true);
+		mSearchEditText = new EditText(this);
+		mSearchEditText.setSingleLine(true);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT);
-		input.setLayoutParams(lp);
-		editalert.setView(input);
+		mSearchEditText.setLayoutParams(lp);
+		editalert.setView(mSearchEditText);
 
 		final ListView locList = new ListView(this);
 
@@ -160,6 +163,8 @@ public class MapsActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 						// Call Thomas' location search method with EditText
 						// string.
+						pTest = school.findPosition(mSearchEditText.getText().toString());
+						Log.d("SEARCH", pTest.xPosition + "," + pTest.yPosition);
 					}
 				});
 		editalert.setNegativeButton("Cancel",
@@ -204,18 +209,23 @@ public class MapsActivity extends Activity {
 						// draw_directions_on_map
 						// else
 						// displayNoSuchLocationDialog()
-                        
-                        //if(school.nodeExist(start) && school.nodeExist(goal)) {
-                        //    Position[] route = school.pathGeneration(start, goal);
-                        //
-                        //    if(route != null)
-                        //        for(int i=0; i<route.length; i++)
-                        //            Log.i("PRINT ROUTE", route[i].nodeNumber);
-                        //    else
-                        //        Log.e("ROUTE ERROR", "No path generated");
-                        //} else {
-                        //    Log.e("ROUTE ERROR", "Invalid start or end position");
-                        //}
+//                        Position p = school.findPosition(mSearchEditText.getText().toString());
+//						
+//						
+//						if (school.nodeExist(mStartPosition)
+//								&& school.nodeExist(goal)) {
+//							Position[] route = school.pathGeneration(
+//									mStartPosition, goal);
+//
+//							if (route != null)
+//								for (int i = 0; i < route.length; i++)
+//									Log.i("PRINT ROUTE", route[i].nodeNumber);
+//							else
+//								Log.e("ROUTE ERROR", "No path generated");
+//						} else {
+//							Log.e("ROUTE ERROR",
+//									"Invalid start or end position");
+//						}
                         
 						Toast.makeText(getApplicationContext(),
 								"Thomas' search method goes here.",

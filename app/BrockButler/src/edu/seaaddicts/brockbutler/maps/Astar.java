@@ -44,7 +44,8 @@ public class Astar {
     public Astar (Context c) {
     	ourContext = c;
     	ourHelper = new DatabaseHelper(ourContext);
-        ourDatabase = ourHelper.getWritableDatabase();
+        //ourDatabase = ourHelper.getWritableDatabase();
+        ourDatabase = ourHelper.getReadableDatabase();
         
         Cursor cur = ourDatabase.rawQuery("SELECT DISTINCT node_id, desc, x, y FROM node_connections", null);
     	graph = new Position[cur.getCount()];
@@ -72,7 +73,7 @@ public class Astar {
         		} while(cur.moveToNext());
         	}
     	}
-    	Log.d("PRINT", "Graph Built");
+    	Log.d("PRINT", "Graph Built with " + graph.length + " nodes");
     }
     
     /**
@@ -94,7 +95,8 @@ public class Astar {
 	 */ 
     public Position findPosition(String nodeName) {
     	for(int j=0; j<graph.length; j++) {
-			if(nodeName.equals(graph[j].nodeName))
+    		Log.i("PRINT",graph.length + "," + nodeName + "," + graph[j].nodeNumber);
+			if(nodeName.equals(graph[j].nodeNumber))
 				return graph[j];
 		}
     	return null;

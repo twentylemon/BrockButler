@@ -9,23 +9,34 @@
 
 package edu.seaaddicts.brockbutler.coursemanager;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
-
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Looper;
 
 public class CourseListHandler extends SQLiteOpenHelper {
 
 	// All Static variables
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
-
-	// Database Name
 	private static final String DATABASE_NAME = "Database";
+	private static String DB_PATH = "/data/data/edu.seaddicts.brockbutler.cousemanager/databases";
+    //private static String DB_NAME = "database.sqlite";
+    //private static String DB_PATH = DB_DIR + DATABASE_NAME;
+    //private static String OLD_DB_PATH = DB_DIR + "old_" + DATABASE_NAME;
+    private SQLiteDatabase myDataBase; 
+	// Database Name
+	
 
 	// Contacts table name
 	private static final String TABLE_MCOURSES = "MasterList";
@@ -74,17 +85,19 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_PRIORITY = "priority";
 	private static final String KEY_INSTREMAIL = "instructor_email";
-
+	
 	Context context;
 
 	public CourseListHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		this.context = context;
+		DB_PATH = this.context.getDatabasePath(DATABASE_NAME).getAbsolutePath();
 	}
 
 	// creates the courses table for the master list of courses
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		/*
 		String CREATE_COURSES_TABLE = "CREATE TABLE " + TABLE_MCOURSES + "("
 				+ KEY_ID + " TEXT," + KEY_SUBJ + " TEXT," + KEY_CODE + " TEXT,"
 				+ KEY_DESC + " TEXT," + KEY_TYPE + " TEXT," + KEY_SEC
@@ -135,8 +148,133 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_OFFERINGS);
 		db.execSQL(CREATE_OFFERING_TIMES);
 		db.execSQL(CREATE_CONTACTS);
+		*/
+		/*A test to see if a pre loaded database can be inserted to a newly made one
+		 * 
+		 */
+
+		
 	}
 
+	
+	
+	
+	
+	
+	 public void createDataBase() throws IOException{
+		 
+		 boolean dbExist = checkDataBase();
+		  
+		 if(dbExist){
+		 //do nothing - database already exist
+		 }else{
+		  
+		 //By calling this method and empty database will be created into the default system path
+		 //of your application so we are gonna be able to overwrite that database with our database.
+		 this.getReadableDatabase();
+		  
+		 try {
+		  
+		 copyDataBase();
+		  
+		 } catch (IOException e) {
+		  
+		 throw new Error("Error copying database");
+		  
+		 }
+		 }
+		  
+		 }
+	
+	
+	 
+	 
+	 private boolean checkDataBase(){
+		 
+		 SQLiteDatabase checkDB = null;
+		  
+		 try{
+		 String myPath = DB_PATH;// + DATABASE_NAME;
+		 checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+		  
+		 }catch(SQLiteException e){
+		  
+		 //database does't exist yet.
+		  
+		 }
+		  
+		 if(checkDB != null){
+		  
+		 checkDB.close();
+		  
+		 }
+		  
+		 return checkDB != null ? true : false;
+		 }
+	 
+	 
+	 
+	 private void copyDataBase() throws IOException{
+		 
+		//Open your local db as the input stream
+		InputStream myInput = this.context.getAssets().open(DATABASE_NAME);
+		 
+		// Path to the just created empty db
+		String outFileName = DB_PATH;// + DATABASE_NAME;
+		 
+		//Open the empty db as the output stream
+		OutputStream myOutput = new FileOutputStream(outFileName);
+		 
+		//transfer bytes from the inputfile to the outputfile
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = myInput.read(buffer))>0){
+		myOutput.write(buffer, 0, length);
+		}
+		 
+		//Close the streams
+		myOutput.flush();
+		myOutput.close();
+		myInput.close();
+		 
+		}
+	
+	 
+	 
+	 public void openDataBase() throws SQLException{
+		 
+		//Open the database
+		String myPath = DB_PATH;// + DATABASE_NAME;
+		myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+		 
+		}
+		 
+		@Override
+		public synchronized void close() {
+		 
+		if(myDataBase != null)
+		myDataBase.close();
+		 
+		super.close();
+		 
+		}
+		 
+		
+		/*
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+		 
+		}
+		 
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		 
+		}*/
+	 
+	 
+	
+	
+	
 	// upgrading the database will drop the table and recreate
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -148,7 +286,12 @@ public class CourseListHandler extends SQLiteOpenHelper {
 
 	// addCourse - adds information for a course into the database
 	public void addCourse() {
+		Looper myLooper;
 		Brocku list = new Brocku();
+		myLooper = Looper.myLooper();
+        Looper.loop();
+        
+                     myLooper.quit();
 		ArrayList<MasterCourse> course = new ArrayList<MasterCourse>();
 		try {
 			course = list.execute().get();
@@ -180,7 +323,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		}
 		;
 	}
-
+/*
 	public void updateCourse() {
 		Brocku list = new Brocku();
 		ArrayList<MasterCourse> course = new ArrayList<MasterCourse>();
@@ -220,7 +363,7 @@ public class CourseListHandler extends SQLiteOpenHelper {
 		}
 		;
 	}
-
+*/
 	// getCourses - returns a list of offerings for a particular subject and
 	// code
 	public ArrayList<MasterCourse> getCourses(String subj, String code) {
