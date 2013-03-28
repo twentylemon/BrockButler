@@ -24,7 +24,7 @@ public class Position implements Comparable<Object> {
 	public double   hScore;
 	public String   nodeNumber;
 	public String   nodeName;
-	public boolean  visited;
+	public boolean  visited = false;;
     public Position from;
     public Position accesible[];
     public Position nonaccesible[];

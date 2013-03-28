@@ -11,13 +11,11 @@ public class TestHarness extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_harness);
-		
-		Position start = new Position(1693,1052,"D Block","D37");
-		//"('D37', 'D Block', 1693, 1052, 'D38')," +
-		//"('J23', 'J Block', 1818, 789, 'J22')," +
-		Position goal = new Position(1818,789,"J Block","J23");
 	    
-	    Astar a = new Astar(this);
+	    Astar a = new Astar();
+	    
+	    Position start = a.findPosition("J01");
+	    Position goal = a.findPosition("J23");
 	    
 	    if(a.nodeExist(start) && a.nodeExist(goal)) {
 		    Position[] route = a.pathGeneration(start, goal);
@@ -30,7 +28,7 @@ public class TestHarness extends Activity {
 	    } else {
 	    	Log.e("PRINT", "positions apperantly dont exist"); 
 	    }
-	    a.close();
+	    //a.close();
     }
 
     @Override

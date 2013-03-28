@@ -19,61 +19,9 @@ import android.util.Log;
 public class Astar {
 	
 	/**
-	 * Class variable for the ASTAR class. All are private variables
-	 * as they are all atributited to the database helper and 
-	 * are only used by this class.
+	 * Class variable for the ASTAR class.
 	 */
-	private static final String KEY_NODE = "node_id";
-	private static final String KEY_DESC = "desc";
-	private static final String KEY_XPOS = "x";
-	private static final String KEY_YPOS = "y";
-	private static final String KEY_CONN = "con";
-	private static final String DATABASE_TABLE = "node_connections";
-	
-	private DatabaseHelper ourHelper;
-    private final Context ourContext;
-    private SQLiteDatabase ourDatabase;
     private Position[] graph;
-
-    
-    /**
-	 * Constructor method for the ASTAR class. The constructor
-	 * is given the context of the calling activity as an argument
-	 * then opens and sets up the database connection.
-	 */ 
-    public Astar (Context c) {
-    	ourContext = c;
-    	ourHelper = new DatabaseHelper(ourContext);
-        ourDatabase = ourHelper.getWritableDatabase();
-        
-        Cursor cur = ourDatabase.rawQuery("SELECT DISTINCT node_id, desc, x, y FROM node_connections", null);
-    	graph = new Position[cur.getCount()];
-    	if (cur.moveToFirst()) {
-    		int i = 0;
-    		do {
-    			graph[i] = new Position(cur.getInt(cur.getColumnIndex(KEY_XPOS)),cur.getInt(cur.getColumnIndex(KEY_YPOS)),cur.getString(cur.getColumnIndex(KEY_DESC)),cur.getString(cur.getColumnIndex(KEY_NODE)));
-    			i++;
-    		} while (cur.moveToNext());
-    	}
-    	
-    	for(int i=0; i<graph.length; i++) {
-    		String[] columns = new String[]{KEY_NODE,KEY_DESC,KEY_XPOS,KEY_YPOS,KEY_CONN};
-        	cur = ourDatabase.query(DATABASE_TABLE, columns, KEY_CONN+"=?", new String[]{graph[i].nodeNumber}, null, null, null);
-        	if (cur.moveToFirst()) {
-        		graph[i].accesible = new Position[cur.getCount()];
-        		int k=0;
-        		do {
-        			graph[i].accesible[k] = new Position(cur.getInt(cur.getColumnIndex(KEY_XPOS)), cur.getInt(cur.getColumnIndex(KEY_YPOS)), cur.getString(cur.getColumnIndex(KEY_DESC)), cur.getString(cur.getColumnIndex(KEY_NODE)));
-        			for(int j=0; j<graph.length; j++) {
-        				if(graph[i].accesible[k].compare(graph[j]))
-        					graph[i].accesible[k] = graph[j];
-        			}
-        			k++;
-        		} while(cur.moveToNext());
-        	}
-    	}
-    	Log.d("PRINT", "Graph Built");
-    }
     
     /**
 	 * This method returns true or false if a given position exists
@@ -94,7 +42,7 @@ public class Astar {
 	 */ 
     public Position findPosition(String nodeName) {
     	for(int j=0; j<graph.length; j++) {
-			if(nodeName.equals(graph[j].nodeName))
+			if(nodeName.equals(graph[j].nodeNumber))
 				return graph[j];
 		}
     	return null;
@@ -192,12 +140,129 @@ public class Astar {
         return route;
     }
     
-    
     /**
-	 * This method is invoked to close the connection to the database once the
-	 * path has been generated.
-	 */ 
-    public void close(){
-        ourHelper.close();
+	 * Constructor method for the ASTAR class. The constructor
+	 * is given the context of the calling activity as an argument
+	 * then opens and sets up the database connection.
+	 */
+    public Astar () {
+    	
+    	graph = new Position[23];
+    	
+    	graph[0] = new Position(1732,687,"J Block","J01");
+    	graph[1] = new Position(1763,688,"J Block","J02");
+    	graph[2] = new Position(1775,698,"J Block","J03");
+    	graph[3] = new Position(1799,723,"J Block","J04");
+    	graph[4] = new Position(1724,677,"J Block","J05");
+    	graph[5] = new Position(1789,663,"J Block","J06");
+    	graph[6] = new Position(1805,648,"J Block","J07");
+    	graph[7] = new Position(1819,637,"J Block","J08");
+    	graph[8] = new Position(1832,625,"J Block","J09");
+    	graph[9] = new Position(1846,613,"J Block","J10");
+    	graph[10] = new Position(1836,600,"J Block","J11");
+    	graph[11] = new Position(1818,583,"J Block","J12");
+		graph[12] = new Position(1858,624,"J Block","J13");
+		graph[13] = new Position(1873,638,"J Block","J14");
+		graph[14] = new Position(1886,652,"J Block","J15");
+		graph[15] = new Position(1901,666,"J Block","J16");
+		graph[16] = new Position(1906,684,"J Block","J17");
+		graph[17] = new Position(1902,705,"J Block","J18");
+		graph[18] = new Position(1886,721,"J Block","J19");
+		graph[19] = new Position(1868,738,"J Block","J20");
+    	graph[20] = new Position(1856,752,"J Block","J21");
+    	graph[21] = new Position(1836,771,"J Block","J22");
+    	graph[22] = new Position(1818,789,"J Block","J23");
+    	
+    		graph[0].accesible = new Position[1];
+    		graph[0].accesible[0] = graph[1];
+    	
+    		graph[1].accesible = new Position[3];
+    		graph[1].accesible[0] = graph[0];
+    		graph[1].accesible[1] = graph[2];
+    		graph[1].accesible[2] = graph[4];
+    	
+    		graph[2].accesible = new Position[2];
+    		graph[2].accesible[0] = graph[1];
+    		graph[2].accesible[1] = graph[3];
+    	
+    		graph[3].accesible = new Position[1];
+    		graph[3].accesible[0] = graph[2];
+
+    		graph[4].accesible = new Position[2];
+			graph[4].accesible[0] = graph[1];
+			graph[4].accesible[1] = graph[5];
+    	
+    		graph[5].accesible = new Position[2];
+			graph[5].accesible[0] = graph[4];
+			graph[5].accesible[1] = graph[6];
+    	
+    		graph[6].accesible = new Position[2];
+			graph[6].accesible[0] = graph[5];
+			graph[6].accesible[1] = graph[7];
+    	
+    		graph[7].accesible = new Position[2];
+			graph[7].accesible[0] = graph[6];
+			graph[7].accesible[1] = graph[8];
+    	
+    		graph[8].accesible = new Position[2];
+    		graph[8].accesible[0] = graph[7];
+    		graph[8].accesible[1] = graph[9];
+    	
+    		graph[9].accesible = new Position[3];
+			graph[9].accesible[0] = graph[8];
+			graph[9].accesible[1] = graph[10];
+			graph[9].accesible[2] = graph[12];
+			
+    		graph[10].accesible = new Position[2];
+    		graph[10].accesible[0] = graph[9];
+    		graph[10].accesible[1] = graph[11];
+    	
+    		graph[11].accesible = new Position[1];
+    		graph[11].accesible[0] = graph[10];
+    	
+    		graph[12].accesible = new Position[2];
+    		graph[12].accesible[0] = graph[9];
+    		graph[12].accesible[1] = graph[13];
+    	
+    		graph[13].accesible = new Position[2];
+    		graph[13].accesible[0] = graph[12];
+			graph[13].accesible[1] = graph[14];
+    	
+    		graph[14].accesible = new Position[2];
+    		graph[14].accesible[0] = graph[13];
+    		graph[14].accesible[1] = graph[15];
+    	
+    		graph[15].accesible = new Position[2];
+    		graph[15].accesible[0] = graph[14];
+    		graph[15].accesible[1] = graph[16];
+    	
+    		graph[16].accesible = new Position[2];
+    		graph[16].accesible[0] = graph[15];
+    		graph[16].accesible[1] = graph[17];
+    	
+    		graph[17].accesible = new Position[2];
+    		graph[17].accesible[0] = graph[16];
+    		graph[17].accesible[1] = graph[18];
+    	
+    		graph[18].accesible = new Position[2];
+    		graph[18].accesible[0] = graph[17];
+    		graph[18].accesible[1] = graph[19];
+    	
+    		graph[19].accesible = new Position[2];
+    		graph[19].accesible[0] = graph[18];
+    		graph[19].accesible[1] = graph[20];
+    	
+    		graph[20].accesible = new Position[2];
+    		graph[20].accesible[0] = graph[19];
+    		graph[20].accesible[1] = graph[21];
+    	
+    		graph[21].accesible = new Position[2];
+    		graph[21].accesible[0] = graph[20];
+    		graph[21].accesible[1] = graph[22];
+    	
+    		graph[22].accesible = new Position[1];
+    		graph[22].accesible[0] = graph[21];
+    		
+    	Log.d("PRINT", "Graph Built of size " + graph.length);
     }
 }
