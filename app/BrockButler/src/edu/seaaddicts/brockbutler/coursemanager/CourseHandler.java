@@ -7,6 +7,7 @@
  **/
 
 package edu.seaaddicts.brockbutler.coursemanager;
+import edu.seaaddicts.brockbutler.contacts.Contact;
 
 import java.util.ArrayList;
 
@@ -190,6 +191,10 @@ public class CourseHandler {
 
 	public int getSize() {
 		return courseList.size();
+	}
+	
+	public void removeContact(Contact contact){
+		CH.removeContact(contact);
 	}
 
 	// Query - returns a cursor with results for a custom query

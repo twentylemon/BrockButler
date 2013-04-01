@@ -136,6 +136,9 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 		for (int i=0; i<course.mOfferings.size(); i++){
 			deleteOffering(course.mOfferings.get(i));		
 		}
+		for (int i=0; i<course.mTasks.size(); i++){
+			removeTask(course.mTasks.get(i));
+		}
 		
 		
 	}
@@ -287,7 +290,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			num = 0;
 			update = false;
 			num = DatabaseUtils.queryNumEntries(db, TABLE_TASKS, KEY_ASSIGN
-					+ " ='" + task.mAssign + "' AND " + KEY_SUBJ + " ='"
+					+ " =" + task.mAssign + " AND " + KEY_SUBJ + " ='"
 					+ task.mSubj + "' AND " + KEY_CODE + "='" + task.mCode
 					+ "'");
 			if (num > 0)
@@ -330,7 +333,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			update = false;
 			num = DatabaseUtils.queryNumEntries(db, TABLE_CONTACTS, KEY_SUBJ
 					+ " ='" + contact.mSubj + "' AND " + KEY_CODE + "='"
-					+ contact.mCode + "'");
+					+ contact.mCode + "' AND " + KEY_FNAME + "='" + contact.mFirstName
+					+ "' AND " + KEY_LNAME + "='"+ contact.mLastName+"'");
 			if (num > 0)
 				update = true;
 			values.put(KEY_SUBJ, contact.mSubj);
@@ -353,7 +357,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	/* addTasks - adds a task for a certian course */
+	/* addTasks - adds a task for a certain course */
 	public void addTasks(Task task) {
 		Course course = new Course();
 		course.mTasks.add(task);
@@ -516,13 +520,18 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* removeTask - deletes a given task from the tasks table of the database */
 	public void removeTask(Task task) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.rawQuery("PRAGMA foreign_keys = ON", null);
-		db.rawQuery("DELETE * FROM " + TABLE_TASKS + " WHERE " + KEY_SUBJ
-				+ "='" + task.mSubj + "' AND " + KEY_CODE + "='" + task.mCode
-				+ "' AND " + KEY_ASSIGN + "=" + task.mAssign, null);
+		//db.rawQuery("PRAGMA foreign_keys = ON", null);
+		db.delete(TABLE_TASKS, KEY_SUBJ
+				+ " ='" + task.mSubj + "' AND " + KEY_CODE + "='"
+				+ task.mCode + "' AND " + KEY_ASSIGN + "="
+				+ task.mAssign, null);
 		db.close();
 	}
 
+	public void removeContact(Contact contact){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_CONTACTS, KEY_CID +"="+contact.mId, null );
+	}
 	/*
 	 * getRegCourses - gets all courses added to the courses table of the
 	 * database and all of it's components
