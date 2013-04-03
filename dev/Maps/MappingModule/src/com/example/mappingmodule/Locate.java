@@ -1,36 +1,92 @@
 package com.example.mappingmodule;
 
+import java.util.List;
+
+import android.content.Context;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
+
 /**
  * Locate.java
  * Brock Butler
- * Database helper class to ease database interaction 
  * portion of Brock Butler.
- * Created by Thomas Nelson 2013-03-05
+ * Created by Thomas Nelson 2013-03-10
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
 
 
 public class Locate {
 	
+	/**
+	 * Class variables
+	 */
+	private static WifiManager      wifiMgr;
+	private static List<ScanResult> scanResults;
+	static Context mContext;
+	/**
+	 * Wireless information containers
+	 */
+	private static int[] sigStr  = new int[10];
+	private static String[] address = new String[10];
+	private static double[] sigIn  = new double[10];
+	private static double[] addIn = new double[10];
+	/**
+	 * Layers
+	 */
 	private static final int inputs = 2;
 	private static final int hidden = 8;
 	private static final int output = 5;
-	
-	//weights
+	/**
+	 * Weights
+	 */
 	private static double[][] W = new double[inputs][hidden];
 	private static double[][] V = new double[hidden][output];
 	private static double[] HB = new double[hidden];
 	private static double[] OB = new double[output];
-	//neuron outputs
+	/**
+	 * Neurons
+	 */
 	private static double[] hiddenVal = new double[hidden];
 	private static double[] outputVal = new double[output];
-	//neuron inputs
-	private static double[] inputVal = new double[inputs];
-
+	private static double[][] inputVal = new double[10][inputs];
+	
+	private static void getWirelessData(Context m) {
+		mContext = m;
+		wifiMgr = (WifiManager)mContext.getSystemService(Context.WIFI_SERVICE);
+    	int x = 0;
+    	
+    	for(int num=0; num<10; num++) {
+    		wifiMgr.startScan();
+    		scanResults = wifiMgr.getScanResults();
+    		
+    		x = 0;
+    		sigStr  = new int[10];
+    		address = new String[10];
+	   		 
+    		for(ScanResult scanRes : scanResults) {
+    			if(x < 10) {
+    				address[x] = scanRes.BSSID;
+    				sigStr[x] = scanRes.level;
+    				x++;
+    			}
+    		}
+    	}
+	}
+	
+	/**
+	 * This Method will return the sigmoid value of an argument
+	 * for the final node value
+	 * @param x
+	 * @return
+	 */
 	private static double sigmoid(double x) {
 		return 1 / (1 + Math.exp(-x));
 	}
 
+	/**
+	 * The beans of the class, calculates the network layers
+	 * and neuron values.
+	 */
 	private static void calcNetwork() {
 		for(int h=0; h<hidden; h++) {
 			hiddenVal[h] = -HB[h];
@@ -47,107 +103,148 @@ public class Locate {
 			}
 			outputVal[o] = sigmoid(outputVal[o]);
 			
-			//if(outputVal[o] >= 0.9)
-			//	outputVal[o] = 1;
-		    //else if(outputVal[o] <= 0.1)
-		    //	outputVal[o] = 0;
-			
-			//outputError[o] = outTrain[pat][o] - outputVal[o];
+			if(outputVal[o] >= 0.5)
+				outputVal[o] = 1;
+		    else if(outputVal[o] < 0.5)
+		    	outputVal[o] = 0;
 		}
 	}
 	
+	/**
+	 * Initializes the network with pre-defined weights
+	 */
 	public void initWeights ( ) {
-		W[0][0] = 0;
-		W[0][1] = 0;
-		W[0][2] = 0;
-		W[0][3] = 0;
-		W[0][4] = 0;
-		W[0][5] = 0;
-		W[0][6] = 0;
-		W[0][7] = 0;
-		
-		W[1][0] = 0;
-		W[1][1] = 0;
-		W[1][2] = 0;
-		W[1][3] = 0;
-		W[1][4] = 0;
-		W[1][5] = 0;
-		W[1][6] = 0;
-		W[1][7] = 0;
-		
-		V[0][0] = 0;
-		V[0][1] = 0;
-		V[0][2] = 0;
-		V[0][3] = 0;
-		V[0][4] = 0;
-		
-		V[1][0] = 0;
-		V[1][1] = 0;
-		V[1][2] = 0;
-		V[1][3] = 0;
-		V[1][4] = 0;
-		
-		V[2][0] = 0;
-		V[2][1] = 0;
-		V[2][2] = 0;
-		V[2][3] = 0;
-		V[2][4] = 0;
-		
-		V[3][0] = 0;
-		V[3][1] = 0;
-		V[3][2] = 0;
-		V[3][3] = 0;
-		V[3][4] = 0;
-		
-		V[4][0] = 0;
-		V[4][1] = 0;
-		V[4][2] = 0;
-		V[4][3] = 0;
-		V[4][4] = 0;
-		
-		V[5][0] = 0;
-		V[5][1] = 0;
-		V[5][2] = 0;
-		V[5][3] = 0;
-		V[5][4] = 0;
-		
-		V[6][0] = 0;
-		V[6][1] = 0;
-		V[6][2] = 0;
-		V[6][3] = 0;
-		V[6][4] = 0;
-		
-		V[7][0] = 0;
-		V[7][1] = 0;
-		V[7][2] = 0;
-		V[7][3] = 0;
-		V[7][4] = 0;
-		
-		HB[0] = 0;
-		HB[1] = 0;
-		HB[2] = 0;
-		HB[3] = 0;
-		HB[4] = 0;
-		HB[5] = 0;
-		HB[6] = 0;
-		HB[7] = 0;
-		
-		OB[0] = 0;
-		OB[1] = 0;
-		OB[2] = 0;
-		OB[3] = 0;
-		OB[4] = 0;
+		W[0][0] = -5.191953555370145;
+		W[1][0] = 8.311119623052747;
+		HB[0] = 13.645070679100112;
+		V[0][0] = -1.4188817448241078;
+		OB[0] = 8.485931304116875;
+		V[0][1] = -0.12644482595532947;
+		OB[1] = 7.676266130312892;
+		V[0][2] = -0.8742897792429708;
+		OB[2] = 7.71163044603109;
+		V[0][3] = 8.174930730213324;
+		OB[3] = 5.050964297399435;
+		V[0][4] = -1.483533992384484;
+		OB[4] = -0.9537318879960314;
+		W[0][1] = 1.2747639658533194;
+		W[1][1] = 35.85241447388153;
+		HB[1] = 22.187068222811735;
+		V[1][0] = 0.08863280595533382;
+		OB[0] = 8.485931304116875;
+		V[1][1] = -0.711381178420192;
+		OB[1] = 7.676266130312892;
+		V[1][2] = 0.47717648845370575;
+		OB[2] = 7.71163044603109;
+		V[1][3] = -0.9106351920878477;
+		OB[3] = 5.050964297399435;
+		V[1][4] = -21.858140121995646;
+		OB[4] = -0.9537318879960314;
+		W[0][2] = 72.6159523077509;
+		W[1][2] = 62.83113577555713;
+		HB[2] = 48.81891128647234;
+		V[2][0] = -0.2564556186462736;
+		OB[0] = 8.485931304116875;
+		V[2][1] = -1.3189848572962326;
+		OB[1] = 7.676266130312892;
+		V[2][2] = -1.132371452477312;
+		OB[2] = 7.71163044603109;
+		V[2][3] = 6.23102460219137;
+		OB[3] = 5.050964297399435;
+		V[2][4] = 0.9547440817617039;
+		OB[4] = -0.9537318879960314;
+		W[0][3] = -12.93760218402065;
+		W[1][3] = -27.44465213223537;
+		HB[3] = -12.785991014176767;
+		V[3][0] = -0.3900489003340711;
+		OB[0] = 8.485931304116875;
+		V[3][1] = -0.4526342230399839;
+		OB[1] = 7.676266130312892;
+		V[3][2] = -1.1900195982331039;
+		OB[2] = 7.71163044603109;
+		V[3][3] = 32.266073798358136;
+		OB[3] = 5.050964297399435;
+		V[3][4] = 0.8870702490085969;
+		OB[4] = -0.9537318879960314;
+		W[0][4] = 20.564192571900584;
+		W[1][4] = 64.556122443447;
+		HB[4] = 51.94209137066473;
+		V[4][0] = -0.14542636219949362;
+		OB[0] = 8.485931304116875;
+		V[4][1] = -0.18725148477033168;
+		OB[1] = 7.676266130312892;
+		V[4][2] = -1.3082405929431982;
+		OB[2] = 7.71163044603109;
+		V[4][3] = 7.750490464388548;
+		OB[3] = 5.050964297399435;
+		V[4][4] = 7.381930098882;
+		OB[4] = -0.9537318879960314;
+		W[0][5] = 26.203506852804754;
+		W[1][5] = 30.430410744252843;
+		HB[5] = 30.471677989844203;
+		V[5][0] = 0.6785829497339613;
+		OB[0] = 8.485931304116875;
+		V[5][1] = -0.7290230440401178;
+		OB[1] = 7.676266130312892;
+		V[5][2] = 0.01863788955350768;
+		OB[2] = 7.71163044603109;
+		V[5][3] = 13.290562812876107;
+		OB[3] = 5.050964297399435;
+		V[5][4] = -3.191226914646271;
+		OB[4] = -0.9537318879960314;
+		W[0][6] = -4.992559685945157;
+		W[1][6] = 88.04743967482369;
+		HB[6] = 50.39739242687603;
+		V[6][0] = 0.0746839836828444;
+		OB[0] = 8.485931304116875;
+		V[6][1] = -0.5879731640198912;
+		OB[1] = 7.676266130312892;
+		V[6][2] = -0.25250658203018556;
+		OB[2] = 7.71163044603109;
+		V[6][3] = 1.4602581997464505;
+		OB[3] = 5.050964297399435;
+		V[6][4] = 18.463904409636967;
+		OB[4] = -0.9537318879960314;
+		W[0][7] = -4.74928985780168;
+		W[1][7] = 40.78597102067532;
+		HB[7] = 35.79898233956728;
+		V[7][0] = -0.09439880889024627;
+		OB[0] = 8.485931304116875;
+		V[7][1] = -1.1230801185236317;
+		OB[1] = 7.676266130312892;
+		V[7][2] = -0.2674705623236563;
+		OB[2] = 7.71163044603109;
+		V[7][3] = 8.441254951069187;
+		OB[3] = 5.050964297399435;
+		V[7][4] = -20.04591503798929;
+		OB[4] = -0.9537318879960314;
 	}
 	
+	/**
+	 * Makes the wireless data usable and sets it up for
+	 * the network to use
+	 */
 	public void initData() {
+		for (int x=0; x<10; x++) { 
+			switch (address[x]) {
+				case "":
+					addIn[x] = 1;
+			}
+		}
 		
+		for (int x=0; x<10; x++) { 
+			inputVal[x][0] = (addIn[x] - 1) / 28;
+			inputVal[x][1] = (sigIn[x] - -97) / 58;
+		}
 	}
 
 	public Locate () {
 		initWeights();
 		initData();
+		
 		calcNetwork();
 		
+		@SuppressWarnings("unused")
 		int answer = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
 	}
 
