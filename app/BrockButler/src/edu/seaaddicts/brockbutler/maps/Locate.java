@@ -21,6 +21,7 @@ public class Locate extends Thread{
 	private static WifiManager      wifiMgr;
 	private static List<ScanResult> scanResults;
 	static Context mContext;
+	int[] answer = new int[10];
 	/**
 	 * Wireless information containers
 	 */
@@ -47,6 +48,19 @@ public class Locate extends Thread{
 	private static double[] hiddenVal = new double[hidden];
 	private static double[] outputVal = new double[output];
 	private static double[][] inputVal = new double[10][inputs];
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub  //
+		super.run();  
+		while(true){   
+			try {    
+				sleep(1000);   
+			} catch (InterruptedException e) {    // TODO Auto-generated catch block    
+				e.printStackTrace();   
+			}
+		}
+	}
 	
 	private static void getWirelessData(Context m) {
 		mContext = m;
@@ -223,99 +237,100 @@ public class Locate extends Thread{
 	 * the network to use
 	 */
 	public void initData() {
-		/*for (int x=0; x<10; x++) { 
+		for (int x=0; x<10; x++) { 
 			switch (address[x]) {
 				case "00:0b:86:91:ce:a1":
 					addIn[x] = 1;
 				case "00:0b:86:8a:8c:02":
-					= 2
+					addIn[x] = 2;
 				case "00:1a:1e:fc:af:21":
-					= 3
+					addIn[x] = 3;
 				case "00:0b:86:91:ce:a2":
-					= 4
+					addIn[x] = 4;
 				case "00:1a:1e:fc:b0:e2":
-					= 5
+					addIn[x] = 5;
 				case "00:1a:1e:fc:b0:e1":
-					= 6
+					addIn[x] = 6;
 				case "00:0b:86:89:f6:e1":
-					= 7
+					addIn[x] = 7;
 				case "00:1a:1e:fc:af:22":
-					= 8
+					addIn[x] = 8;
 				case "00:1a:1e:fc:b2:62":
-					= 9
+					addIn[x] = 9;
 				case "00:0b:86:4d:8f:21":
-					= 10
-				case "00:0b:86:4d:8f:22": = 11
-
-
-					00:1a:1e:fc:b0:21 = 12
-
-
-					00:1a:1e:a7:dc:22 = 13
-
-
-					00:1a:1e:fc:b0:22 = 14
-
-
-					00:1a:1e:a7:dc:21 = 15
-
-
-					00:0b:86:8a:8c:01 = 16
-
-
-					00:1a:1e:a7:e4:c2 = 17
-
-
-					00:1a:1e:a7:e4:c1 = 18
-
-
-					00:1a:1e:fc:ac:82 = 19
-
-
-					00:1a:1e:fc:ac:81 = 20
-
-
-					00:0b:86:91:ce:a0 = 21
-
-
-					00:0b:86:8a:8c:00 = 22
-
-
-					00:1a:1e:fc:ac:80 = 23
-
-
-					00:1a:1e:fc:b2:61 = 24
-
-
-					00:0b:86:42:de:80 = 25
-
-
-					00:0b:86:42:de:82 = 26
-
-
-					00:1a:1e:a7:e4:c0 = 27
-
-					00:1a:1e:fc:b2:60 = 28
+					addIn[x] = 10;
+				case "00:0b:86:4d:8f:22": 
+					addIn[x] = 11;
+				case "00:1a:1e:fc:b0:21":
+					addIn[x] = 12;
+				case "00:1a:1e:a7:dc:22":
+					addIn[x] = 13;
+				case "00:1a:1e:fc:b0:22":
+					addIn[x] = 14;
+				case "00:1a:1e:a7:dc:21":
+					addIn[x] = 15;
+				case "00:0b:86:8a:8c:01":
+					addIn[x] = 16;
+				case "00:1a:1e:a7:e4:c2":
+					addIn[x] = 17;
+				case "00:1a:1e:a7:e4:c1":
+					addIn[x] = 18;
+				case "00:1a:1e:fc:ac:82":
+					addIn[x] = 19;
+				case "00:1a:1e:fc:ac:81":
+					addIn[x] = 20;
+				case "00:0b:86:91:ce:a0":
+					addIn[x] = 21;
+				case "00:0b:86:8a:8c:00":
+					addIn[x] = 22;
+				case "00:1a:1e:fc:ac:80":
+					addIn[x] = 23;
+				case "00:1a:1e:fc:b2:61":
+					addIn[x] = 24;
+				case "00:0b:86:42:de:80":
+					addIn[x] = 25;
+				case "00:0b:86:42:de:82":
+					addIn[x] = 26;
+				case "00:1a:1e:a7:e4:c0":
+					addIn[x] = 27;
+				case "00:1a:1e:fc:b2:60":
+					addIn[x] = 28;
 			}
 		}
 		
 		for (int x=0; x<10; x++) { 
 			inputVal[x][0] = (addIn[x] - 1) / 28;
-			inputVal[x][1] = (sigIn[x] - -97) / 58;
-		}*/
+			inputVal[x][1] = (sigStr[x] - -97) / 58;
+		}
 	}
+	
+	public static int mode(int a[]) {
+		int maxValue=0, maxCount=0;
 
+		for (int i = 0; i < a.length; ++i) {
+			int count = 0;
+			for (int j = 0; j < a.length; ++j) {
+				if (a[j] == a[i]) ++count;
+			}
+			if (count > maxCount) {
+				maxCount = count;
+				maxValue = a[i];
+			}
+		}
+
+		return maxValue;
+	}
 
 	public Locate () {
 		initWeights();
 		initData();
 		
-		calcNetwork(10);
+		for(int i=0; i<10; i++) {
+			calcNetwork(i);
+			answer[i] = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
+		}
 		
-		@SuppressWarnings("unused")
-		int answer = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
+		System.out.println("Node: " + mode(answer));
 	}
-
-
 }
 
