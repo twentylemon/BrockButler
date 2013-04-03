@@ -20,16 +20,6 @@ public class Astar {
 	 * as they are all atributited to the database helper and 
 	 * are only used by this class.
 	 */
-	private static final String KEY_NODE = "node_id";
-	private static final String KEY_DESC = "desc";
-	private static final String KEY_XPOS = "x";
-	private static final String KEY_YPOS = "y";
-	private static final String KEY_CONN = "con";
-	private static final String DATABASE_TABLE = "node_connections";
-	
-	private DatabaseHelper ourHelper;
-    private final Context ourContext;
-    private SQLiteDatabase ourDatabase;
     private Position[] graph;
     
     /**
