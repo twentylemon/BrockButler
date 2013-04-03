@@ -73,7 +73,7 @@ public class MapsActivity extends Activity {
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler);
-        school = new Astar(this);
+        school = new Astar();
 	}
 
 	@Override
