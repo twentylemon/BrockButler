@@ -11,9 +11,6 @@ package edu.seaaddicts.brockbutler.maps;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class Astar {
@@ -23,19 +20,6 @@ public class Astar {
 	 * as they are all atributited to the database helper and 
 	 * are only used by this class.
 	 */
-<<<<<<< HEAD
-	private static final String KEY_NODE = "node_id";
-	private static final String KEY_DESC = "desc";
-	private static final String KEY_XPOS = "x";
-	private static final String KEY_YPOS = "y";
-	private static final String KEY_CONN = "con";
-	private static final String DATABASE_TABLE = "node_connections";
-	
-	private DatabaseHelper ourHelper;
-    private Context ourContext;
-    private SQLiteDatabase ourDatabase;
-=======
->>>>>>> origin/working
     private Position[] graph;
     
     /**

@@ -65,8 +65,8 @@ public class Position implements Comparable<Object> {
 	}
 	
 	public Position (int inputX, int inputY, String inputName, String inputNumber) {
-		xPosition = 0;
-		yPosition = 0;
+		xPosition = inputX;
+		yPosition = inputY;
 		
 		nodeNumber = inputNumber;
 		nodeName   = inputName;
