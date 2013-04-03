@@ -11,6 +11,9 @@ package edu.seaaddicts.brockbutler.maps;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class Astar {
@@ -28,7 +31,7 @@ public class Astar {
 	private static final String DATABASE_TABLE = "node_connections";
 	
 	private DatabaseHelper ourHelper;
-    private final Context ourContext;
+    private Context ourContext;
     private SQLiteDatabase ourDatabase;
     private Position[] graph;
     

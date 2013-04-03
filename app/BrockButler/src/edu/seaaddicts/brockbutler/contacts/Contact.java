@@ -8,7 +8,6 @@
 
 package edu.seaaddicts.brockbutler.contacts;
 
-import java.util.ArrayList;
 
 public class Contact {
 	public String mSubj;

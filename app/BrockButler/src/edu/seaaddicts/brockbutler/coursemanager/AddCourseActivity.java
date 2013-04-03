@@ -281,9 +281,6 @@ public class AddCourseActivity extends Activity {
 				if (c.mSubject != null) {
 					try {
 						mCourseHandle.addCourse(c);
-						Toast.makeText(getApplicationContext(),
-								c.mSubject + " " + c.mCode + " added.",
-								Toast.LENGTH_LONG).show();
 						Log.d("# ADDED OFFERINGS:", "" + c.mOfferings.size());
 						for (int i = 0; i < c.mOfferings.size(); i++) {
 							Log.d(TAG, "Added: " + c.mOfferings.get(i).mSubj

@@ -27,18 +27,17 @@ public class MapsActivity extends Activity {
 	private Button start;
 	private Button resume;
 	Position pTest;
-	
+
 	private EditText mSearchEditText;
 
 	private Handler mHandler;
 	private MapsTouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
-    
-    private Position currentLocation;
-    private Position mStartPosition;
-    private Position mGoalPosition;
-    private Astar school;
-    
+
+	private Position currentLocation;
+	private Position mStartPosition;
+	private Position mGoalPosition;
+	private Astar school;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +53,8 @@ public class MapsActivity extends Activity {
 
 		mTemp = (TextView) findViewById(R.id.txtv_count);
 		mHandler = new Handler() {
+
+			// Handles Messages sent from Thomas.
 			@Override
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
@@ -73,7 +74,7 @@ public class MapsActivity extends Activity {
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler);
-        school = new Astar(this);
+		school = new Astar();
 	}
 
 	@Override
@@ -160,7 +161,8 @@ public class MapsActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 						// Call Thomas' location search method with EditText
 						// string.
-						pTest = school.findPosition(mSearchEditText.getText().toString());
+						pTest = school.findPosition(mSearchEditText.getText()
+								.toString());
 						Log.d("SEARCH", pTest.xPosition + "," + pTest.yPosition);
 					}
 				});
@@ -206,23 +208,26 @@ public class MapsActivity extends Activity {
 						// draw_directions_on_map
 						// else
 						// displayNoSuchLocationDialog()
-						
-						// mStartPosition = school.findPosition("J01");
-                        // mGoalPosition = school.findPosition(mSearchEditText.getText().toString());
-						
-						// if (school.nodeExist(mStartPosition) && school.nodeExist(mGoalPosition)) {
-							// Position[] route = school.pathGeneration(mStartPosition, mGoalPosition);
 
-							// if (route != null)
-								// for (int i = 0; i < route.length; i++)
-								// Log.i("PRINT ROUTE", route[i].nodeNumber);
-							// else
-								// Log.e("ROUTE ERROR", "No path generated");
+						// mStartPosition = school.findPosition("J01");
+						// mGoalPosition =
+						// school.findPosition(mSearchEditText.getText().toString());
+
+						// if (school.nodeExist(mStartPosition) &&
+						// school.nodeExist(mGoalPosition)) {
+						// Position[] route =
+						// school.pathGeneration(mStartPosition, mGoalPosition);
+
+						// if (route != null)
+						// for (int i = 0; i < route.length; i++)
+						// Log.i("PRINT ROUTE", route[i].nodeNumber);
+						// else
+						// Log.e("ROUTE ERROR", "No path generated");
 						// } else {
-							// Log.e("ROUTE ERROR",
-									// "Invalid start or end position");
+						// Log.e("ROUTE ERROR",
+						// "Invalid start or end position");
 						// }
-                        
+
 						Toast.makeText(getApplicationContext(),
 								"Thomas' search method goes here.",
 								Toast.LENGTH_LONG).show();

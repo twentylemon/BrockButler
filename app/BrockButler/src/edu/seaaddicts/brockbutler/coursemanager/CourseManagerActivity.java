@@ -24,8 +24,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
+import edu.seaaddicts.brockbutler.contacts.Contact;
+import edu.seaaddicts.brockbutler.scheduler.Task;
 
 public class CourseManagerActivity extends Activity {
+	public static final int CODE_COURSE_MODIFIED = 0;
+	public static final int CODE_COURSE_UNMODIFIED = 1;
+	public static final int CODE_ADD_COURSE = 2;
+	
+	public static final String CODE_COURSE_SUBJECT = "csubj";
+	public static final String CODE_COURSE_CODE = "ccode";
+	public static final String CODE_COURSE_DESC = "cdesc";
+	public static final String CODE_COURSE_INSTRUCTOR = "cinstruct";
+	public static final String CODE_COURSE_INSTRUCTOR_EMAIL = "cinstructemail";
+	public static final String CODE_COURSE_OFFERINGS = "coffs";
 
 	private static final String TAG = "CourseManagerActivity";
 
@@ -119,9 +131,31 @@ public class CourseManagerActivity extends Activity {
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
 				.getMenuInfo();
 		int menuItemIndex = item.getItemId();
+		Course thisCourse = mRegisteredCoursesList.get(menuItemIndex);
 		switch (menuItemIndex) {
 		case 0:
-			Toast.makeText(this, "Modify", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,
+					"Modify " + thisCourse.mSubject + " " + thisCourse.mCode,
+					Toast.LENGTH_SHORT).show();
+
+			// Start Intent with Course as Extra
+			Intent i = new Intent(CourseManagerActivity.this,
+					ModifyCourseActivity.class);
+			i.putExtra(CODE_COURSE_SUBJECT, thisCourse.mSubject);
+			i.putExtra(CODE_COURSE_CODE, thisCourse.mCode);
+			i.putExtra(CODE_COURSE_INSTRUCTOR, thisCourse.mInstructor);
+			i.putExtra(CODE_COURSE_INSTRUCTOR_EMAIL, thisCourse.mInstructor_email);
+			
+			// Create String array of Offerings to pass.
+			String lec[] = new String [thisCourse.mOfferings.size()];
+//			ArrayList<Offering> off
+//			for (int j = 0; j < thisCourse.mOfferings.size(); j++) {
+//				for (int k = 0; k < thisCourse.mOfferings.get(j).mOfferingTimes.size(); k++) {
+//					if (thisCourse.get)
+//				}
+//			}
+			i.putExtra(CODE_COURSE_OFFERINGS, thisCourse.mOfferings);
+			startActivity(i);
 			break;
 		case 1:
 			Course c = mRegisteredCoursesList.get(info.position);
@@ -129,6 +163,28 @@ public class CourseManagerActivity extends Activity {
 		}
 		populateCoursesLayout();
 		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			case (CODE_ADD_COURSE):
+//				Course c = (Course) data.getSerializableExtra(CODE_COURSE_OBJECT);
+//				Toast.makeText(getApplicationContext(),
+//						c.mSubject + " " + c.mCode + " added.",
+//						Toast.LENGTH_LONG).show();
+				break;
+			default:
+				break;
+			}
+		}
+		 if (resultCode == RESULT_OK && requestCode == CODE_COURSE_MODIFIED) {
+			    if (data.hasExtra("returnKey1")) {
+			      Toast.makeText(this, data.getExtras().getString("returnKey1"),
+			        Toast.LENGTH_SHORT).show();
+			    }
+			  }
 	}
 
 	/**
@@ -161,21 +217,24 @@ public class CourseManagerActivity extends Activity {
 				"Number of Offerings for " + subj + " " + code + ": "
 						+ offs.size());
 
-		// Add offerings registered for
+		// Add Offerings registered for.
 		for (int i = 0; i < offs.size(); i++) {
 			String what = offs.get(i).mType.substring(0, 3).trim();
 
 			offTimes = offs.get(i).mOfferingTimes;
 
 			Log.d(TAG, "Offering Type: " + what + ", # " + offTimes.size());
-			
+
 			offering = "";
+
+			// Loop through OfferingTimes for each Offering to populate
 			for (int j = 0; j < offTimes.size(); j++) {
 				offering += offTimes.get(j).mDay + " "
 						+ offTimes.get(j).mStartTime + " - "
 						+ offTimes.get(j).mEndTime + " @ "
 						+ offTimes.get(j).mLocation + "\n";
 
+				// Check for type of Offering and add as appropriate
 				if (what.equalsIgnoreCase("lec")) {
 					TextView tv = ((TextView) view
 							.findViewById(R.id.tv_lecture));
