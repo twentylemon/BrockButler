@@ -1,5 +1,6 @@
 package edu.seaaddicts.brockbutler.maps;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -25,6 +26,7 @@ public class MapsHandler extends Handler {
 	public static final int THREAD_UPDATE_POSITION = 0x012;
 
 	private static final String tag = "MapsHandler";
+	private static Context parentContext;
 	private Handler mMainHandler;
 	private Thread mMapsThread;
 
@@ -32,16 +34,18 @@ public class MapsHandler extends Handler {
 	private boolean mIsPaused;
 	private boolean mIsFinished;
 
-	public MapsHandler(Looper main) {
+	public MapsHandler(Looper main, Context c) {
 		super(main);
 		Log.d(tag, "-----++++++ Creating Handler from Looper ++++++------");
+		parentContext = c;
 		mMainHandler = new Handler(main);
 		mIsPaused = true;
 		init();
 	}
 
-	public MapsHandler(Handler main) {
+	public MapsHandler(Handler main, Context c) {
 		Log.d(tag, "-----++++++ Creating Handler. ++++++------");
+		parentContext = c;
 		mMainHandler = main;
 		mIsPaused = true;
 		init();
@@ -54,7 +58,11 @@ public class MapsHandler extends Handler {
 		mMapsThread = new Thread() {
 
 			int count = 20;
-
+			Locate locate = new Locate(parentContext);
+			Position current = null;
+			Position previous = null;
+			
+			
 			@Override
 			public void run() {
 				Log.d(tag, "Thread started.");
@@ -64,7 +72,11 @@ public class MapsHandler extends Handler {
 
 					mMainHandler.sendEmptyMessage(count);
 					try {
-						Thread.sleep(1000);
+						previous = current;
+						current = locate.getUserPosition();
+						if(!current.compare(previous))
+							Log.i("LOCATE", "YAY");
+						Thread.sleep(3000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
