@@ -312,7 +312,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			else
 				db.insert(TABLE_TASKS, null, values);
 			values.clear();
-			addContacts(task.mContacts);
+			//addContacts(task.mContacts);
 		}
 		db.close();
 	}
