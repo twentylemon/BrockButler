@@ -74,7 +74,11 @@ public class MapsActivity extends Activity {
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler);
+<<<<<<< HEAD
         school = new Astar();
+=======
+		school = new Astar();
+>>>>>>> 93a031d5bda179458d56a7980ebeb0b93b953061
 	}
 
 	@Override
@@ -161,9 +165,9 @@ public class MapsActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 						// Call Thomas' location search method with EditText
 						// string.
-						pTest = school.findPosition(mSearchEditText.getText()
-								.toString());
-						Log.d("SEARCH", pTest.xPosition + "," + pTest.yPosition);
+						pTest = school.findPosition(mSearchEditText.getText().toString());
+						pTest.printCoordinates();
+						//Log.d("SEARCH", "Location: " + mSearchEditText.getText().toString() + ", " + pTest.xPosition + "," + pTest.yPosition);
 					}
 				});
 		editalert.setNegativeButton("Cancel",
