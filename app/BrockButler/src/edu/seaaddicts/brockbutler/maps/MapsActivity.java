@@ -74,11 +74,7 @@ public class MapsActivity extends Activity {
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler);
-<<<<<<< HEAD
         school = new Astar();
-=======
-		school = new Astar();
->>>>>>> 93a031d5bda179458d56a7980ebeb0b93b953061
 	}
 
 	@Override
