@@ -2,6 +2,7 @@ package edu.seaaddicts.brockbutler.maps;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +27,7 @@ public class MapsActivity extends Activity {
 	private TextView mTemp;
 	private Button start;
 	private Button resume;
-	Position pTest;
+	private Position pTest;
 
 	private EditText mSearchEditText;
 
@@ -38,6 +39,7 @@ public class MapsActivity extends Activity {
 	private Position mStartPosition;
 	private Position mGoalPosition;
 	private Astar school;
+	private Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,14 @@ public class MapsActivity extends Activity {
 				}
 			}
 		};
+<<<<<<< HEAD
 		mMapsHandler = new MapsHandler(mHandler);
         school = new Astar();
+=======
+		mMapsHandler = new MapsHandler(mHandler,this);
+        school = new Astar();
+        mContext = this;
+>>>>>>> e2e5297688e090fd4ea78e5a3e7e0ef7c04a7601
 	}
 
 	@Override
