@@ -12,22 +12,22 @@ import java.util.List;
 import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
-public class Locate extends Thread{
+public class Locate {
 	
 	/**
 	 * Class variables
 	 */
 	private static WifiManager      wifiMgr;
 	private static List<ScanResult> scanResults;
-	static Context mContext;
+	static Context parentContext;
 	int[] answer = new int[10];
 	/**
 	 * Wireless information containers
 	 */
 	private static int[] sigStr  = new int[10];
 	private static String[] address = new String[10];
-	private static double[] sigIn  = new double[10];
 	private static double[] addIn = new double[10];
 	/**
 	 * Layers
@@ -49,22 +49,26 @@ public class Locate extends Thread{
 	private static double[] outputVal = new double[output];
 	private static double[][] inputVal = new double[10][inputs];
 	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub  //
-		super.run();  
-		while(true){   
-			try {    
-				sleep(1000);   
-			} catch (InterruptedException e) {    // TODO Auto-generated catch block    
-				e.printStackTrace();   
+	
+	public Position getUserPosition ( ) {
+		try {   
+			getWirelessData();
+			initData();
+				
+			for(int i=0; i<10; i++) {
+				calcNetwork(i);
+				answer[i] = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
 			}
+				
+			Log.i("LOCATE", "Node: " + mode(answer));
+		} catch (Exception err) {
+			Log.e("LOCATE", err.getMessage());   
 		}
+		return null;
 	}
 	
-	private static void getWirelessData(Context m) {
-		mContext = m;
-		wifiMgr = (WifiManager)mContext.getSystemService(Context.WIFI_SERVICE);
+	private static void getWirelessData() {
+		wifiMgr = (WifiManager)parentContext.getSystemService(Context.WIFI_SERVICE);
     	int x = 0;
     	
     	for(int num=0; num<10; num++) {
@@ -238,64 +242,64 @@ public class Locate extends Thread{
 	 */
 	public void initData() {
 		for (int x=0; x<10; x++) { 
-			switch (address[x]) {
-				case "00:0b:86:91:ce:a1":
-					addIn[x] = 1;
-				case "00:0b:86:8a:8c:02":
-					addIn[x] = 2;
-				case "00:1a:1e:fc:af:21":
-					addIn[x] = 3;
-				case "00:0b:86:91:ce:a2":
-					addIn[x] = 4;
-				case "00:1a:1e:fc:b0:e2":
-					addIn[x] = 5;
-				case "00:1a:1e:fc:b0:e1":
-					addIn[x] = 6;
-				case "00:0b:86:89:f6:e1":
-					addIn[x] = 7;
-				case "00:1a:1e:fc:af:22":
-					addIn[x] = 8;
-				case "00:1a:1e:fc:b2:62":
-					addIn[x] = 9;
-				case "00:0b:86:4d:8f:21":
-					addIn[x] = 10;
-				case "00:0b:86:4d:8f:22": 
-					addIn[x] = 11;
-				case "00:1a:1e:fc:b0:21":
-					addIn[x] = 12;
-				case "00:1a:1e:a7:dc:22":
-					addIn[x] = 13;
-				case "00:1a:1e:fc:b0:22":
-					addIn[x] = 14;
-				case "00:1a:1e:a7:dc:21":
-					addIn[x] = 15;
-				case "00:0b:86:8a:8c:01":
-					addIn[x] = 16;
-				case "00:1a:1e:a7:e4:c2":
-					addIn[x] = 17;
-				case "00:1a:1e:a7:e4:c1":
-					addIn[x] = 18;
-				case "00:1a:1e:fc:ac:82":
-					addIn[x] = 19;
-				case "00:1a:1e:fc:ac:81":
-					addIn[x] = 20;
-				case "00:0b:86:91:ce:a0":
-					addIn[x] = 21;
-				case "00:0b:86:8a:8c:00":
-					addIn[x] = 22;
-				case "00:1a:1e:fc:ac:80":
-					addIn[x] = 23;
-				case "00:1a:1e:fc:b2:61":
-					addIn[x] = 24;
-				case "00:0b:86:42:de:80":
-					addIn[x] = 25;
-				case "00:0b:86:42:de:82":
-					addIn[x] = 26;
-				case "00:1a:1e:a7:e4:c0":
-					addIn[x] = 27;
-				case "00:1a:1e:fc:b2:60":
-					addIn[x] = 28;
-			}
+			if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a1"))
+				addIn[x] = 1;
+			else if (address[x].equalsIgnoreCase("00:0b:86:8a:8c:02"))
+				addIn[x] = 2;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:af:21"))
+				addIn[x] = 3;
+			else if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a2"))
+				addIn[x] = 4;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:e2"))
+				addIn[x] = 5;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:e1"))
+				addIn[x] = 6;
+			else if (address[x].equalsIgnoreCase("00:0b:86:89:f6:e1"))
+				addIn[x] = 7;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:af:22"))
+				addIn[x] = 8;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b2:62"))
+				addIn[x] = 9;
+			else if (address[x].equalsIgnoreCase("00:0b:86:4d:8f:21"))
+				addIn[x] = 10;
+			else if (address[x].equalsIgnoreCase("00:0b:86:4d:8f:22"))
+				addIn[x] = 11;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:21"))
+				addIn[x] = 12;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:dc:22"))
+				addIn[x] = 13;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:22"))
+				addIn[x] = 14;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:dc:21"))
+				addIn[x] = 15;
+			else if (address[x].equalsIgnoreCase("00:0b:86:8a:8c:01"))
+				addIn[x] = 16;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:e4:c2"))
+				addIn[x] = 17;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:e4:c1"))
+				addIn[x] = 18;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:ac:82"))
+				addIn[x] = 19;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:ac:81"))
+				addIn[x] = 20;
+			else if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a0"))
+				addIn[x] = 21;
+			else if (address[x].equalsIgnoreCase("00:0b:86:8a:8c:00"))
+				addIn[x] = 22;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:ac:80"))
+				addIn[x] = 23;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b2:61"))
+				addIn[x] = 24;
+			else if (address[x].equalsIgnoreCase("00:0b:86:42:de:80"))
+				addIn[x] = 25;
+			else if (address[x].equalsIgnoreCase("00:0b:86:42:de:82"))
+				addIn[x] = 26;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:e4:c0"))
+				addIn[x] = 27;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b2:60"))
+				addIn[x] = 28;
+			else
+				addIn[x] = 0;
 		}
 		
 		for (int x=0; x<10; x++) { 
@@ -321,16 +325,9 @@ public class Locate extends Thread{
 		return maxValue;
 	}
 
-	public Locate () {
+	public Locate (Context pc) {
+		parentContext = pc;
 		initWeights();
-		initData();
-		
-		for(int i=0; i<10; i++) {
-			calcNetwork(i);
-			answer[i] = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
-		}
-		
-		System.out.println("Node: " + mode(answer));
 	}
 }
 
