@@ -59,7 +59,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice" />
+            android:choiceMode="singleChoice" />
     </LinearLayout>
 
     <LinearLayout
@@ -80,7 +80,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice"
+            android:choiceMode="singleChoice"
             android:text="@string/add_course_add_labs" />
     </LinearLayout>
 
@@ -102,7 +102,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice"
+            android:choiceMode="singleChoice"
             android:text="@string/add_course_add_tuts" />
     </LinearLayout>
 
@@ -124,7 +124,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice"
+            android:choiceMode="singleChoice"
             android:text="@string/add_course_add_sems" />
     </LinearLayout>
 

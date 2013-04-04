@@ -24,5 +24,10 @@
         android:onClick="exitMaps"
         android:titleCondensed="@string/menu_exit_maps">
     </item>
+    <item
+        android:id="@+id/menu_show_maps_help"
+        android:title="@string/menu_show_maps_help"
+        android:onClick="showHelp">
+    </item>
 
 </menu>

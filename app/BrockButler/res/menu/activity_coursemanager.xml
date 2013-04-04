@@ -13,5 +13,11 @@
         android:showAsAction="never"
         android:onClick="updateMaster"
         android:title="@string/add_course_update_master_list"/>
+    <item
+        android:id="@+id/menu_show_coursemanager_help"
+         android:orderInCategory="100"
+         android:showAsAction="never"
+        android:onClick="showHelp"
+        android:title="@string/menu_show_coursemanager_help"/>
 
 </menu>

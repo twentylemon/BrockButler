@@ -47,7 +47,7 @@ public class MapsTouchImageView extends ImageView {
 
 	// Ratio of screen resolution to map image resolution
 	private double mMapRatio;
-	
+
 	private int viewWidth, viewHeight;
 	private int oldMeasuredWidth, oldMeasuredHeight;
 
@@ -60,6 +60,8 @@ public class MapsTouchImageView extends ImageView {
 
 	private Context mContext;
 	int actionBarHeight;
+
+	public Position[] mPosition = null;
 
 	public MapsTouchImageView(Context context) {
 		super(context);
@@ -75,13 +77,27 @@ public class MapsTouchImageView extends ImageView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		mPathPaint.setColor(Color.CYAN);
-		mPathPaint.setStrokeWidth(10);
+		mPathPaint.setStrokeWidth(8);
 		canvas.setMatrix(mMatrixMap);
-		float f[] = convertDimensions(1054, 874);
-		float f2[] = convertDimensions(1184, 1008);
-		canvas.drawLine(f[0], f[1], f2[0], f2[1], mPathPaint);
-		float f3[] = convertDimensions(1304, 888);
-		canvas.drawLine(f2[0], f2[1], f3[0], f3[1], mPathPaint);
+		// float f[] = convertDimensions(1054, 874);
+		// float f2[] = convertDimensions(1184, 1008);
+		// canvas.drawLine(f[0], f[1], f2[0], f2[1], mPathPaint);
+		// float f3[] = convertDimensions(1304, 888);
+		// canvas.drawLine(f2[0], f2[1], f3[0], f3[1], mPathPaint);
+
+		if (mPosition != null) {
+			for (int i = 0; i < mPosition.length - 1; i++) {
+				Position p = mPosition[i];
+				Position q = mPosition[i + 1];
+				int x1 = p.xPosition;
+				int y1 = p.yPosition;
+				float[] f1 = convertDimensions(x1, y1);
+				int x2 = q.xPosition;
+				int y2 = q.yPosition;
+				float[] f2 = convertDimensions(x2, y2);
+				canvas.drawLine(f1[0], f1[1], f2[0], f2[1], mPathPaint);
+			}
+		}
 	}
 
 	private void sharedConstructing(Context context) {
@@ -252,10 +268,11 @@ public class MapsTouchImageView extends ImageView {
 				return;
 			int bmWidth = drawable.getIntrinsicWidth();
 			int bmHeight = drawable.getIntrinsicHeight();
-			
-			mMapRatio = (double) (bmHeight)/ (double) MAP_HEIGHT;
 
-			Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight + "ratio" + mMapRatio);
+			mMapRatio = (double) (bmHeight) / (double) MAP_HEIGHT;
+
+			Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight
+					+ "ratio" + mMapRatio);
 
 			float scaleX = (float) viewWidth / (float) bmWidth;
 			float scaleY = (float) viewHeight / (float) bmHeight;
@@ -285,8 +302,9 @@ public class MapsTouchImageView extends ImageView {
 		f[1] = (float) mMapRatio * y;
 		return f;
 	}
-	
-	public void drawPosition(int x, int y) {
-		convertDimensions((float) x, (float) y);
+
+	public void drawPosition(Position[] p) {
+		mPosition = p;
+		invalidate();
 	}
 }

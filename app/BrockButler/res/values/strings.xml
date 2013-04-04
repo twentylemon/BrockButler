@@ -29,6 +29,7 @@
         <item>Remove</item>
     </string-array>
     <string name="loading_courses_registrar_msg">The course database is updating from the Brock Registrar.\n\nThis may take a few moments.</string>
+    <string name="menu_show_coursemanager_help">Show Help</string>
 
     <!-- AddContactActivity -->
     <string name="activity_add_contact">Add Contact</string>
@@ -41,6 +42,7 @@
     <string name="activity_add_contact_courses">Courses</string>
     <string name="activity_add_contact_add_courses">Add Course</string>
     <string name="activity_add_contact_remove">Remove</string>
+    
 
     <!-- AddCourseActivity -->
     <string name="title_add_course">Add Course</string>
@@ -63,6 +65,7 @@
     <string name="menu_modify_task">Modify Task</string>
     <string name="menu_expand_collapse">Expand/Collapse All</string>
     <string name="sched_no_courses">No registered courses.\n\nGo to Course Manager to add courses.</string>
+     <string name="menu_show_scheduler_help">Show Help</string>
 
     <!-- row_task_* -->
     <string name="title_lecture">Lectures</string>
@@ -77,6 +80,7 @@
     <string name="menu_get_directions">Get Directions</string>
     <string name="menu_update_position">Update Position</string>
     <string name="menu_exit_maps">Exit Maps</string>
+    <string name="menu_show_maps_help">Show Help</string>
 
     <!-- TourActivity -->
     <string name="menu_go_back">Go Back</string>

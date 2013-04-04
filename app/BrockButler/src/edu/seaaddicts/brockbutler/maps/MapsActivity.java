@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
+import edu.seaaddicts.brockbutler.help.HelpActivity;
 
 public class MapsActivity extends Activity {
 	private static final String TAG = "MapsActivity";
@@ -75,14 +77,11 @@ public class MapsActivity extends Activity {
 				}
 			}
 		};
-<<<<<<< HEAD
-		mMapsHandler = new MapsHandler(mHandler);
-        school = new Astar();
-=======
+//		mMapsHandler = new MapsHandler(mHandler);
+//        school = new Astar();
 		mMapsHandler = new MapsHandler(mHandler,this);
         school = new Astar();
         mContext = this;
->>>>>>> e2e5297688e090fd4ea78e5a3e7e0ef7c04a7601
 	}
 
 	@Override
@@ -169,8 +168,19 @@ public class MapsActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 						// Call Thomas' location search method with EditText
 						// string.
-						pTest = school.findPosition(mSearchEditText.getText().toString());
-						pTest.printCoordinates();
+						
+						// TESTING
+						Position p1, p2;
+						p1 = school.findPosition("J01");
+						p2 = school.findPosition("J17");
+						
+						Position[] p = school.pathGeneration(p1, p2);
+						mMapImage.drawPosition(p);
+						
+						//pTest = school.findPosition(mSearchEditText.getText().toString());
+						//pTest.printCoordinates();
+						
+						
 						//Log.d("SEARCH", "Location: " + mSearchEditText.getText().toString() + ", " + pTest.xPosition + "," + pTest.yPosition);
 					}
 				});
@@ -252,6 +262,15 @@ public class MapsActivity extends Activity {
 				});
 
 		editalert.show();
+	}
+
+	public void showHelp(MenuItem item)
+	{
+		Intent intent = new Intent(MapsActivity.this,HelpActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("activity", "maps");
+		intent.putExtras(bundle);
+		startActivity(intent);
 	}
 
 	/**

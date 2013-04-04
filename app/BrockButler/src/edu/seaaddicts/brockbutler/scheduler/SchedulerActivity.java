@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +21,7 @@ import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 import edu.seaaddicts.brockbutler.coursemanager.Course;
 import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
+import edu.seaaddicts.brockbutler.help.HelpActivity;
 
 public class SchedulerActivity extends Activity {
 
@@ -153,6 +152,15 @@ public class SchedulerActivity extends Activity {
 								+ mRegisteredCoursesList.get(position).mOfferings
 										.get(i).mOfferingTimes.get(i).mLocation);
 		}
+	}
+	
+	public void showHelp(MenuItem item)
+	{
+		Intent intent = new Intent(SchedulerActivity.this,HelpActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("activity", "scheduler");
+		intent.putExtras(bundle);
+		startActivity(intent);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.contacts.AddContactActivity;
 import edu.seaaddicts.brockbutler.contacts.ContactsActivity;
+import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
 
 public class AddTaskActivity extends Activity {
 	private static final int DATE_DIALOG_ID = 0;
@@ -29,6 +30,8 @@ public class AddTaskActivity extends Activity {
 	private ListView mContactListView;
 	private DatePicker mDueDatePicker;
 	private TextView mDueDateTextView;
+	
+	private CourseHandler mCourseHandle = null;
 
 	private int mYear;
 	private int mMonth;
@@ -45,6 +48,7 @@ public class AddTaskActivity extends Activity {
 	 * Initialize all views and sets Button OnClickListeners.
 	 */
 	private void init() {
+		mCourseHandle = new CourseHandler(this);
 		mDueDateButton = (Button) findViewById(R.id.add_task_due_date_button);
 		mAddContactButton = (Button) findViewById(R.id.add_task_add_contact_button);
 		mSaveButton = (Button) findViewById(R.id.add_task_save_button);
