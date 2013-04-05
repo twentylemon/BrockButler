@@ -1,11 +1,5 @@
 package com.example.mappingmodule;
 
-import java.util.List;
-
-import android.content.Context;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
-
 /**
  * Locate.java
  * Brock Butler
@@ -14,6 +8,11 @@ import android.net.wifi.WifiManager;
  * Copyright (c) 2013 Sea Addicts. All rights reserved.
  */
 
+import java.util.List;
+import android.content.Context;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
+import android.util.Log;
 
 public class Locate {
 	
@@ -22,13 +21,13 @@ public class Locate {
 	 */
 	private static WifiManager      wifiMgr;
 	private static List<ScanResult> scanResults;
-	static Context mContext;
+	static Context parentContext;
+	int[] answer = new int[10];
 	/**
 	 * Wireless information containers
 	 */
 	private static int[] sigStr  = new int[10];
 	private static String[] address = new String[10];
-	private static double[] sigIn  = new double[10];
 	private static double[] addIn = new double[10];
 	/**
 	 * Layers
@@ -50,9 +49,54 @@ public class Locate {
 	private static double[] outputVal = new double[output];
 	private static double[][] inputVal = new double[10][inputs];
 	
-	private static void getWirelessData(Context m) {
-		mContext = m;
-		wifiMgr = (WifiManager)mContext.getSystemService(Context.WIFI_SERVICE);
+	/**
+	 * Constructor for the Locate class sets context and initializes weights
+	 * only once.
+	 * @param pc
+	 */
+	public Locate (Context pc) {
+		parentContext = pc;
+		initWeights();
+	}
+	
+	/**
+	 * Used by the mapping thread to get current user position, returns null if no position is found.
+	 * @return
+	 */
+	public String getUserPosition ( ) {
+		try {   
+			getWirelessData();
+			initTestData3();
+				
+			for(int i=0; i<10; i++) {
+				calcNetwork(i);
+				answer[i] = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
+			}
+			
+			int location = mode(answer);
+			Log.i("LOCATE", "Node: " + location);
+			switch(location) {
+				case 1:
+					return "J01";
+				case 2:
+					return "J02";
+				case 3:
+					return "J03";
+				default:
+					return "";
+			}
+		} catch (Exception err) {
+			Log.e("LOCATE", err.getMessage());   
+		}
+		return null;
+	}
+	
+	/**
+	 * Gathers wireless information from the device for 10 wireless access points
+	 * currently in range. Gathers MAC address and received signal strength
+	 */
+	private static void getWirelessData() {
+		wifiMgr = (WifiManager)parentContext.getSystemService(Context.WIFI_SERVICE);
     	int x = 0;
     	
     	for(int num=0; num<10; num++) {
@@ -75,7 +119,7 @@ public class Locate {
 	
 	/**
 	 * This Method will return the sigmoid value of an argument
-	 * for the final node value
+	 * for the final node value.
 	 * @param x
 	 * @return
 	 */
@@ -84,14 +128,15 @@ public class Locate {
 	}
 
 	/**
-	 * The beans of the class, calculates the network layers
-	 * and neuron values.
+	 * The beans of this class, uses normalized wireless data to predict
+	 * user location based on an inputed input pattern.
+	 * @param pat
 	 */
-	private static void calcNetwork() {
+	private static void calcNetwork(int pat) {
 		for(int h=0; h<hidden; h++) {
 			hiddenVal[h] = -HB[h];
 			for(int i=0; i<inputs; i++) {
-				hiddenVal[h] += (inputVal[i] * W[i][h]);
+				hiddenVal[h] += (inputVal[pat][i] * W[i][h]);
 			}
 			hiddenVal[h] = sigmoid(hiddenVal[h]);
 		}
@@ -103,17 +148,153 @@ public class Locate {
 			}
 			outputVal[o] = sigmoid(outputVal[o]);
 			
-			if(outputVal[o] >= 0.5)
-				outputVal[o] = 1;
-		    else if(outputVal[o] < 0.5)
-		    	outputVal[o] = 0;
+			//if(outputVal[o] >= 0.5)
+			//	outputVal[o] = 1;
+		    //else if(outputVal[o] < 0.5)
+		    //	outputVal[o] = 0;
 		}
 	}
 	
 	/**
-	 * Initializes the network with pre-defined weights
+	 * Searches through network output to find the most likely
+	 * user position.
+	 * @param a
+	 * @return
 	 */
-	public void initWeights ( ) {
+	private static int mode(int a[]) {
+		int maxValue=0, maxCount=0;
+
+		for (int i = 0; i < a.length; ++i) {
+			int count = 0;
+			for (int j = 0; j < a.length; ++j) {
+				if (a[j] == a[i]) ++count;
+			}
+			if (count > maxCount) {
+				maxCount = count;
+				maxValue = a[i];
+			}
+		}
+
+		return maxValue;
+	}
+	
+	private void initTestData() {
+		inputVal[0][0] = 1; inputVal[0][1] = -65;
+		inputVal[1][0] = 2; inputVal[1][1] = -60;
+		inputVal[2][0] = 3; inputVal[2][1] = -64;
+		inputVal[3][0] = 4; inputVal[3][1] = -64;
+		inputVal[4][0] = 5; inputVal[4][1] = -68;
+		inputVal[5][0] = 6; inputVal[5][1] = -69;
+		inputVal[6][0] = 7; inputVal[6][1] = -69;
+		inputVal[7][0] = 8; inputVal[7][1] = -72;
+		inputVal[8][0] = 9; inputVal[8][1] = -74;
+		inputVal[9][0] = 10; inputVal[9][1] = -74;
+	}
+	
+	private void initTestData2() {
+		inputVal[0][0] = 1; inputVal[0][1] = -65;
+		inputVal[1][0] = 1; inputVal[1][1] = -89;
+		inputVal[2][0] = 6; inputVal[2][1] = -64;
+		inputVal[3][0] = 8; inputVal[3][1] = -64;
+		inputVal[4][0] = 11; inputVal[4][1] = -66;
+		inputVal[5][0] = 12; inputVal[5][1] = -66;
+		inputVal[6][0] = 13; inputVal[6][1] = -71;
+		inputVal[7][0] = 14; inputVal[7][1] = -72;
+		inputVal[8][0] = 15; inputVal[8][1] = -72;
+		inputVal[9][0] = 16; inputVal[9][1] = -72;
+	}
+	
+	private void initTestData3() {
+		inputVal[0][0] = 6; inputVal[0][1] = -58;
+		inputVal[1][0] = 8; inputVal[1][1] = -58;
+		inputVal[2][0] = 11; inputVal[2][1] = -72;
+		inputVal[3][0] = 12; inputVal[3][1] = -72;
+		inputVal[4][0] = 13; inputVal[4][1] = -75;
+		inputVal[5][0] = 14; inputVal[5][1] = -66;
+		inputVal[6][0] = 15; inputVal[6][1] = -77;
+		inputVal[7][0] = 16; inputVal[7][1] = -75;
+		inputVal[8][0] = 9; inputVal[8][1] = -69;
+		inputVal[9][0] = 16; inputVal[9][1] = -72;
+	}
+	
+	/**
+	 * Makes the wireless data usable and sets it up for
+	 * the network to use by putting the values between 0 and 1 
+	 * with min/max normalization.
+	 */
+	private void initData() {
+		for (int x=0; x<10; x++) { 
+			if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a1"))
+				addIn[x] = 1;
+			else if (address[x].equalsIgnoreCase("00:0b:86:8a:8c:02"))
+				addIn[x] = 2;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:af:21"))
+				addIn[x] = 3;
+			else if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a2"))
+				addIn[x] = 4;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:e2"))
+				addIn[x] = 5;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:e1"))
+				addIn[x] = 6;
+			else if (address[x].equalsIgnoreCase("00:0b:86:89:f6:e1"))
+				addIn[x] = 7;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:af:22"))
+				addIn[x] = 8;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b2:62"))
+				addIn[x] = 9;
+			else if (address[x].equalsIgnoreCase("00:0b:86:4d:8f:21"))
+				addIn[x] = 10;
+			else if (address[x].equalsIgnoreCase("00:0b:86:4d:8f:22"))
+				addIn[x] = 11;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:21"))
+				addIn[x] = 12;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:dc:22"))
+				addIn[x] = 13;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b0:22"))
+				addIn[x] = 14;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:dc:21"))
+				addIn[x] = 15;
+			else if (address[x].equalsIgnoreCase("00:0b:86:8a:8c:01"))
+				addIn[x] = 16;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:e4:c2"))
+				addIn[x] = 17;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:e4:c1"))
+				addIn[x] = 18;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:ac:82"))
+				addIn[x] = 19;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:ac:81"))
+				addIn[x] = 20;
+			else if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a0"))
+				addIn[x] = 21;
+			else if (address[x].equalsIgnoreCase("00:0b:86:8a:8c:00"))
+				addIn[x] = 22;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:ac:80"))
+				addIn[x] = 23;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b2:61"))
+				addIn[x] = 24;
+			else if (address[x].equalsIgnoreCase("00:0b:86:42:de:80"))
+				addIn[x] = 25;
+			else if (address[x].equalsIgnoreCase("00:0b:86:42:de:82"))
+				addIn[x] = 26;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:a7:e4:c0"))
+				addIn[x] = 27;
+			else if (address[x].equalsIgnoreCase("00:1a:1e:fc:b2:60"))
+				addIn[x] = 28;
+			else
+				addIn[x] = 0;
+		}
+		
+		for (int x=0; x<10; x++) { 
+			inputVal[x][0] = (addIn[x] - 1) / 28;
+			inputVal[x][1] = (sigStr[x] - -97) / 58;
+		}
+	}
+	
+	/**
+	 * Initializes the network with pre-defined weights, currently will only find a 
+	 * position in JBlock.
+	 */
+	private void initWeights ( ) {
 		W[0][0] = -5.191953555370145;
 		W[1][0] = 8.311119623052747;
 		HB[0] = 13.645070679100112;
@@ -219,34 +400,5 @@ public class Locate {
 		V[7][4] = -20.04591503798929;
 		OB[4] = -0.9537318879960314;
 	}
-	
-	/**
-	 * Makes the wireless data usable and sets it up for
-	 * the network to use
-	 */
-	public void initData() {
-		for (int x=0; x<10; x++) { 
-			switch (address[x]) {
-				case "":
-					addIn[x] = 1;
-			}
-		}
-		
-		for (int x=0; x<10; x++) { 
-			inputVal[x][0] = (addIn[x] - 1) / 28;
-			inputVal[x][1] = (sigIn[x] - -97) / 58;
-		}
-	}
-
-	public Locate () {
-		initWeights();
-		initData();
-		
-		calcNetwork();
-		
-		@SuppressWarnings("unused")
-		int answer = (int) (outputVal[0]*16 + outputVal[1]*8 + outputVal[2]*4 + outputVal[3]*2 + outputVal[4]*1);
-	}
-
-
 }
+

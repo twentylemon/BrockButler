@@ -23,9 +23,11 @@ public class Astar {
     private Position[] graph;
     
     /**
-	 * This method returns true or false if a given position exists
-	 * within the graph(school). This method is to be used before pathGeneration.
-	 */ 
+     * This method returns true or false if a given position exists
+	 * within the graph(school). This method is to be used before pathGeneration. 
+     * @param node
+     * @return
+     */
     public boolean nodeExist(Position node) {
     	for(int j=0; j<graph.length; j++) {
 			if(node.compare(graph[j]))
@@ -35,10 +37,12 @@ public class Astar {
     }
     
     /**
-	 * This method returns a position if it exists within
+     * This method returns a position if it exists within
 	 * the graph(school). Used by the interface searching 
 	 * feature.
-	 */ 
+     * @param nodeName
+     * @return
+     */
     public Position findPosition(String nodeName) {
     	for(int j=0; j<graph.length; j++) {
 			if(nodeName.equals(graph[j].nodeNumber))
@@ -49,10 +53,13 @@ public class Astar {
     
     
     /**
-	 * The pathGeneration method is the main part of the A* algorithm. This method
+     * The pathGeneration method is the main part of the A* algorithm. This method
 	 * achieves an efficient and route between two positions based on a heuristic 
-	 * score.
-	 */ 
+	 * score. 
+     * @param startNode
+     * @param goalNode
+     * @return
+     */
     public Position[] pathGeneration(Position startNode, Position goalNode)  {
     	for(int j=0; j<graph.length; j++) {
 			if(startNode.compare(graph[j]))
@@ -115,11 +122,14 @@ public class Astar {
     
     
     /**
-	 * This method takes the generated route from the A* algorithm
+     * This method takes the generated route from the A* algorithm
 	 * and processes it into a usable ArrayList of positions to be 
 	 * passed to the mapping activity for drawing a route on the
 	 * map.
-	 */ 
+     * @param end
+     * @return
+     * @throws ClassCastException
+     */
     public Position[] pathReturn(Position end) throws ClassCastException {
         ArrayList<Position> routeList = new ArrayList<Position>();
         routeList.add(end);
@@ -141,8 +151,8 @@ public class Astar {
 	
 	/**
 	 * Constructor method for the ASTAR class. The constructor
-	 * is given the context of the calling activity as an argument
-	 * then opens and sets up the database connection.
+	 * creates the searchable graph space that represents the
+	 * school hallways and classrooms.
 	 */
     public Astar () {
     	

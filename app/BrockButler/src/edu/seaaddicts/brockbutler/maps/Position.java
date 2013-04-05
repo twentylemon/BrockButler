@@ -30,9 +30,7 @@ public class Position implements Comparable<Object> {
     public Position nonaccesible[];
 	
 	/**
-	 * Constructor methods for the POSITION class. The constructor
-	 * is overloaded 3 times for 3 different way to initialize a 
-	 * POSITION.
+	 * Constructor methods for no arguments
 	 */ 
 	public Position ( ) {
 		xPosition = 0;
@@ -49,6 +47,11 @@ public class Position implements Comparable<Object> {
         from    = null;
 	}
 	
+	/**
+	 * Constructor with coordinates set
+	 * @param inputX
+	 * @param inputY
+	 */
 	public Position (int inputX, int inputY) {
 		xPosition = inputX;
 		yPosition = inputY;
@@ -64,6 +67,13 @@ public class Position implements Comparable<Object> {
         from    = null;
 	}
 	
+	/**
+	 * Constructor with all position information set
+	 * @param inputX
+	 * @param inputY
+	 * @param inputName
+	 * @param inputNumber
+	 */
 	public Position (int inputX, int inputY, String inputName, String inputNumber) {
 		xPosition = inputX;
 		yPosition = inputY;
@@ -79,48 +89,78 @@ public class Position implements Comparable<Object> {
         from    = null;
 	}
 
-	
 	/**
-	 * Methods for the POSITION class. These methods are provided to
-	 * get and set the class variables although for performance reasons they
-	 * will be used very rarely. The final method is able to compare this position
-	 * to another with a boolean return.
-	 */ 
+	 * Set coordinates
+	 * @param inputX
+	 * @param inputY
+	 */
 	public void setCoordinates (int inputX, int inputY) {
 		xPosition  = inputX;
 		yPosition  = inputY;
 	}
 	
+	/**
+	 * Set position number
+	 * @param inputNumber
+	 */
 	public void setNumber (String inputNumber) {
 		nodeNumber  = inputNumber;
 	}
 	
+	/**
+	 * Set position description
+	 * @param inputName
+	 */
 	public void setName (String inputName) {
 		nodeName  = inputName;
 	}
 	
+	/**
+	 * get x coordinate
+	 * @return
+	 */
 	public int getX ( ) {
 		return xPosition;
 	}
 	
+	/**
+	 * get y coordinate
+	 * @return
+	 */
 	public int getY ( ) {
 		return yPosition;
 	}
 	
+	/**
+	 * get node numner
+	 * @return
+	 */
 	public String getNumber ( ) {
 		return nodeNumber;
 	}
 	
+	/**
+	 * Get node name
+	 * @return
+	 */
 	public String getName ( ) {
 		return nodeName;
 	}
 	
+	/**
+	 * Compares this node to another
+	 * @param node
+	 * @return
+	 */
 	public boolean compare (Position node) {
 		if(this.xPosition == node.xPosition && this.yPosition == node.yPosition && this.nodeNumber.equals(node.nodeNumber) && this.nodeName.equals(node.nodeName))
 			return true;
 		return false;
 	}
 	
+	/**
+	 * Not Used but required???
+	 */
 	@Override
 	public int compareTo (Object node) {
 		Position temp = (Position)node;
