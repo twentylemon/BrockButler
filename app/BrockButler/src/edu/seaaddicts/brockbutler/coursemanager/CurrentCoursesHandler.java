@@ -297,7 +297,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 				update = true;
 			values.put(KEY_SUBJ, task.mSubj);
 			values.put(KEY_CODE, task.mCode);
-			values.put(KEY_ASSIGN, task.mAssign);
+			//values.put(KEY_ASSIGN, task.mAssign);
 			values.put(KEY_NAME, task.mName);
 			values.put(KEY_MARK, task.mMark);
 			values.put(KEY_BASE, task.mBase);
