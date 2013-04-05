@@ -289,8 +289,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			task = course.mTasks.get(i);
 			num = 0;
 			update = false;
-			num = DatabaseUtils.queryNumEntries(db, TABLE_TASKS, KEY_ASSIGN
-					+ " =" + task.mAssign + " AND " + KEY_SUBJ + " ='"
+			num = DatabaseUtils.queryNumEntries(db, TABLE_TASKS, KEY_NAME
+					+ " ='" + task.mName + "' AND " + KEY_SUBJ + " ='"
 					+ task.mSubj + "' AND " + KEY_CODE + "='" + task.mCode
 					+ "'");
 			if (num > 0)
@@ -306,8 +306,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			values.put(KEY_CREATE_DATE, task.mCreationDate);
 			values.put(KEY_PRIORITY, task.mPriority);
 			if (update)
-				db.update(TABLE_TASKS, values, KEY_ASSIGN + " =" + task.mAssign
-						+ " AND " + KEY_SUBJ + " ='" + task.mSubj + "' AND "
+				db.update(TABLE_TASKS, values, KEY_NAME + " ='" + task.mName
+						+ "' AND " + KEY_SUBJ + " ='" + task.mSubj + "' AND "
 						+ KEY_CODE + "='" + task.mCode + "'", null);
 			else
 				db.insert(TABLE_TASKS, null, values);
