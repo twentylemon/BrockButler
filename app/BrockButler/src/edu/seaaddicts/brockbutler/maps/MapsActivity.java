@@ -170,9 +170,11 @@ public class MapsActivity extends Activity {
 						// TESTING
 						Position p1, p2;
 						p1 = school.findPosition("J01");
-						p2 = school.findPosition("J17");
+						p2 = school.findPosition("J23");
+						pTest = school.findPosition(mSearchEditText.getText().toString());
+						pTest.printCoordinates();
 						
-						Position[] p = school.pathGeneration(p1, p2);
+						Position[] p = school.pathGeneration(p1, pTest);
 						mMapImage.drawPosition(p);
 						
 						//pTest = school.findPosition(mSearchEditText.getText().toString());
