@@ -59,8 +59,8 @@ public class MapsHandler extends Handler {
 
 			int count = 20;
 			Locate locate = new Locate(parentContext);
-			Position current = null;
-			Position previous = null;
+			String current = "";
+			String previous = "";
 			
 			
 			@Override
@@ -74,7 +74,7 @@ public class MapsHandler extends Handler {
 					try {
 						previous = current;
 						current = locate.getUserPosition();
-						if(!current.compare(previous))
+						if(!current.equals(previous))
 							Log.i("LOCATE", "YAY");
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {

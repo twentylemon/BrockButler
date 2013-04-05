@@ -66,7 +66,8 @@ public class Locate {
 	public String getUserPosition ( ) {
 		try {   
 			getWirelessData();
-			initTestData();
+			initTestData(); // Use when testing on simulator testData1, testData2, or testData3
+			//initData(); // Use when you are testing on device
 				
 			for(int i=0; i<10; i++) {
 				calcNetwork(i);
@@ -191,6 +192,7 @@ public class Locate {
 		inputVal[9][0] = 10; inputVal[9][1] = -74;
 	}
 	
+	@SuppressWarnings("unused")
 	private void initTestData2() {
 		inputVal[0][0] = 1; inputVal[0][1] = -65;
 		inputVal[1][0] = 1; inputVal[1][1] = -89;
@@ -204,6 +206,7 @@ public class Locate {
 		inputVal[9][0] = 16; inputVal[9][1] = -72;
 	}
 	
+	@SuppressWarnings("unused")
 	private void initTestData3() {
 		inputVal[0][0] = 6; inputVal[0][1] = -58;
 		inputVal[1][0] = 8; inputVal[1][1] = -58;
@@ -222,6 +225,7 @@ public class Locate {
 	 * the network to use by putting the values between 0 and 1 
 	 * with min/max normalization.
 	 */
+	@SuppressWarnings("unused")
 	private void initData() {
 		for (int x=0; x<10; x++) { 
 			if (address[x].equalsIgnoreCase("00:0b:86:91:ce:a1"))
