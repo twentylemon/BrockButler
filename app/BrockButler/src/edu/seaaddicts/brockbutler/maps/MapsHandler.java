@@ -1,6 +1,7 @@
 package edu.seaaddicts.brockbutler.maps;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -29,6 +30,9 @@ public class MapsHandler extends Handler {
 	private static Context parentContext;
 	private Handler mMainHandler;
 	private Thread mMapsThread;
+	
+	String current = "";
+	String previous = "";
 
 	private Object mPauseLock;
 	private boolean mIsPaused;
@@ -59,8 +63,6 @@ public class MapsHandler extends Handler {
 
 			int count = 20;
 			Locate locate = new Locate(parentContext);
-			String current = "";
-			String previous = "";
 			
 			
 			@Override
@@ -74,9 +76,17 @@ public class MapsHandler extends Handler {
 					try {
 						previous = current;
 						current = locate.getUserPosition();
-						if(!current.equals(previous))
-							Log.i("LOCATE", "YAY");
-						Thread.sleep(3000);
+						Log.i("TEST", "YAY");
+						if(!current.equals(previous)) {
+							Log.i("TEST", "YAY2");
+							Message m = new Message();
+							Bundle b = new Bundle();
+							b.putString("pos",current);
+							m.what = THREAD_UPDATE_POSITION;
+							m.setData(b);
+							mMainHandler.sendMessage(m);
+						}
+						Thread.sleep(30000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

@@ -66,12 +66,10 @@ public class MapsActivity extends Activity {
 					Log.d("MAIN HANDLER", "YAYAAA!!!");
 					break;
 				case MapsHandler.THREAD_UPDATE_POSITION:
-					Log.d(TAG,
-							"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
+					Log.d("TEST","-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					break;
 				default:
-					Log.d(TAG,
-							"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
+					Log.d(TAG,"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
 					mTemp.setText("#" + msg.what);
 					break;
 				}
@@ -227,25 +225,21 @@ public class MapsActivity extends Activity {
 						// else
 						// displayNoSuchLocationDialog()
 
-						// mStartPosition = school.findPosition("J01");
-						// mGoalPosition =
-						// school.findPosition(mSearchEditText.getText().toString());
+						mStartPosition = school.findPosition("J01");
+						mGoalPosition = school.findPosition(mSearchEditText.getText().toString());
 
-						// if (school.nodeExist(mStartPosition) &&
-						// school.nodeExist(mGoalPosition)) {
-						// Position[] route =
-						// school.pathGeneration(mStartPosition, mGoalPosition);
+						if (school.nodeExist(mStartPosition) && school.nodeExist(mGoalPosition)) {
+							Position[] route = school.pathGeneration(mStartPosition, mGoalPosition);
 
-						// if (route != null)
-						// for (int i = 0; i < route.length; i++)
-						// Log.i("PRINT ROUTE", route[i].nodeNumber);
-						// else
-						// Log.e("ROUTE ERROR", "No path generated");
-						// } else {
-						// Log.e("ROUTE ERROR",
-						// "Invalid start or end position");
-						// }
-
+							if (route != null) {
+								for (int i = 0; i < route.length; i++)
+									Log.i("PRINT ROUTE", route[i].nodeNumber);
+								mMapImage.drawPosition(route);
+							} else {
+								Log.e("ROUTE ERROR", "No path generated");
+							}
+						}
+						
 						Toast.makeText(getApplicationContext(),
 								"Thomas' search method goes here.",
 								Toast.LENGTH_LONG).show();
