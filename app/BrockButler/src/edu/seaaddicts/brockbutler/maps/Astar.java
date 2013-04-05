@@ -146,7 +146,7 @@ public class Astar {
 	 */
     public Astar () {
     	
-    	graph = new Position[23];
+    	graph = new Position[28];
     	
     	graph[0] = new Position(1732,687,"J Block","J01");
     	graph[1] = new Position(1763,688,"J Block","J02");
@@ -171,6 +171,12 @@ public class Astar {
     	graph[20] = new Position(1856,752,"J Block","J21");
     	graph[21] = new Position(1836,771,"J Block","J22");
     	graph[22] = new Position(1818,789,"J Block","J23");
+    	graph[23] = new Position(1845,714,"J310","J310");
+    	graph[24] = new Position(1791,765,"J301","J301");
+    	graph[25] = new Position(1831,747,"J304","J304");
+    	graph[26] = new Position(1841,651,"J328","J328");
+    	graph[27] = new Position(1799,604,"J327","J327");
+
     	
     		graph[0].accesible = new Position[1];
     		graph[0].accesible[0] = graph[1];
@@ -184,8 +190,10 @@ public class Astar {
     		graph[2].accesible[0] = graph[1];
     		graph[2].accesible[1] = graph[3];
     	
-    		graph[3].accesible = new Position[1];
+    		graph[3].accesible = new Position[3];
     		graph[3].accesible[0] = graph[2];
+    		graph[3].accesible[1] = graph[24];
+    		graph[3].accesible[2] = graph[23];
 
     		graph[4].accesible = new Position[2];
 			graph[4].accesible[0] = graph[1];
@@ -195,9 +203,11 @@ public class Astar {
 			graph[5].accesible[0] = graph[4];
 			graph[5].accesible[1] = graph[6];
     	
-    		graph[6].accesible = new Position[2];
+    		graph[6].accesible = new Position[4];
 			graph[6].accesible[0] = graph[5];
 			graph[6].accesible[1] = graph[7];
+			graph[6].accesible[2] = graph[27];
+			graph[6].accesible[3] = graph[26];
     	
     		graph[7].accesible = new Position[2];
 			graph[7].accesible[0] = graph[6];
@@ -251,16 +261,38 @@ public class Astar {
     		graph[19].accesible[0] = graph[18];
     		graph[19].accesible[1] = graph[20];
     	
-    		graph[20].accesible = new Position[2];
+    		graph[20].accesible = new Position[3];
     		graph[20].accesible[0] = graph[19];
     		graph[20].accesible[1] = graph[21];
+    		graph[20].accesible[2] = graph[23];
     	
     		graph[21].accesible = new Position[2];
     		graph[21].accesible[0] = graph[20];
     		graph[21].accesible[1] = graph[22];
     	
-    		graph[22].accesible = new Position[1];
+    		graph[22].accesible = new Position[2];
     		graph[22].accesible[0] = graph[21];
+    		graph[22].accesible[1] = graph[24];
+    		
+    		graph[23].accesible = new Position[3];
+    		graph[23].accesible[0] = graph[3];
+    		graph[23].accesible[1] = graph[20];
+    		graph[23].accesible[2] = graph[25];
+    		
+    		graph[24].accesible = new Position[3];
+    		graph[24].accesible[0] = graph[3];
+    		graph[24].accesible[1] = graph[22];
+    		graph[24].accesible[2] = graph[25];
+    		
+    		graph[25].accesible = new Position[2];
+    		graph[25].accesible[0] = graph[23];
+    		graph[25].accesible[1] = graph[24];
+    		
+    		graph[26].accesible = new Position[1];
+    		graph[26].accesible[0] = graph[6];
+    		
+    		graph[27].accesible = new Position[1];
+    		graph[27].accesible[0] = graph[6];
     		
     	Log.i("ASTAR", "Graph Built of size " + graph.length);
     }
