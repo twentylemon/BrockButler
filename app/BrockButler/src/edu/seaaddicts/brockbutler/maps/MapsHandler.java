@@ -74,19 +74,14 @@ public class MapsHandler extends Handler {
 
 					mMainHandler.sendEmptyMessage(count);
 					try {
-						previous = current;
 						current = locate.getUserPosition();
-						Log.i("TEST", "YAY");
-						if(!current.equals(previous)) {
-							Log.i("TEST", "YAY2");
-							Message m = new Message();
-							Bundle b = new Bundle();
-							b.putString("pos",current);
-							m.what = THREAD_UPDATE_POSITION;
-							m.setData(b);
-							mMainHandler.sendMessage(m);
-						}
-						Thread.sleep(30000);
+						Message m = new Message();
+						Bundle b = new Bundle();
+						b.putString("pos",current);
+						m.what = THREAD_UPDATE_POSITION;
+						m.setData(b);
+						mMainHandler.sendMessage(m);
+						Thread.sleep(3000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

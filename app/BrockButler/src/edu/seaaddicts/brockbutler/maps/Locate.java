@@ -65,7 +65,7 @@ public class Locate {
 	 */
 	public String getUserPosition ( ) {
 		try {   
-			getWirelessData();
+			//getWirelessData(); // Use when you are testing on device
 			initTestData(); // Use when testing on simulator testData1, testData2, or testData3
 			//initData(); // Use when you are testing on device
 				
@@ -83,6 +83,46 @@ public class Locate {
 					return "J02";
 				case 3:
 					return "J03";
+				case 4:
+					return "J04";
+				case 5:
+					return "J05";
+				case 6:
+					return "J06";
+				case 7:
+					return "J07";
+				case 8:
+					return "J08";
+				case 9:
+					return "J09";
+				case 10:
+					return "J10";
+				case 11:
+					return "J11";
+				case 12:
+					return "J12";
+				case 13:
+					return "J13";
+				case 14:
+					return "J14";
+				case 15:
+					return "J15";
+				case 16:
+					return "J16";
+				case 17:
+					return "J17";
+				case 18:
+					return "J18";
+				case 19:
+					return "J19";
+				case 20:
+					return "J20";
+				case 21:
+					return "J21";
+				case 22:
+					return "J22";
+				case 23:
+					return "J23";
 				default:
 					return "";
 			}

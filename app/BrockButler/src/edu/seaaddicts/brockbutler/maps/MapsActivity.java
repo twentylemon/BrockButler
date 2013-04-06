@@ -66,7 +66,7 @@ public class MapsActivity extends Activity {
 					Log.d("MAIN HANDLER", "YAYAAA!!!");
 					break;
 				case MapsHandler.THREAD_UPDATE_POSITION:
-					Log.d("TEST","-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
+					Log.d("TEST",msg.getData().getString("pos"));
 					break;
 				default:
 					Log.d(TAG,"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
@@ -75,8 +75,6 @@ public class MapsActivity extends Activity {
 				}
 			}
 		};
-//		mMapsHandler = new MapsHandler(mHandler);
-//        school = new Astar();
 		mMapsHandler = new MapsHandler(mHandler,this);
         school = new Astar();
         mContext = this;
@@ -168,20 +166,14 @@ public class MapsActivity extends Activity {
 						// string.
 						
 						// TESTING
-						Position p1, p2;
+						Position p1;
 						p1 = school.findPosition("J01");
-						p2 = school.findPosition("J23");
 						pTest = school.findPosition(mSearchEditText.getText().toString());
 						pTest.printCoordinates();
 						
 						Position[] p = school.pathGeneration(p1, pTest);
-						mMapImage.drawPosition(p);
-						
-						//pTest = school.findPosition(mSearchEditText.getText().toString());
-						//pTest.printCoordinates();
-						
-						
-						//Log.d("SEARCH", "Location: " + mSearchEditText.getText().toString() + ", " + pTest.xPosition + "," + pTest.yPosition);
+						if(p != null)
+							mMapImage.drawPosition(p);
 					}
 				});
 		editalert.setNegativeButton("Cancel",
@@ -227,20 +219,15 @@ public class MapsActivity extends Activity {
 						// else
 						// displayNoSuchLocationDialog()
 
-						mStartPosition = school.findPosition("J01");
-						mGoalPosition = school.findPosition(mSearchEditText.getText().toString());
-
-						if (school.nodeExist(mStartPosition) && school.nodeExist(mGoalPosition)) {
-							Position[] route = school.pathGeneration(mStartPosition, mGoalPosition);
-
-							if (route != null) {
-								for (int i = 0; i < route.length; i++)
-									Log.i("PRINT ROUTE", route[i].nodeNumber);
-								mMapImage.drawPosition(route);
-							} else {
-								Log.e("ROUTE ERROR", "No path generated");
-							}
-						}
+						// TESTING
+						Position p1;
+						p1 = school.findPosition("J01");
+						pTest = school.findPosition(mSearchEditText.getText().toString());
+						pTest.printCoordinates();
+						
+						Position[] p = school.pathGeneration(p1, pTest);
+						if(p != null)
+							mMapImage.drawPosition(p);
 						
 						Toast.makeText(getApplicationContext(),
 								"Thomas' search method goes here.",
