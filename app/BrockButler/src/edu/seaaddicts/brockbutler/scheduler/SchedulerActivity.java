@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,7 +44,7 @@ public class SchedulerActivity extends Activity {
 		mCourseHandle = new CourseHandler(this);
 		populateCoursesLayout();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -136,6 +138,54 @@ public class SchedulerActivity extends Activity {
 					((TextView) view.findViewById(R.id.tv_seminar))
 							.setText(offering);
 			}
+
+			/*
+			 * Hide class type if none available
+			 */
+			if (((TextView) view.findViewById(R.id.tv_lecture)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_lec).setVisibility(GONE);
+			if (((TextView) view.findViewById(R.id.tv_lab)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_lab).setVisibility(GONE);
+			if (((TextView) view.findViewById(R.id.tv_tutorial)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_tut).setVisibility(GONE);
+			if (((TextView) view.findViewById(R.id.tv_seminar)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_sem).setVisibility(GONE);
+
+			/*
+			 * Add Tasks to view
+			 */
+			ArrayList<Task> tasks = mRegisteredCoursesList.get(position).mTasks;
+			if (tasks.size() > 0) {
+				// Set visibility for Tasks
+				LinearLayout tasks_layout = (LinearLayout) findViewById(R.id.sched_tasks);
+				TextView task_title = (TextView) findViewById(R.id.sched_tasks_title);
+				task_title.setVisibility(VISIBLE);
+				tasks_layout.setVisibility(VISIBLE);
+				tasks_layout.removeAllViews();
+				for (int j = 0; j < tasks.size(); j++) {
+					// LinearLayout for each task
+					LinearLayout ll = new LinearLayout(this);
+					//ll.setOrientation(1);
+					TextView tv = new TextView(this);
+					tv.setPadding(20, 20, 50, 20);
+					tv.setLayoutParams(new LinearLayout.LayoutParams(
+							500,
+							LinearLayout.LayoutParams.WRAP_CONTENT));
+					tv.setText(tasks.get(j).mName + "\n\tDue: "
+							+ tasks.get(j).mDueDate);
+					CheckBox cb = new CheckBox(this);
+					cb.setPadding(50, 0, 0, 0);
+					cb.setFocusable(false);
+					cb.setFocusableInTouchMode(false);
+					ll.addView(tv);
+					ll.addView(cb);
+					tasks_layout.addView(ll);
+				}
+			}
 		}
 
 		Log.d(TAG, "NUMBER TASKS: "
@@ -152,13 +202,19 @@ public class SchedulerActivity extends Activity {
 							+ "\nDue Date: "
 							+ mRegisteredCoursesList.get(position).mTasks
 									.get(i).mDueDate
-							+ "\nAssignment #: "
+							+ "\nWeight: "
 							+ mRegisteredCoursesList.get(position).mTasks
-									.get(i).mAssign);
+									.get(i).mWeight
+							+ "\nBase: "
+							+ mRegisteredCoursesList.get(position).mTasks
+									.get(i).mBase
+							+ "\nMark: "
+							+ mRegisteredCoursesList.get(position).mTasks
+									.get(i).mMark);
 		}
-		
+
 		((TextView) view.findViewById(R.id.tv_prof_name))
-		.setText(mRegisteredCoursesList.get(position).mInstructor);
+				.setText(mRegisteredCoursesList.get(position).mInstructor);
 
 	}
 

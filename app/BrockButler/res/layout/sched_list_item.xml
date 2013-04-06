@@ -23,12 +23,49 @@
         android:padding="10dip"
         android:visibility="gone" >
 
-        <include android:id="@+id/row_prof" layout="@layout/row_prof_simple"/>
-        <include layout="@layout/row_task_lecture"/>
-        <include layout="@layout/row_task_tutorial"/>
-        <include layout="@layout/row_task_lab"/>
-        <include android:id="@+id/row_task" layout="@layout/row_task"/>
+        <include
+            android:id="@+id/row_prof"
+            layout="@layout/row_prof_simple" />
 
+        <include
+            android:id="@+id/row_lec"
+            layout="@layout/row_task_lecture" />
+
+        <include
+            android:id="@+id/row_lab"
+            layout="@layout/row_task_lab" />
+
+        <include
+            android:id="@+id/row_tut"
+            layout="@layout/row_task_tutorial" />
+
+        <include
+            android:id="@+id/row_sem"
+            layout="@layout/row_task_seminar" />
+
+        <TextView
+            android:id="@+id/sched_tasks_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dip"
+            android:text="@string/title_tasks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/sched_tasks"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:orientation="vertical"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:paddingTop="2sp"
+            android:visibility="gone" >
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

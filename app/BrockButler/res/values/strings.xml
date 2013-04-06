@@ -13,6 +13,10 @@
     <string name="activity_add_task_hint_weight">0 for no mark</string>
     <string name="activity_add_task_description">Description</string>
     <string name="activity_add_task_hint_description">Add description</string>
+    <string name="activity_add_task_base">Base</string>
+    <string name="activity_add_task_hint_base">Enter base mark</string>
+    <string name="activity_add_task_mark">Mark</string>
+    <string name="activity_add_task_hint_mark">Awarded mark</string>
     <string name="activity_add_task_due_date">Edit Due Date</string>
     <string name="activity_add_task_contact">Add Contact</string>
     <string name="activity_add_task_date">No due date set</string>
@@ -66,6 +70,7 @@
     <string name="menu_expand_collapse">Expand/Collapse All</string>
     <string name="sched_no_courses">No registered courses.\n\nGo to Course Manager to add courses.</string>
      <string name="menu_show_scheduler_help">Show Help</string>
+    <string name="scheduler_menu_showhide_completed">Show\/Hide Completed Tasks</string>
 
     <!-- row_task_* -->
     <string name="title_tasks">Tasks</string>
