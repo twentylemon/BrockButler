@@ -21,9 +21,12 @@ import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.animation.ExpandAnimation;
 import edu.seaaddicts.brockbutler.coursemanager.Course;
 import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
+import edu.seaaddicts.brockbutler.coursemanager.Offering;
+import edu.seaaddicts.brockbutler.coursemanager.OfferingTime;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
 
 public class SchedulerActivity extends Activity {
+	private static final String TAG = "SchedulerActivity";
 
 	private static final int VISIBLE = 0;
 	private static final int GONE = 8;
@@ -37,6 +40,12 @@ public class SchedulerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scheduler);
 		mCourseHandle = new CourseHandler(this);
+		populateCoursesLayout();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		populateCoursesLayout();
 	}
 
@@ -76,6 +85,13 @@ public class SchedulerActivity extends Activity {
 	private void showHideToolbar(View view, int position) {
 		View toolbar = view.findViewById(R.id.sched_toolbar);
 
+		// Get current course info.
+		String subj = mRegisteredCoursesList.get(position).mSubject;
+		String code = mRegisteredCoursesList.get(position).mCode;
+		String offering = "";
+		ArrayList<Offering> offs = mRegisteredCoursesList.get(position).mOfferings;
+		ArrayList<OfferingTime> offTimes;
+
 		// Creating the expand animation for the item
 		ExpandAnimation expandAni = new ExpandAnimation(toolbar,
 				ExpandAnimation.ANIMATE_SHORT);
@@ -86,77 +102,68 @@ public class SchedulerActivity extends Activity {
 		((TextView) view.findViewById(R.id.tv_prof_name))
 				.setText(mRegisteredCoursesList.get(position).mInstructor);
 
-		Log.d("NUMBER OFFERINGS:", ""
-				+ mRegisteredCoursesList.get(position).mOfferings.size());
-		// Add offerings registered for
-		for (int i = 0; i < mRegisteredCoursesList.get(position).mOfferings
-				.size(); i++) {
-			String what = mRegisteredCoursesList.get(position).mOfferings
-					.get(i).mType.substring(0, 3).trim();
+		// Add Offerings registered for.
+		for (int i = 0; i < offs.size(); i++) {
+			String what = offs.get(i).mType.substring(0, 3).trim();
 
-			Log.d("TYPE: ", "" + what);
+			offTimes = offs.get(i).mOfferingTimes;
 
-			if (what.equalsIgnoreCase("lec"))
-				((TextView) view.findViewById(R.id.tv_lecture))
-						.setText(mRegisteredCoursesList.get(position).mOfferings
-								.get(i).mOfferingTimes.get(i).mDay
-								+ " "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mStartTime
-								+ " - "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mEndTime
-								+ " @ "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mLocation);
+			offering = "";
 
-			else if (what.equalsIgnoreCase("lab"))
-				((TextView) view.findViewById(R.id.tv_lab))
-						.setText(mRegisteredCoursesList.get(position).mOfferings
-								.get(i).mOfferingTimes.get(i).mDay
-								+ " "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mStartTime
-								+ " - "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mEndTime
-								+ " @ "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mLocation);
+			// Loop through OfferingTimes for each Offering to populate
+			for (int j = 0; j < offTimes.size(); j++) {
+				offering += offTimes.get(j).mDay + " "
+						+ offTimes.get(j).mStartTime + " - "
+						+ offTimes.get(j).mEndTime + " @ "
+						+ offTimes.get(j).mLocation + "\n";
 
-			else if (what.equalsIgnoreCase("tut"))
-				((TextView) view.findViewById(R.id.tv_tutorial))
-						.setText(mRegisteredCoursesList.get(position).mOfferings
-								.get(i).mOfferingTimes.get(i).mDay
-								+ " "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mStartTime
-								+ " - "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mEndTime
-								+ " @ "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mLocation);
+				// Check for type of Offering and add as appropriate
+				if (what.equalsIgnoreCase("lec")) {
+					TextView tv = ((TextView) view
+							.findViewById(R.id.tv_lecture));
+					tv.setText(offering);
+				}
 
-			else if (what.equalsIgnoreCase("sem"))
-				((TextView) view.findViewById(R.id.tv_seminar))
-						.setText(mRegisteredCoursesList.get(position).mOfferings
-								.get(i).mOfferingTimes.get(i).mDay
-								+ " "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mStartTime
-								+ " - "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mEndTime
-								+ " @ "
-								+ mRegisteredCoursesList.get(position).mOfferings
-										.get(i).mOfferingTimes.get(i).mLocation);
+				else if (what.equalsIgnoreCase("lab"))
+					((TextView) view.findViewById(R.id.tv_lab))
+							.setText(offering);
+
+				else if (what.equalsIgnoreCase("tut"))
+					((TextView) view.findViewById(R.id.tv_tutorial))
+							.setText(offering);
+
+				else if (what.equalsIgnoreCase("sem"))
+					((TextView) view.findViewById(R.id.tv_seminar))
+							.setText(offering);
+			}
 		}
+
+		Log.d(TAG, "NUMBER TASKS: "
+				+ mRegisteredCoursesList.get(position).mTasks.size());
+
+		for (int i = 0; i < mRegisteredCoursesList.get(position).mTasks.size(); i++) {
+			Log.d(TAG,
+					"Title: "
+							+ mRegisteredCoursesList.get(position).mTasks
+									.get(i).mName
+							+ "\nPriority: "
+							+ mRegisteredCoursesList.get(position).mTasks
+									.get(i).mPriority
+							+ "\nDue Date: "
+							+ mRegisteredCoursesList.get(position).mTasks
+									.get(i).mDueDate
+							+ "\nAssignment #: "
+							+ mRegisteredCoursesList.get(position).mTasks
+									.get(i).mAssign);
+		}
+		
+		((TextView) view.findViewById(R.id.tv_prof_name))
+		.setText(mRegisteredCoursesList.get(position).mInstructor);
+
 	}
-	
-	public void showHelp(MenuItem item)
-	{
-		Intent intent = new Intent(SchedulerActivity.this,HelpActivity.class);
+
+	public void showHelp(MenuItem item) {
+		Intent intent = new Intent(SchedulerActivity.this, HelpActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putString("activity", "scheduler");
 		intent.putExtras(bundle);

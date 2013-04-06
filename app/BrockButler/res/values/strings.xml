@@ -68,6 +68,7 @@
      <string name="menu_show_scheduler_help">Show Help</string>
 
     <!-- row_task_* -->
+    <string name="title_tasks">Tasks</string>
     <string name="title_lecture">Lectures</string>
     <string name="title_lab">Labs</string>
     <string name="title_tutorial">Tutorials</string>
@@ -125,14 +126,6 @@
     <string name="title_activity_scheduler">SchedulerActivity</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_tour">Brock Butler Tour</string>
-    <string name="title_sample_course1">SAMP 1P01</string>
-    <string name="title_sample_course2">SAMP 1P02</string>
-    <string name="title_sample_course3">SAMP 1P03</string>
-    <string name="title_sample_course4">SAMP 1P04</string>
-    <string name="title_sample_instruct1">Prof. S. Sampler I</string>
-    <string name="title_sample_instruct2">Prof. S. Sampler II</string>
-    <string name="title_sample_instruct3">Prof. S. Sampler III</string>
-    <string name="title_sample_instruct4">Prof. S. Sampler IV</string>
     <string name="title_activity_add_task">AddTaskActivity</string>
     <string name="task_priority_prompt">Task Priority</string>
 
@@ -146,6 +139,7 @@
         <item>Normal</item>
         <item>Low</item>
     </string-array>
+    
     <string-array name="empty">
         <item>None</item>
     </string-array>

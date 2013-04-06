@@ -1,36 +1,41 @@
 package edu.seaaddicts.brockbutler.scheduler;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import edu.seaaddicts.brockbutler.R;
-import edu.seaaddicts.brockbutler.contacts.AddContactActivity;
-import edu.seaaddicts.brockbutler.contacts.ContactsActivity;
+import edu.seaaddicts.brockbutler.coursemanager.Course;
 import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
 
 public class AddTaskActivity extends Activity {
 	private static final int DATE_DIALOG_ID = 0;
 
 	private Button mDueDateButton;
-	private Button mAddContactButton;
 	private Button mSaveButton;
 	private Button mCancelButton;
-	private ListView mContactListView;
-	private DatePicker mDueDatePicker;
-	private TextView mDueDateTextView;
 	
+	private ArrayList<Course> mRegCourses;
+	private EditText mCourseTitle;
+	private TextView mDueDateTextView;
+
+	private Spinner mCourseSpinner;
+	private Spinner mPrioritySpinner;
+
 	private CourseHandler mCourseHandle = null;
 
 	private int mYear;
@@ -41,6 +46,7 @@ public class AddTaskActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_task);
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		init();
 	}
 
@@ -50,17 +56,30 @@ public class AddTaskActivity extends Activity {
 	private void init() {
 		mCourseHandle = new CourseHandler(this);
 		mDueDateButton = (Button) findViewById(R.id.add_task_due_date_button);
-		mAddContactButton = (Button) findViewById(R.id.add_task_add_contact_button);
 		mSaveButton = (Button) findViewById(R.id.add_task_save_button);
 		mCancelButton = (Button) findViewById(R.id.add_task_cancel_button);
-		mContactListView = (ListView) findViewById(R.id.add_task_add_contact_listview);
 		mDueDateTextView = (TextView) findViewById(R.id.add_task_date_textview);
+		mPrioritySpinner = (Spinner) findViewById(R.id.add_task_priority_spinner);
+		mCourseTitle = (EditText) findViewById(R.id.add_task_title);
+
+		mCourseSpinner = (Spinner) findViewById(R.id.add_task_course_spinner);
+
+		mRegCourses = mCourseHandle.getRegisteredCourses();
+		ArrayList<String> cs = new ArrayList<String>();
+
+		// Create ArrayList of Course Strings in format: SUBJECT CODE
+		for (int i = 0; i < mRegCourses.size(); i++) {
+			cs.add(mRegCourses.get(i).mSubject + " " + mRegCourses.get(i).mCode);
+		}
+		// Set the course Spinner
+		mCourseSpinner.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, cs));		
 
 		// DatePicker stuff.
-		final Calendar c = Calendar.getInstance();
-		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
-		mDay = c.get(Calendar.DAY_OF_MONTH);
+		final Calendar cal = Calendar.getInstance();
+		mYear = cal.get(Calendar.YEAR);
+		mMonth = cal.get(Calendar.MONTH);
+		mDay = cal.get(Calendar.DAY_OF_MONTH);
 
 		// OnClickListener for DatePicker
 		mDueDateButton.setOnClickListener(new OnClickListener() {
@@ -69,19 +88,23 @@ public class AddTaskActivity extends Activity {
 			}
 		});
 
-		mAddContactButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				showContactSelectDialog(AddTaskActivity.this, null, "");
-			}
-		});
-
 		mSaveButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// Run Grisdale's function to add a task to the database.
+				Task t = new Task();
+				t.mSubj = mRegCourses.get(mCourseSpinner.getSelectedItemPosition()).mSubject;
+				t.mCode = mRegCourses.get(mCourseSpinner.getSelectedItemPosition()).mCode;
+				t.mName = mCourseTitle.getText().toString();
+				// Lower == higher priority
+				t.mPriority = mPrioritySpinner.getSelectedItemPosition();
+				t.mDueDate = mDueDateTextView.getText().toString();
+				
+				// Get current date
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				Date date = new Date();
+				t.mCreationDate = dateFormat.format(date);
+				mCourseHandle.addTask(t);
 				onBackPressed();
 			}
 		});
@@ -94,34 +117,6 @@ public class AddTaskActivity extends Activity {
 				onBackPressed();
 			}
 		});
-	}
-
-	private void showContactSelectDialog(Activity activity, String title,
-			CharSequence message) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		if (title != null)
-			builder.setTitle(title);
-		// builder.setMessage(message);
-		builder.setPositiveButton("Existing",
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent i = new Intent(AddTaskActivity.this,
-								ContactsActivity.class);
-						startActivity(i);
-					}
-				});
-		builder.setNegativeButton("New", new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent i = new Intent(AddTaskActivity.this,
-						AddContactActivity.class);
-				startActivity(i);
-			}
-		});
-		builder.show();
 	}
 
 	/*
@@ -151,13 +146,25 @@ public class AddTaskActivity extends Activity {
 		public void onDateSet(DatePicker view, int selectedYear,
 				int selectedMonth, int selectedDay) {
 			mYear = selectedYear;
-			mMonth = selectedMonth;
+			mMonth = selectedMonth+1;	// Since index starts at 0 and there is no 0 month.
 			mDay = selectedDay;
 
 			// Set TextView in this activity.
-			mDueDateTextView.setText(new StringBuilder().append(mMonth + 1)
-					.append("-").append(mDay).append("-").append(mYear)
-					.append(" "));
+			if (mMonth < 10) {
+				if (mDay < 10) {
+			mDueDateTextView.setText(new StringBuilder().append(mYear)
+					.append("/").append(0).append(mMonth).append("/").append(0).append(mDay));
+				} else
+					mDueDateTextView.setText(new StringBuilder().append(mYear)
+							.append("/").append(0).append(mMonth).append("/").append(mDay));
+			} else if (mMonth > 9) {
+				if (mDay < 10) {
+				mDueDateTextView.setText(new StringBuilder().append(mYear)
+						.append("/").append(mMonth).append("/").append(0).append(mDay));
+				} else 
+					mDueDateTextView.setText(new StringBuilder().append(mYear)
+							.append("/").append(mMonth).append("/").append(mDay));
+			}
 
 		}
 	};

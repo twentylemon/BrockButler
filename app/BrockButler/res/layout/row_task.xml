@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dip"
+    android:layout_marginLeft="15dip"
+    android:orientation="vertical"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:paddingTop="2sp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/title_tasks"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+    
+        <include android:id="@+id/row_task_info" layout="@layout/row_task_info"/>
+
+</LinearLayout>

@@ -27,8 +27,7 @@
         <include layout="@layout/row_task_lecture"/>
         <include layout="@layout/row_task_tutorial"/>
         <include layout="@layout/row_task_lab"/>
-        <include layout="@layout/row_task_assignment"/>
-        <include layout="@layout/row_task_test"/>
+        <include android:id="@+id/row_task" layout="@layout/row_task"/>
 
     </LinearLayout>
 

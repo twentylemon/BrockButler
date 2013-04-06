@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import edu.seaaddicts.brockbutler.contacts.Contact;
 
 public class Task {
-	
 	public String mSubj;
 	public String mCode;
 	public boolean mIsPastDue;
@@ -30,6 +29,7 @@ public class Task {
 	public Task(){
 		mContacts = new ArrayList<Contact>();
 	}
+	
 	public boolean isPastDueDate(){
 		return true;
 	}
