@@ -266,6 +266,22 @@ public class CourseManagerActivity extends Activity {
 							.setText(offering);
 			}
 		}
+
+		/*
+		 * Hide class type if none available
+		 */
+		if (((TextView) view.findViewById(R.id.tv_lecture)).getText()
+				.toString().equalsIgnoreCase("none"))
+			view.findViewById(R.id.row_lec).setVisibility(GONE);
+		if (((TextView) view.findViewById(R.id.tv_lab)).getText()
+				.toString().equalsIgnoreCase("none"))
+			view.findViewById(R.id.row_lab).setVisibility(GONE);
+		if (((TextView) view.findViewById(R.id.tv_tutorial)).getText()
+				.toString().equalsIgnoreCase("none"))
+			view.findViewById(R.id.row_tut).setVisibility(GONE);
+		if (((TextView) view.findViewById(R.id.tv_seminar)).getText()
+				.toString().equalsIgnoreCase("none"))
+			view.findViewById(R.id.row_sem).setVisibility(GONE);
 	}
 
 	@Override

@@ -8,7 +8,8 @@
         android:id="@+id/course_manager_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="gone" >
+        android:visibility="gone"
+        android:divider="@drawable/grad_course_title" >
     </ListView>
     
     <TextView 

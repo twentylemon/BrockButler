@@ -54,6 +54,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="edu.seaaddicts.brockbutler.scheduler.SchedulerActivityBAK"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/title_activity_scheduler"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="edu.seaaddicts.brockbutler.contacts.ContactsActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_contacts"

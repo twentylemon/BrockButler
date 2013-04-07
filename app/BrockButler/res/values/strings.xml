@@ -70,7 +70,7 @@
     <string name="menu_expand_collapse">Expand/Collapse All</string>
     <string name="sched_no_courses">No registered courses.\n\nGo to Course Manager to add courses.</string>
      <string name="menu_show_scheduler_help">Show Help</string>
-    <string name="scheduler_menu_showhide_completed">Show\/Hide Completed Tasks</string>
+    <string name="scheduler_menu_showhide_completed">Show//Hide Completed Tasks</string>
 
     <!-- row_task_* -->
     <string name="title_tasks">Tasks</string>

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +26,7 @@ import edu.seaaddicts.brockbutler.coursemanager.Offering;
 import edu.seaaddicts.brockbutler.coursemanager.OfferingTime;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
 
-public class SchedulerActivity extends Activity {
+public class SchedulerActivityBAK extends Activity {
 	private static final String TAG = "SchedulerActivity";
 
 	private static final int VISIBLE = 0;
@@ -39,9 +36,6 @@ public class SchedulerActivity extends Activity {
 	private CourseHandler mCourseHandle = null;
 	private ListView mRegisteredCoursesListView = null;
 	ArrayAdapter<String> mListAdaptor;
-	View mView;
-	int mCurTaskTextViewId;
-	int mCurTaskCheckBoxId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,145 +81,111 @@ public class SchedulerActivity extends Activity {
 					});
 			registerForContextMenu(mRegisteredCoursesListView);
 		}
+		populateCourseViews();
 	}
 
-	private void populateCourseView(View view, int position) {
+	private void populateCourseViews() {
+		LinearLayout convert = (LinearLayout) findViewById(R.id.sched_list_item);
+		for (int m = 0; m < mListAdaptor.getCount(); m++) {
 
-		mView = view;
-		// Get current course info.
-		String offering = "";
-		ArrayList<Offering> offs = mRegisteredCoursesList.get(position).mOfferings;
-		ArrayList<OfferingTime> offTimes;
-		ArrayList<Task> tasks = mRegisteredCoursesList.get(position).mTasks;
-		Log.d(TAG, "NUMBER OF TASKS: " + tasks.size());
+			View view = mListAdaptor.getView(m, convert,
+					mRegisteredCoursesListView);
 
-		// Set Instructor
-		((TextView) view.findViewById(R.id.tv_prof_name))
-				.setText(mRegisteredCoursesList.get(position).mInstructor);
+			// Get current course info.
+			String offering = "";
+			ArrayList<Offering> offs = mRegisteredCoursesList.get(m).mOfferings;
+			ArrayList<OfferingTime> offTimes;
+			ArrayList<Task> tasks = mRegisteredCoursesList.get(m).mTasks;
+			Log.d(TAG, "NUMBER OF TASKS: " + tasks.size());
 
-		// Add Offerings registered for.
-		for (int i = 0; i < offs.size(); i++) {
-			String what = offs.get(i).mType.substring(0, 3).trim();
-			offTimes = offs.get(i).mOfferingTimes;
-			offering = "";
+			// Set Instructor
+			((TextView) view.findViewById(R.id.tv_prof_name))
+					.setText(mRegisteredCoursesList.get(m).mInstructor);
 
-			// Loop through OfferingTimes for each Offering to populate
-			for (int j = 0; j < offTimes.size(); j++) {
-				offering += offTimes.get(j).mDay + " "
-						+ offTimes.get(j).mStartTime + " - "
-						+ offTimes.get(j).mEndTime + " @ "
-						+ offTimes.get(j).mLocation + "\n";
+			// Add Offerings registered for.
+			for (int i = 0; i < offs.size(); i++) {
+				String what = offs.get(i).mType.substring(0, 3).trim();
+				offTimes = offs.get(i).mOfferingTimes;
+				offering = "";
 
-				// Check for type of Offering and add as appropriate
-				if (what.equalsIgnoreCase("lec")) {
-					TextView tv = ((TextView) view
-							.findViewById(R.id.tv_lecture));
-					tv.setText(offering);
-				}
+				// Loop through OfferingTimes for each Offering to populate
+				for (int j = 0; j < offTimes.size(); j++) {
+					offering += offTimes.get(j).mDay + " "
+							+ offTimes.get(j).mStartTime + " - "
+							+ offTimes.get(j).mEndTime + " @ "
+							+ offTimes.get(j).mLocation + "\n";
 
-				// ...a lab?
-				else if (what.equalsIgnoreCase("lab"))
-					((TextView) view.findViewById(R.id.tv_lab))
-							.setText(offering);
-
-				// ..a tutorial?
-				else if (what.equalsIgnoreCase("tut"))
-					((TextView) view.findViewById(R.id.tv_tutorial))
-							.setText(offering);
-
-				// ...a seminar?
-				else if (what.equalsIgnoreCase("sem"))
-					((TextView) view.findViewById(R.id.tv_seminar))
-							.setText(offering);
-			}
-		}
-
-		/*
-		 * Add Tasks to view
-		 */
-		if (tasks.size() > 0) {
-			// Set visibility for Tasks
-			view.findViewById(R.id.sched_tasks_title).setVisibility(VISIBLE);
-			view.findViewById(R.id.sched_tasks).setVisibility(VISIBLE);
-			((LinearLayout) view.findViewById(R.id.sched_tasks))
-					.removeAllViews();
-			ArrayList<TextView> tvs = new ArrayList<TextView>();
-			ArrayList<CheckBox> cbs = new ArrayList<CheckBox>();
-			for (int j = 0; j < tasks.size(); j++) {
-				// LinearLayout for each task
-				LinearLayout ll = new LinearLayout(this);
-				
-				// TextView for task info
-				TextView tv = new TextView(this);
-
-				ll.addView(tv);
-				
-				// Each TextView will need an ID when added to the layout
-				mCurTaskTextViewId = 1000+j;
-				tv.setId(mCurTaskTextViewId);
-				
-				// Cosmetics
-				tv.setPadding(20, 20, 50, 20);
-				tv.setLayoutParams(new LinearLayout.LayoutParams(500,
-						LinearLayout.LayoutParams.WRAP_CONTENT));
-				
-				// Set the TextView
-				tv.setText(tasks.get(j).mName + "\n\tDue: "
-						+ tasks.get(j).mDueDate);
-				
-				// Add the TextView to ArrayList
-				tvs.add(tv);
-				// Checkbox for Task status
-				CheckBox cb = new CheckBox(this);
-				ll.addView(cb);
-				
-				// Each TextView will need an ID when added to the layout
-				mCurTaskCheckBoxId = 1000 + j + 1;
-				cb.setId(mCurTaskCheckBoxId);
-				cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						Log.d(TAG, "mCurTaskTextViewId: " + (buttonView.getId()-1));
-						TextView tv = ((TextView) mView.findViewById(buttonView.getId()-1));
-						if (isChecked) {
-							tv.setPaintFlags(tv.getPaintFlags()
-									| Paint.STRIKE_THRU_TEXT_FLAG);
-						} else {
-							tv.setPaintFlags(0);
-						}
+					// Check for type of Offering and add as appropriate
+					if (what.equalsIgnoreCase("lec")) {
+						((TextView) view.findViewById(R.id.tv_lecture))
+								.setText(offering);
 					}
-				});
-				cb.setPadding(50, 0, 0, 0);
-				cb.setFocusable(false);
-				cb.setFocusableInTouchMode(false);
-				cbs.add(cb);
-				((LinearLayout) view.findViewById(R.id.sched_tasks))
-						.addView(ll);
-			}
-		}
 
-		/*
-		 * Hide class type if none available
-		 */
-		if (((TextView) view.findViewById(R.id.tv_lecture)).getText()
-				.toString().equalsIgnoreCase("none"))
-			view.findViewById(R.id.row_lec).setVisibility(GONE);
-		if (((TextView) view.findViewById(R.id.tv_lab)).getText().toString()
-				.equalsIgnoreCase("none"))
-			view.findViewById(R.id.row_lab).setVisibility(GONE);
-		if (((TextView) view.findViewById(R.id.tv_tutorial)).getText()
-				.toString().equalsIgnoreCase("none"))
-			view.findViewById(R.id.row_tut).setVisibility(GONE);
-		if (((TextView) view.findViewById(R.id.tv_seminar)).getText()
-				.toString().equalsIgnoreCase("none"))
-			view.findViewById(R.id.row_sem).setVisibility(GONE);
+					// ...a lab?
+					else if (what.equalsIgnoreCase("lab"))
+						((TextView) view.findViewById(R.id.tv_lab))
+								.setText(offering);
+
+					// ..a tutorial?
+					else if (what.equalsIgnoreCase("tut"))
+						((TextView) view.findViewById(R.id.tv_tutorial))
+								.setText(offering);
+
+					// ...a seminar?
+					else if (what.equalsIgnoreCase("sem"))
+						((TextView) view.findViewById(R.id.tv_seminar))
+								.setText(offering);
+				}
+			}
+			view.findViewById(R.id.sched_tasks_title).setVisibility(VISIBLE);
+
+			/*
+			 * Add Tasks to view
+			 */
+			if (tasks.size() > 0) {
+				// Set visibility for Tasks
+				view.findViewById(R.id.sched_tasks).setVisibility(VISIBLE);
+				((LinearLayout) view.findViewById(R.id.sched_tasks))
+						.removeAllViews();
+				for (int j = 0; j < tasks.size(); j++) {
+					// LinearLayout for each task
+					LinearLayout ll = new LinearLayout(this);
+					TextView tv = new TextView(this);
+					tv.setPadding(20, 20, 50, 20);
+					tv.setLayoutParams(new LinearLayout.LayoutParams(500,
+							LinearLayout.LayoutParams.WRAP_CONTENT));
+					tv.setText(tasks.get(j).mName + "\n\tDue: "
+							+ tasks.get(j).mDueDate);
+					CheckBox cb = new CheckBox(this);
+					cb.setPadding(50, 0, 0, 0);
+					cb.setFocusable(false);
+					cb.setFocusableInTouchMode(false);
+					ll.addView(tv);
+					ll.addView(cb);
+					// tasks_layout.addView(ll);
+				}
+			}
+
+			/*
+			 * Hide class type if none available
+			 */
+			if (((TextView) view.findViewById(R.id.tv_lecture)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_lec).setVisibility(GONE);
+			if (((TextView) view.findViewById(R.id.tv_lab)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_lab).setVisibility(GONE);
+			if (((TextView) view.findViewById(R.id.tv_tutorial)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_tut).setVisibility(GONE);
+			if (((TextView) view.findViewById(R.id.tv_seminar)).getText()
+					.toString().equalsIgnoreCase("none"))
+				view.findViewById(R.id.row_sem).setVisibility(GONE);
+		}
 	}
 
 	private void showHideToolbar(View view, int position) {
 		View toolbar = view.findViewById(R.id.sched_toolbar);
-		populateCourseView(view, position);
 
 		// Creating the expand animation for the item
 		ExpandAnimation expandAni = new ExpandAnimation(toolbar,
@@ -237,7 +197,8 @@ public class SchedulerActivity extends Activity {
 	}
 
 	public void showHelp(MenuItem item) {
-		Intent intent = new Intent(SchedulerActivity.this, HelpActivity.class);
+		Intent intent = new Intent(SchedulerActivityBAK.this,
+				HelpActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putString("activity", "scheduler");
 		intent.putExtras(bundle);
@@ -257,14 +218,14 @@ public class SchedulerActivity extends Activity {
 		try {
 			startActivity(Intent.createChooser(i, "Send mail..."));
 		} catch (android.content.ActivityNotFoundException ex) {
-			Toast.makeText(SchedulerActivity.this,
+			Toast.makeText(SchedulerActivityBAK.this,
 					"There are no email clients installed.", Toast.LENGTH_SHORT)
 					.show();
 		}
 	}
 
 	public void addTask(MenuItem item) {
-		Intent i = new Intent(SchedulerActivity.this, AddTaskActivity.class);
+		Intent i = new Intent(SchedulerActivityBAK.this, AddTaskActivity.class);
 		startActivity(i);
 	}
 

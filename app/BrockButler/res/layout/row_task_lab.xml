@@ -12,6 +12,8 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/grad_task_title"
+        android:paddingLeft="5dip"
         android:text="@string/title_lab"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -22,8 +24,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
-        android:textColor="#ddd"
-        android:text="@string/none" >
+        android:paddingLeft="10dip"
+        android:text="@string/none"
+        android:textColor="#ddd" >
     </TextView>
 
 </LinearLayout>
