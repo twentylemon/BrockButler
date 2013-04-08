@@ -1,0 +1,10 @@
+Date: April 7, 2013
+Time: 3:00 - 5:00pm
+
+Members Present:
+	Thomas
+	Lachlan
+	
+- Discussed and attempted to fix Locate class
+- Discussed testing results
+- implemented new location methods

@@ -1,0 +1,8 @@
+Date: April 2, 2013
+Time: 12:00 - 2:00pm
+
+Members Present:
+	Thomas
+	Vince
+	
+- Continued integration of maps and interface
