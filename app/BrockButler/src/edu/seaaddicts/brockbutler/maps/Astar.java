@@ -275,6 +275,34 @@ graph[113] = new Position(1612,764,"D330","D330");
 graph[114] = new Position(1625,753,"D331","D331");
 graph[115] = new Position(1644,733,"D332","D332");
 graph[116] = new Position(1664,713,"D333","D333");
+graph[117] = new Position(1677,682,"G Block","G01");
+graph[118] = new Position(1655,664,"G Block","G02");
+graph[119] = new Position(1640,644,"G Block","G03");
+graph[120] = new Position(1640,614,"G Block","G04");
+graph[121] = new Position(1670,594,"G Block","G05");
+graph[122] = new Position(1640,588,"G Block","G06");
+graph[123] = new Position(1640,555,"G Block","G07");
+graph[124] = new Position(1622,515,"G Block","G08");
+graph[125] = new Position(1585,495,"G Block","G09");
+graph[126] = new Position(1495,492,"G Block","G10");
+graph[127] = new Position(1495,469,"G Block","G11");
+graph[128] = new Position(1447,469,"G Block","G12");
+graph[129] = new Position(1406,506,"G Block","G13");
+graph[130] = new Position(1534,469,"G Block","G14");
+graph[131] = new Position(1573,469,"G Block","G15");
+graph[132] = new Position(1617,469,"G Block","G16");
+graph[133] = new Position(1661,469,"G Block","G17");
+graph[134] = new Position(1723,469,"G Block","G18");
+graph[135] = new Position(1750,469,"G Block","G19");
+graph[136] = new Position(1750,430,"G Block","G20");
+graph[137] = new Position(1452,444,"G300","G300");
+graph[138] = new Position(1509,444,"G301","G301");
+graph[139] = new Position(1607,444,"G302","G302");
+graph[140] = new Position(1628,444,"G303","G303");
+graph[141] = new Position(1669,444,"G304","G304");
+graph[142] = new Position(1703,444,"G305","G305");
+graph[143] = new Position(1734,444,"G306","G306");
+graph[144] = new Position(1698,621,"G310","G310");
 
 graph[0].accesible = new Position[2];
 graph[0].accesible[0] = graph[1];
@@ -565,9 +593,10 @@ graph[66].accesible = new Position[2];
 graph[66].accesible[0] = graph[65];
 graph[66].accesible[1] = graph[67];
 
-graph[67].accesible = new Position[2];
+graph[67].accesible = new Position[3];
 graph[67].accesible[0] = graph[66];
 graph[67].accesible[1] = graph[92];
+graph[67].accesible[2] = graph[117];
 
 graph[68].accesible = new Position[2];
 graph[68].accesible[0] = graph[64];
@@ -677,9 +706,10 @@ graph[91].accesible = new Position[2];
 graph[91].accesible[0] = graph[56];
 graph[91].accesible[1] = graph[90];
 
-graph[92].accesible = new Position[2];
+graph[92].accesible = new Position[3];
 graph[92].accesible[0] = graph[0];
 graph[92].accesible[1] = graph[67];
+graph[92].accesible[2] = graph[144];
 
 graph[93].accesible = new Position[1];
 graph[93].accesible[0] = graph[49];
@@ -758,6 +788,122 @@ graph[115].accesible[1] = graph[116];
 graph[116].accesible = new Position[2];
 graph[116].accesible[0] = graph[65];
 graph[116].accesible[1] = graph[115];
+
+graph[117].accesible = new Position[2];
+graph[117].accesible[0] = graph[118];
+graph[117].accesible[1] = graph[67];
+
+graph[118].accesible = new Position[2];
+graph[118].accesible[0] = graph[117];
+graph[118].accesible[1] = graph[119];
+
+graph[119].accesible = new Position[2];
+graph[119].accesible[0] = graph[118];
+graph[119].accesible[1] = graph[120];
+
+graph[120].accesible = new Position[3];
+graph[120].accesible[0] = graph[119];
+graph[120].accesible[1] = graph[121];
+graph[120].accesible[2] = graph[122];
+
+graph[121].accesible = new Position[3];
+graph[121].accesible[0] = graph[120];
+graph[121].accesible[1] = graph[122];
+graph[121].accesible[2] = graph[144];
+
+graph[122].accesible = new Position[3];
+graph[122].accesible[0] = graph[120];
+graph[122].accesible[1] = graph[121];
+graph[122].accesible[2] = graph[123];
+
+graph[123].accesible = new Position[2];
+graph[123].accesible[0] = graph[122];
+graph[123].accesible[1] = graph[124];
+
+graph[124].accesible = new Position[2];
+graph[124].accesible[0] = graph[123];
+graph[124].accesible[1] = graph[125];
+
+graph[125].accesible = new Position[2];
+graph[125].accesible[0] = graph[124];
+graph[125].accesible[1] = graph[126];
+
+graph[126].accesible = new Position[2];
+graph[126].accesible[0] = graph[125];
+graph[126].accesible[1] = graph[127];
+
+graph[127].accesible = new Position[3];
+graph[127].accesible[0] = graph[126];
+graph[127].accesible[1] = graph[128];
+graph[127].accesible[2] = graph[130];
+
+graph[128].accesible = new Position[3];
+graph[128].accesible[0] = graph[127];
+graph[128].accesible[1] = graph[129];
+graph[128].accesible[2] = graph[137];
+
+graph[129].accesible = new Position[1];
+graph[129].accesible[0] = graph[128];
+
+graph[130].accesible = new Position[3];
+graph[130].accesible[0] = graph[127];
+graph[130].accesible[1] = graph[131];
+graph[130].accesible[2] = graph[138];
+
+graph[131].accesible = new Position[2];
+graph[131].accesible[0] = graph[130];
+graph[131].accesible[1] = graph[132];
+
+graph[132].accesible = new Position[4];
+graph[132].accesible[0] = graph[131];
+graph[132].accesible[1] = graph[133];
+graph[132].accesible[2] = graph[139];
+graph[132].accesible[3] = graph[140];
+
+graph[133].accesible = new Position[3];
+graph[133].accesible[0] = graph[132];
+graph[133].accesible[1] = graph[134];
+graph[133].accesible[2] = graph[141];
+
+graph[134].accesible = new Position[4];
+graph[134].accesible[0] = graph[133];
+graph[134].accesible[1] = graph[135];
+graph[134].accesible[2] = graph[142];
+graph[134].accesible[3] = graph[143];
+
+graph[135].accesible = new Position[2];
+graph[135].accesible[0] = graph[134];
+graph[135].accesible[1] = graph[136];
+
+graph[136].accesible = new Position[1];
+graph[136].accesible[0] = graph[135];
+
+graph[137].accesible = new Position[2];
+graph[137].accesible[0] = graph[128];
+graph[137].accesible[1] = graph[138];
+
+graph[138].accesible = new Position[2];
+graph[138].accesible[0] = graph[130];
+graph[138].accesible[1] = graph[137];
+
+graph[139].accesible = new Position[1];
+graph[139].accesible[0] = graph[132];
+
+graph[140].accesible = new Position[1];
+graph[140].accesible[0] = graph[132];
+
+graph[141].accesible = new Position[1];
+graph[141].accesible[0] = graph[133];
+
+graph[142].accesible = new Position[1];
+graph[142].accesible[0] = graph[134];
+
+graph[143].accesible = new Position[1];
+graph[143].accesible[0] = graph[134];
+
+graph[144].accesible = new Position[2];
+graph[144].accesible[0] = graph[121];
+graph[144].accesible[1] = graph[92];
 			
     	Log.i("ASTAR", "Graph Built of size " + graph.length);
     }
