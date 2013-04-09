@@ -111,7 +111,6 @@ public class MapsTouchImageView extends ImageView {
 
 		setOnTouchListener(new OnTouchListener() {
 
-			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				mScaleDetector.onTouchEvent(event);
 				PointF curr = new PointF(event.getX(), event.getY());

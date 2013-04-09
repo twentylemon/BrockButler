@@ -129,7 +129,6 @@ public class AddTaskActivity extends Activity {
 		});
 
 		mSaveButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Task t = new Task();
 				t.mSubj = mRegCourses.get(mCourseSpinner
@@ -161,7 +160,6 @@ public class AddTaskActivity extends Activity {
 		});
 
 		mCancelButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				// Do nothing.
 				onBackPressed();

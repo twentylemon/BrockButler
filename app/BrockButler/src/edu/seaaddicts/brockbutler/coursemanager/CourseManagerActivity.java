@@ -368,7 +368,6 @@ public class CourseManagerActivity extends Activity {
 				// this will handle the post task.
 				// it will run when the time consuming task get finished
 				handler.post(new Runnable() {
-					@Override
 					public void run() {
 
 						// Update your UI or

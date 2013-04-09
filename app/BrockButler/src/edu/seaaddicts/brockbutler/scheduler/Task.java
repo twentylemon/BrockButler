@@ -24,6 +24,7 @@ public class Task {
 	public String mCreationDate;
 	public String mDueDate;
 	public int mPriority;
+	public int mIsDone;
 	public ArrayList<Contact> mContacts;
 
 	public Task(){

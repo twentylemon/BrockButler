@@ -66,7 +66,6 @@ public class ContactsAdapter extends BaseAdapter implements OnClickListener {
         return convertView;
     }
 
-    @Override
     public void onClick(View view) {
         Contact c = (Contact) view.getTag();
         mContactsList.remove(c);

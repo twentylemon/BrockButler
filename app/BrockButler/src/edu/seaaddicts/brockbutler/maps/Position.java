@@ -161,7 +161,6 @@ public class Position implements Comparable<Object> {
 	/**
 	 * Not Used but required???
 	 */
-	@Override
 	public int compareTo (Object node) {
 		Position temp = (Position)node;
         return (int)(fScore - temp.fScore);

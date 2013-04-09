@@ -170,8 +170,7 @@ public class SchedulerActivity extends Activity {
 						LinearLayout.LayoutParams.WRAP_CONTENT));
 				
 				// Set the TextView
-				tv.setText(tasks.get(j).mName + "\n\tDue: "
-						+ tasks.get(j).mDueDate);
+				tv.setText(tasks.get(j).mName + "\n\tDue: " + tasks.get(j).mDueDate);
 				
 				// Add the TextView to ArrayList
 				tvs.add(tv);
@@ -182,18 +181,23 @@ public class SchedulerActivity extends Activity {
 				// Each TextView will need an ID when added to the layout
 				mCurTaskCheckBoxId = 1000 + j + 1;
 				cb.setId(mCurTaskCheckBoxId);
+				final Task currentTask = tasks.get(j);
+				final View fView = mView;
 				cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-					@Override
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
 						Log.d(TAG, "mCurTaskTextViewId: " + (buttonView.getId()-1));
-						TextView tv = ((TextView) mView.findViewById(buttonView.getId()-1));
+						TextView tv = ((TextView) fView.findViewById(buttonView.getId()-1));
 						if (isChecked) {
 							tv.setPaintFlags(tv.getPaintFlags()
 									| Paint.STRIKE_THRU_TEXT_FLAG);
+							currentTask.mIsDone = 1;
+							mCourseHandle.addTask(currentTask);
 						} else {
 							tv.setPaintFlags(0);
+							currentTask.mIsDone = 0;
+							mCourseHandle.addTask(currentTask);
 						}
 					}
 				});
@@ -201,8 +205,8 @@ public class SchedulerActivity extends Activity {
 				cb.setFocusable(false);
 				cb.setFocusableInTouchMode(false);
 				cbs.add(cb);
-				((LinearLayout) view.findViewById(R.id.sched_tasks))
-						.addView(ll);
+				((LinearLayout) view.findViewById(R.id.sched_tasks)).addView(ll);
+				cb.setChecked(currentTask.mIsDone != 0);	//HUZZAH!!!
 			}
 		}
 

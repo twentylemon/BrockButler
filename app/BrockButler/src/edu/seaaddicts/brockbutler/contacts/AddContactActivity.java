@@ -27,7 +27,6 @@ public class AddContactActivity extends Activity {
 		mSaveButton = (Button) findViewById(R.id.add_contact_save_button);
 		mSaveButton.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// Grisdale add contact
 				onBackPressed();
@@ -36,7 +35,6 @@ public class AddContactActivity extends Activity {
 		mCancelButton = (Button) findViewById(R.id.add_contact_cancel_button);
 		mCancelButton.setOnClickListener(new OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				onBackPressed();
 			}

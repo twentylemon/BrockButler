@@ -86,7 +86,6 @@ public class ModifyCourseActivity extends Activity {
 
 		// Set OnClickListener
 		mSaveButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Course c = new Course();
 				
@@ -111,7 +110,6 @@ public class ModifyCourseActivity extends Activity {
 		});
 
 		mCancelButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				// Do nothing.
 				onBackPressed();

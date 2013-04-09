@@ -90,7 +90,6 @@ public class AddCourseActivity extends Activity {
 
 		mCodesSpinner = (Spinner) findViewById(R.id.add_course_codes_spinner);
 		mSubjectSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				try {
@@ -105,14 +104,12 @@ public class AddCourseActivity extends Activity {
 				}
 			}
 
-			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// Do nothing.
 			}
 		});
 		mCodesSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				mCode = arg0.getItemAtPosition(arg2).toString();
@@ -202,7 +199,6 @@ public class AddCourseActivity extends Activity {
 				}
 			}
 
-			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
 
@@ -210,7 +206,6 @@ public class AddCourseActivity extends Activity {
 		});
 
 		mSaveButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				Course c = new Course();
 				c.mSubject = mSubject;
@@ -299,7 +294,6 @@ public class AddCourseActivity extends Activity {
 		});
 
 		mCancelButton.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				// Do nothing.
 				onBackPressed();

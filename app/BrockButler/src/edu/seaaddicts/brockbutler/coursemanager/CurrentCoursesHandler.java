@@ -12,12 +12,11 @@ import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Context;
-
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+import android.util.Log;
 import edu.seaaddicts.brockbutler.contacts.Contact;
 import edu.seaaddicts.brockbutler.scheduler.Task;
 
@@ -51,6 +50,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	private static final String KEY_WEIGHT = "weight";
 	private static final String KEY_DUE = "due";
 	private static final String KEY_CREATE_DATE = "create_date";
+	private static final String KEY_IS_DONE = "is_done";
 	private static final String KEY_CID = "cid";
 	private static final String KEY_FNAME = "fname";
 	private static final String KEY_LNAME = "lname";
@@ -305,6 +305,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			values.put(KEY_DUE, task.mDueDate);
 			values.put(KEY_CREATE_DATE, task.mCreationDate);
 			values.put(KEY_PRIORITY, task.mPriority);
+			values.put(KEY_IS_DONE, task.mIsDone);
 			if (update)
 				db.update(TABLE_TASKS, values, KEY_NAME + " ='" + task.mName
 						+ "' AND " + KEY_SUBJ + " ='" + task.mSubj + "' AND "
@@ -443,8 +444,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 					task.mBase = c.getInt(c.getColumnIndex(KEY_BASE));
 					task.mWeight = c.getFloat(c.getColumnIndex(KEY_WEIGHT));
 					task.mDueDate = c.getString(c.getColumnIndex(KEY_DUE));
-					task.mCreationDate = c.getString(c
-							.getColumnIndex(KEY_CREATE_DATE));
+					task.mIsDone = c.getInt(c.getColumnIndex(KEY_IS_DONE));
+					task.mCreationDate = c.getString(c.getColumnIndex(KEY_CREATE_DATE));
 					task.mPriority = c.getInt(c.getColumnIndex(KEY_PRIORITY));
 					tasks.add(task);
 				} while (c.moveToNext());
@@ -475,8 +476,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 					task.mBase = c.getInt(c.getColumnIndex(KEY_BASE));
 					task.mWeight = c.getFloat(c.getColumnIndex(KEY_WEIGHT));
 					task.mDueDate = c.getString(c.getColumnIndex(KEY_DUE));
-					task.mCreationDate = c.getString(c
-							.getColumnIndex(KEY_CREATE_DATE));
+					task.mIsDone = c.getInt(c.getColumnIndex(KEY_IS_DONE));
+					task.mCreationDate = c.getString(c.getColumnIndex(KEY_CREATE_DATE));
 					task.mPriority = c.getInt(c.getColumnIndex(KEY_PRIORITY));
 					task.mContacts = getContacts(course);
 					tasks.add(task);
