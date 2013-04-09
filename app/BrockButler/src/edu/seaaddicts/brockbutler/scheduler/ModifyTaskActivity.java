@@ -2,7 +2,6 @@ package edu.seaaddicts.brockbutler.scheduler;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -53,8 +52,7 @@ public class ModifyTaskActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_task);
-		this.getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		init();
 	}
 
@@ -62,6 +60,7 @@ public class ModifyTaskActivity extends Activity {
 	 * Initialize all views and sets Button OnClickListeners.
 	 */
 	private void init() {
+		Bundle bundle = this.getIntent().getExtras();
 		/*
 		 * CourseHandler
 		 */
@@ -83,15 +82,20 @@ public class ModifyTaskActivity extends Activity {
 		 * Spinners
 		 */
 		mPrioritySpinner = (Spinner) findViewById(R.id.add_task_priority_spinner);
+		mPrioritySpinner.setSelection(bundle.getInt("priority"));
 		mCourseSpinner = (Spinner) findViewById(R.id.add_task_course_spinner);
 
 		/*
 		 * EditTexts
 		 */
 		mTaskTitle = (EditText) findViewById(R.id.add_task_title);
+		mTaskTitle.setText(bundle.getString("title"));
 		mTaskWeight = (EditText) findViewById(R.id.task_weight);
+		mTaskWeight.setText(bundle.getFloat("weight")+"");
 		mTaskBase = (EditText) findViewById(R.id.task_base);
+		mTaskBase.setText(bundle.getFloat("base")+"");
 		mTaskMark = (EditText) findViewById(R.id.task_mark);
+		mTaskMark.setText(bundle.getFloat("mark")+"");
 
 		mRegCourses = mCourseHandle.getRegisteredCourses();
 		ArrayList<String> cs = new ArrayList<String>();
@@ -99,8 +103,13 @@ public class ModifyTaskActivity extends Activity {
 		/*
 		 * ArrayList of Course Strings in format: SUBJECT CODE
 		 */
+		String course = bundle.getString("course");
+		int pos = 0;
 		for (int i = 0; i < mRegCourses.size(); i++) {
-			cs.add(mRegCourses.get(i).mSubject + " " + mRegCourses.get(i).mCode);
+			String c = mRegCourses.get(i).mSubject + " " + mRegCourses.get(i).mCode;
+			cs.add(c);
+			if (c.equals(course))
+				pos = i;
 		}
 
 		/*
@@ -109,13 +118,14 @@ public class ModifyTaskActivity extends Activity {
 		mCourseSpinner.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_dropdown_item, cs));
 
+		mCourseSpinner.setSelection(pos);
+
 		/*
 		 * DatePicker stuff.
 		 */
-		final Calendar cal = Calendar.getInstance();
-		mYear = cal.get(Calendar.YEAR);
-		mMonth = cal.get(Calendar.MONTH);
-		mDay = cal.get(Calendar.DAY_OF_MONTH);
+		mYear = bundle.getInt("year");
+		mMonth = bundle.getInt("month");
+		mDay = bundle.getInt("day");
 
 		/*
 		 * OnClickListeners
@@ -146,8 +156,7 @@ public class ModifyTaskActivity extends Activity {
 					t.mBase = Float.parseFloat(mTaskBase.getText().toString());
 					t.mMark = Float.parseFloat(mTaskMark.getText().toString());
 				} catch (NumberFormatException e) {
-					Log.e(TAG,
-							"It is OK, we just had a blank field when parsing a float.");
+					Log.e(TAG,"It is OK, we just had a blank field when parsing a float.");
 				}
 
 				// Get current date
@@ -165,6 +174,8 @@ public class ModifyTaskActivity extends Activity {
 				onBackPressed();
 			}
 		});
+		
+		setDueDateText();
 	}
 
 	/**
@@ -197,29 +208,31 @@ public class ModifyTaskActivity extends Activity {
 			mMonth = selectedMonth + 1; // Since index starts at 0 and there is
 										// no 0th month.
 			mDay = selectedDay;
-
-			// Set TextView in this activity.
-			if (mMonth < 10) {
-				if (mDay < 10) {
-					mDueDateTextView.setText(new StringBuilder().append(mYear)
-							.append("/").append(0).append(mMonth).append("/")
-							.append(0).append(mDay));
-				} else
-					mDueDateTextView.setText(new StringBuilder().append(mYear)
-							.append("/").append(0).append(mMonth).append("/")
-							.append(mDay));
-			} else if (mMonth > 9) {
-				if (mDay < 10) {
-					mDueDateTextView.setText(new StringBuilder().append(mYear)
-							.append("/").append(mMonth).append("/").append(0)
-							.append(mDay));
-				} else
-					mDueDateTextView.setText(new StringBuilder().append(mYear)
-							.append("/").append(mMonth).append("/")
-							.append(mDay));
-			}
+			setDueDateText();
 
 		}
 	};
-
+	
+	private void setDueDateText(){
+		// Set TextView in this activity.
+		if (mMonth < 10) {
+			if (mDay < 10) {
+				mDueDateTextView.setText(new StringBuilder().append(mYear)
+						.append("/").append(0).append(mMonth).append("/")
+						.append(0).append(mDay));
+			} else
+				mDueDateTextView.setText(new StringBuilder().append(mYear)
+						.append("/").append(0).append(mMonth).append("/")
+						.append(mDay));
+		} else if (mMonth > 9) {
+			if (mDay < 10) {
+				mDueDateTextView.setText(new StringBuilder().append(mYear)
+						.append("/").append(mMonth).append("/").append(0)
+						.append(mDay));
+			} else
+				mDueDateTextView.setText(new StringBuilder().append(mYear)
+						.append("/").append(mMonth).append("/")
+						.append(mDay));
+		}
+	}
 }

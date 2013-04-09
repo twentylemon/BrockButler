@@ -1,6 +1,7 @@
 package edu.seaaddicts.brockbutler.scheduler;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -246,6 +247,37 @@ public class SchedulerActivity extends Activity {
 		bundle.putString("activity", "scheduler");
 		intent.putExtras(bundle);
 		startActivity(intent);
+	}
+	
+	public void modifyTask(Task task){
+		Intent intent = new Intent(SchedulerActivity.this, ModifyTaskActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("title",task.mName);
+		bundle.putFloat("weight",task.mWeight);
+		bundle.putFloat("base",task.mBase);
+		bundle.putFloat("mark",task.mMark);
+		bundle.putString("course",task.mSubj + " " + task.mCode);
+		bundle.putInt("priority",task.mPriority);
+		if (task.mDueDate.equals(getResources().getString(R.string.activity_add_task_date))){
+			final Calendar cal = Calendar.getInstance();
+			bundle.putInt("year",cal.get(Calendar.YEAR));
+			bundle.putInt("month",cal.get(Calendar.MONTH));
+			bundle.putInt("day",cal.get(Calendar.DAY_OF_MONTH));
+		}
+		else {
+			int year = Integer.parseInt(task.mDueDate.substring(0,4));
+			int month = Integer.parseInt(task.mDueDate.substring(5,7));
+			int day = Integer.parseInt(task.mDueDate.substring(8));
+			bundle.putInt("year",year);
+			bundle.putInt("month",month);
+			bundle.putInt("day",day);
+		}
+		intent.putExtras(bundle);
+		startActivity(intent);
+	}
+	
+	public void removeTask(Task task){
+		//REMOVE THE TASK
 	}
 
 	@Override

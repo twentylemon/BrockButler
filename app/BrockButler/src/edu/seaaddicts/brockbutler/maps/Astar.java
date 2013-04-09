@@ -156,7 +156,7 @@ public class Astar {
 	 */
     public Astar () {
     	
-    	graph = new Position[200];
+    	graph = new Position[145];
     	
     	graph[0] = new Position(1732,687,"J Block","J01");
 graph[1] = new Position(1763,688,"J Block","J02");
