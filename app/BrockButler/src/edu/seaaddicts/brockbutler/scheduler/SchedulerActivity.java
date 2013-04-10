@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -12,12 +14,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +34,7 @@ import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
 import edu.seaaddicts.brockbutler.coursemanager.Offering;
 import edu.seaaddicts.brockbutler.coursemanager.OfferingTime;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
+import edu.seaaddicts.brockbutler.maps.Position;
 
 public class SchedulerActivity extends Activity {
 	private static final String TAG = "SchedulerActivity";
@@ -43,6 +49,8 @@ public class SchedulerActivity extends Activity {
 	View mView;
 	int mCurTaskTextViewId;
 	int mCurTaskCheckBoxId;
+	int mCurTaskNum;
+	ArrayList<Task> mCurTasks;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,14 +153,14 @@ public class SchedulerActivity extends Activity {
 		 * Add Tasks to view
 		 */
 		if (tasks.size() > 0) {
+			mCurTasks = tasks;
 			// Set visibility for Tasks
 			view.findViewById(R.id.sched_tasks_title).setVisibility(VISIBLE);
 			view.findViewById(R.id.sched_tasks).setVisibility(VISIBLE);
 			((LinearLayout) view.findViewById(R.id.sched_tasks))
 					.removeAllViews();
-			ArrayList<TextView> tvs = new ArrayList<TextView>();
-			ArrayList<CheckBox> cbs = new ArrayList<CheckBox>();
 			for (int j = 0; j < tasks.size(); j++) {
+				mCurTaskNum = j;
 				// LinearLayout for each task
 				LinearLayout ll = new LinearLayout(this);
 				
@@ -166,18 +174,42 @@ public class SchedulerActivity extends Activity {
 				tv.setId(mCurTaskTextViewId);
 				
 				// Cosmetics
-				tv.setPadding(20, 20, 50, 20);
-				tv.setLayoutParams(new LinearLayout.LayoutParams(500,
+				tv.setPadding(20, 20, 30, 20);
+				tv.setLayoutParams(new LinearLayout.LayoutParams(425,
 						LinearLayout.LayoutParams.WRAP_CONTENT));
 				
 				// Set the TextView
 				tv.setText(tasks.get(j).mName + "\n\tDue: " + tasks.get(j).mDueDate);
 				
-				// Add the TextView to ArrayList
-				tvs.add(tv);
 				// Checkbox for Task status
 				CheckBox cb = new CheckBox(this);
-				ll.addView(cb);
+				
+				// Buttons for Modify/Delete
+				ImageButton ib_mod = new ImageButton(this);
+				ImageButton ib_del = new ImageButton(this);
+				ib_mod.setFocusable(false);
+				ib_mod.setFocusableInTouchMode(false);
+				ib_mod.setBackgroundResource(android.R.drawable.ic_dialog_info);
+				ib_mod.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						modifyTask(mCurTasks.get(mCurTaskNum));
+					}
+				});
+				ib_del.setFocusable(false);
+				ib_del.setFocusableInTouchMode(false);
+				ib_del.setBackgroundResource(android.R.drawable.ic_delete);
+				ib_del.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						displayTaskRemoveDialog(mCurTasks.get(mCurTaskNum));
+					}
+				});
+				ll.addView(ib_del);
+				ll.addView(ib_mod);
+				
 				
 				// Each TextView will need an ID when added to the layout
 				mCurTaskCheckBoxId = 1000 + j + 1;
@@ -202,10 +234,10 @@ public class SchedulerActivity extends Activity {
 						}
 					}
 				});
-				cb.setPadding(50, 0, 0, 0);
+				cb.setPadding(20, 0, 0, 0);
 				cb.setFocusable(false);
 				cb.setFocusableInTouchMode(false);
-				cbs.add(cb);
+				ll.addView(cb);
 				((LinearLayout) view.findViewById(R.id.sched_tasks)).addView(ll);
 				cb.setChecked(currentTask.mIsDone != 0);	//HUZZAH!!!
 			}
@@ -226,6 +258,29 @@ public class SchedulerActivity extends Activity {
 		if (((TextView) view.findViewById(R.id.tv_seminar)).getText()
 				.toString().equalsIgnoreCase("none"))
 			view.findViewById(R.id.row_sem).setVisibility(GONE);
+	}
+	
+	private void displayTaskRemoveDialog(final Task t) {
+		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
+
+		editalert.setTitle("Delete Task?");
+		editalert.setMessage("Are you sure you wish to delete this task?");
+
+		editalert.setPositiveButton("Yes",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						mCourseHandle.removeTask(t);
+						populateCoursesLayout();
+					}
+				});
+		editalert.setNegativeButton("No",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						// do nothing
+					}
+				});
+
+		editalert.show();
 	}
 
 	private void showHideToolbar(View view, int position) {
