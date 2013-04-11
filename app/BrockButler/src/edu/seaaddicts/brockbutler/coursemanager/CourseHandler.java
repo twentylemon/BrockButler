@@ -38,6 +38,13 @@ public class CourseHandler {
 		//SQLiteDatabase db = courseList.getWritableDatabase();
 		//db.close();
 	}
+	
+	/* updateAll - updates all course information from the Brock University registrar's
+	 * office website
+	 */
+	public void updateAll(){
+		courseList.addCourse();
+	}
 
 	/* Depreciated - getAllCourses - grabs course data from the registrar's timetable and
 	 * inserts data into the masterlist table.
