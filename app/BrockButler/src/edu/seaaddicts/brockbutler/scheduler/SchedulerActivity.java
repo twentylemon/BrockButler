@@ -352,6 +352,7 @@ public class SchedulerActivity extends Activity {
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	private void sendEmail() {
 		Intent i = new Intent(Intent.ACTION_SEND);
 		i.setType("message/rfc822");

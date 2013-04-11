@@ -21,9 +21,9 @@ public class AddCourseActivity extends Activity {
 
 	private static final String TAG = "AddCourseActivity";
 
-	private static final int DATE_DIALOG_ID = 0;
+	//private static final int DATE_DIALOG_ID = 0;
 	private static final int VISIBLE = 0;
-	private static final int INVISIBLE = 4;
+	//private static final int INVISIBLE = 4;
 	private static final int GONE = 8;
 
 	ArrayList<String> mLecs;
@@ -55,10 +55,6 @@ public class AddCourseActivity extends Activity {
 	private ListView mTutsListView;
 	private ListView mLabsListView;
 
-	private int mYear;
-	private int mMonth;
-	private int mDay;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,7 +77,6 @@ public class AddCourseActivity extends Activity {
 					android.R.layout.simple_spinner_dropdown_item,
 					mCourseHandle.getSubjects()));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -96,7 +91,6 @@ public class AddCourseActivity extends Activity {
 							android.R.layout.simple_spinner_dropdown_item,
 							mCourseHandle.getCodes(mSubject)));
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -197,8 +191,6 @@ public class AddCourseActivity extends Activity {
 			}
 
 			public void onNothingSelected(AdapterView<?> arg0) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 
@@ -283,7 +275,6 @@ public class AddCourseActivity extends Activity {
 						}
 						onBackPressed();
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -292,7 +283,6 @@ public class AddCourseActivity extends Activity {
 
 		mCancelButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// Do nothing.
 				onBackPressed();
 			}
 		});

@@ -9,14 +9,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class LoginActivity extends Activity {
 	private Button mBtnLogin;
 	private Button mBtnSkip;
-	private CheckBox mChkRemember;
-	private CheckBox mChkSkip;
+	//private CheckBox mChkRemember;
+	//private CheckBox mChkSkip;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +55,8 @@ public class LoginActivity extends Activity {
 		mBtnLogin = (Button) findViewById(R.id.btn_login_login);
 		mBtnSkip = (Button) findViewById(R.id.btn_login_skip);
 		
-		mChkRemember = (CheckBox) findViewById(R.id.chk_login_remember);
-		mChkSkip = (CheckBox) findViewById(R.id.chk_login_skip);
+		//mChkRemember = (CheckBox) findViewById(R.id.chk_login_remember);
+		//mChkSkip = (CheckBox) findViewById(R.id.chk_login_skip);
 		
 		mBtnLogin.setOnClickListener(new OnClickListener() {
 

@@ -3,7 +3,6 @@ package edu.seaaddicts.brockbutler.coursemanager;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -22,9 +21,7 @@ public class ModifyCourseActivity extends Activity {
 
 	private static final String TAG = "ModifyCourseActivity";
 
-	private static final int DATE_DIALOG_ID = 0;
 	private static final int VISIBLE = 0;
-	private static final int INVISIBLE = 4;
 	private static final int GONE = 8;
 
 	ArrayList<String> mLecs;
@@ -59,10 +56,6 @@ public class ModifyCourseActivity extends Activity {
 	private CurrentCoursesHandler mCourseHandle;
 
 	private TextView mSubjectTextView;
-	private TextView mCodesTextView;
-	
-	private Bundle mCourseBundle;
-	private Intent mCallingIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

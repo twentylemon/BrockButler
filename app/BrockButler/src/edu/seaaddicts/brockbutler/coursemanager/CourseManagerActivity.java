@@ -121,7 +121,7 @@ public class CourseManagerActivity extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		if (v.getId() == R.id.course_manager_list) {
-			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			//AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 			String[] menuItems = getResources().getStringArray(
 					R.array.course_manager_context_menu);
 			for (int i = 0; i < menuItems.length; i++) {
@@ -143,29 +143,12 @@ public class CourseManagerActivity extends Activity {
 		Course thisCourse = mRegisteredCoursesList.get(info.position);
 		switch (menuItemIndex) {
 		case 0:
-			Toast.makeText(this,
-					"Modify " + thisCourse.mSubject + " " + thisCourse.mCode,
-					Toast.LENGTH_SHORT).show();
 
 			// Start Intent with Course as Extra
 			Intent i = new Intent(CourseManagerActivity.this,
 					ModifyCourseActivity.class);
 			i.putExtra(CODE_COURSE_SUBJECT, thisCourse.mSubject);
 			i.putExtra(CODE_COURSE_CODE, thisCourse.mCode);
-			i.putExtra(CODE_COURSE_INSTRUCTOR, thisCourse.mInstructor);
-			i.putExtra(CODE_COURSE_INSTRUCTOR_EMAIL,
-					thisCourse.mInstructor_email);
-
-			// Create String array of Offerings to pass.
-			//String lec[] = new String[thisCourse.mOfferings.size()];
-			// ArrayList<Offering> off
-			// for (int j = 0; j < thisCourse.mOfferings.size(); j++) {
-			// for (int k = 0; k <
-			// thisCourse.mOfferings.get(j).mOfferingTimes.size(); k++) {
-			// if (thisCourse.get)
-			// }
-			// }
-			//i.putExtra(CODE_COURSE_OFFERINGS, thisCourse.mOfferings);
 			startActivity(i);
 			break;
 		case 1:

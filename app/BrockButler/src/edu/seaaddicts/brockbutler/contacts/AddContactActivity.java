@@ -11,7 +11,7 @@ public class AddContactActivity extends Activity {
 
 	private Button mSaveButton;
 	private Button mCancelButton;
-	private Contact mContact;
+	//private Contact mContact;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

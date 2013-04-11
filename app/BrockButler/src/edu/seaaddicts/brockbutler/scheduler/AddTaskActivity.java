@@ -123,6 +123,7 @@ public class AddTaskActivity extends Activity {
 
 		// Deprecated but easier than alternative.
 		mDueDateButton.setOnClickListener(new OnClickListener() {
+			@SuppressWarnings("deprecation")
 			public void onClick(View v) {
 				showDialog(DATE_DIALOG_ID);
 			}

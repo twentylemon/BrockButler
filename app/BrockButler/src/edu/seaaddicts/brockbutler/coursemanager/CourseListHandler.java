@@ -38,11 +38,11 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	// Full course list table name
 	private static final String TABLE_MCOURSES = "MasterList";
 	//current courses table names
-	private static final String TABLE_COURSES = "courses";
-	private static final String TABLE_TASKS = "tasks";
-	private static final String TABLE_OFFERINGS = "offerings";
-	private static final String TABLE_OFFERING_TIMES = "offering_times";
-	private static final String TABLE_CONTACTS = "contacts";
+	//private static final String TABLE_COURSES = "courses";
+	//private static final String TABLE_TASKS = "tasks";
+	//private static final String TABLE_OFFERINGS = "offerings";
+	//private static final String TABLE_OFFERING_TIMES = "offering_times";
+	//private static final String TABLE_CONTACTS = "contacts";
 	// All field names used in the database
 	private static final String KEY_SUBJ = "subj";
 	private static final String KEY_CODE = "code";
@@ -51,24 +51,24 @@ public class CourseListHandler extends SQLiteOpenHelper {
 	private static final String KEY_ID = "id";
 	private static final String KEY_TYPE = "type";
 	private static final String KEY_SEC = "sec";
-	private static final String KEY_DAY = "day";
-	private static final String KEY_TIMES = "time_start";
-	private static final String KEY_TIMEE = "time_end";
+	//private static final String KEY_DAY = "day";
+	//private static final String KEY_TIMES = "time_start";
+	//private static final String KEY_TIMEE = "time_end";
 	private static final String KEY_LOCATION = "location";
 	private static final String KEY_DUR = "dur";
-	private static final String KEY_ASSIGN = "assign";
-	private static final String KEY_NAME = "name";
-	private static final String KEY_MARK = "mark";
-	private static final String KEY_BASE = "base";
-	private static final String KEY_WEIGHT = "weight";
-	private static final String KEY_DUE = "due";
-	private static final String KEY_CREATE_DATE = "create_date";
-	private static final String KEY_CID = "cid";
-	private static final String KEY_FNAME = "fname";
-	private static final String KEY_LNAME = "lname";
-	private static final String KEY_EMAIL = "email";
-	private static final String KEY_PRIORITY = "priority";
-	private static final String KEY_INSTREMAIL = "instructor_email";
+	//private static final String KEY_ASSIGN = "assign";
+	//private static final String KEY_NAME = "name";
+	//private static final String KEY_MARK = "mark";
+	//private static final String KEY_BASE = "base";
+	//private static final String KEY_WEIGHT = "weight";
+	//private static final String KEY_DUE = "due";
+	//private static final String KEY_CREATE_DATE = "create_date";
+	//private static final String KEY_CID = "cid";
+	//private static final String KEY_FNAME = "fname";
+	//private static final String KEY_LNAME = "lname";
+	//private static final String KEY_EMAIL = "email";
+	//private static final String KEY_PRIORITY = "priority";
+	//private static final String KEY_INSTREMAIL = "instructor_email";
 	private static final String KEY_DAYS = "days";
 	private static final String KEY_TIME = "time";
 	Context context;//holds the application context

@@ -86,7 +86,7 @@
         <activity
             android:name="edu.seaaddicts.brockbutler.scheduler.ModifyTaskActivity"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/title_add_course"
+            android:label="@string/title_modify_task"
             android:screenOrientation="portrait" >
         </activity>
         <activity

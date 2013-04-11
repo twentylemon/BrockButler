@@ -74,9 +74,9 @@ public class ContactsAdapter extends BaseAdapter implements OnClickListener {
 
     }
 
-    private void showDialog(Contact c) {
+    /*private void showDialog(Contact c) {
         // Create and show your dialog
         // Depending on the Dialogs button clicks delete it or do nothing
-    }
+    }*/
 
 }

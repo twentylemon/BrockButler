@@ -1,5 +1,6 @@
 package edu.seaaddicts.brockbutler.help;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -9,6 +10,7 @@ import android.webkit.WebView;
 import edu.seaaddicts.brockbutler.R;
 public class HelpActivity extends Activity {
 
+	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

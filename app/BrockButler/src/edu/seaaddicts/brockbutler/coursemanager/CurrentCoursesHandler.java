@@ -41,7 +41,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	private static final String KEY_TIMES = "time_start";
 	private static final String KEY_TIMEE = "time_end";
 	private static final String KEY_LOCATION = "location";
-	private static final String KEY_DUR = "dur";
+	//private static final String KEY_DUR = "dur";
 	private static final String KEY_ASSIGN = "assign";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_MARK = "mark";
@@ -279,7 +279,6 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 	/* addTasks - adds all tasks associated with a given course */
 	public void addTasks(Course course) {
 		Task task;
-		Contact contact;
 		ContentValues values = new ContentValues();
 		SQLiteDatabase db = this.getWritableDatabase();
 		long num = 0;
