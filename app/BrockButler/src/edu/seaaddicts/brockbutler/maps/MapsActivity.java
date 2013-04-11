@@ -187,10 +187,9 @@ public class MapsActivity extends Activity {
 		init();
 		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
 
-		editalert.setTitle("MChown Direction Search");
-		editalert.setMessage("Enter block or room name (i.e. B314)");
+		editalert.setTitle("MChown Direction Getter");
+		editalert.setMessage("Enter desired Location.");
 
-		mSearchEditText = new EditText(this);
 		mSearchEditText.setSingleLine(true);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
@@ -198,10 +197,17 @@ public class MapsActivity extends Activity {
 		mSearchEditText.setLayoutParams(lp);
 		editalert.setView(mSearchEditText);
 
-		editalert.setPositiveButton("Search",
-				new DialogInterface.OnClickListener() {
+
+		editalert.setPositiveButton("Search", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						mStartPosition = school.findPosition(mSearchEditText.getText().toString());
+						mStartPosition = school.findPosition("J01");
+						mGoalPosition = school.findPosition(mSearchEditText.getText().toString());
+						
+						Position[] p = school.pathGeneration(mStartPosition, mGoalPosition);
+						if(p != null)
+							mMapImage.drawPosition(p,8);
+						else
+							Toast.makeText(getApplicationContext(), "Shit didn't work!",Toast.LENGTH_LONG).show();
 					}
 				});
 		editalert.setNegativeButton("Cancel",
@@ -212,36 +218,6 @@ public class MapsActivity extends Activity {
 				});
 
 		editalert.show();
-		
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-		alert.setTitle("MChown Direction Search");
-		alert.setMessage("Enter block or room name (i.e. B314)");
-
-		// Set an EditText view to get user input 
-		final EditText input = new EditText(this);
-		alert.setView(input);
-
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		public void onClick(DialogInterface dialog, int whichButton) {
-			mGoalPosition = school.findPosition(input.getText().toString());
-			
-			Position[] pTest = school.pathGeneration(mStartPosition,mGoalPosition);
-			
-			if(pTest != null)
-				mMapImage.drawPosition(pTest,8);
-			else
-				Toast.makeText(getApplicationContext(), "Shit didn't work!",Toast.LENGTH_LONG).show();
-		  }
-		});
-
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-		  public void onClick(DialogInterface dialog, int whichButton) {
-		    // Canceled.
-		  }
-		});
-
-		alert.show();
 	}
 
 	public void showHelp(MenuItem item)
