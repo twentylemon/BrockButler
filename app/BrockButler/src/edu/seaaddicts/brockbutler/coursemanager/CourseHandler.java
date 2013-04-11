@@ -181,12 +181,24 @@ public class CourseHandler {
 	}
 
 	// getMark - returns the calculated progress mark for a course
+	public float getBase(Course course) {
+		float base = 0;
+		for (int i = 0; i < course.mTasks.size(); i++)				
+			base +=course.mTasks.get(i).mWeight;
+		 return base;
+	}
+	
+	// getMark - returns the calculated progress mark for a course
 	public float getMark(Course course) {
 		float mark = 0;
-		for (int i = 0; i < course.mTasks.size(); i++)
+		for (int i = 0; i < course.mTasks.size(); i++){
+			if(course.mTasks.get(i).mBase !=0){
 			mark += (course.mTasks.get(i).mMark / course.mTasks.get(i).mBase)
-					* course.mTasks.get(i).mWeight;
-		return mark;
+					* course.mTasks.get(i).mWeight;}
+			else mark+=0;
+		}
+			
+		 return mark;
 	}
 
 	public int getSize() {

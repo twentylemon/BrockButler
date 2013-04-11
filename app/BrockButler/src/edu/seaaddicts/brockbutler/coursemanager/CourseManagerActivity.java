@@ -157,7 +157,7 @@ public class CourseManagerActivity extends Activity {
 					thisCourse.mInstructor_email);
 
 			// Create String array of Offerings to pass.
-			String lec[] = new String[thisCourse.mOfferings.size()];
+			//String lec[] = new String[thisCourse.mOfferings.size()];
 			// ArrayList<Offering> off
 			// for (int j = 0; j < thisCourse.mOfferings.size(); j++) {
 			// for (int k = 0; k <
@@ -165,7 +165,7 @@ public class CourseManagerActivity extends Activity {
 			// if (thisCourse.get)
 			// }
 			// }
-			i.putExtra(CODE_COURSE_OFFERINGS, thisCourse.mOfferings);
+			//i.putExtra(CODE_COURSE_OFFERINGS, thisCourse.mOfferings);
 			startActivity(i);
 			break;
 		case 1:
@@ -266,6 +266,17 @@ public class CourseManagerActivity extends Activity {
 							.setText(offering);
 			}
 		}
+		
+		float mark  = mCourseHandle.getMark(mRegisteredCoursesList.get(position));
+		float base  = mCourseHandle.getBase(mRegisteredCoursesList.get(position));
+		float total=0;
+		if(base != 0){
+			total= (mark/base)*100;
+		}
+		
+		String grade= ""+(int)mark+"/"+(int)base+" = "+ (int)total+"%";
+		((TextView) view.findViewById(R.id.course_grade_grade))
+		.setText(grade);
 
 		/*
 		 * Hide class type if none available

@@ -45,6 +45,10 @@
         <include
             android:id="@+id/row_sem"
             layout="@layout/row_task_seminar" />
+        
+        <include
+            android:id="@+id/row_grade"
+            layout="@layout/row_grade" />
     </LinearLayout>
 
 </LinearLayout>

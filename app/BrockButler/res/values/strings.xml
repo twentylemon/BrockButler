@@ -46,7 +46,7 @@
     <string name="activity_add_contact_courses">Courses</string>
     <string name="activity_add_contact_add_courses">Add Course</string>
     <string name="activity_add_contact_remove">Remove</string>
-    
+
 
     <!-- AddCourseActivity -->
     <string name="title_add_course">Add Course</string>
@@ -119,19 +119,19 @@
     <string name="msg_skip">By logging in BrockButler attempts to automatically update your timetable, grades, and other information from my.brocku.\n\nDo you still want to skip the login process?</string>
 
     <!-- MainActivity -->
-    <string name="title_activity_main">Main</string>
-    <string name="title_activity_map">Maps Activity</string>
+    <string name="title_activity_main">Brock Butler</string>
+    <string name="title_activity_map">Brock Maps</string>
     <string name="test_image">This is a test image.</string>
     <string name="title_scheduler">Scheduler</string>
     <string name="title_maps">Maps</string>
     <string name="title_contacts">Contacts</string>
     <string name="title_tour">Tour</string>
-    <string name="title_help">Help</string>
-    <string name="title_activity_help">HelpActivity</string>
-    <string name="title_activity_scheduler">SchedulerActivity</string>
-    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_help">User Manual</string>
+    <string name="title_activity_help">User Manual</string>
+    <string name="title_activity_scheduler">Scheduler</string>
+    <string name="title_activity_contacts">Contacts</string>
     <string name="title_activity_tour">Brock Butler Tour</string>
-    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="title_activity_add_task">Add Task</string>
     <string name="task_priority_prompt">Task Priority</string>
 
     <!-- Miscellaneous -->

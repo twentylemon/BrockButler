@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.contacts.Contact;
 import edu.seaaddicts.brockbutler.scheduler.Task;
@@ -43,6 +44,7 @@ public class ModifyCourseActivity extends Activity {
 	public ArrayList<Offering> mOfferings;
 	public ArrayList<Task> mTasks;
 	public ArrayList<Contact> mContacts;
+	public Course course;
 
 	private Button mSaveButton;
 	private Button mCancelButton;
@@ -65,7 +67,11 @@ public class ModifyCourseActivity extends Activity {
 //			finish();
 //		}
 		mCourseHandle = new CourseHandler(this.getApplicationContext());
+		Bundle bundle = this.getIntent().getExtras();
+		course = mCourseHandle.getCourse(bundle.getString(CourseManagerActivity.CODE_COURSE_SUBJECT),
+				bundle.getString(CourseManagerActivity.CODE_COURSE_CODE));
 		init();
+		Toast.makeText(getApplicationContext(), course.mSubject+" "+course.mCode, Toast.LENGTH_LONG).show();
 	}
 
 	/*

@@ -192,7 +192,6 @@ public class SchedulerActivity extends Activity {
 				ib_mod.setBackgroundResource(android.R.drawable.ic_dialog_info);
 				ib_mod.setOnClickListener(new OnClickListener() {
 					
-					@Override
 					public void onClick(View v) {
 						modifyTask(mCurTasks.get(mCurTaskNum));
 					}
@@ -202,7 +201,6 @@ public class SchedulerActivity extends Activity {
 				ib_del.setBackgroundResource(android.R.drawable.ic_delete);
 				ib_del.setOnClickListener(new OnClickListener() {
 					
-					@Override
 					public void onClick(View v) {
 						displayTaskRemoveDialog(mCurTasks.get(mCurTaskNum));
 					}
