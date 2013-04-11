@@ -606,12 +606,12 @@ public final class R {
         public static final int add_course_update_master_list=0x7f040014;
         public static final int app_name=0x7f040000;
         public static final int b_block=0x7f040046;
-        public static final int button_cancel=0x7f04006b;
-        public static final int button_save=0x7f04006a;
+        public static final int button_cancel=0x7f04006c;
+        public static final int button_save=0x7f04006b;
         public static final int c_block=0x7f040047;
         /**  Miscellaneous 
          */
-        public static final int contentdesc=0x7f040069;
+        public static final int contentdesc=0x7f04006a;
         public static final int d_block=0x7f040048;
         public static final int e_block=0x7f040049;
         public static final int f_block=0x7f04004a;
@@ -653,7 +653,7 @@ public final class R {
         public static final int menu_update_position=0x7f04003e;
         public static final int msg_skip=0x7f04005a;
         public static final int no_courses=0x7f040016;
-        public static final int none=0x7f04006c;
+        public static final int none=0x7f04006d;
         public static final int prof_email=0x7f04002d;
         /**  Professors 
          */
@@ -661,7 +661,7 @@ public final class R {
         public static final int prof_office=0x7f04002c;
         public static final int sched_no_courses=0x7f040032;
         public static final int scheduler_menu_showhide_completed=0x7f040034;
-        public static final int task_priority_prompt=0x7f040068;
+        public static final int task_priority_prompt=0x7f040069;
         public static final int temp=0x7f040059;
         public static final int test_image=0x7f04005d;
         public static final int title_activity_add_task=0x7f040067;
@@ -685,6 +685,7 @@ public final class R {
         public static final int title_lab=0x7f040037;
         public static final int title_lecture=0x7f040036;
         public static final int title_maps=0x7f04005f;
+        public static final int title_modify_task=0x7f040068;
         public static final int title_scheduler=0x7f04005e;
         public static final int title_seminar=0x7f040039;
         /**  row_task_* 

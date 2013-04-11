@@ -159,9 +159,6 @@ public class MapsActivity extends Activity {
 		editalert.setPositiveButton("Search",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						Toast.makeText(getApplicationContext(),
-								"Thomas' search method goes here.",
-								Toast.LENGTH_LONG).show();
 						// Call Thomas' location search method with EditText
 						// string.
 						

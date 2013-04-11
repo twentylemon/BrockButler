@@ -47,6 +47,7 @@ public class ModifyTaskActivity extends Activity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
+	private int mAssign;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class ModifyTaskActivity extends Activity {
 	 */
 	private void init() {
 		Bundle bundle = this.getIntent().getExtras();
+		mAssign = bundle.getInt("assign");
 		/*
 		 * CourseHandler
 		 */
@@ -141,6 +143,7 @@ public class ModifyTaskActivity extends Activity {
 		mSaveButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Task t = new Task();
+				t.mAssign = mAssign;
 				t.mSubj = mRegCourses.get(mCourseSpinner
 						.getSelectedItemPosition()).mSubject;
 				t.mCode = mRegCourses.get(mCourseSpinner

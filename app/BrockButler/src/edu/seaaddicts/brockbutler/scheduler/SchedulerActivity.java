@@ -190,10 +190,11 @@ public class SchedulerActivity extends Activity {
 				ib_mod.setFocusable(false);
 				ib_mod.setFocusableInTouchMode(false);
 				ib_mod.setBackgroundResource(android.R.drawable.ic_dialog_info);
+				final Task edit = mCurTasks.get(mCurTaskNum);
 				ib_mod.setOnClickListener(new OnClickListener() {
 					
 					public void onClick(View v) {
-						modifyTask(mCurTasks.get(mCurTaskNum));
+						modifyTask(edit);
 					}
 				});
 				ib_del.setFocusable(false);
@@ -202,7 +203,7 @@ public class SchedulerActivity extends Activity {
 				ib_del.setOnClickListener(new OnClickListener() {
 					
 					public void onClick(View v) {
-						displayTaskRemoveDialog(mCurTasks.get(mCurTaskNum));
+						displayTaskRemoveDialog(edit);
 					}
 				});
 				ll.addView(ib_del);
@@ -240,6 +241,17 @@ public class SchedulerActivity extends Activity {
 				cb.setChecked(currentTask.mIsDone != 0);	//HUZZAH!!!
 			}
 		}
+		
+		float mark  = mCourseHandle.getMark(mRegisteredCoursesList.get(position));
+		float base  = mCourseHandle.getBase(mRegisteredCoursesList.get(position));
+		float total=0;
+		if(base != 0){
+			total= (mark/base)*100;
+		}
+		
+		String grade= ""+(int)mark+"/"+(int)base+" = "+ (int)total+"%";
+		((TextView) view.findViewById(R.id.course_grade_grade))
+		.setText(grade);
 
 		/*
 		 * Hide class type if none available
@@ -305,6 +317,7 @@ public class SchedulerActivity extends Activity {
 	public void modifyTask(Task task){
 		Intent intent = new Intent(SchedulerActivity.this, ModifyTaskActivity.class);
 		Bundle bundle = new Bundle();
+		bundle.putInt("assign", task.mAssign);
 		bundle.putString("title",task.mName);
 		bundle.putFloat("weight",task.mWeight);
 		bundle.putFloat("base",task.mBase);
