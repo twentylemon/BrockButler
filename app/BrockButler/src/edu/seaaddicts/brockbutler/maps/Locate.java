@@ -136,6 +136,7 @@ public class Locate {
 	 * Gathers wireless information from the device for 10 wireless access points
 	 * currently in range. Gathers MAC address and received signal strength
 	 */
+	@SuppressWarnings("unused")
 	private static void getWirelessData() {
 		wifiMgr = (WifiManager)parentContext.getSystemService(Context.WIFI_SERVICE);
     	int x = 0;

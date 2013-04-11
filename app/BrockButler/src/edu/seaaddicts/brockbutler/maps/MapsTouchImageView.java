@@ -24,8 +24,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class MapsTouchImageView extends ImageView {
-	private static final String TAG = "MapsTouchImageView";
+	//private static final String TAG = "MapsTouchImageView";
 
+	@SuppressWarnings("unused")
 	private static final int MAP_WIDTH = 2000;
 	private static final int MAP_HEIGHT = 1100;
 	private static final int CLICK = 3;
@@ -50,6 +51,7 @@ public class MapsTouchImageView extends ImageView {
 	private double mMapRatio;
 
 	private int viewWidth, viewHeight;
+	@SuppressWarnings("unused")
 	private int oldMeasuredWidth, oldMeasuredHeight;
 
 	private float scaleFactor = 1f;
@@ -59,7 +61,7 @@ public class MapsTouchImageView extends ImageView {
 
 	private ScaleGestureDetector mScaleDetector;
 
-	private Context mContext;
+	//private Context mContext;
 	int actionBarHeight;
 
 	public Position[] mPosition = null;
@@ -98,7 +100,7 @@ public class MapsTouchImageView extends ImageView {
 
 	private void sharedConstructing(Context context) {
 		super.setClickable(true);
-		this.mContext = context;
+		//this.mContext = context;
 		mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
 		mMatrixMap = new Matrix();
 		m = new float[9];
