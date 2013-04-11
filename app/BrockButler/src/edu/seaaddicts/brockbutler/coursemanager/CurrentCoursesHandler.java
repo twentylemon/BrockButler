@@ -16,7 +16,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import edu.seaaddicts.brockbutler.contacts.Contact;
 import edu.seaaddicts.brockbutler.scheduler.Task;
 

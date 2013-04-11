@@ -1,12 +1,9 @@
 package edu.seaaddicts.brockbutler.help;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.Menu;
-import android.webkit.WebSettings;
 import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import edu.seaaddicts.brockbutler.R;

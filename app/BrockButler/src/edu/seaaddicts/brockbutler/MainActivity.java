@@ -10,7 +10,6 @@ import edu.seaaddicts.brockbutler.coursemanager.CourseManagerActivity;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
 import edu.seaaddicts.brockbutler.maps.MapsActivity;
 import edu.seaaddicts.brockbutler.scheduler.SchedulerActivity;
-import edu.seaaddicts.brockbutler.scheduler.SchedulerActivityBAK;
 import edu.seaaddicts.brockbutler.tour.TourActivity;
 
 public class MainActivity extends Activity {

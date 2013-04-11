@@ -5,7 +5,7 @@
     android:layout_margin="10sp"
     android:orientation="vertical"
     android:scrollbars="vertical"
-    tools:context=".AddTaskActivity" >
+    tools:context=".ModifyTaskActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -13,32 +13,11 @@
         android:orientation="horizontal" >
 
         <TextView
+            android:id="@+id/modify_course_subject_textview"
             android:layout_width="85sp"
             android:layout_height="wrap_content"
             android:text="@string/add_course_subject" />
 
-        <TextView
-            android:id="@+id/modify_course_subject_textview"
-            android:layout_width="180sp"
-            android:layout_height="40sp"
-            android:layout_marginLeft="25sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="85sp"
-            android:layout_height="wrap_content"
-            android:text="@string/add_course_code" />
-
-        <TextView
-            android:id="@+id/modify_course_code_textview"
-            android:layout_width="180sp"
-            android:layout_height="40sp"
-            android:layout_marginLeft="25sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,7 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice" />
+            android:choiceMode="singleChoice" />
     </LinearLayout>
 
     <LinearLayout
@@ -80,7 +59,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice"
+            android:choiceMode="singleChoice"
             android:text="@string/add_course_add_labs" />
     </LinearLayout>
 
@@ -102,7 +81,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice"
+            android:choiceMode="singleChoice"
             android:text="@string/add_course_add_tuts" />
     </LinearLayout>
 
@@ -124,7 +103,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:layout_marginLeft="25sp"
-            android:choiceMode="multipleChoice"
+            android:choiceMode="singleChoice"
             android:text="@string/add_course_add_sems" />
     </LinearLayout>
 

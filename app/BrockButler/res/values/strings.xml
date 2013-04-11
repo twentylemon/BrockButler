@@ -47,7 +47,6 @@
     <string name="activity_add_contact_add_courses">Add Course</string>
     <string name="activity_add_contact_remove">Remove</string>
 
-
     <!-- AddCourseActivity -->
     <string name="title_add_course">Add Course</string>
     <string name="add_course_subject">Subject</string>
@@ -133,6 +132,7 @@
     <string name="title_activity_tour">Brock Butler Tour</string>
     <string name="title_activity_add_task">Add Task</string>
     <string name="title_modify_task">Modify Task</string>
+    <string name="title_modify_course">Modify Course</string>
     <string name="task_priority_prompt">Task Priority</string>
 
     <!-- Miscellaneous -->

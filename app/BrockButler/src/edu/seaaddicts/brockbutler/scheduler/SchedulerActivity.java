@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,7 +33,6 @@ import edu.seaaddicts.brockbutler.coursemanager.CourseHandler;
 import edu.seaaddicts.brockbutler.coursemanager.Offering;
 import edu.seaaddicts.brockbutler.coursemanager.OfferingTime;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
-import edu.seaaddicts.brockbutler.maps.Position;
 
 public class SchedulerActivity extends Activity {
 	private static final String TAG = "SchedulerActivity";
