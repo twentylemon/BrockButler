@@ -9,9 +9,9 @@
 package edu.seaaddicts.brockbutler.coursemanager;
 
 public class OfferingTime {
-	public int mOid;
-	public String mStartTime;
-	public String mEndTime;
-	public String mDay;
-	public String mLocation;
+	public int mOid;  //id associated with offering
+	public String mStartTime; //start time of offering
+	public String mEndTime; //offering end time
+	public String mDay;  //day available
+	public String mLocation; //location
 }

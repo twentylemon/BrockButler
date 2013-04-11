@@ -13,24 +13,26 @@ import java.util.ArrayList;
 import edu.seaaddicts.brockbutler.contacts.Contact;
 
 public class Task {
-	public String mSubj;
-	public String mCode;
-	public boolean mIsPastDue;
-	public float mMark;
-	public float mBase;
-	public float mWeight;
-	public int mAssign;
-	public String mName;
-	public String mCreationDate;
-	public String mDueDate;
-	public int mPriority;
-	public int mIsDone;
-	public ArrayList<Contact> mContacts;
+	public String mSubj; //course name
+	public String mCode; //course code
+	public boolean mIsPastDue; //is the task late
+	public float mMark; //mark on task
+	public float mBase; //base mark of task
+	public float mWeight; //weight of the mark
+	public int mAssign;  //assignment number
+	public String mName; //name of task
+	public String mCreationDate; //creation date
+	public String mDueDate; //due date
+	public int mPriority; //priority of task
+	public int mIsDone; //is the task complete
+	public ArrayList<Contact> mContacts; //task contacts
 
+	//contructor - initializes the contacts arraylist
 	public Task(){
 		mContacts = new ArrayList<Contact>();
 	}
 	
+	//isPastDue - calculates if the task is past the due date
 	public boolean isPastDueDate(){
 		return true;
 	}

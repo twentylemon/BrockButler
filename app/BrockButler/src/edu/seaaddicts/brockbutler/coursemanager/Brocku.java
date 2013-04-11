@@ -20,7 +20,11 @@ import org.apache.http.HttpResponse;
 import android.os.AsyncTask;
 //Using AsyncTask to do operations off the main thread
 public class Brocku extends AsyncTask<Void, Void, ArrayList<MasterCourse>> {
-//returns an arraylist of courses after information has be gathered
+
+	/* doInBackground - connects to Brock University's registrar's office website to gather
+	 * information on courses being offered, then returns an arraylist of MasterCourse
+	 * objects which hold the data for all offerings at Brock.
+	 */
 	protected ArrayList<MasterCourse> doInBackground(Void... Void) {
 		String codes[] = new String[74];
 		BufferedReader in = null;

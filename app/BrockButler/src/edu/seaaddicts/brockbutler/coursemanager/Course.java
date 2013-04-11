@@ -14,16 +14,17 @@ import edu.seaaddicts.brockbutler.contacts.Contact;
 import edu.seaaddicts.brockbutler.scheduler.Task;
 
 public class Course {
-	public int mId;
-	public String mSubject;
-	public String mCode;
-	public String mDesc;
-	public String mInstructor;
-	public String mInstructor_email;
-	public ArrayList<Offering> mOfferings;
-	public ArrayList<Task> mTasks;
-	public ArrayList<Contact> mContacts;
+	public int mId;	//course ID
+	public String mSubject;  //subject name
+	public String mCode;  //course code
+	public String mDesc;  //course description
+	public String mInstructor;  //instructor name
+	public String mInstructor_email;  //instructor's email
+	public ArrayList<Offering> mOfferings;  //list of offerings for this course
+	public ArrayList<Task> mTasks; //list of tasks associated with this course
+	public ArrayList<Contact> mContacts;  //contacts for this course
 
+	//Constructor - initializes the arraylists for offerings, tasks and contacts
 	public Course() {
 		mOfferings = new ArrayList<Offering>();
 		mTasks = new ArrayList<Task>();

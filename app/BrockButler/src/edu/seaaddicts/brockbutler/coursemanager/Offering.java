@@ -11,14 +11,15 @@ package edu.seaaddicts.brockbutler.coursemanager;
 import java.util.ArrayList;
 
 public class Offering {
-	public int mId;
-	public String mSubj;
-	public String mCode;
-	public int mSection;
-	public String mType;
-	public ArrayList<OfferingTime> mOfferingTimes;
-	public int mOid;
+	public int mId;	    //offering id
+	public String mSubj;//faculty name
+	public String mCode;//course code
+	public int mSection;//section
+	public String mType;//type
+	public ArrayList<OfferingTime> mOfferingTimes;//list of times offered
+	public int mOid; //extra id if needed
 	
+	//constructor - initializes arraylist of offering times
 	public Offering(){
 		mOfferingTimes = new ArrayList<OfferingTime>();
 	}
