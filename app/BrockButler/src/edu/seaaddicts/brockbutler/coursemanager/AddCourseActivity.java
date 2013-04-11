@@ -201,6 +201,11 @@ public class AddCourseActivity extends Activity {
 				c.mCode = mCode;
 				c.mInstructor = mCourseHandle.getCourseOfferings(mSubject,
 						mCode).mInstructor;
+				try {
+					c.mInstructor_email = c.mInstructor.substring(0,c.mInstructor.length()-2);
+					c.mInstructor_email += c.mInstructor.charAt(c.mInstructor.length()-1);
+					c.mInstructor_email += "@brocku.ca";
+				} catch (Exception e){}
 
 				SparseBooleanArray sba1, sba2, sba3, sba4;
 				if (mLecsListView != null) {

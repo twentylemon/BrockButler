@@ -208,9 +208,7 @@ public class CourseManagerActivity extends Activity {
 		((TextView) view.findViewById(R.id.tv_prof_name))
 				.setText(mRegisteredCoursesList.get(position).mInstructor);
 
-		Log.d(TAG,
-				"Number of Offerings for " + subj + " " + code + ": "
-						+ offs.size());
+		Log.d(TAG,"Number of Offerings for " + subj + " " + code + ": "	+ offs.size());
 
 		// Add Offerings registered for.
 		for (int i = 0; i < offs.size(); i++) {
