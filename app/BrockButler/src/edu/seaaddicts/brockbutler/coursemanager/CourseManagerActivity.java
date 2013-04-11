@@ -6,11 +6,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View.OnClickListener;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -207,6 +210,13 @@ public class CourseManagerActivity extends Activity {
 
 		((TextView) view.findViewById(R.id.tv_prof_name))
 				.setText(mRegisteredCoursesList.get(position).mInstructor);
+		final String e= mRegisteredCoursesList.get(position).mInstructor_email;
+		((Button) view.findViewById(R.id.prof_email_button))
+		.setOnClickListener(new OnClickListener() {		
+			public void onClick(View v) {
+				sendEmail(e); 	
+			}
+		});
 
 		Log.d(TAG,"Number of Offerings for " + subj + " " + code + ": "	+ offs.size());
 
@@ -332,6 +342,19 @@ public class CourseManagerActivity extends Activity {
 	 */
 	public void updateMaster(MenuItem item) {
 		updateCourseDatabaseFromRegistrar();
+	}
+	
+	private void sendEmail(String instr_email) {
+		Intent i = new Intent(Intent.ACTION_SENDTO);
+		i.setType("message/rfc822");
+		i.setData(Uri.parse("mailto:"+instr_email));
+		try {
+			startActivity(Intent.createChooser(i, "Send mail..."));
+		} catch (android.content.ActivityNotFoundException ex) {
+			Toast.makeText(CourseManagerActivity.this,
+					"There are no email clients installed.", Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 
 	/**

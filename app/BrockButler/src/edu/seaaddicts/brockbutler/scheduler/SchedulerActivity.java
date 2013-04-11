@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -109,6 +111,13 @@ public class SchedulerActivity extends Activity {
 		// Set Instructor
 		((TextView) view.findViewById(R.id.tv_prof_name))
 				.setText(mRegisteredCoursesList.get(position).mInstructor);
+		final String e= mRegisteredCoursesList.get(position).mInstructor_email;
+		((Button) view.findViewById(R.id.prof_email_button))
+		.setOnClickListener(new OnClickListener() {		
+			public void onClick(View v) {
+				sendEmail(e); 	
+			}
+		});
 
 		// Add Offerings registered for.
 		for (int i = 0; i < offs.size(); i++) {
@@ -352,10 +361,10 @@ public class SchedulerActivity extends Activity {
 		return true;
 	}
 
-	@SuppressWarnings("unused")
-	private void sendEmail() {
-		Intent i = new Intent(Intent.ACTION_SEND);
+	private void sendEmail(String instr_email) {
+		Intent i = new Intent(Intent.ACTION_SENDTO);
 		i.setType("message/rfc822");
+		i.setData(Uri.parse("mailto:"+instr_email));
 		try {
 			startActivity(Intent.createChooser(i, "Send mail..."));
 		} catch (android.content.ActivityNotFoundException ex) {
