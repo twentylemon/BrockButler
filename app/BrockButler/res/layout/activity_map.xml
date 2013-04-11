@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapActivity" >
-    
+
     <edu.seaaddicts.brockbutler.maps.MapsTouchImageView
         android:id="@+id/imgv_map"
         android:layout_alignParentTop="true"
@@ -12,33 +12,14 @@
         android:layout_height="fill_parent"
         android:src="@drawable/mch_maps"
         android:contentDescription="@string/test_image" />
-    <!-- 
-    <Button
-        android:id="@+id/btn_maps_menu"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
-        android:gravity="right|bottom"
-        android:text="||" />
-    <Button
-        android:id="@+id/btnstop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="50sp"
-        android:text="STOP" />
-    <Button
-        android:id="@+id/btnresume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="100sp"
-        android:text="RESUME" />
-         -->
-    <TextView 
-        android:id="@+id/txtv_count" 
+
+    <TextView
+        android:id="@+id/txtv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgv_map"
         android:contentDescription="@string/temp"
         android:textColor="#fff" />
-    
+
 
 </RelativeLayout>

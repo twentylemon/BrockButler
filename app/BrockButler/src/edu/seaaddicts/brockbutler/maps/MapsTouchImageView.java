@@ -37,6 +37,7 @@ public class MapsTouchImageView extends ImageView {
 	private static final int DRAG = 1;
 	private static final int ZOOM = 2;
 	private int mode = NONE;
+	private int stroke = 8;
 
 	// Zooming variables.
 	private PointF last = new PointF();
@@ -77,13 +78,8 @@ public class MapsTouchImageView extends ImageView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		mPathPaint.setColor(Color.CYAN);
-		mPathPaint.setStrokeWidth(8);
+		mPathPaint.setStrokeWidth(stroke);
 		canvas.setMatrix(mMatrixMap);
-		// float f[] = convertDimensions(1054, 874);
-		// float f2[] = convertDimensions(1184, 1008);
-		// canvas.drawLine(f[0], f[1], f2[0], f2[1], mPathPaint);
-		// float f3[] = convertDimensions(1304, 888);
-		// canvas.drawLine(f2[0], f2[1], f3[0], f3[1], mPathPaint);
 
 		if (mPosition != null) {
 			for (int i = 0; i < mPosition.length - 1; i++) {
@@ -302,7 +298,8 @@ public class MapsTouchImageView extends ImageView {
 		return f;
 	}
 
-	public void drawPosition(Position[] p) {
+	public void drawPosition(Position[] p, int n) {
+		stroke = n;
 		mPosition = p;
 		invalidate();
 	}

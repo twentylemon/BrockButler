@@ -2,7 +2,6 @@ package edu.seaaddicts.brockbutler.maps;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import edu.seaaddicts.brockbutler.R;
 import edu.seaaddicts.brockbutler.help.HelpActivity;
@@ -26,22 +22,15 @@ import edu.seaaddicts.brockbutler.help.HelpActivity;
 public class MapsActivity extends Activity {
 	private static final String TAG = "MapsActivity";
 
-	private TextView mTemp;
-	private Button start;
-	private Button resume;
-	private Position pTest;
-
 	private EditText mSearchEditText;
 
 	private Handler mHandler;
 	private MapsTouchImageView mMapImage;
 	private MapsHandler mMapsHandler;
 
-	private Position currentLocation;
 	private Position mStartPosition;
 	private Position mGoalPosition;
 	private Astar school;
-	private Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +44,6 @@ public class MapsActivity extends Activity {
 				getResources().getDrawable(R.drawable.actionbar_bg));
 		init();
 
-		mTemp = (TextView) findViewById(R.id.txtv_count);
 		mHandler = new Handler() {
 
 			// Handles Messages sent from Thomas.
@@ -70,14 +58,12 @@ public class MapsActivity extends Activity {
 					break;
 				default:
 					Log.d(TAG,"-----+++++ Got THREAD_UPDATE_POSITION message. +++++-----");
-					mTemp.setText("#" + msg.what);
 					break;
 				}
 			}
 		};
 		mMapsHandler = new MapsHandler(mHandler,this);
         school = new Astar();
-        mContext = this;
 	}
 
 	@Override
@@ -144,7 +130,7 @@ public class MapsActivity extends Activity {
 		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
 
 		editalert.setTitle("MChown Location Search");
-		editalert.setMessage("Enter block or room name (i.e. B203)");
+		editalert.setMessage("Enter block or room name (i.e. B314)");
 
 		mSearchEditText = new EditText(this);
 		mSearchEditText.setSingleLine(true);
@@ -154,23 +140,31 @@ public class MapsActivity extends Activity {
 		mSearchEditText.setLayoutParams(lp);
 		editalert.setView(mSearchEditText);
 
-		final ListView locList = new ListView(this);
-
 		editalert.setPositiveButton("Search",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						// Call Thomas' location search method with EditText
-						// string.
+						Position p1, p2=new Position(), p3=new Position(), p4=new Position(), p5=new Position();
 						
-						// TESTING
-						Position p1;
-						p1 = school.findPosition("J01");
-						pTest = school.findPosition(mSearchEditText.getText().toString());
-						pTest.printCoordinates();
+						p1 = school.findPosition(mSearchEditText.getText().toString());
 						
-						Position[] p = school.pathGeneration(p1, pTest);
-						if(p != null)
-							mMapImage.drawPosition(p);
+						p2.xPosition = p1.xPosition - 1;
+						p2.yPosition = p1.yPosition - 1;
+						
+						p3.xPosition = p1.xPosition + 1;
+						p3.yPosition = p1.yPosition + 1;
+						
+						p4.xPosition = p1.xPosition + 1;
+						p4.yPosition = p1.yPosition - 1;
+						
+						p5.xPosition = p1.xPosition - 1;
+						p5.yPosition = p1.yPosition + 1;
+						
+						Position[] pTest = {p5,p3,p4,p2,p5,p4,p3,p2};
+						
+						if(p1 != null && p2 != null)
+							mMapImage.drawPosition(pTest,30);
+						else
+							Toast.makeText(getApplicationContext(), "Shit didn't work!",Toast.LENGTH_LONG).show();
 					}
 				});
 		editalert.setNegativeButton("Cancel",
@@ -190,48 +184,30 @@ public class MapsActivity extends Activity {
 	 * @param item
 	 */
 	public void displayGetDirectionsDialog(MenuItem item) {
+		init();
 		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
 
 		editalert.setTitle("MChown Direction Getter");
-		editalert.setMessage("Enter block or room name (i.e. B203)");
+		editalert.setMessage("Enter desired Location.");
 
-		final EditText input = new EditText(this);
-		input.setSingleLine(true);
+		mSearchEditText.setSingleLine(true);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.MATCH_PARENT);
-		input.setLayoutParams(lp);
-		editalert.setView(input);
+		mSearchEditText.setLayoutParams(lp);
+		editalert.setView(mSearchEditText);
 
-		final ListView locList = new ListView(this);
 
-		editalert.setPositiveButton("Search",
-				new DialogInterface.OnClickListener() {
+		editalert.setPositiveButton("Search", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						// Call Thomas' location search method with EditText
-						// string.
-						// if (locationFound) {
-						// getDirections()
-						// draw_directions_on_map
-						// else
-						// displayNoSuchLocationDialog()
-
-						// TESTING
-						Position p1;
-						p1 = school.findPosition("J01");
-						pTest = school.findPosition(mSearchEditText.getText().toString());
-						pTest.printCoordinates();
+						mStartPosition = school.findPosition("J01");
+						mGoalPosition = school.findPosition(mSearchEditText.getText().toString());
 						
-						Position[] p = school.pathGeneration(p1, pTest);
+						Position[] p = school.pathGeneration(mStartPosition, mGoalPosition);
 						if(p != null)
-							mMapImage.drawPosition(p);
-						
-						Toast.makeText(getApplicationContext(),
-								"Thomas' search method goes here.",
-								Toast.LENGTH_LONG).show();
-						Toast.makeText(getApplicationContext(),
-								"Thomas' direction getter method goes here.",
-								Toast.LENGTH_LONG).show();
+							mMapImage.drawPosition(p,8);
+						else
+							Toast.makeText(getApplicationContext(), "Shit didn't work!",Toast.LENGTH_LONG).show();
 					}
 				});
 		editalert.setNegativeButton("Cancel",

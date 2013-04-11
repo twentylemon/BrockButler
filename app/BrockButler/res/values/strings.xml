@@ -34,6 +34,7 @@
     </string-array>
     <string name="loading_courses_registrar_msg">The course database is updating from the Brock Registrar.\n\nThis may take a few moments.</string>
     <string name="menu_show_coursemanager_help">Show Help</string>
+    <string name="course_grade">Course Grade</string>
 
     <!-- AddContactActivity -->
     <string name="activity_add_contact">Add Contact</string>

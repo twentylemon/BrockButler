@@ -12,12 +12,12 @@
         android:onClick="displayGetDirectionsDialog"
         android:titleCondensed="@string/menu_get_directions">
     </item>
-    <item
-        android:id="@+id/menu_update_position"
+  <!--   <item
+       android:id="@+id/menu_update_position"
         android:title="@string/menu_update_position"
         android:onClick="updatePosition"
         android:titleCondensed="@string/menu_update_position">
-    </item>
+    </item>-->
     <item
         android:id="@+id/menu_exit_maps"
         android:title="@string/menu_exit_maps"

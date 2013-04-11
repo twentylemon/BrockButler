@@ -17,7 +17,6 @@
         android:background="@drawable/grad_course_title" />
 
     <!-- Toolbar -->
-
     <LinearLayout
         android:id="@+id/course_manager_toolbar"
         android:layout_width="fill_parent"

@@ -8,7 +8,7 @@
 $(document).ready(function(){
 	$(".toggle_container").hide();
 	$("h2.expand_heading").toggle(function(){
-		$(this).addClass("active"); 
+		$(this).addClass("active");
 		}, function () {
 		$(this).removeClass("active");
 	});
@@ -16,7 +16,7 @@ $(document).ready(function(){
 		$(this).next(".toggle_container").slideToggle("slow");
 	});
 	$(".expand_all").toggle(function(){
-		$(this).addClass("expanded"); 
+		$(this).addClass("expanded");
 		}, function () {
 		$(this).removeClass("expanded");
 	});
@@ -120,7 +120,7 @@ width:116px;
 height:29px;
 background:url(extra_buttons.png) no-repeat top left;
 float:center;
-cursor: pointer; 
+cursor: pointer;
 }
 .expanded
 {
@@ -155,52 +155,51 @@ text-decoration:none;
 <div class="expand_top"><div class="expand_all"></div></div>
 <div class="expand_wrapper">
 	<h2 class="expand_heading"><a href="#">Overview</a></h2>
-	
+
 	<div class="toggle_container">
 		<div class="box">
 			<h3>Overview</h3>
-			
+
 			<p>BrockButler is a general purpose Course Management and Navigation System for Brock Students that can help you manage your courses, plan your day, give you a tour and find your classes.
 			</p>
 		</div>
 	</div>
-	
+
 	<h2 class="expand_heading"><a href="#">Feature List</a></h2>
 
 	<div class="toggle_container">
 		<div class="box">
 			<h3>Feature List</h3>
-		
+
 			<p><ul>
 		<li>Course Management</li>
 		<li>Schedule/Task Management</li>
 		<li>Tour</li>
 		<li>Navigation</li>
-		<li>A world class help documentation..thanks Mathew</li>
 		</ul></p>
 		<p></p>
 		</div>
 
 	</div>
-	
+
 	<h2 class="expand_heading"><a href="#">Help Topics</a></h2>
 	<div class="toggle_container">
 		<div class="box">
 		<h3>Help Topics</h3>
-		
+
 		<p>
 			<ul>
 		<li><a href="file:///android_asset/help_gps.htm">How can I find my classes?</a></li>
 		<li><a href="file:///android_asset/help_schedule.htm">How can I plan my day?</a></li>
 		<li><a href="file:///android_asset/help_coursemanager.htm">How can I manage my courses</a></li>
-		
-		
+
+
 		</ul>
 		</p>
 		</div>
 	</div>
-	
-	
+
+
 </div>
 
 

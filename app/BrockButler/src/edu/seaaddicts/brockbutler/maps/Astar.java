@@ -45,7 +45,7 @@ public class Astar {
      */
     public Position findPosition(String nodeName) {
     	for(int j=0; j<graph.length; j++) {
-			if(nodeName.equals(graph[j].nodeNumber))
+			if(nodeName.equalsIgnoreCase(graph[j].nodeNumber))
 				return graph[j];
 		}
     	return null;
