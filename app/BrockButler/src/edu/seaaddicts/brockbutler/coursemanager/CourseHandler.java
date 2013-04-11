@@ -7,13 +7,11 @@
  **/
 
 package edu.seaaddicts.brockbutler.coursemanager;
-import edu.seaaddicts.brockbutler.contacts.Contact;
-
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import edu.seaaddicts.brockbutler.contacts.Contact;
 import edu.seaaddicts.brockbutler.scheduler.Task;
 
 public class CourseHandler {
