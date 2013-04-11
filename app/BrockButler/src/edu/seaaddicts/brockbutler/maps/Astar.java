@@ -62,6 +62,7 @@ public class Astar {
      */
     public Position[] pathGeneration(Position startNode, Position goalNode)  {
     	for(int j=0; j<graph.length; j++) {
+    		//graph[j].visited = false;
 			if(startNode.compare(graph[j]))
 				startNode = graph[j];
 			if(goalNode.compare(graph[j]))

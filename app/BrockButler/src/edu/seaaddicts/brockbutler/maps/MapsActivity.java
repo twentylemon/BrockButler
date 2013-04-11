@@ -143,28 +143,31 @@ public class MapsActivity extends Activity {
 		editalert.setPositiveButton("Search",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						Position p1, p2=new Position(), p3=new Position(), p4=new Position(), p5=new Position();
-						
-						p1 = school.findPosition(mSearchEditText.getText().toString());
-						
-						p2.xPosition = p1.xPosition - 1;
-						p2.yPosition = p1.yPosition - 1;
-						
-						p3.xPosition = p1.xPosition + 1;
-						p3.yPosition = p1.yPosition + 1;
-						
-						p4.xPosition = p1.xPosition + 1;
-						p4.yPosition = p1.yPosition - 1;
-						
-						p5.xPosition = p1.xPosition - 1;
-						p5.yPosition = p1.yPosition + 1;
-						
-						Position[] pTest = {p5,p3,p4,p2,p5,p4,p3,p2};
-						
-						if(p1 != null && p2 != null)
-							mMapImage.drawPosition(pTest,30);
-						else
-							Toast.makeText(getApplicationContext(), "Shit didn't work!",Toast.LENGTH_LONG).show();
+						try {
+							Position p1, p2=new Position(), p3=new Position(), p4=new Position(), p5=new Position();
+							
+							p1 = school.findPosition(mSearchEditText.getText().toString());
+							
+							p2.xPosition = p1.xPosition - 1;
+							p2.yPosition = p1.yPosition - 1;
+							
+							p3.xPosition = p1.xPosition + 1;
+							p3.yPosition = p1.yPosition + 1;
+							
+							p4.xPosition = p1.xPosition + 1;
+							p4.yPosition = p1.yPosition - 1;
+							
+							p5.xPosition = p1.xPosition - 1;
+							p5.yPosition = p1.yPosition + 1;
+							
+							Position[] pTest = {p5,p3,p4,p2,p5,p4,p3,p2};
+							
+							if(p1 != null && p2 != null)
+								mMapImage.drawPosition(pTest,30);
+							}
+						catch (NullPointerException e) {
+							Toast.makeText(getApplicationContext(), "Location not found",Toast.LENGTH_LONG).show();
+						}
 					}
 				});
 		editalert.setNegativeButton("Cancel",
@@ -184,40 +187,43 @@ public class MapsActivity extends Activity {
 	 * @param item
 	 */
 	public void displayGetDirectionsDialog(MenuItem item) {
-		init();
-		AlertDialog.Builder editalert = new AlertDialog.Builder(this);
+		school = new Astar();
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-		editalert.setTitle("MChown Direction Getter");
-		editalert.setMessage("Enter desired Location.");
+		alert.setTitle("Get Directions");
+		alert.setMessage("Enter Start and End Points");
+		
+		LinearLayout lila1= new LinearLayout(this);
+	    lila1.setOrientation(1); //1 is for vertical orientation
+	    final EditText input = new EditText(this); 
+	    final EditText input1 = new EditText(this);
+	    lila1.addView(input);
+	    lila1.addView(input1);
+	    alert.setView(lila1);
 
-		mSearchEditText.setSingleLine(true);
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.MATCH_PARENT);
-		mSearchEditText.setLayoutParams(lp);
-		editalert.setView(mSearchEditText);
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				try {
+					mStartPosition = school.findPosition(input.getText().toString());
+					mGoalPosition = school.findPosition(input1.getText().toString());
+					
+					Position[] p = school.pathGeneration(mStartPosition, mGoalPosition);
+					if(mStartPosition != null && mGoalPosition != null)
+						mMapImage.drawPosition(p,8);
+				}
+				catch (NullPointerException e){
+					Toast.makeText(getApplicationContext(), "Location not found",Toast.LENGTH_LONG).show();
+				}
+			}
+		});
 
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		  public void onClick(DialogInterface dialog, int whichButton) {
+		    // Canceled.
+		  }
+		});
 
-		editalert.setPositiveButton("Search", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						mStartPosition = school.findPosition("J01");
-						mGoalPosition = school.findPosition(mSearchEditText.getText().toString());
-						
-						Position[] p = school.pathGeneration(mStartPosition, mGoalPosition);
-						if(p != null)
-							mMapImage.drawPosition(p,8);
-						else
-							Toast.makeText(getApplicationContext(), "Shit didn't work!",Toast.LENGTH_LONG).show();
-					}
-				});
-		editalert.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						// do nothing
-					}
-				});
-
-		editalert.show();
+		alert.show();
 	}
 
 	public void showHelp(MenuItem item)
@@ -231,8 +237,7 @@ public class MapsActivity extends Activity {
 
 	/**
 	 * Menu item onClick that calls mapping function to manual update user
-	 * location in case first reported location is not accurate.
-	 * 
+	 * location in case first reported location isnot accurate.
 	 * @param item
 	 */
 	public void updatePosition(MenuItem item) {
