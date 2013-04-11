@@ -289,8 +289,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			task = course.mTasks.get(i);
 			num = 0;
 			update = false;
-			num = DatabaseUtils.queryNumEntries(db, TABLE_TASKS, KEY_NAME
-					+ " ='" + task.mName + "' AND " + KEY_SUBJ + " ='"
+			num = DatabaseUtils.queryNumEntries(db, TABLE_TASKS, KEY_ASSIGN
+					+ " ='" + task.mAssign + "' AND " + KEY_SUBJ + " ='"
 					+ task.mSubj + "' AND " + KEY_CODE + "='" + task.mCode
 					+ "'");
 			if (num > 0)
@@ -298,7 +298,8 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			values.put(KEY_SUBJ, task.mSubj);
 			values.put(KEY_CODE, task.mCode);
 			try {
-				values.put(KEY_ASSIGN, task.mAssign);
+				if (task.mAssign != 0)
+					values.put(KEY_ASSIGN, task.mAssign);
 			} catch (NullPointerException e){}
 			values.put(KEY_NAME, task.mName);
 			values.put(KEY_MARK, task.mMark);
@@ -309,7 +310,7 @@ public class CurrentCoursesHandler extends SQLiteOpenHelper {
 			values.put(KEY_PRIORITY, task.mPriority);
 			values.put(KEY_IS_DONE, task.mIsDone);
 			if (update)
-				db.update(TABLE_TASKS, values, KEY_NAME + " ='" + task.mName
+				db.update(TABLE_TASKS, values, KEY_ASSIGN + " ='" + task.mAssign
 						+ "' AND " + KEY_SUBJ + " ='" + task.mSubj + "' AND "
 						+ KEY_CODE + "='" + task.mCode + "'", null);
 			else

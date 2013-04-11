@@ -324,6 +324,7 @@ public class SchedulerActivity extends Activity {
 		bundle.putFloat("mark",task.mMark);
 		bundle.putString("course",task.mSubj + " " + task.mCode);
 		bundle.putInt("priority",task.mPriority);
+		bundle.putInt("is_done",task.mIsDone);
 		if (task.mDueDate.equals(getResources().getString(R.string.activity_add_task_date))){
 			final Calendar cal = Calendar.getInstance();
 			bundle.putInt("year",cal.get(Calendar.YEAR));

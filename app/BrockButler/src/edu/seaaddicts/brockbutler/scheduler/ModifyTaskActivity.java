@@ -48,6 +48,7 @@ public class ModifyTaskActivity extends Activity {
 	private int mMonth;
 	private int mDay;
 	private int mAssign;
+	private int mIsDone;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class ModifyTaskActivity extends Activity {
 	private void init() {
 		Bundle bundle = this.getIntent().getExtras();
 		mAssign = bundle.getInt("assign");
+		mIsDone = bundle.getInt("is_done");
 		/*
 		 * CourseHandler
 		 */
@@ -144,6 +146,7 @@ public class ModifyTaskActivity extends Activity {
 			public void onClick(View v) {
 				Task t = new Task();
 				t.mAssign = mAssign;
+				t.mIsDone = mIsDone;
 				t.mSubj = mRegCourses.get(mCourseSpinner
 						.getSelectedItemPosition()).mSubject;
 				t.mCode = mRegCourses.get(mCourseSpinner
@@ -154,8 +157,7 @@ public class ModifyTaskActivity extends Activity {
 				t.mDueDate = mDueDateTextView.getText().toString();
 
 				try {
-					t.mWeight = Float.parseFloat(mTaskWeight.getText()
-							.toString());
+					t.mWeight = Float.parseFloat(mTaskWeight.getText().toString());
 					t.mBase = Float.parseFloat(mTaskBase.getText().toString());
 					t.mMark = Float.parseFloat(mTaskMark.getText().toString());
 				} catch (NumberFormatException e) {
